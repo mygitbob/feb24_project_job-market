@@ -39,17 +39,3 @@ for url, connect_type, headers, body in urls:
     else:
         print('ERROR:', response.status_code)
     
-
-
-
-"""
-connection = http.client.HTTPConnection(host)
-#request headers
-headers = {"Content-type": "application/json"}
-#json query
-body = '{ "keywords": "it", "location": "Bern"}'
-connection.request('POST','/api/' + key, body, headers)
-response = connection.getresponse()
-print(response.status, response.reason)
-print(response.read())
-"""
