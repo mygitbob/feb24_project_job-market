@@ -10,13 +10,11 @@ JOOBLE_API_KEY = "b056f9bf-136f-4fd5-8721-6fdc0d4453bc"
 
 page_number = 1
 
-header_list = [{
-    "ACCEPT": "application/json",  
-}]
+header = {"ACCEPT": "application/json"}
 
-urls = [(f"https://api.adzuna.com/v1/api/jobs/de/search/{page_number}?app_id={ADZUNA_APP_ID}&app_key={ADZUNA_APP_KEY}","GET", header_list[0], None),
-            (f"https://www.themuse.com/api/public/jobs?page={page_number}", "GET", header_list[0], None),
-            (f"http://jooble.org/api/{JOOBLE_API_KEY}", "POST", header_list[0], '{ "keywords": "it", "location": "Berlin"}')]
+urls = [(f"https://api.adzuna.com/v1/api/jobs/de/search/{page_number}?app_id={ADZUNA_APP_ID}&app_key={ADZUNA_APP_KEY}","GET", header, None),
+            (f"https://www.themuse.com/api/public/jobs?page={page_number}", "GET", header, None),
+            (f"http://jooble.org/api/{JOOBLE_API_KEY}", "POST", header, '{ "keywords": "it", "location": "Berlin"}')]
 
 
 print(list(urls))
