@@ -7,4 +7,4 @@ glasddor has also data on job salaries:
 https://scrapingrobot.com/blog/glassdoor-api/#Scale%20API%20Glassdoor
 
 SALARY SURVEYS AND RESOURCES
-https://economics.virginia.edu/salary-surveys-and-resources
+https://economics.virginia.edu/salary-surveys-and-resourcesgit
