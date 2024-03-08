@@ -1,2 +1,4 @@
 .venv/
 .vscode/
+src/log.txt
+src/__pycache__/
