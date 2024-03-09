@@ -96,10 +96,9 @@ def save_raw_api_joblist(api2contact, page=1, data={}):
     save_raw_data(fname, result)
     
 
-setup_logging(Constants.LOG_FILE)
-
 if __name__ == "__main__" :
     
+    setup_logging()
     save_raw_api_joblist("jooble", data='{"keywords": "it", "location": "Berlin"}')
     save_raw_api_joblist("muse", page=range(2))
     save_raw_api_joblist("adzuna", page=range(3))
