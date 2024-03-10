@@ -98,6 +98,9 @@ def save_raw_api_joblist(api2contact, page=1, data={}):
     
 
 def okjob_test_api():
+    """
+    doesnt work, look for public key
+    """
     start = 1
     end = 20
     response = requests.get(f"https://sheets.googleapis.com/v4/spreadsheets/1owGcfKZRHZq8wR7Iw6PVh6-ueR0weIVQMjxWW_0M6a8/values/Sheet1!A{start}:N{end}?key={Constants.OKJOB_API_KEY}")
@@ -108,6 +111,16 @@ def jobicy_test_api():
     response = requests.get(f"https://jobicy.com/api/v2/remote-jobs")
     save_raw_data("jobicy_raw.json", response.text)
 
+def reed_test_api():
+    versionnumber = "1.0"
+    keywords = "accountant"
+    locationName = "london"
+    # url = f"https://www.reed.co.uk/api/{versionnumber}/search?keywords={keywords}&locationName={locationName}" # &employerId={employerId}&distanceFromLocation={distance_in_miles}
+    url = "https://www.reed.co.uk/api/1.0/search" #?keywords=accountant&location=london&employerid=123&distancefromlocation=15"
+    auth_header = requests.auth.HTTPBasicAuth(Constants.REED_API_KEY, '')
+    response = requests.get(url, auth=auth_header)
+    save_raw_data("reed_test.json", response.text)
+
 if __name__ == "__main__" :
     
     setup_logging()
@@ -115,4 +128,5 @@ if __name__ == "__main__" :
     #save_raw_api_joblist("muse", page=range(2))
     #save_raw_api_joblist("adzuna", page=range(3))
     #okjob_test_api()
-    jobicy_test_api()
+    #jobicy_test_api()
+    reed_test_api()
