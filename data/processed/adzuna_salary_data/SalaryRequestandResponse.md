@@ -1,4 +1,4 @@
-API can be tested at https://developer.adzuna.com/activedocs#!/adzuna/history
+API can be tested at https://developer.adzuna.com/activedocs
 
 ### GET jobs/{country}/history
 #### Request URL

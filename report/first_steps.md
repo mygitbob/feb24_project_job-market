@@ -68,3 +68,13 @@ https://www.themuse.com/developers/api/v2
 - start date (optional)
 - job experience (optional)
 - education (optional)
+
+## tested web scraping for following sites:
+- adzuna : I tired to get a job description from the job list of the api response -> works fine but has no salary data (maybe other job offers contain salary info ?)
+- welcometothe jungel: I tried the web search for minimum salary, filter is availible for USA but not for UK or Ireland, 
+	tried to search US for data engineer & minimum salary -> no hits
+	searched USA for software engineer & minimum salary -> 3 hits
+	tried to search world wide -> Error (in my browser, no scripting involved)
+- indeed : 403 -> do not like robots ?!
+- glassdoor : 403 -> do not like robots ?!
+- linkedin . 409 -> do not like robots ?! they have good data on salary and skills per job

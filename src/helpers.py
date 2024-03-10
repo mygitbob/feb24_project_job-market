@@ -55,6 +55,7 @@ def jooble_api_joblist_test(data):
         return response
     else:
         return f'{{"__CLASS__":{Constants.BAD_RESPONSE}}}'
+    
 
 def save_raw_data(fname, data):
     if isinstance(data, str):  
@@ -77,28 +78,36 @@ def save_raw_data(fname, data):
 def save_raw_api_joblist(api2contact, page=1, data={}):
     if api2contact not in Constants.API_JOBLIST:
         raise ValueError(f"api {api2contact} not in known list: {Constants.API_JOBLIST}]")
-    now = datetime.now()
+    now_str = str(datetime.now()).replace(" ","_")
     if api2contact == "adzuna":
         result = adzuna_api_joblist_test(page)
         if isinstance(page, int):
-            fname = f"adzuna_raw_joblist.page{str(page)}.{now}.json"
+            fname = f"adzuna_raw_joblist.page{str(page)}.{now_str}.json"
         else:
-            fname = f"adzuna_raw_joblist.multiple_pages_{page[0]}_{page[-1]}.{now}.json"
+            fname = f"adzuna_raw_joblist.multiple_pages_{page[0]}_{page[-1]}.{now_str}.json"
     elif api2contact == "muse":
         result = muse_api_joblist_test(page)
         if isinstance(page, int):
-            fname = f"muse_raw_joblist.page{str(page)}.{now}.json"
+            fname = f"muse_raw_joblist.page{str(page)}.{now_str}.json"
         else:
-            fname = f"muse_raw_joblist.multiple_pages_{page[0]}_{page[-1]}.{now}.json"
+            fname = f"muse_raw_joblist.multiple_pages_{page[0]}_{page[-1]}.{now_str}.json"
     elif api2contact == "jooble":
         result = jooble_api_joblist_test(data)
-        fname = f"joodle_raw_joblist.{now}.json"
+        fname = f"joodle_raw_joblist.{now_str}.json"
     save_raw_data(fname, result)
     
+
+def okjob_test_api():
+    start = 1
+    end = 20
+    response = requests.get(f"https://sheets.googleapis.com/v4/spreadsheets/1owGcfKZRHZq8wR7Iw6PVh6-ueR0weIVQMjxWW_0M6a8/values/Sheet1!A{start}:N{end}?key={Constants.OKJOB_API_KEY}")
+    save_raw_data("okjob_raw.json", response.text)
 
 if __name__ == "__main__" :
     
     setup_logging()
-    save_raw_api_joblist("jooble", data='{"keywords": "it", "location": "Berlin"}')
-    save_raw_api_joblist("muse", page=range(2))
-    save_raw_api_joblist("adzuna", page=range(3))
+    #save_raw_api_joblist("jooble", data='{"keywords": "jav developer", "salary": "40000"}') 
+    #save_raw_api_joblist("muse", page=range(2))
+    #save_raw_api_joblist("adzuna", page=range(3))
+    r = okjob_test_api()
+    print(r)
