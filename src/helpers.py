@@ -103,11 +103,16 @@ def okjob_test_api():
     response = requests.get(f"https://sheets.googleapis.com/v4/spreadsheets/1owGcfKZRHZq8wR7Iw6PVh6-ueR0weIVQMjxWW_0M6a8/values/Sheet1!A{start}:N{end}?key={Constants.OKJOB_API_KEY}")
     save_raw_data("okjob_raw.json", response.text)
 
+
+def jobicy_test_api():
+    response = requests.get(f"https://jobicy.com/api/v2/remote-jobs")
+    save_raw_data("jobicy_raw.json", response.text)
+
 if __name__ == "__main__" :
     
     setup_logging()
     #save_raw_api_joblist("jooble", data='{"keywords": "jav developer", "salary": "40000"}') 
     #save_raw_api_joblist("muse", page=range(2))
     #save_raw_api_joblist("adzuna", page=range(3))
-    r = okjob_test_api()
-    print(r)
+    #okjob_test_api()
+    jobicy_test_api()
