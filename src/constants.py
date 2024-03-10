@@ -22,6 +22,8 @@ class Constants(metaclass=CMeta):
     ADZUNA_APP_ID = "fb3d1b6c"
     ADZUNA_API_KEY = "d1999430f1b272b9af611b798e8b0789"
     JOOBLE_API_KEY = "b056f9bf-136f-4fd5-8721-6fdc0d4453bc"
+    OKJOB_API_KEY = "" # google scan github and doesnt want me to publish the public key
+    REED_API_KEY = "52f1eba3-39f1-4ee8-bc36-26140b349e67"
 
     API_JOBLIST = ["adzuna", "muse", "jooble"]
     BAD_RESPONSE = "Error - No Data received"
