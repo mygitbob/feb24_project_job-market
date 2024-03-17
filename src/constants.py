@@ -16,6 +16,10 @@ class Constants(metaclass=CMeta):
     PATH_DATA_PROCESSED = os.path.join(PATH_BASE, "data/processed")
     PATH_SRC = os.path.join(PATH_BASE, "src")
 
+    DIR_NAME_MUSE = "muse.com"
+    SALARY_ENTRY_MUSE = "contents"
+    KOWN_CURRENCY = ['$', '£' , '€']
+
     LOG_FILE = os.path.join(PATH_SRC, "log.txt")
 
     # TODO: move secrets to a safe place
