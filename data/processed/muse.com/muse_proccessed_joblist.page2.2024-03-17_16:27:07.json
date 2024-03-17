@@ -1,0 +1,521 @@
+[
+    {
+        "job_title": "Pharmacy Technician",
+        "min_salary": "16.00",
+        "max_salary": "19.50",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:27:43Z",
+        "id": 14099713,
+        "location": [
+            {
+                "name": "Lake Charles, LA"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Healthcare"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/pharmacy-technician-314b93",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Merchant Operations Lead, Uber Eats, Germany",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2024-03-01T00:25:23Z",
+        "id": 14082903,
+        "location": [
+            {
+                "name": "Berlin, Germany"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Data and Analytics"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/uber/merchant-operations-lead-uber-eats-germany",
+        "type": "external",
+        "company_name": "Uber",
+        "company_id": 61,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Systemarchitekt (w/m/d) ETCS Onboard Units",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2023-03-09T23:53:15Z",
+        "id": 10258131,
+        "location": [
+            {
+                "name": "Berlin, Germany"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Unknown"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/siemens/systemarchitekt-wmd-etcs-onboard-units",
+        "type": "external",
+        "company_name": "Siemens",
+        "company_id": 11913,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Pharmacy Technician",
+        "min_salary": "16.00",
+        "max_salary": "24.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:22:29Z",
+        "id": 14147465,
+        "location": [
+            {
+                "name": "Troy, NY"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Healthcare"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/pharmacy-technician-03bf66",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Portfolio Development Executive (Aerospace Industry)",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2023-03-09T23:53:15Z",
+        "id": 10665736,
+        "location": [
+            {
+                "name": "Flexible / Remote"
+            },
+            {
+                "name": "Mexico City, Mexico"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Sales"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/siemens/portfolio-development-executive-aerospace-industry-0379d0",
+        "type": "external",
+        "company_name": "Siemens",
+        "company_id": 11913,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Community Pharmacist Full-time",
+        "min_salary": "60.00",
+        "max_salary": "73.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:36:11Z",
+        "id": 13894008,
+        "location": [
+            {
+                "name": "Bethlehem, PA"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Healthcare"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/community-pharmacist-fulltime-504917",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Servicetechniker:in f\u00fcr Sicherheitsanlagen 80-100%",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2023-04-07T23:37:19Z",
+        "id": 11155325,
+        "location": [
+            {
+                "name": "Zurich, Switzerland"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Unknown"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/siemens/servicetechnikerin-fur-sicherheitsanlagen-80100-1fd951",
+        "type": "external",
+        "company_name": "Siemens",
+        "company_id": 11913,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Senior Banker",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2024-03-13T23:27:45Z",
+        "id": 14374702,
+        "location": [
+            {
+                "name": "Prescott Valley, AZ"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Human Resources and Recruitment"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/bankofamerica/senior-banker-ceb5d2",
+        "type": "external",
+        "company_name": "Bank of America",
+        "company_id": 12145,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Shift Supervisor Trainee",
+        "min_salary": "16.00",
+        "max_salary": "19.50",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:47:59Z",
+        "id": 12628746,
+        "location": [
+            {
+                "name": "Loganville, GA"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Human Resources and Recruitment"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/shift-supervisor-trainee-a9bacf",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Store Associate",
+        "min_salary": "15.00",
+        "max_salary": "19.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:48:00Z",
+        "id": 12560269,
+        "location": [
+            {
+                "name": "Miami, FL"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Retail"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/store-associate-f83605",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Associate Counsel",
+        "min_salary": "124,372.50",
+        "max_salary": "247,200.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:15:35Z",
+        "id": 14393033,
+        "location": [
+            {
+                "name": "Hartford, CT"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Advertising and Marketing"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/associate-counsel-178a2c",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "store associate",
+        "min_salary": "15.00",
+        "max_salary": "18.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:27:43Z",
+        "id": 14099780,
+        "location": [
+            {
+                "name": "Merrimack, NH"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Retail"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/store-associate-8a2f92",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Store Associate",
+        "min_salary": "15.00",
+        "max_salary": "18.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:27:44Z",
+        "id": 14102546,
+        "location": [
+            {
+                "name": "Tampa, FL"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Retail"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/store-associate-12ab35",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Bauleitung (w/m/d) f\u00fcr Nieder- und Mittelspannungsanlagen",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2023-05-25T23:39:12Z",
+        "id": 11434844,
+        "location": [
+            {
+                "name": "Freiburg, Germany"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Arts"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/siemens/bauleitung-wmd-fur-nieder-und-mittelspannungsanlagen-faede5",
+        "type": "external",
+        "company_name": "Siemens",
+        "company_id": 11913,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Store Associate",
+        "min_salary": "16.00",
+        "max_salary": "19.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:36:15Z",
+        "id": 13772507,
+        "location": [
+            {
+                "name": "San Clemente, CA"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Retail"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/store-associate-364035",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Sr. DSP Communication Systems Engineer (Silicon Engineering)",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2024-03-06T23:05:21Z",
+        "id": 14305070,
+        "location": [
+            {
+                "name": "Redmond, WA"
+            }
+        ],
+        "job_categories": [],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/spacex/sr-dsp-communication-systems-engineer-silicon-engineering-1984fe",
+        "type": "external",
+        "company_name": "SpaceX",
+        "company_id": 15000190,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Sr Customer Analytics Manager",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2023-12-16T00:45:18Z",
+        "id": 12521224,
+        "location": [
+            {
+                "name": "Tokyo, Japan"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Data and Analytics"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/uber/sr-customer-analytics-manager",
+        "type": "external",
+        "company_name": "Uber",
+        "company_id": 61,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Relationship Banker - Olden Avenue Financial Center",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2024-03-12T23:28:43Z",
+        "id": 14362856,
+        "location": [
+            {
+                "name": "Trenton, NJ"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Human Resources and Recruitment"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/bankofamerica/relationship-banker-olden-avenue-financial-center-3d28f3",
+        "type": "external",
+        "company_name": "Bank of America",
+        "company_id": 12145,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Pharmacy Technician",
+        "min_salary": "16.75",
+        "max_salary": "24.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:15:35Z",
+        "id": 14382368,
+        "location": [
+            {
+                "name": "Southampton, NY"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Healthcare"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/pharmacy-technician-b24bfc",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Pharmacy Technician",
+        "min_salary": "16.00",
+        "max_salary": "21.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:32:18Z",
+        "id": 13946473,
+        "location": [
+            {
+                "name": "Angleton, TX"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Healthcare"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/pharmacy-technician-d19738",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    }
+]

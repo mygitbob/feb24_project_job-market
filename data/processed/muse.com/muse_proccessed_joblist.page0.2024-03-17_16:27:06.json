@@ -1,0 +1,522 @@
+[
+    {
+        "job_title": "Store Associate",
+        "min_salary": "15.70",
+        "max_salary": "15.70",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:42:27Z",
+        "id": 13540382,
+        "location": [
+            {
+                "name": "San Dimas, CA"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Retail"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/store-associate-aa0a17",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Pharmacy Technician",
+        "min_salary": "16.00",
+        "max_salary": "21.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:39:34Z",
+        "id": 13718234,
+        "location": [
+            {
+                "name": "Livonia, MI"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Healthcare"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/pharmacy-technician-60696c",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Pharmacy Technician  Telepharmacy (Onsite - Store 17714 - Phoenix AZ) - FT",
+        "min_salary": "16.00",
+        "max_salary": "24.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:47:56Z",
+        "id": 13034388,
+        "location": [
+            {
+                "name": "Phoenix, AZ"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Healthcare"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/pharmacy-technician-telepharmacy-onsite-store-17714-phoenix-az-ft",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Senior Software Architect(m/f/d)",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2023-01-03T23:34:15Z",
+        "id": 10654819,
+        "location": [
+            {
+                "name": "Aveiro, Portugal"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Software Engineering"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/siemens/senior-software-architectmfd",
+        "type": "external",
+        "company_name": "Siemens",
+        "company_id": 11913,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Pharmacy Technician Back End (Production) Omnicare",
+        "min_salary": "16.00",
+        "max_salary": "23.56",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:27:42Z",
+        "id": 14102352,
+        "location": [
+            {
+                "name": "Clarksburg, WV"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Healthcare"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/pharmacy-technician-back-end-production-omnicare-8370fe",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Technical Team Leader - Core Team",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2024-01-15T23:04:50Z",
+        "id": 13681803,
+        "location": [
+            {
+                "name": "Paris, France"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Software Engineering"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/abtasty/technical-team-leader-core-team",
+        "type": "external",
+        "company_name": "AB Tasty",
+        "company_id": 11719,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Werkstudent*in (w/m/d) im Bereich Finance - Strategic Development and Communication - Trade Finance",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2022-12-16T23:39:03Z",
+        "id": 10591478,
+        "location": [
+            {
+                "name": "Erlangen, Germany"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Accounting and Finance"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/siemens/werkstudentin-wmd-im-bereich-finance-strategic-development-and-communication-trade-finance-e0c555",
+        "type": "external",
+        "company_name": "Siemens",
+        "company_id": 11913,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Shift Supervisor Trainee",
+        "min_salary": "16.75",
+        "max_salary": "22.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:15:37Z",
+        "id": 14343707,
+        "location": [
+            {
+                "name": "Fresno, CA"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Human Resources and Recruitment"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/shift-supervisor-trainee-bec2cd",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Shift Supervisor Trainee",
+        "min_salary": "16.00",
+        "max_salary": "19.50",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:36:12Z",
+        "id": 13854735,
+        "location": [
+            {
+                "name": "Lee's Summit, MO"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Human Resources and Recruitment"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/shift-supervisor-trainee-4816dd",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Shift Supervisor Trainee",
+        "min_salary": "18.82",
+        "max_salary": "23.32",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:47:59Z",
+        "id": 12832005,
+        "location": [
+            {
+                "name": "San Francisco, CA"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Human Resources and Recruitment"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/shift-supervisor-trainee-d54714",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Fraud Client Service Representative - Retail Banking - Bilingual Spanish - 2nd shift",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2024-03-13T23:27:45Z",
+        "id": 14374699,
+        "location": [
+            {
+                "name": "Phoenix, AZ"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Data and Analytics"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/bankofamerica/fraud-client-service-representative-retail-banking-bilingual-spanish-2nd-shift-8f06c0",
+        "type": "external",
+        "company_name": "Bank of America",
+        "company_id": 12145,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Werkstudent*in (w/m/d) Innovation Excellence mit Fokus auf Strategic Foresight",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2023-05-02T23:41:08Z",
+        "id": 10767265,
+        "location": [
+            {
+                "name": "N\u00fcrnberg, Germany"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Unknown"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/siemens/werkstudentin-wmd-innovation-excellence-mit-fokus-auf-strategic-foresight-079480",
+        "type": "external",
+        "company_name": "Siemens",
+        "company_id": 11913,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Pharmacy Technician",
+        "min_salary": "16.44",
+        "max_salary": "24.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:15:35Z",
+        "id": 14392984,
+        "location": [
+            {
+                "name": "Mansfield, CT"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Healthcare"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/pharmacy-technician-7f557c",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Pharmacy Technician",
+        "min_salary": "16.44",
+        "max_salary": "24.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:22:28Z",
+        "id": 14160249,
+        "location": [
+            {
+                "name": "Plainville, CT"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Healthcare"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/pharmacy-technician-7f359a",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Senior Design Engineer (Low Voltage)",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2023-05-09T23:40:12Z",
+        "id": 11320952,
+        "location": [
+            {
+                "name": "York, United Kingdom"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Science and Engineering"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/siemens/senior-design-engineer-low-voltage",
+        "type": "external",
+        "company_name": "Siemens",
+        "company_id": 11913,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Pharmacy Technician",
+        "min_salary": "16.00",
+        "max_salary": "16.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:39:33Z",
+        "id": 13766648,
+        "location": [
+            {
+                "name": "Beachwood, OH"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Healthcare"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/pharmacy-technician-151f5e",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Freileitungsmonteur (w/m/d) Fahrleitungs- und Stromversorgungsanlagen",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2023-01-24T00:42:10Z",
+        "id": 10536487,
+        "location": [
+            {
+                "name": "Bad Mergentheim, Germany"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Computer and IT"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/siemens/freileitungsmonteur-wmd-fahrleitungs-und-stromversorgungsanlagen-c64550",
+        "type": "external",
+        "company_name": "Siemens",
+        "company_id": 11913,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Mechanical Assembler - 1st Shift",
+        "min_salary": "NOT_FOUND",
+        "max_salary": "NOT_FOUND",
+        "currency": "NOT_FOUND",
+        "skills": [],
+        "publication_date": "2023-04-26T23:41:35Z",
+        "id": 11259124,
+        "location": [
+            {
+                "name": "Clayton, NC"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Software Engineering"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/siemens/mechanical-assembler-1st-shift-0a7d96",
+        "type": "external",
+        "company_name": "Siemens",
+        "company_id": 11913,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "Shift Supervisor Trainee",
+        "min_salary": "16.00",
+        "max_salary": "18.50",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:47:58Z",
+        "id": 12835925,
+        "location": [
+            {
+                "name": "Huntsville, AL"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Human Resources and Recruitment"
+            }
+        ],
+        "experience": "mid",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/shift-supervisor-trainee-d493f4",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    },
+    {
+        "job_title": "pharmacy tech",
+        "min_salary": "16.00",
+        "max_salary": "21.00",
+        "currency": "$",
+        "skills": [],
+        "publication_date": "2024-03-17T12:15:36Z",
+        "id": 14370568,
+        "location": [
+            {
+                "name": "Wells, ME"
+            }
+        ],
+        "job_categories": [
+            {
+                "name": "Healthcare"
+            }
+        ],
+        "experience": "senior",
+        "html_link": "https://www.themuse.com/jobs/cvshealth/pharmacy-tech-e5baa4",
+        "type": "external",
+        "company_name": "CVS Health",
+        "company_id": 12096,
+        "source": "muse.com",
+        "created": "2024-03-17 16:27:08"
+    }
+]

@@ -1,4 +1,5 @@
 import os
+import my_secrets
 
 class CMeta(type): 
     """
@@ -16,28 +17,23 @@ class Constants(metaclass=CMeta):
     PATH_DATA_PROCESSED = os.path.join(PATH_BASE, "data/processed")
     PATH_SRC = os.path.join(PATH_BASE, "src")
 
-    DIR_NAME_MUSE = "muse.com"
+    # name of subfolder for both data/ raw AND data/proccessed
+    DIR_NAME_MUSE = "muse.com"          
+    DIR_NAME_OKJOB = "okjob.io"
+    
     SALARY_ENTRY_MUSE = "contents"
     KOWN_CURRENCY = ['$', '£' , '€']
 
     LOG_FILE = os.path.join(PATH_SRC, "log.txt")
 
     # TODO: move secrets to a safe place
-    ADZUNA_APP_ID = "fb3d1b6c"
-    ADZUNA_API_KEY = "d1999430f1b272b9af611b798e8b0789"
-    JOOBLE_API_KEY = "b056f9bf-136f-4fd5-8721-6fdc0d4453bc"
-    OKJOB_API_KEY = "" # google scan github and doesnt want me to publish the public key
-    REED_API_KEY = "52f1eba3-39f1-4ee8-bc36-26140b349e67"
+    ADZUNA_APP_ID = my_secrets.ADZUNA_APP_ID
+    ADZUNA_API_KEY = my_secrets.ADZUNA_API_KEY
+    JOOBLE_API_KEY = my_secrets.JOOBLE_API_KEY
+    OKJOB_API_KEY = my_secrets.OKJOB_API_KEY
+    REED_API_KEY = my_secrets.REED_API_KEY
 
-    API_JOBLIST = ["adzuna", "muse", "jooble"]
     BAD_RESPONSE = "Error - No Data received"
-
-class HTTPMethod():
-    GET = "GET"
-    POST = "POST"
-    PUT = "PUT"
-    DELETE = "DELETE"
-
 
 if __name__ == "__main__" :
 
@@ -46,3 +42,4 @@ if __name__ == "__main__" :
     print("Path Data Raw:", Constants.PATH_DATA_RAW)
     print("Path Data Processed:", Constants.PATH_DATA_PROCESSED)
     print("Path to log file:", Constants.LOG_FILE)
+    print("my secrets Adzuna APi Key:", Constants.ADZUNA_API_KEY)

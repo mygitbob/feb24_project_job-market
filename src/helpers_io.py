@@ -1,12 +1,20 @@
 import os
 import csv
 import json
-from datetime import datetime
 from constants import Constants
-from logger import logging
+from logger import logging, setup_logging
 
 def save_raw_api_data(fname, data, subdir = ''):
     """
+    Save result of api data as json file
+
+    Args:
+        fname : str                 = name of the file to save
+        data : str | list [ str ]   = json dict as string or list of them
+        subdir (optional) : str     = subfolder in data/raw, will be created if it does not exist
+    
+    Returns:
+        None
     """
     path2save = os.path.join(Constants.PATH_DATA_RAW, subdir)
     fname = fname.replace(' ', '_')
@@ -31,8 +39,15 @@ def save_raw_api_data(fname, data, subdir = ''):
 
 def load_raw_api_data(subdir = '', fname=''):
     """
-    loads raw api data as json file list, if fname is empty then get all files in subdir
-    returns filepath and content (json)
+    Loads raw api data of all files in folder
+    Returns a list of tupels that contain the filename of the source and the content
+
+    Args:
+        subdir (optional) : str     = name of subfolder of data/raw
+        fname (optional) : str      = name of a specific file, when not empty only load the conent of this file
+
+    Returns:
+         list of tuples: [ (filepath : str, json_data: dict) ]
     """
     path2load = os.path.join(Constants.PATH_DATA_RAW, subdir)
     result = []
@@ -56,27 +71,22 @@ def load_raw_api_data(subdir = '', fname=''):
                         logging.error(f"load_raw_data: json load failed for file: {file}")
         return result
 
-"""
-def save_proccessed_data(to_save_list, subdir='', delete_files=False):
-    
-    files2delete = []
-    path2save = os.path.join(Constants.PATH_DATA_PROCESSED, subdir)
-    if not os.path.exists(path2save):
-        os.mkdir(path2save)
-    for json_dict, fname_raw in to_save_list:
-        fout = os.path.basename(fname_raw).replace('_raw_', '_proccessed_')
-        filepath = os.path.join(path2save, fout)
-        with open(filepath, 'w') as f:
-            json.dump(json_dict, f, indent=4)
-        if delete_files:
-            files2delete.append(fname_raw)
-    if files2delete:
-        remove_raw_api_data(files2delete)    
-"""
-def save_proccessed_data(data_to_save, source_file, subdir='', delete_source=False, write_json=True, Write_csv=True):
+
+def save_proccessed_data(data_to_save, source_file, subdir='', delete_source=False, write_json=True, write_csv=True):
     """
-    saves list of job entries (json format) in processed data folder
-    can save as json or csv
+    Saves list of job entries (json format) in data/processed
+    Can save data as json or csv
+
+    Args:
+        data_to_save : list [ dict ]       = json data of one source file
+        source_file : str                  = filepath of json source file
+        subdir (optional) : str            = name of subfolder of data/processed
+        delete_source (optional) : bool    = should source file to be deleted ?       
+        write_json (optional) : bool       = write file as json ?
+        write_csv (optional) : bool        = write file as csv ?
+
+    Returns:
+        None
     """
     path2save = os.path.join(Constants.PATH_DATA_PROCESSED, subdir)
     if not os.path.exists(path2save):
@@ -86,7 +96,7 @@ def save_proccessed_data(data_to_save, source_file, subdir='', delete_source=Fal
         json_filepath = os.path.join(path2save, fout)
         with open(json_filepath, 'w') as f:
             json.dump(data_to_save, f, indent=4)
-    if Write_csv:
+    if write_csv:
         csv_filepath = os.path.join(path2save, fout).rsplit(".", maxsplit=1)[0] + ".csv"
         with open(csv_filepath, 'w') as f:
             writer = csv.DictWriter(f, fieldnames = data_to_save[0].keys())
@@ -97,7 +107,12 @@ def save_proccessed_data(data_to_save, source_file, subdir='', delete_source=Fal
 
 def remove_raw_api_files(files2delete):
     """
-    deletes files in list files2delete
+    Deletes files in list files2delete
+
+    Args:
+        files2delete: list[ filepath ]
+    Returns:
+        None
     """
     for to_delete in files2delete:
         try:
@@ -106,14 +121,11 @@ def remove_raw_api_files(files2delete):
             logging.error(f"helpers_io.py: remove_raw_api_data: error deleting file: {to_delete}")
 
 if __name__ == "__main__":
-    pass
-    # TODO
-    # create dummy json data
-    # test save functions
+    setup_logging()
     #res = load_raw_data()
     #print(len(res))
     #print(load_raw_data(fname="adzuna_joblist_all_entries.json"))
     #res = load_raw_api_data(subdir="muse.com")
-    #print( [ ( i[0], len(i[1]) )  for i in res] )
-    dummy = [{'eins':1,'zwei':2,'drei':3},{'eins':11,'zwei':22,'drei':33}]
-    save_proccessed_data(dummy, "my.json.dummy.json", subdir='', delete_source=False, write_json=True, Write_csv=True)
+    #print( [ ( i[0], type(i[1]) )  for i in res] )
+    #dummy = [{'eins':1,'zwei':2,'drei':3},{'eins':11,'zwei':22,'drei':33}]
+    #save_proccessed_data(dummy, "my.json.dummy.json", subdir='', delete_source=False, write_json=True, write_csv=True)

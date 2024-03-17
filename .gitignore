@@ -2,3 +2,4 @@
 .vscode/
 src/log.txt
 src/__pycache__/
+src/my_secrets.py
