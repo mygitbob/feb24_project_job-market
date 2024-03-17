@@ -93,9 +93,9 @@ def save_proccessed_data(data_to_save, source_file, subdir='', delete_source=Fal
             writer.writeheader()
             writer.writerows(data_to_save)
     if delete_source:
-        remove_raw_api_data([source_file])    
+        remove_raw_api_files([source_file])    
 
-def remove_raw_api_file(files2delete):
+def remove_raw_api_files(files2delete):
     """
     deletes files in list files2delete
     """
