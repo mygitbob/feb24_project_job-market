@@ -4,7 +4,7 @@ import json
 import os
 from constants import Constants
 from logger import setup_logging, logging
-from helpers_io import save_raw_api_data, load_raw_api_data, save_proccessed_data
+from helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files
 
 
 
@@ -92,11 +92,12 @@ def proccess_raw_data(source_subdir=Constants.DIR_NAME_OKJOB, target_subdir=Cons
                 break
             
             # save full job description in subfolder
+            # TODO: delete these files if no longer needed
             jobd_folder = os.path.join(Constants.PATH_DATA_PROCESSED, Constants.DIR_NAME_OKJOB, "full_job_description")
             
             if not os.path.exists(jobd_folder):
                 logging.debug(f"okjob.py: proccess_raw_data: create job description folder: {jobd_folder}")
-                os.mkdir(jobd_folder)
+                os.makedirs(jobd_folder, exist_ok=True)
             jobd_fname = f"okjob_jobdesc_id={json_dict['id']}.html"
             job_full_path = os.path.join(jobd_folder, jobd_fname)
             with open(job_full_path, 'w') as f:            
@@ -104,9 +105,19 @@ def proccess_raw_data(source_subdir=Constants.DIR_NAME_OKJOB, target_subdir=Cons
             json_dict["Job-Description"] = job_full_path
             result_list.append(json_dict)
 
-        save_proccessed_data(result_list, fname, target_subdir, delete_source=delete_processed, write_json=write_json, write_csv=write_csv)
+        save_processed_data(result_list, fname, target_subdir, delete_source=delete_processed, write_json=write_json, write_csv=write_csv)
 
-
+def merge_processed_files(prefix='okjob_proc', delete_source=False):
+    """
+    Merges processed single json and csv files into one big file
+    Args:
+        pefix : str             = files to merge must begin with prefix
+        delete_soure : bool     = delete source files ?
+    Returns:
+        None
+    """
+    merge_files(Constants.DIR_NAME_OKJOB, prefix, delete_source=delete_source)
+    
 if __name__ == "__main__":
     setup_logging()
     #job_list = get_raw_joblist(start=3,end=3)
@@ -116,3 +127,4 @@ if __name__ == "__main__":
     #for i in range(5):
     #    save_raw_joblist(i)
     proccess_raw_data(delete_processed=False)
+    merge_processed_files(delete_source=True)

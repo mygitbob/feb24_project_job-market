@@ -3,7 +3,7 @@ from datetime import datetime
 import re
 from constants import Constants
 from logger import setup_logging, logging
-from helpers_io import save_raw_api_data, load_raw_api_data, save_proccessed_data
+from helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files
 
 
 
@@ -57,7 +57,7 @@ def save_raw_joblist(page=0, subdir = Constants.DIR_NAME_MUSE, headers={}):
         logging.debug(f"muse.py: save_raw_joblist: no data to save")
 
 
-def proccess_raw_data(source_subdir=Constants.DIR_NAME_MUSE, target_subdir=Constants.DIR_NAME_MUSE, delete_processed = False, write_json=True, write_csv=True):
+def process_raw_data(source_subdir=Constants.DIR_NAME_MUSE, target_subdir=Constants.DIR_NAME_MUSE, delete_processed = False, write_json=True, write_csv=True):
     """
     Extract information from all files or a specific file from data/raw/<subfolder> and save them in data/processed
     For exact data points see code below
@@ -75,10 +75,10 @@ def proccess_raw_data(source_subdir=Constants.DIR_NAME_MUSE, target_subdir=Const
     data2process = load_raw_api_data(subdir=source_subdir)
     for d2p in data2process:
         fname, data = d2p
-        logging.debug(f"muse.py: proccess_raw_data: process raw file {fname}")
+        logging.debug(f"muse.py: process_raw_data: process raw file {fname}")
         all_entries = []
         if 'results' not in data:
-            logging.error(f"muse.py: proccess_raw_data: no entry results for {fname}")
+            logging.error(f"muse.py: process_raw_data: no entry results for {fname}")
             break
         job_results = data['results']
         for job_result in job_results:
@@ -99,7 +99,7 @@ def proccess_raw_data(source_subdir=Constants.DIR_NAME_MUSE, target_subdir=Const
             job_entry["created"] = str(datetime.now().replace(microsecond=0))       # date when the script creates this entry
             #TODO: try to get how many hours to work
             all_entries.append(job_entry)    # save job entry
-        save_proccessed_data(all_entries, fname, target_subdir, delete_source=delete_processed, write_json=write_json, write_csv=write_csv)
+        save_processed_data(all_entries, fname, target_subdir, delete_source=delete_processed, write_json=write_json, write_csv=write_csv)
 
 def extract_salary(html_text):
     """
@@ -140,11 +140,23 @@ def extract_skills(html_text):
     # TODO: implement
     return []
 
+def merge_processed_files(prefix='muse_proc', delete_source=False):
+    """
+    Merges processed single json and csv files into one big file
+    Args:
+        pefix : str             = files to merge must begin with prefix
+        delete_soure : bool     = delete source files ?
+    Returns:
+        None
+    """
+    merge_files(Constants.DIR_NAME_MUSE, prefix, delete_source=delete_source)
+
 if __name__ == "__main__":
     setup_logging()
     #job_list = get_raw_joblist(100, {})
     #print("Job list return length:", len(job_list[0]))
     #save_raw_joblist(0)
-    for i in range(5):
-        save_raw_joblist(i)
-    proccess_raw_data(delete_processed=False)
+    #for i in range(5):
+    #    save_raw_joblist(i)
+    process_raw_data(delete_processed=False)
+    merge_processed_files(delete_source=True)

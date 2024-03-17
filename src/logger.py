@@ -7,7 +7,7 @@ def setup_logging(log_file=None, level=logging.DEBUG):
 
     Args:
         log_file : str  = filepath, when empty use stdout
-        level : str ?   = debug level
+        level : str     = debug level
 
     Returns:
         None
