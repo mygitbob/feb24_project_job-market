@@ -105,10 +105,20 @@ def proccess_raw_data(source_subdir=Constants.DIR_NAME_REED, target_subdir=Const
         logging.debug(f"reed.py: proccess_raw_data: process raw file {fname}")
 
         job_entries = json_data['results']
+
         if job_entries:
-            save_processed_data(job_entries, fname, target_subdir, delete_source=delete_processed, write_json=write_json, write_csv=write_csv)   
+            result_list = []
+            for entry in job_entries:
+                try:
+                    entry['id'] = entry['jobId']            # rename jobId to id as for the other sources
+                    del entry['jobId']
+                except:
+                    logging.error(f"reed.py: proccess_raw_data: no id found for {entry}")        
+                result_list.append(entry)
+
+            save_processed_data(result_list, fname, target_subdir, delete_source=delete_processed, write_json=write_json, write_csv=write_csv)   
         else:
-            logging.error(f"reed.py: result list empty for file: {fname}")
+            logging.error(f"reed.py: proccess_raw_data: result list empty for file: {fname}")
 
 
 def merge_processed_files(prefix='reed_proc', delete_source=False):
@@ -152,6 +162,6 @@ if __name__ == "__main__":
     #save_raw_joblist(parameters={"keywords":"accountant","location":"london"})
     #save_raw_joblist()
     #save_raw_joblist(parameters={"resultsToSkip":"200"})
-    proccess_raw_data(delete_processed=False)
+    #proccess_raw_data(delete_processed=False)
     #merge_processed_files(delete_source=True)
     #remove_raw_data()
