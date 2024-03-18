@@ -127,6 +127,7 @@ def remove_files(files2delete):
         except OSError as e:
             logging.error(f"helpers: remove_raw_api_data: error deleting file: {to_delete}")
 
+
 def merge_files(folder, prefix, delete_source=False):
     """
     Combines multiple files with the same prefix in data/processed or a subfolder of that into a single file
@@ -145,6 +146,11 @@ def merge_files(folder, prefix, delete_source=False):
     merged_json = []
     merged_csv = []
     files2delete = []
+
+    if not os.path.exists(source_path):
+        logging.debug(f"helpers: merge_files: make dir: {source_path}")
+        os.mkdir(source_path)
+
     for file in os.listdir(source_path):
         if file.startswith(prefix):
             if file.endswith('.json'):
@@ -158,11 +164,14 @@ def merge_files(folder, prefix, delete_source=False):
                 if delete_source:
                     files2delete.append(os.path.join(source_path, file))
     out_file = prefix + ".merged." + str(datetime.now().replace(microsecond=0, second=0))
+    
+
     if merged_json:
         jout_file = out_file + ".json"
         with open(os.path.join(source_path, jout_file), 'w') as f:
             logging.debug(f"helpers: merge_files: write json: {jout_file}")
             json.dump(merged_json, f)
+
     if merged_csv:    
         cout_file = out_file + ".csv"
         with open(os.path.join(source_path, cout_file), 'w', newline='') as outf:

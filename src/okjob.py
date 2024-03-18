@@ -4,30 +4,24 @@ import json
 import os
 from constants import Constants
 from logger import setup_logging, logging
-from helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files
+from helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files, remove_files
 
 
-
-def get_raw_joblist(start=1, end=2, headers={}):
+def get_entries(amount, first=1, headers={}):
     """
-    Send api get request to load muse joblist
+    Get all pages in range
 
     Args:
-        start: str       = minimun value = 1, first entry always contains the keys/header/schema
-        end: str         = number of job entries, first entry is no job entry see start
-        header : dict    = headers to send
+        amount : int                    = number of entries to collect, it seems that the max amount is 926 - 1 (header) = 925 entries
+        first (optional) : int          = first entry (always contains feature names)
+        headers (optional) : dict       = headers for api request 
+    
     Returns:
-        tupel : ( json data : str, response code : str) 
+        None 
     """
-    url = f"https://sheets.googleapis.com/v4/spreadsheets/1owGcfKZRHZq8wR7Iw6PVh6-ueR0weIVQMjxWW_0M6a8/values/Sheet1!A{start}:N{end}?key={Constants.OKJOB_API_KEY}"
-
-    logging.debug(f"okjob.py: GET REQUEST API FOR: {url}, HEADERS: {headers}")
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        logging.debug(f"okjob.py: {url}: CONNECTION SUCCESSFUL, RESPONSE CODE: {response.status_code}")
-    else:
-        logging.error(f"okjob.py: {url}: CONNECTION NOT SUCCESSFUL, RESPONSE CODE: {response.status_code}")
-    return response.text, response.status_code
+    if amount < 1:
+        raise ValueError(f"amount must be <= 1")
+    save_raw_joblist(end=amount + 1 , headers=headers)    
 
 
 def save_raw_joblist(start=1, end=20, subdir = Constants.DIR_NAME_OKJOB, headers={}):
@@ -54,6 +48,30 @@ def save_raw_joblist(start=1, end=20, subdir = Constants.DIR_NAME_OKJOB, headers
         save_raw_api_data(fname, response_data, subdir)
     else:
         logging.debug(f"okjob.py: save_raw_joblist: no data to save")
+
+
+def get_raw_joblist(start=1, end=2, headers={}):
+    """
+    Send api get request to load muse joblist
+
+    Args:
+        start: str       = minimun value = 1, first entry always contains the keys/header/schema
+        end: str         = number of job entries, first entry is no job entry see start
+        header : dict    = headers to send
+    Returns:
+        tupel : ( json data : str, response code : str) 
+    """
+    url = f"https://sheets.googleapis.com/v4/spreadsheets/1owGcfKZRHZq8wR7Iw6PVh6-ueR0weIVQMjxWW_0M6a8/values/Sheet1!A{start}:N{end}?key={Constants.OKJOB_API_KEY}"
+
+    logging.debug(f"okjob.py: GET REQUEST API FOR: {url}, HEADERS: {headers}")
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        logging.debug(f"okjob.py: {url}: CONNECTION SUCCESSFUL, RESPONSE CODE: {response.status_code}")
+    else:
+        logging.error(f"okjob.py: {url}: CONNECTION NOT SUCCESSFUL, RESPONSE CODE: {response.status_code}")
+    return response.text, response.status_code
+
+
 
 def proccess_raw_data(source_subdir=Constants.DIR_NAME_OKJOB, target_subdir=Constants.DIR_NAME_OKJOB, delete_processed = False, write_json=True, write_csv=True):
     """
@@ -107,6 +125,7 @@ def proccess_raw_data(source_subdir=Constants.DIR_NAME_OKJOB, target_subdir=Cons
 
         save_processed_data(result_list, fname, target_subdir, delete_source=delete_processed, write_json=write_json, write_csv=write_csv)
 
+
 def merge_processed_files(prefix='okjob_proc', delete_source=False):
     """
     Merges processed single json and csv files into one big file
@@ -117,7 +136,29 @@ def merge_processed_files(prefix='okjob_proc', delete_source=False):
         None
     """
     merge_files(Constants.DIR_NAME_OKJOB, prefix, delete_source=delete_source)
+
+
+def remove_raw_data():
+    """
+    Remove raw data from data/raw/okjob.io, should be called before getting new raw data via api call
+
+    Args:
+        None
     
+    Returns:
+        None
+    """
+    raw2delete = []
+    okjob_dir = os.path.join(Constants.PATH_DATA_RAW, Constants.DIR_NAME_OKJOB)
+
+    if os.path.exists(okjob_dir):
+        for entry in os.listdir(okjob_dir):
+            if entry.endswith('.json') or entry.endswith('.csv'):
+                raw2delete.append(os.path.join(okjob_dir, entry))
+                
+    remove_files(raw2delete)
+
+
 if __name__ == "__main__":
     setup_logging()
     #job_list = get_raw_joblist(start=3,end=3)
@@ -126,5 +167,6 @@ if __name__ == "__main__":
     #save_raw_joblist(start=1, end=30)
     #for i in range(5):
     #    save_raw_joblist(i)
-    proccess_raw_data(delete_processed=False)
-    merge_processed_files(delete_source=True)
+    #proccess_raw_data(delete_processed=False)
+    #merge_processed_files(delete_source=True)
+    remove_raw_data()

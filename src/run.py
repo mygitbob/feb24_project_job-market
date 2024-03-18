@@ -9,11 +9,15 @@ def run():
     # log only errors
     logger.setup_logging(log_file=Constants.LOG_FILE, level=logger.logging.DEBUG)
     
+    # delete previous collected raw data
+    muse.remove_raw_data()
+    okjob.remove_raw_data()
+
     # retrive data
-    # get 20 pages from muse
-    muse.save_raw_joblist(20)
+    # get  pages 0 - 9 from muse
+    muse.get_pages(10)
     # get 150 job entries from okjob
-    okjob.save_raw_joblist(end=151)
+    okjob.get_entries(200)
 
     # process data & delete raw files
     muse.process_raw_data(delete_processed=False)

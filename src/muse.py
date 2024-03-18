@@ -1,33 +1,28 @@
 import requests
 from datetime import datetime
 import re
+import os
 from constants import Constants
 from logger import setup_logging, logging
-from helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files
+from helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files, remove_files
 
 
-
-def get_raw_joblist(page, headers={}):
+def get_pages(end, start=0, headers={}):
     """
-    Send api get request to load muse joblist
+    Get all pages in range
 
     Args:
-        page: str        = page number to load, MAX VALUE IS 99
-        header : dict    = headers to send
+        end : int                   = last page
+        start (optional) : int      = first page
+        headers (optional) : dict   = headers for api request 
+    
     Returns:
-        tupel : ( json data : str, response code : str) 
+        None 
     """
-    # TODO: register muse api key
-    # url = f"https://www.themuse.com/api/public/jobs?api_key={Constants.MUSE_API_KEY}&page={page}"
-    url = f"https://www.themuse.com/api/public/jobs?page={page}"
-
-    logging.debug(f"muse.py: GET REQUEST API FOR: {url}, HEADERS: {headers}")
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        logging.debug(f"muse.py: {url}: CONNECTION SUCCESSFUL, RESPONSE CODE: {response.status_code}")
-    else:
-        logging.error(f"muse.py: {url}: CONNECTION NOT SUCCESSFUL, RESPONSE CODE: {response.status_code}")
-    return response.text, response.status_code
+    if start < 0 or start > end:
+        raise ValueError("start must be <=0 end start <= end")
+    for page in range(start, end + 1):
+        save_raw_joblist(page, headers=headers)    
 
 
 def save_raw_joblist(page=0, subdir = Constants.DIR_NAME_MUSE, headers={}):
@@ -55,6 +50,29 @@ def save_raw_joblist(page=0, subdir = Constants.DIR_NAME_MUSE, headers={}):
         save_raw_api_data(fname, response_data, subdir)
     else:
         logging.debug(f"muse.py: save_raw_joblist: no data to save")
+
+
+def get_raw_joblist(page, headers={}):
+    """
+    Send api get request to load muse joblist
+
+    Args:
+        page: str        = page number to load, MAX VALUE IS 99
+        header : dict    = headers to send
+    Returns:
+        tupel : ( json data : str, response code : str) 
+    """
+    # TODO: register muse api key
+    # url = f"https://www.themuse.com/api/public/jobs?api_key={Constants.MUSE_API_KEY}&page={page}"
+    url = f"https://www.themuse.com/api/public/jobs?page={page}"
+
+    logging.debug(f"muse.py: GET REQUEST API FOR: {url}, HEADERS: {headers}")
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        logging.debug(f"muse.py: {url}: CONNECTION SUCCESSFUL, RESPONSE CODE: {response.status_code}")
+    else:
+        logging.error(f"muse.py: {url}: CONNECTION NOT SUCCESSFUL, RESPONSE CODE: {response.status_code}")
+    return response.text, response.status_code
 
 
 def process_raw_data(source_subdir=Constants.DIR_NAME_MUSE, target_subdir=Constants.DIR_NAME_MUSE, delete_processed = False, write_json=True, write_csv=True):
@@ -101,6 +119,7 @@ def process_raw_data(source_subdir=Constants.DIR_NAME_MUSE, target_subdir=Consta
             all_entries.append(job_entry)    # save job entry
         save_processed_data(all_entries, fname, target_subdir, delete_source=delete_processed, write_json=write_json, write_csv=write_csv)
 
+
 def extract_salary(html_text):
     """
     Extracts salary information, its possible that nothing will be found
@@ -126,6 +145,7 @@ def extract_salary(html_text):
         min_nr = max_nr = currency = "NOT_FOUND"
     return min_nr, max_nr, currency
 
+
 def extract_skills(html_text):
     """
     Extracts information on job skills , returns empty list when nothing is found
@@ -140,6 +160,7 @@ def extract_skills(html_text):
     # TODO: implement
     return []
 
+
 def merge_processed_files(prefix='muse_proc', delete_source=False):
     """
     Merges processed single json and csv files into one big file
@@ -151,6 +172,28 @@ def merge_processed_files(prefix='muse_proc', delete_source=False):
     """
     merge_files(Constants.DIR_NAME_MUSE, prefix, delete_source=delete_source)
 
+
+def remove_raw_data():
+    """
+    Remove raw data from data/raw/muse.com, should be called before getting new raw data via api call
+
+    Args:
+        None
+    
+    Returns:
+        None
+    """
+    raw2delete = []
+    muse_dir = os.path.join(Constants.PATH_DATA_RAW, Constants.DIR_NAME_MUSE)
+    
+    if os.path.exists(muse_dir):
+        for entry in os.listdir(muse_dir):
+            if entry.endswith('.json') or entry.endswith('.csv'):
+                raw2delete.append(os.path.join(muse_dir, entry))
+    
+    remove_files(raw2delete)
+
+
 if __name__ == "__main__":
     setup_logging()
     #job_list = get_raw_joblist(100, {})
@@ -158,5 +201,6 @@ if __name__ == "__main__":
     #save_raw_joblist(0)
     #for i in range(5):
     #    save_raw_joblist(i)
-    process_raw_data(delete_processed=False)
-    merge_processed_files(delete_source=True)
+    #process_raw_data(delete_processed=False)
+    #merge_processed_files(delete_source=True)
+    remove_raw_data()
