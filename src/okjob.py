@@ -1,6 +1,5 @@
 import requests
 from datetime import datetime
-import json
 import os
 from constants import Constants
 from logger import setup_logging, logging
@@ -24,14 +23,14 @@ def get_entries(amount, first=1, headers={}):
     save_raw_joblist(end=amount + 1 , headers=headers)    
 
 
-def save_raw_joblist(start=1, end=20, subdir = Constants.DIR_NAME_OKJOB, headers={}):
+def save_raw_joblist(start=1, end=20, subdir = '', headers={}):
     """
     Get okjob raw joblist by api call and save it in data/raw
 
     Args:
         start: str                  = minimun value = 1, first entry always contains the keys/header/schema
         end: str                    = number of job entries, first entry is no job entry see start
-        subdir : str                = subfolder in data/raw to save results, default Constants.DIR_NAME_OKJOB
+        subdir (optional) : str     = subfolder in data/raw to save results, if empty use Constants.DIR_NAME_OKJOB
         headers (optional) : dict   = headers to send with api call
 
     Returns:
@@ -41,7 +40,7 @@ def save_raw_joblist(start=1, end=20, subdir = Constants.DIR_NAME_OKJOB, headers
     response_data , response_code = get_raw_joblist(start=start, end=end, headers=headers)
     if response_code == 200:
         if subdir == '':
-            subdir = Constants.DIR_NAME_OKJOB_NAME_MUSE                    # create a folder for each source 
+            subdir = Constants.DIR_NAME_OKJOB                           # create a folder for each source 
         now = datetime.now().replace(microsecond=0)
         fname = f"okjob_raw_joblist.entires{str(start)}-{str(end)}.{now}.json"  # filename includes timestamp of request
         fname.replace(' ','_')                                  # no empty spaces in filename
@@ -52,12 +51,12 @@ def save_raw_joblist(start=1, end=20, subdir = Constants.DIR_NAME_OKJOB, headers
 
 def get_raw_joblist(start=1, end=2, headers={}):
     """
-    Send api get request to load muse joblist
+    Send api get request to load okjob joblist
 
     Args:
-        start: str       = minimun value = 1, first entry always contains the keys/header/schema
-        end: str         = number of job entries, first entry is no job entry see start
-        header : dict    = headers to send
+        start: str                  = minimun value = 1, first entry always contains the keys/header/schema
+        end: str                    = number of job entries, first entry is no job entry see start
+        headers (optional) : dict   = headers to send with api call
     Returns:
         tupel : ( json data : str, response code : str) 
     """
@@ -78,8 +77,8 @@ def proccess_raw_data(source_subdir=Constants.DIR_NAME_OKJOB, target_subdir=Cons
     Extract information of all files in data/raw/<subfolder> and save them in data/processed
     
     Args:
-        source_subdir : str                = subfolder in data/raw to load raw data, default Constants.DIR_NAME_MUSE
-        target_subdir : str                = subfolder in data/processed to save processed data, default Constants.DIR_NAME_MUSE
+        source_subdir : str                = subfolder in data/raw to load raw data, default Constants.DIR_NAME_REED
+        target_subdir : str                = subfolder in data/processed to save processed data, default Constants.DIR_NAME_REED
         delete_processed (optional) : bool = should source file to be deleted ?       
         write_json (optional) : bool       = write file as json ?
         write_csv (optional) : bool        = write file as csv ?
@@ -155,7 +154,7 @@ def remove_raw_data():
         for entry in os.listdir(okjob_dir):
             if entry.endswith('.json') or entry.endswith('.csv'):
                 raw2delete.append(os.path.join(okjob_dir, entry))
-                
+
     remove_files(raw2delete)
 
 
@@ -165,8 +164,6 @@ if __name__ == "__main__":
     #print("Job list return length:", len(job_list[0]))
     #print(job_list[0])
     #save_raw_joblist(start=1, end=30)
-    #for i in range(5):
-    #    save_raw_joblist(i)
     #proccess_raw_data(delete_processed=False)
     #merge_processed_files(delete_source=True)
     remove_raw_data()

@@ -25,13 +25,13 @@ def get_pages(end, start=0, headers={}):
         save_raw_joblist(page, headers=headers)    
 
 
-def save_raw_joblist(page=0, subdir = Constants.DIR_NAME_MUSE, headers={}):
+def save_raw_joblist(page=0, subdir = '', headers={}):
     """
     Get muse raw joblist by api call and save it in data/raw
 
     Args:
         page: str                   = page number to load, MAX VALUE IS 99
-        subdir : str                = subfolder in data/raw to save results, default Constants.DIR_NAME_MUSE
+        subdir (optional) : str     = subfolder in data/raw to save results, if empty use Constants.DIR_NAME_MUSE
         headers (optional) : dict   = headers to send with api call
 
     Returns:

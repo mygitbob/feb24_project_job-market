@@ -20,6 +20,9 @@ class Constants(metaclass=CMeta):
     # name of subfolder for both data/ raw AND data/proccessed
     DIR_NAME_MUSE = "muse.com"          
     DIR_NAME_OKJOB = "okjob.io"
+    DIR_NAME_REED = "reed.co.uk"
+    
+    API_VERSION_REED = "1.0"
     
     SALARY_ENTRY_MUSE = "contents"
     KOWN_CURRENCY = ['$', '£' , '€']
