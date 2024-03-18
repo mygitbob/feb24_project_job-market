@@ -146,11 +146,12 @@ def remove_raw_data():
 
 if __name__ == "__main__":
     setup_logging()
-    #job_list = get_raw_joblist(parameters={"keywords":"accountant","location":"london"})
+    #job_list = get_raw_joblist(parameters={"resultsToSkip":"200"})
     #print("Job list return length:", len(job_list[0]))
     #print(job_list[0])
     #save_raw_joblist(parameters={"keywords":"accountant","location":"london"})
     #save_raw_joblist()
-    #roccess_raw_data(delete_processed=False)
+    #save_raw_joblist(parameters={"resultsToSkip":"200"})
+    proccess_raw_data(delete_processed=False)
     #merge_processed_files(delete_source=True)
     #remove_raw_data()
