@@ -20,8 +20,10 @@ def run():
     # max page number is 99, this means we can get 100 * 20 = 2000 results
     muse.get_pages(10)
     # get 150 job entries from okjob
-    # TODO: I have to check how we can get max results
-    okjob.get_entries(200)
+    # seems it works like reed, we have alimit per call and have to move the range
+    # TODO: change the arguments of okjob.get_entries, in the moment the 1st entry will be always treated as key names
+    # this will crash  when we start with a value grreater than 1
+    okjob.get_entries(1,100)
     # get as many as we can 
     # one call islimited to 100 results, we can get more data if we use "resultsToSkip" : x
     # then we can the next 100 results after x, for example get_entires(parameters={"resultsToSkip":"100"})

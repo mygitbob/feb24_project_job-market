@@ -6,24 +6,22 @@ from logger import setup_logging, logging
 from helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files, remove_files
 
 
-def get_entries(amount, first=1, headers={}):
+def get_entries(first, last, headers={}):
     """
     Get all pages in range
 
     Args:
-        amount : int                    = number of entries to collect, it seems that the max amount is 926 - 1 (header) = 925 entries
-        first (optional) : int          = first entry (always contains feature names)
-        headers (optional) : dict       = headers for api request 
+        first : int                   = first entry (first = 1 always contains feature names)
+        last : int                    = number of entries to collect, it seems that the max amount is 926 - 1 (header) = 925 entries
+        headers (optional) : dict     = headers for api request 
     
     Returns:
         None 
     """
-    if amount < 1:
-        raise ValueError(f"amount must be <= 1")
-    save_raw_joblist(end=amount + 1 , headers=headers)    
+    save_raw_joblist(first, last, headers=headers)    
 
 
-def save_raw_joblist(start=1, end=20, subdir = '', headers={}):
+def save_raw_joblist(start, end, subdir = '', headers={}):
     """
     Get okjob raw joblist by api call and save it in data/raw
 
@@ -49,7 +47,7 @@ def save_raw_joblist(start=1, end=20, subdir = '', headers={}):
         logging.debug(f"okjob.py: save_raw_joblist: no data to save")
 
 
-def get_raw_joblist(start=1, end=2, headers={}):
+def get_raw_joblist(start, end, headers={}):
     """
     Send api get request to load okjob joblist
 
