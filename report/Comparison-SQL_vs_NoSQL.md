@@ -1,6 +1,6 @@
 ## Comparison of Relational Databases vs NoSql Databases 
 ### Relational Databases
-#### Strengths:
+#### Strengths
 -  **Structured Data Modeling**: Relational databases are ideal for applications where data is well-structured and standardized. They use tables, relationships, and SQL for querying and manipulating data.
 	
 		Our data is still a work in progress -> not well-structured and standardized
@@ -10,7 +10,7 @@
 			
 		Not important for your project, we don´t have a lot of reading 
 		and writing operations in parallel (transactional).
-#### Weaknesses:
+#### Weaknesses
 -  **Rigid Schema**: Relational databases require a fixed schema, meaning changes to the data structure are often cumbersome and may impact existing data if the schema changes.
 			
 		Our data may change during the project development -> problems see above
@@ -24,7 +24,7 @@
 		Not very likely our project will reach the state where this becomes a major concern, 
 		however if it would continue running it could be a future problem.
 ### NoSQL Databases
-### Strengths
+#### Strengths
 
 -  **Flexible Data Model**: NoSQL databases offer a more flexible data model, allowing storage of various types of data without requiring a fixed schema. This enables easier scalability and adaptation to changing requirements.
 -  **Scalability**: Many NoSQL databases are optimized for horizontal scaling, making them well-suited for handling large volumes of data distributed across multiple servers.
@@ -37,7 +37,7 @@
 
 		This is good to have the choice and not be limited ...
 
-### Weaknesses
+#### Weaknesses
 
 -  **Consistency Model**: Some NoSQL databases prioritize availability and partition tolerance over consistency, which may lead to inconsistencies in some cases.
 
@@ -102,7 +102,7 @@ Weaknesses:
 
 -  **Configuration Complexity**: Configuring and managing Elasticsearch clusters can be complex due to their distributed nature and the required indexing and replication.
 
-			Same as MongoDB.
+		Same as MongoDB.
 -  **Data Consistency**: Elasticsearch prioritizes performance and availability over consistency, which may lead to inconsistencies in some application scenarios.
 
 		Again availability and consistency are no concerns of our project.
