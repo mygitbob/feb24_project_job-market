@@ -18,6 +18,7 @@ So far we have 3 data sources, I try to add new ones before our meeting on Weden
 
 ### Data Sources
 #### Muse.com
+
 - **job_title**: name of the job, should not be NULL
 - **min_salary**:  value can be :"NOT_FOUND" which equals NULL
 - **max_salary**: value can be :"NOT_FOUND" which equals NULL
