@@ -18,14 +18,14 @@ So far we have 3 data sources, I try to add new ones before our meeting on Weden
 
 ### Data Sources
 #### Muse.com
-**job_title**: name of the job, should not be NULL
-**min_salary**:  value can be :"NOT_FOUND" which equals NULL
-**max_salary**: value can be :"NOT_FOUND" which equals NULL
-**currency**: value can be :"NOT_FOUND" which equals NULL
-**skills**: value can be [] => empty list which equals NULL
-**publication_date**: when the offer was published, should not be NULL
-**id**: every data I save contains an id, this id is distinct for the data source
-**location**: list that contains somethimes multiple entries, one of them should be city, country, field has to be checked, I have discovered so far something like this:
+- **job_title**: name of the job, should not be NULL
+- **min_salary**:  value can be :"NOT_FOUND" which equals NULL
+- **max_salary**: value can be :"NOT_FOUND" which equals NULL
+- **currency**: value can be :"NOT_FOUND" which equals NULL
+- **skills**: value can be [] => empty list which equals NULL
+- **publication_date**: when the offer was published, should not be NULL
+- **id**: every data I save contains an id, this id is distinct for the data source
+- **location**: list that contains somethimes multiple entries, one of them should be city, country, field has to be checked, I have discovered so far something like this:
 ```json
 "location": [
 {
@@ -36,11 +36,11 @@ So far we have 3 data sources, I try to add new ones before our meeting on Weden
 }
 ]
 ```
-**experience**: level of exp required, have not seen yet but I guess could be NULL
-**html_link** : link to full job offer description , could valuable if we get data from multiple sources to identify doubles (our sources are often services that query data sources, for example okjobs queries LinkIn), should not be NULL
-**type**: describes tpye as "external" (sample data has no other values), could be NULL imho
-**company_name**: should not be NULL
-**company_id**: muse company id => not useful for us !?
-**source**: redundant (see html_link above) !?
-**created** : I would say publication_date is enough !?
+- **experience**: level of exp required, have not seen yet but I guess could be NULL
+- **html_link** : link to full job offer description , could valuable if we get data from multiple sources to identify doubles (our sources are often services that query data sources, for example okjobs queries LinkIn), should not be NULL
+- **type**: describes tpye as "external" (sample data has no other values), could be NULL imho
+- **company_name**: should not be NULL
+- **company_id**: muse company id => not useful for us !?
+- **source**: redundant (see html_link above) !?
+- **created** : I would say publication_date is enough !?
 
