@@ -3,17 +3,17 @@
 #### Strengths:
 -  **Structured Data Modeling**: Relational databases are ideal for applications where data is well-structured and standardized. They use tables, relationships, and SQL for querying and manipulating data.
 	
-		Your data is still a work in progress -> not well-structured and standardized
+		Our data is still a work in progress -> not well-structured and standardized
 	
 -  **Powerful Querying Capabilities**: SQL provides a powerful query language allowing complex queries and aggregations.
 -  (**Transaction Consistency**: Relational databases offer ACID properties (Atomicity, Consistency, Isolation, Durability), ensuring transactions are reliably and consistently executed.)
 			
-			Not important for your project, we don´t have a lot of reading 
+		Not important for your project, we don´t have a lot of reading 
 		and writing operations in parallel (transactional).
 #### Weaknesses:
 -  **Rigid Schema**: Relational databases require a fixed schema, meaning changes to the data structure are often cumbersome and may impact existing data if the schema changes.
 			
-			Our data may change during the project development -> problems see above
+		Our data may change during the project development -> problems see above
 -  **Complexity with Hierarchical Data**: If your data is hierarchical or heavily nested, modeling and querying in relational databases can become complex.
 
 		For example we can´t save your data on job skills as a list in a field, 
@@ -21,8 +21,8 @@
 		This is more complicated, however it would save storage space because of avoiding redundance.
 -  **Scalability**: Traditional relational databases may struggle with horizontal scaling across multiple servers, although it's possible with technologies like sharding and replication. 
 
-			Not very likely our project will reach the state where this becomes a major concern, 
-			however if it would continue running it could be a future problem.
+		Not very likely our project will reach the state where this becomes a major concern, 
+		however if it would continue running it could be a future problem.
 ### NoSQL Databases
 ### Strengths
 
