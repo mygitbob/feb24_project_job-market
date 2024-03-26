@@ -113,8 +113,9 @@ def proccess_raw_data(source_subdir=Constants.DIR_NAME_REED, target_subdir=Const
                     entry['id'] = entry['jobId']            # rename jobId to id as for the other sources
                     del entry['jobId']
                 except:
-                    logging.error(f"reed.py: proccess_raw_data: no id found for {entry}")        
-                result_list.append(entry)
+                    logging.error(f"reed.py: proccess_raw_data: no id found for {entry}")   
+                entry_stripped = {key: str(value).strip() for key, value in entry.items()}
+                result_list.append(entry_stripped)
 
             save_processed_data(result_list, fname, target_subdir, delete_source=delete_processed, write_json=write_json, write_csv=write_csv)   
         else:
@@ -160,8 +161,8 @@ if __name__ == "__main__":
     #print("Job list return length:", len(job_list[0]))
     #print(job_list[0])
     #save_raw_joblist(parameters={"keywords":"accountant","location":"london"})
-    #save_raw_joblist()
-    save_raw_joblist(parameters={"resultsToSkip":"200"})
+    save_raw_joblist()
+    #save_raw_joblist(parameters={"resultsToSkip":"200"})
     proccess_raw_data(delete_processed=True)
     merge_processed_files(delete_source=True)
     #remove_raw_data()

@@ -101,18 +101,18 @@ def process_raw_data(source_subdir=Constants.DIR_NAME_MUSE, target_subdir=Consta
         job_results = data['results']
         for job_result in job_results:
             job_entry = {}
-            job_entry["job_title"] = job_result["name"]    
+            job_entry["job_title"] = job_result["name"].strip()    
             job_entry["min_salary"], job_entry["max_salary"], job_entry['currency'] = extract_salary(job_result["contents"])
             job_entry["skills"] = extract_skills(job_result["contents"])
-            job_entry["publication_date"] = job_result["publication_date"]
-            job_entry["id"] = job_result["id"]
+            job_entry["publication_date"] = job_result["publication_date"].strip()
+            job_entry["id"] = str(job_result["id"]).strip()
             job_entry["location"] = job_result["locations"]
             job_entry["job_categories"] = job_result["categories"]
-            job_entry["experience"] = job_result["levels"][0]["short_name"]                 # TODO: check html
-            job_entry["html_link"] = job_result["refs"]["landing_page"] 
-            job_entry["type"] = job_result["type"]                                          # not sure what this means
-            job_entry["company_name"] = job_result["company"]["name"]
-            job_entry["company_id"] = job_result["company"]["id"]                           # muse company id
+            job_entry["experience"] = job_result["levels"][0]["short_name"].strip()                 # TODO: check html
+            job_entry["html_link"] = job_result["refs"]["landing_page"].strip() 
+            job_entry["type"] = job_result["type"].strip()                                          # not sure what this means
+            job_entry["company_name"] = job_result["company"]["name"].strip()
+            job_entry["company_id"] = str(job_result["company"]["id"]).strip()                           # muse company id
             job_entry["source"] = "muse.com"                                                # name of data source
             job_entry["created"] = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")       # date when the script creates this entry
             #TODO: try to get how many hours to work

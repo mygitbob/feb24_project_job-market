@@ -92,14 +92,16 @@ def proccess_raw_data(source_subdir=Constants.DIR_NAME_OKJOB, target_subdir=Cons
         logging.debug(f"okjob.py: proccess_raw_data: process raw file {fname}")
 
         keys = json_data['values'][0]       # keys are in the first entry
-        values = json_data['values'][1:]    # all other entries contain values
+        values_raw = json_data['values'][1:]    # all other entries contain values
+        # lets strip all values
+        values = [[value.strip() for value in value_entry] for value_entry in values_raw]
 
         # create dict
         json_dict_list = [dict(zip(keys, row)) for row in values]
         result_list = []
         for json_dict in json_dict_list: 
             # create id for entry
-            id_entry = json_dict["LinkedIn-Job-Link"].split('-')[-1]
+            id_entry = json_dict["LinkedIn-Job-Link"].strip().split('-')[-1]
             try:
                 json_dict["id"] = str(int(id_entry))
             except:
