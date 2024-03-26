@@ -44,7 +44,7 @@ def save_raw_joblist(page=0, subdir = '', headers={}):
     if response_code == 200:
         if subdir == '':
             subdir = Constants.DIR_NAME_MUSE                    # create a folder for each source 
-        now = datetime.now().replace(microsecond=0)
+        now = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
         fname = f"muse_raw_joblist.page{str(page)}.{now}.json"  # filename includes timestamp of request
         fname.replace(' ','_')                                  # no empty spaces in filename
         save_raw_api_data(fname, response_data, subdir)
@@ -108,13 +108,13 @@ def process_raw_data(source_subdir=Constants.DIR_NAME_MUSE, target_subdir=Consta
             job_entry["id"] = job_result["id"]
             job_entry["location"] = job_result["locations"]
             job_entry["job_categories"] = job_result["categories"]
-            job_entry["experience"] = job_result["levels"][0]["short_name"]         # TODO: check html
+            job_entry["experience"] = job_result["levels"][0]["short_name"]                 # TODO: check html
             job_entry["html_link"] = job_result["refs"]["landing_page"] 
-            job_entry["type"] = job_result["type"]                                  # not sure what this means
+            job_entry["type"] = job_result["type"]                                          # not sure what this means
             job_entry["company_name"] = job_result["company"]["name"]
-            job_entry["company_id"] = job_result["company"]["id"]                   # muse company id
-            job_entry["source"] = "muse.com"                                        # name of data source
-            job_entry["created"] = str(datetime.now().replace(microsecond=0))       # date when the script creates this entry
+            job_entry["company_id"] = job_result["company"]["id"]                           # muse company id
+            job_entry["source"] = "muse.com"                                                # name of data source
+            job_entry["created"] = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")       # date when the script creates this entry
             #TODO: try to get how many hours to work
             all_entries.append(job_entry)    # save job entry
         save_processed_data(all_entries, fname, target_subdir, delete_source=delete_processed, write_json=write_json, write_csv=write_csv)
@@ -199,8 +199,8 @@ if __name__ == "__main__":
     #job_list = get_raw_joblist(100, {})
     #print("Job list return length:", len(job_list[0]))
     #save_raw_joblist(0)
-    #for i in range(5):
-    #    save_raw_joblist(i)
-    #process_raw_data(delete_processed=False)
-    #merge_processed_files(delete_source=True)
-    remove_raw_data()
+    for i in range(5):
+        save_raw_joblist(i)
+    process_raw_data(delete_processed=True)
+    merge_processed_files(delete_source=True)
+    #remove_raw_data()

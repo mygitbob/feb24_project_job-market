@@ -39,7 +39,7 @@ def save_raw_joblist(start, end, subdir = '', headers={}):
     if response_code == 200:
         if subdir == '':
             subdir = Constants.DIR_NAME_OKJOB                           # create a folder for each source 
-        now = datetime.now().replace(microsecond=0)
+        now = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
         fname = f"okjob_raw_joblist.entires{str(start)}-{str(end)}.{now}.json"  # filename includes timestamp of request
         fname.replace(' ','_')                                  # no empty spaces in filename
         save_raw_api_data(fname, response_data, subdir)
@@ -161,7 +161,7 @@ if __name__ == "__main__":
     #job_list = get_raw_joblist(start=3,end=3)
     #print("Job list return length:", len(job_list[0]))
     #print(job_list[0])
-    #save_raw_joblist(start=1, end=30)
-    #proccess_raw_data(delete_processed=False)
-    #merge_processed_files(delete_source=True)
-    remove_raw_data()
+    save_raw_joblist(start=1, end=30)
+    proccess_raw_data(delete_processed=True)
+    merge_processed_files(delete_source=True)
+    #remove_raw_data()

@@ -41,7 +41,7 @@ def save_raw_joblist(subdir = '', headers={}, parameters={}):
     if response_code == 200:
         if subdir == '':
             subdir = Constants.DIR_NAME_REED                    # create a folder for each source 
-        now = datetime.now().replace(microsecond=0)
+        now = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
         fname = f"reed_raw_joblist.{now}.json"                  # filename includes timestamp of request
         fname.replace(' ','_')                                  # no empty spaces in filename
         save_raw_api_data(fname, response_data, subdir)
@@ -161,7 +161,7 @@ if __name__ == "__main__":
     #print(job_list[0])
     #save_raw_joblist(parameters={"keywords":"accountant","location":"london"})
     #save_raw_joblist()
-    #save_raw_joblist(parameters={"resultsToSkip":"200"})
-    #proccess_raw_data(delete_processed=False)
-    #merge_processed_files(delete_source=True)
+    save_raw_joblist(parameters={"resultsToSkip":"200"})
+    proccess_raw_data(delete_processed=True)
+    merge_processed_files(delete_source=True)
     #remove_raw_data()

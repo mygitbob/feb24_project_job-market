@@ -163,7 +163,7 @@ def merge_files(folder, prefix, delete_source=False):
                 merged_csv.append(os.path.join(source_path, file))
                 if delete_source:
                     files2delete.append(os.path.join(source_path, file))
-    out_file = prefix + ".merged." + str(datetime.now().replace(microsecond=0, second=0))
+    out_file = prefix + ".merged." + str(datetime.now().strftime("%Y-%m-%d_%H:%M"))
     
 
     if merged_json:
