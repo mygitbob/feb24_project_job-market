@@ -19,6 +19,14 @@ with open("/data/processed/row_sample_data/okjob_raw.json", "r") as okjobs_file:
 with open("/data/processed/row_sample_data/reed_raw.json", "r") as reed_file:
     reed_data = json.load(reed_file)
 
-# insert data into collections
-okjobs_collection.insert_one(okjobs_data)
-reed_collection.insert_one(reed_data)
+# insert data into collections using unique id
+
+for job in okjobs_data:
+    if not okjobs_collection.find_one({"id": job["id"]}):
+        okjobs_collection.insert_one(job)
+
+for job in reed_data:
+    if not reed_collection.find_one({"id": job["id"]}):
+        reed_collection.insert_one(job)
+
+
