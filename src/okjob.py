@@ -9,7 +9,6 @@ from helpers import save_raw_api_data, load_raw_api_data, save_processed_data, m
 def get_entries(first, last, headers={}):
     """
     Get all pages in range
-
     Args:
         first : int                   = first entry (first = 1 always contains feature names)
         last : int                    = number of entries to collect, it seems that the max amount is 926 - 1 (header) = 925 entries
@@ -39,7 +38,7 @@ def save_raw_joblist(start, end, subdir = '', headers={}):
     if response_code == 200:
         if subdir == '':
             subdir = Constants.DIR_NAME_OKJOB                           # create a folder for each source 
-        now = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
+        now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         fname = f"okjob_raw_joblist.entires{str(start)}-{str(end)}.{now}.json"  # filename includes timestamp of request
         fname.replace(' ','_')                                  # no empty spaces in filename
         save_raw_api_data(fname, response_data, subdir)
@@ -117,7 +116,7 @@ def proccess_raw_data(source_subdir=Constants.DIR_NAME_OKJOB, target_subdir=Cons
                 os.makedirs(jobd_folder, exist_ok=True)
             jobd_fname = f"okjob_jobdesc_id={json_dict['id']}.html"
             job_full_path = os.path.join(jobd_folder, jobd_fname)
-            with open(job_full_path, 'w') as f:            
+            with open(job_full_path, 'w', encoding='utf-8') as f:            
                     f.write(json_dict["Job-Description"])
             json_dict["Job-Description"] = job_full_path
             result_list.append(json_dict)

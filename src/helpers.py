@@ -22,11 +22,11 @@ def save_raw_api_data(fname, data, subdir = ''):
     if not os.path.exists(path2save):
         os.mkdir(path2save)
     if isinstance(data, str):  
-        with open(os.path.join(path2save, fname), 'w') as file:
+        with open(os.path.join(path2save, fname), 'w', encoding='utf-8') as file:
             logging.debug(f"helpers: save_raw_data: write json file: {fname}")
             file.write(data)
     elif isinstance(data, list):  
-        with open(os.path.join(path2save, fname), 'w') as file:
+        with open(os.path.join(path2save, fname), 'w', encoding='utf-8') as file:
             logging.debug(f"helpers: save_raw_data: write json file: {fname}")
             file.write('[')            # multiple jsons have to be in an array
             for i, item in enumerate(data):
@@ -55,7 +55,7 @@ def load_raw_api_data(subdir = '', fname=''):
     if fname != '':
         file = os.path.join(path2load, fname)
         if file.endswith("json") and os.path.getsize(file) > 0:
-            with open(file) as f:
+            with open(file, encoding='utf-8') as f:
                 try:
                     result.append((file, json.load(f)))
                     logging.debug(f"helpers: load_raw_data: load json file: {file}")
@@ -66,7 +66,7 @@ def load_raw_api_data(subdir = '', fname=''):
         for file in os.listdir(path2load):
             file = os.path.join(path2load, file)
             if file.endswith("json") and os.path.getsize(file) > 0:
-                with open(file) as f:
+                with open(file, encoding='utf-8') as f:
                     try:
                         result.append((file, json.load(f)))
                         logging.debug(f"helpers: load_raw_data: load json file: {file}")
@@ -98,12 +98,12 @@ def save_processed_data(data_to_save, source_file, subdir='', delete_source=Fals
     fout = os.path.basename(source_file).replace('_raw_', '_processed_')
     if write_json:
         json_filepath = os.path.join(path2save, fout)
-        with open(json_filepath, 'w') as f:
+        with open(json_filepath, 'w', encoding='utf-8') as f:
             logging.debug(f"helpers: save_processed_data: write json: {json_filepath}")
             json.dump(data_to_save, f, indent=4)
     if write_csv:
         csv_filepath = os.path.join(path2save, fout).rsplit(".", maxsplit=1)[0] + ".csv"
-        with open(csv_filepath, 'w') as f:
+        with open(csv_filepath, 'w', encoding='utf-8') as f:
             logging.debug(f"helpers: save_processed_data: write csv: {csv_filepath}")
             writer = csv.DictWriter(f, fieldnames = data_to_save[0].keys())
             writer.writeheader()
@@ -154,7 +154,7 @@ def merge_files(folder, prefix, delete_source=False):
     for file in os.listdir(source_path):
         if file.startswith(prefix):
             if file.endswith('.json'):
-                with open(os.path.join(source_path, file)) as f:
+                with open(os.path.join(source_path, file), encoding='utf-8') as f:
                     logging.debug(f"helpers: merge_files: open json: {file}")
                     merged_json.extend(json.load(f))
                     if delete_source:
@@ -163,30 +163,30 @@ def merge_files(folder, prefix, delete_source=False):
                 merged_csv.append(os.path.join(source_path, file))
                 if delete_source:
                     files2delete.append(os.path.join(source_path, file))
-    out_file = prefix + ".merged." + str(datetime.now().strftime("%Y-%m-%d_%H:%M"))
+    out_file = prefix + ".merged." + str(datetime.now().strftime("%Y-%m-%d_%H-%M"))
     
 
     if merged_json:
         jout_file = out_file + ".json"
-        with open(os.path.join(source_path, jout_file), 'w') as f:
+        with open(os.path.join(source_path, jout_file), 'w', encoding='utf-8') as f:
             logging.debug(f"helpers: merge_files: write json: {jout_file}")
             json.dump(merged_json, f)
 
     if merged_csv:    
         cout_file = out_file + ".csv"
-        with open(os.path.join(source_path, cout_file), 'w', newline='') as outf:
+        with open(os.path.join(source_path, cout_file), 'w', newline='', encoding='utf-8') as outf:
             logging.debug(f"helpers: merge_files: write csv: {cout_file}")
             writer = csv.writer(outf)
 
             # write header only once
-            with open(os.path.join(source_path, merged_csv[0]), 'r', newline='') as inf:
+            with open(os.path.join(source_path, merged_csv[0]), 'r', newline='', encoding='utf-8') as inf:
                 reader = csv.reader(inf)
                 header = next(reader)
                 writer.writerow(header)
 
             # skip 1st row, we already have the header
             for csv_file in merged_csv:
-                with open(os.path.join(source_path, csv_file), 'r', newline='') as inf:
+                with open(os.path.join(source_path, csv_file), 'r', newline='', encoding='utf-8') as inf:
                     reader = csv.reader(inf)
                     # skip header
                     next(reader)

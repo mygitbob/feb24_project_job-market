@@ -44,7 +44,7 @@ def save_raw_joblist(page=0, subdir = '', headers={}):
     if response_code == 200:
         if subdir == '':
             subdir = Constants.DIR_NAME_MUSE                    # create a folder for each source 
-        now = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
+        now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         fname = f"muse_raw_joblist.page{str(page)}.{now}.json"  # filename includes timestamp of request
         fname.replace(' ','_')                                  # no empty spaces in filename
         save_raw_api_data(fname, response_data, subdir)
