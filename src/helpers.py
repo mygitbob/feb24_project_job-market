@@ -109,7 +109,29 @@ def save_processed_data(data_to_save, source_file, subdir='', delete_source=Fals
             writer.writeheader()
             writer.writerows(data_to_save)
     if delete_source:
-        remove_files([source_file])    
+        # remove all files in dir
+        delete_all_files_in_directory_of_file(source_file)
+        # remove_files([source_file])    
+
+# TODO: description
+def delete_all_files_in_directory_of_file(file_path):
+    directory_path = os.path.dirname(file_path)
+
+    if not os.path.isdir(directory_path):
+        logging.error(f"helpers: delete_all_files_in_directory_of_file: cant get dir name: {file_path}")
+        return
+    
+    file_list = os.listdir(directory_path)
+    
+    for file_name in file_list:
+        file_path = os.path.join(directory_path, file_name)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+            logging.debug(f"helpers: delete_all_files_in_directory_of_file: deleting file: {file_path}")
+        else:
+            logging.error(f"helpers: delete_all_files_in_directory_of_file: error deleting file: {file_path}")
+    
+
 
 def remove_files(files2delete):
     """
@@ -128,13 +150,14 @@ def remove_files(files2delete):
             logging.error(f"helpers: remove_raw_api_data: error deleting file: {to_delete}")
 
 
-def merge_files(folder, prefix, delete_source=False):
+def merge_files(folder, prefix, delete_source=False, name_add = ''):
     """
     Combines multiple files with the same prefix in data/processed or a subfolder of that into a single file
     BEWARE: dont merge the same files several times
     Args:
         folder : str                = folder for files to merge
         prefix : str                = prefix of files to merge
+        name_add : str         = add this string to the filename
         delete_source : bool        = delete source files ?
 
     Returns:
@@ -163,9 +186,15 @@ def merge_files(folder, prefix, delete_source=False):
                 merged_csv.append(os.path.join(source_path, file))
                 if delete_source:
                     files2delete.append(os.path.join(source_path, file))
-    out_file = prefix + ".merged." + str(datetime.now().strftime("%Y-%m-%d_%H-%M"))
+    if name_add:
+        prefix = prefix + f'.{name_add}'
+    out_file = prefix + f".merged." + str(datetime.now().strftime("%Y-%m-%d_%H-%M"))
     
 
+    # create new ouput dir because the files will be deleted after merge -> no double merging please
+    if 'merged' not in os.listdir(source_path):
+        os.mkdir(os.path.join(source_path, 'merged'))
+    source_path = os.path.join(source_path, 'merged')
     if merged_json:
         jout_file = out_file + ".json"
         with open(os.path.join(source_path, jout_file), 'w', encoding='utf-8') as f:
@@ -191,7 +220,8 @@ def merge_files(folder, prefix, delete_source=False):
                     # skip header
                     next(reader)
                     for row in reader:
-                        writer.writerow(row)
+                        if row:             # no empty lines please
+                            writer.writerow(row)
 
     if files2delete:
         remove_files(files2delete)

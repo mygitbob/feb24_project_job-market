@@ -118,7 +118,7 @@ def proccess_raw_data(source_subdir=Constants.DIR_NAME_OKJOB, target_subdir=Cons
             job_full_path = os.path.join(jobd_folder, jobd_fname)
             with open(job_full_path, 'w', encoding='utf-8') as f:            
                     f.write(json_dict["Job-Description"])
-            json_dict["Job-Description"] = job_full_path
+            json_dict["Job-Description"] = "data/processed/okjob.io/full_job_description/" + jobd_fname
             result_list.append(json_dict)
 
         save_processed_data(result_list, fname, target_subdir, delete_source=delete_processed, write_json=write_json, write_csv=write_csv)
@@ -156,13 +156,21 @@ def remove_raw_data():
 
     remove_files(raw2delete)
 
+def remove_processed_data():
+    pass
+    # TODO: implement
+
 
 if __name__ == "__main__":
     setup_logging()
     #job_list = get_raw_joblist(start=3,end=3)
     #print("Job list return length:", len(job_list[0]))
     #print(job_list[0])
-    save_raw_joblist(start=1, end=30)
+    #save_raw_joblist(start=1, end=30)
+    #proccess_raw_data(delete_processed=True)
+    #merge_processed_files(delete_source=True)
+    #remove_raw_data()
+
+    save_raw_joblist(start=1,end=1000)     # 151 is the highest
     proccess_raw_data(delete_processed=True)
     merge_processed_files(delete_source=True)
-    #remove_raw_data()

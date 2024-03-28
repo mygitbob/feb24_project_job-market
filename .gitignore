@@ -3,3 +3,6 @@
 src/log.txt
 src/__pycache__/
 src/my_secrets.py
+data/processed/muse.com/*
+data/processed/okjob.io/*
+data/processed/reed.co.uk/*

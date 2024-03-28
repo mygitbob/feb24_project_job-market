@@ -1,11 +1,13 @@
-    
 import requests
 from datetime import datetime
-import json
+from time import sleep
 import os
+import json
+import pandas as pd
 from constants import Constants
 from logger import setup_logging, logging
 from helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files, remove_files
+from reed_locations import locations
 
 
 def get_entries(headers={}, parameters={}):
@@ -23,6 +25,17 @@ def get_entries(headers={}, parameters={}):
     
     save_raw_joblist(headers=headers, parameters=parameters)    
 
+# TODO: description
+def check_results_empty(response_data):
+    try:
+        data = json.loads(response_data)
+        
+        if 'results' in data and data['results'] == []:
+            return True
+        else:
+            return False
+    except json.JSONDecodeError:
+        return False
 
 def save_raw_joblist(subdir = '', headers={}, parameters={}):
     """
@@ -34,19 +47,27 @@ def save_raw_joblist(subdir = '', headers={}, parameters={}):
         parameters (optional) : dict    = arguments for url query
 
     Returns:
-        None
+        True if there was data to be saved, False otherwise
     """
 
     response_data , response_code = get_raw_joblist(headers=headers, parameters=parameters)
     if response_code == 200:
+        
+        if check_results_empty(response_data):   # do we still get results or just an empty reply ?
+            logging.debug(f"reed.py: save_raw_joblist: empty result")
+            return False     
         if subdir == '':
             subdir = Constants.DIR_NAME_REED                    # create a folder for each source 
         now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        if "resultsToSkip" in parameters:
+            now = f"resToSkip-{parameters['resultsToSkip']}-" + now
         fname = f"reed_raw_joblist.{now}.json"                  # filename includes timestamp of request
         fname.replace(' ','_')                                  # no empty spaces in filename
         save_raw_api_data(fname, response_data, subdir)
+        return True
     else:
-        logging.debug(f"reed.py: save_raw_joblist: no data to save")
+        logging.debug(f"reed.py: save_raw_joblist: response code: {response_code}")
+        return False
 
 
 def get_raw_joblist(headers={}, parameters={}):
@@ -66,7 +87,7 @@ def get_raw_joblist(headers={}, parameters={}):
     if parameters:
         query = "?"
         for key, value in parameters.items():
-            query += key + '=' + value + '&'
+            query += key + '=' + str(value) + '&'
         url += query[:-1]   # exclude final & 
 
     # we have to do basic authentication
@@ -122,7 +143,7 @@ def proccess_raw_data(source_subdir=Constants.DIR_NAME_REED, target_subdir=Const
             logging.error(f"reed.py: proccess_raw_data: result list empty for file: {fname}")
 
 
-def merge_processed_files(prefix='reed_proc', delete_source=False):
+def merge_processed_files(prefix='reed_proc', delete_source=False, name_add = ''):
     """
     Merges processed single json and csv files into one big file
     Args:
@@ -131,7 +152,7 @@ def merge_processed_files(prefix='reed_proc', delete_source=False):
     Returns:
         None
     """
-    merge_files(Constants.DIR_NAME_REED, prefix, delete_source=delete_source)
+    merge_files(Constants.DIR_NAME_REED, prefix, delete_source=delete_source, name_add=name_add)
 
 
 def remove_raw_data():
@@ -146,7 +167,6 @@ def remove_raw_data():
     """
     raw2delete = []
     reed_dir = os.path.join(Constants.PATH_DATA_RAW, Constants.DIR_NAME_REED)
-
     if os.path.exists(reed_dir):
         for entry in os.listdir(reed_dir):
             if entry.endswith('.json') or entry.endswith('.csv'):
@@ -154,15 +174,74 @@ def remove_raw_data():
                 
     remove_files(raw2delete)
 
+# TODO: implement
+def get_num_results():
+    """
+    Seems to be capped at 10000
+    Get number of max results to get
+    Only a stub at the moment
+
+    Args:
+        None
+
+    Returns:
+        max number of data results to retrieve
+    """
+    return 10000
+
+# TODO : description
+def get_results(params = {}, name_add='', sleep_time=0):
+        print("looking for:", params)
+        max_results = get_num_results()
+        for res_to_skip in range(0,max_results,100):
+            p2send = {"resultsToSkip": res_to_skip}
+            p2send.update(params)
+            if not save_raw_joblist(parameters=p2send): # as soon as we get no resuluts stop searching
+                break
+            sleep(sleep_time)
+        proccess_raw_data(delete_processed=True)
+        merge_processed_files(prefix = "reed_proc", delete_source=True, name_add=name_add)
+
+
+
+def distinct_locations(csv_file):
+    
+    df = pd.read_csv(csv_file, header=0)
+    distinct_values = df['locationName'].unique().tolist()
+    
+    return distinct_values
 
 if __name__ == "__main__":
-    setup_logging()
+    setup_logging("log.txt")
     #job_list = get_raw_joblist(parameters={"resultsToSkip":"200"})
     #print("Job list return length:", len(job_list[0]))
     #print(job_list[0])
-    #save_raw_joblist(parameters={"keywords":"accountant","location":"london"})
-    save_raw_joblist()
-    #save_raw_joblist(parameters={"resultsToSkip":"200"})
-    proccess_raw_data(delete_processed=True)
-    merge_processed_files(delete_source=True)
+    #save_raw_joblist(parameters={"keywords":"accountant","locationName":"london"})
+    #save_raw_joblist()
+    #save_raw_joblist(parameters={"resultsToSkip":"8900", "locationName":"S419RN"}) 
+    #proccess_raw_data(delete_processed=True)
+    #merge_processed_files(delete_source=True)
     #remove_raw_data()
+    
+
+    remove_raw_data()
+    #get_results(name_add="default_search")
+    res_dir = os.path.join(Constants.PATH_DATA_PROCESSED, Constants.DIR_NAME_REED, 'merged')
+    
+    """
+    default_res = ''
+    for file in os.listdir(res_dir):
+        if file.find("default_search") and file.endswith(".csv"):
+            default_res = file
+            break
+    if not default_res:
+        print('no default results in', res_dir)
+    else:
+    
+        locations = distinct_locations(os.path.join(res_dir, default_res))
+    """
+    # locations are saved in reed_locations.py and imported
+    for loc in locations[50:100]:
+        if isinstance(loc, str):
+            get_results(name_add=f"{loc}_search", params={"locationName": loc})
+            sleep(60)

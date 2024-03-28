@@ -139,8 +139,11 @@ def extract_salary(html_text):
         currency = matches.group(1).strip()[0]
         if currency not in Constants.KOWN_CURRENCY:
             currency = "UNKOWN"
-        min_nr = matches.group(1).split('-')[0].strip()[1:]
-        max_nr = matches.group(1).split('-')[1].strip()[1:]
+        try:
+            min_nr = matches.group(1).split('-')[0].strip()[1:]
+            max_nr = matches.group(1).split('-')[1].strip()[1:]
+        except:
+            min_nr = max_nr = currency = "NOT_FOUND"    
     else: 
         min_nr = max_nr = currency = "NOT_FOUND"
     return min_nr, max_nr, currency
@@ -199,8 +202,8 @@ if __name__ == "__main__":
     #job_list = get_raw_joblist(100, {})
     #print("Job list return length:", len(job_list[0]))
     #save_raw_joblist(0)
-    for i in range(5):
+    for i in range(0,99):
         save_raw_joblist(i)
     process_raw_data(delete_processed=True)
     merge_processed_files(delete_source=True)
-    #remove_raw_data()
+    remove_raw_data()
