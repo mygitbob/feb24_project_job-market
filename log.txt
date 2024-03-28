@@ -1,840 +1,189 @@
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=0&locationName=NE119DJ, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057850E20> HEADERS: {}
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=0&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350F40> HEADERS: {}
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=0&locationName=NE119DJ HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=0&locationName=NE119DJ: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-0-2024-03-28_17-22-16.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=100&locationName=NE119DJ, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057850E20> HEADERS: {}
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=0&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=0&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-0-2024-03-28_17-45-22.json
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=100&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350E50> HEADERS: {}
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=100&locationName=NE119DJ HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=100&locationName=NE119DJ: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-100-2024-03-28_17-22-16.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=200&locationName=NE119DJ, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057850E20> HEADERS: {}
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=100&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=100&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-100-2024-03-28_17-45-22.json
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=200&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350F40> HEADERS: {}
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=200&locationName=NE119DJ HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=200&locationName=NE119DJ: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-200-2024-03-28_17-22-16.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=300&locationName=NE119DJ, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057850E20> HEADERS: {}
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=200&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=200&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-200-2024-03-28_17-45-22.json
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=300&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350E50> HEADERS: {}
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=300&locationName=NE119DJ HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=300&locationName=NE119DJ: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-300-2024-03-28_17-22-16.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=400&locationName=NE119DJ, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057850E20> HEADERS: {}
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=300&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=300&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-300-2024-03-28_17-45-22.json
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=400&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350F40> HEADERS: {}
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=400&locationName=NE119DJ HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=400&locationName=NE119DJ: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-400-2024-03-28_17-22-17.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=500&locationName=NE119DJ, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057850E20> HEADERS: {}
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=400&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=400&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-400-2024-03-28_17-45-23.json
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=500&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350E50> HEADERS: {}
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=500&locationName=NE119DJ HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=500&locationName=NE119DJ: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-500-2024-03-28_17-22-17.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=600&locationName=NE119DJ, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057850E20> HEADERS: {}
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=500&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=500&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-500-2024-03-28_17-45-23.json
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=600&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350F40> HEADERS: {}
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=600&locationName=NE119DJ HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=600&locationName=NE119DJ: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-600-2024-03-28_17-22-17.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=700&locationName=NE119DJ, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057850E20> HEADERS: {}
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=600&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=600&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-600-2024-03-28_17-45-23.json
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=700&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350E50> HEADERS: {}
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=700&locationName=NE119DJ HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=700&locationName=NE119DJ: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-700-2024-03-28_17-22-18.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=800&locationName=NE119DJ, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057850E20> HEADERS: {}
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=700&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=700&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-700-2024-03-28_17-45-24.json
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=800&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350F40> HEADERS: {}
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=800&locationName=NE119DJ HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=800&locationName=NE119DJ: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-800-2024-03-28_17-22-18.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=900&locationName=NE119DJ, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057850E20> HEADERS: {}
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=800&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=800&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-800-2024-03-28_17-45-24.json
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=900&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350E50> HEADERS: {}
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=900&locationName=NE119DJ HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=900&locationName=NE119DJ: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-900-2024-03-28_17-22-18.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1000&locationName=NE119DJ, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057850E20> HEADERS: {}
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=900&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=900&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-900-2024-03-28_17-45-24.json
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1000&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350F40> HEADERS: {}
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1000&locationName=NE119DJ HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1000&locationName=NE119DJ: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1000-2024-03-28_17-22-19.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1100&locationName=NE119DJ, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057850E20> HEADERS: {}
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1000&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1000&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1000-2024-03-28_17-45-25.json
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1100&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350E50> HEADERS: {}
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1100&locationName=NE119DJ HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1100&locationName=NE119DJ: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1100-2024-03-28_17-22-19.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1200&locationName=NE119DJ, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057850E20> HEADERS: {}
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1100&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1100&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1100-2024-03-28_17-45-25.json
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1200&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350F40> HEADERS: {}
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1200&locationName=NE119DJ HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1200&locationName=NE119DJ: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1200-2024-03-28_17-22-19.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1300&locationName=NE119DJ, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057850E20> HEADERS: {}
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1200&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1200&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1200-2024-03-28_17-45-25.json
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1300&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350E50> HEADERS: {}
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1300&locationName=NE119DJ HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1300&locationName=NE119DJ: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1300&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1300&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
+DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1300-2024-03-28_17-45-25.json
+DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1400&locationName=CB41YG, AUTH: <requests.auth.HTTPBasicAuth object at 0x0000023034350F40> HEADERS: {}
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
+DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1400&locationName=CB41YG HTTP/1.1" 200 None
+DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1400&locationName=CB41YG: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
 DEBUG:root:reed.py: save_raw_joblist: empty result
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-0-2024-03-28_17-22-16.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-100-2024-03-28_17-22-16.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1000-2024-03-28_17-22-19.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1100-2024-03-28_17-22-19.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1200-2024-03-28_17-22-19.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-200-2024-03-28_17-22-16.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-300-2024-03-28_17-22-16.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-400-2024-03-28_17-22-17.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-500-2024-03-28_17-22-17.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-600-2024-03-28_17-22-17.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-700-2024-03-28_17-22-18.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-800-2024-03-28_17-22-18.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-900-2024-03-28_17-22-18.json
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-0-2024-03-28_17-22-16.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-22-16.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-22-16.csv
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-0-2024-03-28_17-22-16.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-100-2024-03-28_17-22-16.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1000-2024-03-28_17-22-19.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1100-2024-03-28_17-22-19.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1200-2024-03-28_17-22-19.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-200-2024-03-28_17-22-16.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-300-2024-03-28_17-22-16.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-400-2024-03-28_17-22-17.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-500-2024-03-28_17-22-17.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-600-2024-03-28_17-22-17.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-700-2024-03-28_17-22-18.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-800-2024-03-28_17-22-18.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-900-2024-03-28_17-22-18.json
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-100-2024-03-28_17-22-16.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-22-16.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-22-16.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1000-2024-03-28_17-22-19.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1000-2024-03-28_17-22-19.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1000-2024-03-28_17-22-19.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1100-2024-03-28_17-22-19.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1100-2024-03-28_17-22-19.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1100-2024-03-28_17-22-19.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1200-2024-03-28_17-22-19.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1200-2024-03-28_17-22-19.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1200-2024-03-28_17-22-19.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-200-2024-03-28_17-22-16.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-22-16.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-22-16.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-300-2024-03-28_17-22-16.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-22-16.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-22-16.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-400-2024-03-28_17-22-17.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-22-17.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-22-17.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-500-2024-03-28_17-22-17.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-22-17.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-22-17.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-600-2024-03-28_17-22-17.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-22-17.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-22-17.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-700-2024-03-28_17-22-18.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-22-18.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-22-18.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-800-2024-03-28_17-22-18.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-22-18.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-22-18.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-900-2024-03-28_17-22-18.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-22-18.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-22-18.csv
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-0-2024-03-28_17-22-16.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-100-2024-03-28_17-22-16.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1000-2024-03-28_17-22-19.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1100-2024-03-28_17-22-19.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1200-2024-03-28_17-22-19.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-200-2024-03-28_17-22-16.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-300-2024-03-28_17-22-16.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-400-2024-03-28_17-22-17.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-500-2024-03-28_17-22-17.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-600-2024-03-28_17-22-17.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-700-2024-03-28_17-22-18.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-800-2024-03-28_17-22-18.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-900-2024-03-28_17-22-18.json
-DEBUG:root:helpers: merge_files: write json: reed_proc.NE119DJ_search.merged.2024-03-28_17-22.json
-DEBUG:root:helpers: merge_files: write csv: reed_proc.NE119DJ_search.merged.2024-03-28_17-22.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-22-16.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-22-16.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-22-16.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-22-16.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1000-2024-03-28_17-22-19.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1000-2024-03-28_17-22-19.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1100-2024-03-28_17-22-19.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1100-2024-03-28_17-22-19.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1200-2024-03-28_17-22-19.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1200-2024-03-28_17-22-19.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-22-16.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-22-16.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-22-16.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-22-16.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-22-17.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-22-17.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-22-17.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-22-17.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-22-17.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-22-17.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-22-18.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-22-18.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-22-18.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-22-18.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-22-18.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-22-18.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=0&locationName=S419RN, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057875400> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=0&locationName=S419RN HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=0&locationName=S419RN: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-0-2024-03-28_17-23-20.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=100&locationName=S419RN, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B03E0278B0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=100&locationName=S419RN HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=100&locationName=S419RN: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-100-2024-03-28_17-23-20.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=200&locationName=S419RN, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B03E027D00> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=200&locationName=S419RN HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=200&locationName=S419RN: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-200-2024-03-28_17-23-21.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=300&locationName=S419RN, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B03E0278B0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=300&locationName=S419RN HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=300&locationName=S419RN: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-300-2024-03-28_17-23-21.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=400&locationName=S419RN, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B03E027D00> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=400&locationName=S419RN HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=400&locationName=S419RN: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-400-2024-03-28_17-23-21.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=500&locationName=S419RN, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B03E0278B0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=500&locationName=S419RN HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=500&locationName=S419RN: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-500-2024-03-28_17-23-22.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=600&locationName=S419RN, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B03E027D00> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=600&locationName=S419RN HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=600&locationName=S419RN: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-600-2024-03-28_17-23-22.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=700&locationName=S419RN, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B03E0278B0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=700&locationName=S419RN HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=700&locationName=S419RN: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-700-2024-03-28_17-23-22.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=800&locationName=S419RN, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B03E027D00> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=800&locationName=S419RN HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=800&locationName=S419RN: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-800-2024-03-28_17-23-23.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=900&locationName=S419RN, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B03E0278B0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=900&locationName=S419RN HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=900&locationName=S419RN: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-900-2024-03-28_17-23-23.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1000&locationName=S419RN, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B03E027D00> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1000&locationName=S419RN HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1000&locationName=S419RN: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:reed.py: save_raw_joblist: empty result
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-0-2024-03-28_17-23-20.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-100-2024-03-28_17-23-20.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-200-2024-03-28_17-23-21.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-300-2024-03-28_17-23-21.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-400-2024-03-28_17-23-21.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-500-2024-03-28_17-23-22.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-600-2024-03-28_17-23-22.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-700-2024-03-28_17-23-22.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-800-2024-03-28_17-23-23.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-900-2024-03-28_17-23-23.json
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-0-2024-03-28_17-23-20.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-23-20.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-23-20.csv
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-0-2024-03-28_17-23-20.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-100-2024-03-28_17-23-20.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-200-2024-03-28_17-23-21.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-300-2024-03-28_17-23-21.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-400-2024-03-28_17-23-21.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-500-2024-03-28_17-23-22.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-600-2024-03-28_17-23-22.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-700-2024-03-28_17-23-22.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-800-2024-03-28_17-23-23.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-900-2024-03-28_17-23-23.json
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-100-2024-03-28_17-23-20.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-23-20.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-23-20.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-200-2024-03-28_17-23-21.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-23-21.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-23-21.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-300-2024-03-28_17-23-21.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-23-21.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-23-21.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-400-2024-03-28_17-23-21.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-23-21.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-23-21.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-500-2024-03-28_17-23-22.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-23-22.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-23-22.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-600-2024-03-28_17-23-22.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-23-22.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-23-22.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-700-2024-03-28_17-23-22.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-23-22.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-23-22.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-800-2024-03-28_17-23-23.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-23-23.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-23-23.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-900-2024-03-28_17-23-23.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-23-23.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-23-23.csv
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-0-2024-03-28_17-23-20.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-100-2024-03-28_17-23-20.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-200-2024-03-28_17-23-21.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-300-2024-03-28_17-23-21.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-400-2024-03-28_17-23-21.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-500-2024-03-28_17-23-22.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-600-2024-03-28_17-23-22.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-700-2024-03-28_17-23-22.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-800-2024-03-28_17-23-23.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-900-2024-03-28_17-23-23.json
-DEBUG:root:helpers: merge_files: write json: reed_proc.S419RN_search.merged.2024-03-28_17-23.json
-DEBUG:root:helpers: merge_files: write csv: reed_proc.S419RN_search.merged.2024-03-28_17-23.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-23-20.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-23-20.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-23-20.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-23-20.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-23-21.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-23-21.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-23-21.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-23-21.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-23-21.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-23-21.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-23-22.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-23-22.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-23-22.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-23-22.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-23-22.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-23-22.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-23-23.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-23-23.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-23-23.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-23-23.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=0&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67AF0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=0&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=0&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-0-2024-03-28_17-24-24.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=100&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C673D0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=100&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=100&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-100-2024-03-28_17-24-24.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=200&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67160> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=200&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=200&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-200-2024-03-28_17-24-24.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=300&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C678E0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=300&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=300&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-300-2024-03-28_17-24-24.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=400&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67D30> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=400&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=400&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-400-2024-03-28_17-24-25.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=500&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C670A0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=500&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=500&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-500-2024-03-28_17-24-25.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=600&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67910> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=600&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=600&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-600-2024-03-28_17-24-25.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=700&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67400> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=700&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=700&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-700-2024-03-28_17-24-25.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=800&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C676A0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=800&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=800&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-800-2024-03-28_17-24-26.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=900&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C678B0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=900&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=900&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-900-2024-03-28_17-24-26.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1000&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67730> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1000&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1000&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1000-2024-03-28_17-24-26.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1100&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67970> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1100&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1100&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1100-2024-03-28_17-24-27.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1200&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67820> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1200&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1200&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1200-2024-03-28_17-24-27.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1300&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67A30> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1300&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1300&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1300-2024-03-28_17-24-27.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1400&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67880> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1400&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1400&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1400-2024-03-28_17-24-27.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1500&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C674F0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1500&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1500&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1500-2024-03-28_17-24-28.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1600&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67940> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1600&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1600&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1600-2024-03-28_17-24-28.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1700&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67070> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1700&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1700&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1700-2024-03-28_17-24-28.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1800&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C670D0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1800&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1800&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1800-2024-03-28_17-24-29.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1900&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67370> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=1900&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=1900&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-1900-2024-03-28_17-24-29.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2000&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67580> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=2000&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2000&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-2000-2024-03-28_17-24-29.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2100&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67AC0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=2100&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2100&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-2100-2024-03-28_17-24-29.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2200&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67A60> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=2200&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2200&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-2200-2024-03-28_17-24-30.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2300&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C677F0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=2300&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2300&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-2300-2024-03-28_17-24-30.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2400&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67640> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=2400&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2400&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-2400-2024-03-28_17-24-30.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2500&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67FA0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=2500&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2500&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-2500-2024-03-28_17-24-31.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2600&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67130> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=2600&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2600&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-2600-2024-03-28_17-24-31.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2700&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67AF0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=2700&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2700&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-2700-2024-03-28_17-24-31.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2800&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C673D0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=2800&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2800&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-2800-2024-03-28_17-24-31.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2900&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67160> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=2900&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=2900&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-2900-2024-03-28_17-24-32.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3000&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C678E0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=3000&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3000&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-3000-2024-03-28_17-24-32.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3100&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67D30> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=3100&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3100&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-3100-2024-03-28_17-24-32.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3200&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C670A0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=3200&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3200&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-3200-2024-03-28_17-24-32.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3300&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67910> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=3300&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3300&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-3300-2024-03-28_17-24-33.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3400&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67400> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=3400&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3400&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-3400-2024-03-28_17-24-33.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3500&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C672B0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=3500&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3500&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-3500-2024-03-28_17-24-33.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3600&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C674C0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=3600&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3600&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-3600-2024-03-28_17-24-34.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3700&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67700> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=3700&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3700&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-3700-2024-03-28_17-24-34.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3800&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C676A0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=3800&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3800&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-3800-2024-03-28_17-24-34.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3900&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C678B0> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=3900&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=3900&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:helpers: save_raw_data: write json file: reed_raw_joblist.resToSkip-3900-2024-03-28_17-24-34.json
-DEBUG:root:reed.py: GET REQUEST API FOR: https://www.reed.co.uk/api/1.0/search?resultsToSkip=4000&locationName=North East England, AUTH: <requests.auth.HTTPBasicAuth object at 0x000001B057C67730> HEADERS: {}
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.reed.co.uk:443
-DEBUG:urllib3.connectionpool:https://www.reed.co.uk:443 "GET /api/1.0/search?resultsToSkip=4000&locationName=North%20East%20England HTTP/1.1" 200 None
-DEBUG:root:reed.py: https://www.reed.co.uk/api/1.0/search?resultsToSkip=4000&locationName=North East England: CONNECTION SUCCESSFUL, RESPONSE CODE: 200
-DEBUG:root:reed.py: save_raw_joblist: empty result
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-0-2024-03-28_17-24-24.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-100-2024-03-28_17-24-24.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1000-2024-03-28_17-24-26.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1100-2024-03-28_17-24-27.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1200-2024-03-28_17-24-27.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1300-2024-03-28_17-24-27.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1400-2024-03-28_17-24-27.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1500-2024-03-28_17-24-28.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1600-2024-03-28_17-24-28.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1700-2024-03-28_17-24-28.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1800-2024-03-28_17-24-29.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1900-2024-03-28_17-24-29.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-200-2024-03-28_17-24-24.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2000-2024-03-28_17-24-29.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2100-2024-03-28_17-24-29.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2200-2024-03-28_17-24-30.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2300-2024-03-28_17-24-30.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2400-2024-03-28_17-24-30.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2500-2024-03-28_17-24-31.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2600-2024-03-28_17-24-31.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2700-2024-03-28_17-24-31.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2800-2024-03-28_17-24-31.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2900-2024-03-28_17-24-32.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-300-2024-03-28_17-24-24.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3000-2024-03-28_17-24-32.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3100-2024-03-28_17-24-32.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3200-2024-03-28_17-24-32.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3300-2024-03-28_17-24-33.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3400-2024-03-28_17-24-33.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3500-2024-03-28_17-24-33.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3600-2024-03-28_17-24-34.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3700-2024-03-28_17-24-34.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3800-2024-03-28_17-24-34.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3900-2024-03-28_17-24-34.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-400-2024-03-28_17-24-25.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-500-2024-03-28_17-24-25.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-600-2024-03-28_17-24-25.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-700-2024-03-28_17-24-25.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-800-2024-03-28_17-24-26.json
-DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-900-2024-03-28_17-24-26.json
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-0-2024-03-28_17-24-24.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-24-24.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-24-24.csv
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-0-2024-03-28_17-24-24.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-100-2024-03-28_17-24-24.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1000-2024-03-28_17-24-26.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1100-2024-03-28_17-24-27.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1200-2024-03-28_17-24-27.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1300-2024-03-28_17-24-27.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1400-2024-03-28_17-24-27.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1500-2024-03-28_17-24-28.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1600-2024-03-28_17-24-28.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1700-2024-03-28_17-24-28.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1800-2024-03-28_17-24-29.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1900-2024-03-28_17-24-29.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-200-2024-03-28_17-24-24.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2000-2024-03-28_17-24-29.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2100-2024-03-28_17-24-29.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2200-2024-03-28_17-24-30.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2300-2024-03-28_17-24-30.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2400-2024-03-28_17-24-30.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2500-2024-03-28_17-24-31.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2600-2024-03-28_17-24-31.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2700-2024-03-28_17-24-31.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2800-2024-03-28_17-24-31.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2900-2024-03-28_17-24-32.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-300-2024-03-28_17-24-24.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3000-2024-03-28_17-24-32.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3100-2024-03-28_17-24-32.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3200-2024-03-28_17-24-32.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3300-2024-03-28_17-24-33.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3400-2024-03-28_17-24-33.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3500-2024-03-28_17-24-33.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3600-2024-03-28_17-24-34.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3700-2024-03-28_17-24-34.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3800-2024-03-28_17-24-34.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3900-2024-03-28_17-24-34.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-400-2024-03-28_17-24-25.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-500-2024-03-28_17-24-25.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-600-2024-03-28_17-24-25.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-700-2024-03-28_17-24-25.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-800-2024-03-28_17-24-26.json
-DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-900-2024-03-28_17-24-26.json
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-100-2024-03-28_17-24-24.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-24-24.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-24-24.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1000-2024-03-28_17-24-26.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1000-2024-03-28_17-24-26.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1000-2024-03-28_17-24-26.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1100-2024-03-28_17-24-27.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1100-2024-03-28_17-24-27.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1100-2024-03-28_17-24-27.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1200-2024-03-28_17-24-27.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1200-2024-03-28_17-24-27.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1200-2024-03-28_17-24-27.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1300-2024-03-28_17-24-27.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1300-2024-03-28_17-24-27.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1300-2024-03-28_17-24-27.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1400-2024-03-28_17-24-27.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1400-2024-03-28_17-24-27.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1400-2024-03-28_17-24-27.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1500-2024-03-28_17-24-28.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1500-2024-03-28_17-24-28.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1500-2024-03-28_17-24-28.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1600-2024-03-28_17-24-28.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1600-2024-03-28_17-24-28.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1600-2024-03-28_17-24-28.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1700-2024-03-28_17-24-28.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1700-2024-03-28_17-24-28.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1700-2024-03-28_17-24-28.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1800-2024-03-28_17-24-29.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1800-2024-03-28_17-24-29.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1800-2024-03-28_17-24-29.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1900-2024-03-28_17-24-29.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1900-2024-03-28_17-24-29.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1900-2024-03-28_17-24-29.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-200-2024-03-28_17-24-24.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-24-24.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-24-24.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2000-2024-03-28_17-24-29.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2000-2024-03-28_17-24-29.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2000-2024-03-28_17-24-29.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2100-2024-03-28_17-24-29.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2100-2024-03-28_17-24-29.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2100-2024-03-28_17-24-29.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2200-2024-03-28_17-24-30.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2200-2024-03-28_17-24-30.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2200-2024-03-28_17-24-30.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2300-2024-03-28_17-24-30.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2300-2024-03-28_17-24-30.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2300-2024-03-28_17-24-30.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2400-2024-03-28_17-24-30.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2400-2024-03-28_17-24-30.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2400-2024-03-28_17-24-30.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2500-2024-03-28_17-24-31.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2500-2024-03-28_17-24-31.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2500-2024-03-28_17-24-31.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2600-2024-03-28_17-24-31.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2600-2024-03-28_17-24-31.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2600-2024-03-28_17-24-31.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2700-2024-03-28_17-24-31.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2700-2024-03-28_17-24-31.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2700-2024-03-28_17-24-31.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2800-2024-03-28_17-24-31.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2800-2024-03-28_17-24-31.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2800-2024-03-28_17-24-31.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-2900-2024-03-28_17-24-32.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2900-2024-03-28_17-24-32.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2900-2024-03-28_17-24-32.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-300-2024-03-28_17-24-24.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-24-24.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-24-24.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3000-2024-03-28_17-24-32.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3000-2024-03-28_17-24-32.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3000-2024-03-28_17-24-32.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3100-2024-03-28_17-24-32.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3100-2024-03-28_17-24-32.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3100-2024-03-28_17-24-32.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3200-2024-03-28_17-24-32.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3200-2024-03-28_17-24-32.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3200-2024-03-28_17-24-32.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3300-2024-03-28_17-24-33.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3300-2024-03-28_17-24-33.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3300-2024-03-28_17-24-33.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3400-2024-03-28_17-24-33.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3400-2024-03-28_17-24-33.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3400-2024-03-28_17-24-33.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3500-2024-03-28_17-24-33.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3500-2024-03-28_17-24-33.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3500-2024-03-28_17-24-33.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3600-2024-03-28_17-24-34.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3600-2024-03-28_17-24-34.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3600-2024-03-28_17-24-34.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3700-2024-03-28_17-24-34.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3700-2024-03-28_17-24-34.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3700-2024-03-28_17-24-34.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3800-2024-03-28_17-24-34.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3800-2024-03-28_17-24-34.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3800-2024-03-28_17-24-34.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-3900-2024-03-28_17-24-34.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3900-2024-03-28_17-24-34.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3900-2024-03-28_17-24-34.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-400-2024-03-28_17-24-25.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-24-25.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-24-25.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-500-2024-03-28_17-24-25.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-24-25.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-24-25.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-600-2024-03-28_17-24-25.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-24-25.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-24-25.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-700-2024-03-28_17-24-25.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-24-25.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-24-25.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-800-2024-03-28_17-24-26.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-24-26.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-24-26.csv
-DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-900-2024-03-28_17-24-26.json
-DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-24-26.json
-DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-24-26.csv
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-0-2024-03-28_17-24-24.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-100-2024-03-28_17-24-24.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1000-2024-03-28_17-24-26.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1100-2024-03-28_17-24-27.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1200-2024-03-28_17-24-27.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1300-2024-03-28_17-24-27.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1400-2024-03-28_17-24-27.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1500-2024-03-28_17-24-28.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1600-2024-03-28_17-24-28.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1700-2024-03-28_17-24-28.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1800-2024-03-28_17-24-29.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1900-2024-03-28_17-24-29.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-200-2024-03-28_17-24-24.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-2000-2024-03-28_17-24-29.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-2100-2024-03-28_17-24-29.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-2200-2024-03-28_17-24-30.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-2300-2024-03-28_17-24-30.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-2400-2024-03-28_17-24-30.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-2500-2024-03-28_17-24-31.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-2600-2024-03-28_17-24-31.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-2700-2024-03-28_17-24-31.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-2800-2024-03-28_17-24-31.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-2900-2024-03-28_17-24-32.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-300-2024-03-28_17-24-24.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-3000-2024-03-28_17-24-32.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-3100-2024-03-28_17-24-32.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-3200-2024-03-28_17-24-32.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-3300-2024-03-28_17-24-33.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-3400-2024-03-28_17-24-33.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-3500-2024-03-28_17-24-33.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-3600-2024-03-28_17-24-34.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-3700-2024-03-28_17-24-34.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-3800-2024-03-28_17-24-34.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-3900-2024-03-28_17-24-34.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-400-2024-03-28_17-24-25.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-500-2024-03-28_17-24-25.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-600-2024-03-28_17-24-25.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-700-2024-03-28_17-24-25.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-800-2024-03-28_17-24-26.json
-DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-900-2024-03-28_17-24-26.json
-DEBUG:root:helpers: merge_files: write json: reed_proc.North East England_search.merged.2024-03-28_17-24.json
-DEBUG:root:helpers: merge_files: write csv: reed_proc.North East England_search.merged.2024-03-28_17-24.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-24-24.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-24-24.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-24-24.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-24-24.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1000-2024-03-28_17-24-26.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1000-2024-03-28_17-24-26.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1100-2024-03-28_17-24-27.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1100-2024-03-28_17-24-27.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1200-2024-03-28_17-24-27.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1200-2024-03-28_17-24-27.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1300-2024-03-28_17-24-27.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1300-2024-03-28_17-24-27.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1400-2024-03-28_17-24-27.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1400-2024-03-28_17-24-27.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1500-2024-03-28_17-24-28.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1500-2024-03-28_17-24-28.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1600-2024-03-28_17-24-28.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1600-2024-03-28_17-24-28.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1700-2024-03-28_17-24-28.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1700-2024-03-28_17-24-28.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1800-2024-03-28_17-24-29.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1800-2024-03-28_17-24-29.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1900-2024-03-28_17-24-29.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1900-2024-03-28_17-24-29.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-24-24.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-24-24.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2000-2024-03-28_17-24-29.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2000-2024-03-28_17-24-29.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2100-2024-03-28_17-24-29.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2100-2024-03-28_17-24-29.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2200-2024-03-28_17-24-30.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2200-2024-03-28_17-24-30.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2300-2024-03-28_17-24-30.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2300-2024-03-28_17-24-30.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2400-2024-03-28_17-24-30.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2400-2024-03-28_17-24-30.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2500-2024-03-28_17-24-31.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2500-2024-03-28_17-24-31.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2600-2024-03-28_17-24-31.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2600-2024-03-28_17-24-31.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2700-2024-03-28_17-24-31.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2700-2024-03-28_17-24-31.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2800-2024-03-28_17-24-31.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2800-2024-03-28_17-24-31.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2900-2024-03-28_17-24-32.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-2900-2024-03-28_17-24-32.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-24-24.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-24-24.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3000-2024-03-28_17-24-32.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3000-2024-03-28_17-24-32.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3100-2024-03-28_17-24-32.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3100-2024-03-28_17-24-32.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3200-2024-03-28_17-24-32.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3200-2024-03-28_17-24-32.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3300-2024-03-28_17-24-33.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3300-2024-03-28_17-24-33.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3400-2024-03-28_17-24-33.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3400-2024-03-28_17-24-33.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3500-2024-03-28_17-24-33.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3500-2024-03-28_17-24-33.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3600-2024-03-28_17-24-34.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3600-2024-03-28_17-24-34.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3700-2024-03-28_17-24-34.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3700-2024-03-28_17-24-34.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3800-2024-03-28_17-24-34.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3800-2024-03-28_17-24-34.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3900-2024-03-28_17-24-34.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-3900-2024-03-28_17-24-34.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-24-25.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-24-25.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-24-25.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-24-25.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-24-25.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-24-25.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-24-25.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-24-25.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-24-26.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-24-26.json
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-24-26.csv
-DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-24-26.json
+DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-0-2024-03-28_17-45-22.json
+DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-100-2024-03-28_17-45-22.json
+DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1000-2024-03-28_17-45-25.json
+DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1100-2024-03-28_17-45-25.json
+DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1200-2024-03-28_17-45-25.json
+DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1300-2024-03-28_17-45-25.json
+DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-200-2024-03-28_17-45-22.json
+DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-300-2024-03-28_17-45-22.json
+DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-400-2024-03-28_17-45-23.json
+DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-500-2024-03-28_17-45-23.json
+DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-600-2024-03-28_17-45-23.json
+DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-700-2024-03-28_17-45-24.json
+DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-800-2024-03-28_17-45-24.json
+DEBUG:root:helpers: load_raw_data: load json file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-900-2024-03-28_17-45-24.json
+DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-0-2024-03-28_17-45-22.json
+DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-45-22.json
+DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-45-22.csv
+DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-0-2024-03-28_17-45-22.json
+DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-100-2024-03-28_17-45-22.json
+DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1000-2024-03-28_17-45-25.json
+DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1100-2024-03-28_17-45-25.json
+DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1200-2024-03-28_17-45-25.json
+DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1300-2024-03-28_17-45-25.json
+DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-200-2024-03-28_17-45-22.json
+DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-300-2024-03-28_17-45-22.json
+DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-400-2024-03-28_17-45-23.json
+DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-500-2024-03-28_17-45-23.json
+DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-600-2024-03-28_17-45-23.json
+DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-700-2024-03-28_17-45-24.json
+DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-800-2024-03-28_17-45-24.json
+DEBUG:root:helpers: delete_all_files_in_directory_of_file: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-900-2024-03-28_17-45-24.json
+DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-100-2024-03-28_17-45-22.json
+DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-45-22.json
+DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-45-22.csv
+DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1000-2024-03-28_17-45-25.json
+DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1000-2024-03-28_17-45-25.json
+DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1000-2024-03-28_17-45-25.csv
+DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1100-2024-03-28_17-45-25.json
+DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1100-2024-03-28_17-45-25.json
+DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1100-2024-03-28_17-45-25.csv
+DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1200-2024-03-28_17-45-25.json
+DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1200-2024-03-28_17-45-25.json
+DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1200-2024-03-28_17-45-25.csv
+DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-1300-2024-03-28_17-45-25.json
+DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1300-2024-03-28_17-45-25.json
+DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1300-2024-03-28_17-45-25.csv
+DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-200-2024-03-28_17-45-22.json
+DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-45-22.json
+DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-45-22.csv
+DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-300-2024-03-28_17-45-22.json
+DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-45-22.json
+DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-45-22.csv
+DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-400-2024-03-28_17-45-23.json
+DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-45-23.json
+DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-45-23.csv
+DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-500-2024-03-28_17-45-23.json
+DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-45-23.json
+DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-45-23.csv
+DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-600-2024-03-28_17-45-23.json
+DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-45-23.json
+DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-45-23.csv
+DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-700-2024-03-28_17-45-24.json
+DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-45-24.json
+DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-45-24.csv
+DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-800-2024-03-28_17-45-24.json
+DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-45-24.json
+DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-45-24.csv
+DEBUG:root:reed.py: proccess_raw_data: process raw file c:\Users\winbob\datasientest\feb24_project_job-market\data/raw\reed.co.uk\reed_raw_joblist.resToSkip-900-2024-03-28_17-45-24.json
+DEBUG:root:helpers: save_processed_data: write json: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-45-24.json
+DEBUG:root:helpers: save_processed_data: write csv: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-45-24.csv
+DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-0-2024-03-28_17-45-22.json
+DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-100-2024-03-28_17-45-22.json
+DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1000-2024-03-28_17-45-25.json
+DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1100-2024-03-28_17-45-25.json
+DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1200-2024-03-28_17-45-25.json
+DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-1300-2024-03-28_17-45-25.json
+DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-200-2024-03-28_17-45-22.json
+DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-300-2024-03-28_17-45-22.json
+DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-400-2024-03-28_17-45-23.json
+DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-500-2024-03-28_17-45-23.json
+DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-600-2024-03-28_17-45-23.json
+DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-700-2024-03-28_17-45-24.json
+DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-800-2024-03-28_17-45-24.json
+DEBUG:root:helpers: merge_files: open json: reed_processed_joblist.resToSkip-900-2024-03-28_17-45-24.json
+DEBUG:root:helpers: merge_files: write json: reed_proc.CB41YG_search.merged.2024-03-28_17-45.json
+DEBUG:root:helpers: merge_files: write csv: reed_proc.CB41YG_search.merged.2024-03-28_17-45.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-45-22.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-0-2024-03-28_17-45-22.json
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-45-22.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-100-2024-03-28_17-45-22.json
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1000-2024-03-28_17-45-25.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1000-2024-03-28_17-45-25.json
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1100-2024-03-28_17-45-25.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1100-2024-03-28_17-45-25.json
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1200-2024-03-28_17-45-25.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1200-2024-03-28_17-45-25.json
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1300-2024-03-28_17-45-25.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-1300-2024-03-28_17-45-25.json
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-45-22.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-200-2024-03-28_17-45-22.json
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-45-22.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-300-2024-03-28_17-45-22.json
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-45-23.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-400-2024-03-28_17-45-23.json
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-45-23.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-500-2024-03-28_17-45-23.json
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-45-23.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-600-2024-03-28_17-45-23.json
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-45-24.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-700-2024-03-28_17-45-24.json
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-45-24.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-800-2024-03-28_17-45-24.json
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-45-24.csv
+DEBUG:root:helpers: remove_raw_api_data: deleting file: c:\Users\winbob\datasientest\feb24_project_job-market\data/processed\reed.co.uk\reed_processed_joblist.resToSkip-900-2024-03-28_17-45-24.json
