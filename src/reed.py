@@ -12,7 +12,7 @@ from reed_locations import locations
 
 def get_entries(headers={}, parameters={}):
     """
-    Get all jon entries
+    Get all job offers
 
     Args:
         amount : int                    = number of entries to collect, it seems that the max amount is 926 - 1 (header) = 925 entries
@@ -241,7 +241,7 @@ if __name__ == "__main__":
         locations = distinct_locations(os.path.join(res_dir, default_res))
     """
     # locations are saved in reed_locations.py and imported
-    for loc in locations[50:100]:
+    for loc in locations[311:350]:
         if isinstance(loc, str):
             get_results(name_add=f"{loc}_search", params={"locationName": loc})
             sleep(60)
