@@ -1,70 +1,60 @@
-## First steps
--   After getting data samples as a groupe you should decide :
--   The different sources of data
--   The business problem to address with the data
-	
-	form project description:
-	
-			which sectors recruit the most, what skills
-			are required, which cities are the most active, etc. ?
+## Data Model - brainstorming
+This is a brainstorming document; I'll simply jot down what I think could be valuable for our data model.
 
+### Ressources
+- [Guide to data modelling with MongoDB](https://www.mongodb.com/docs/manual/data-modeling/)
 
--   The required optional pre-processing to apply
--   The form of the product to build to answer the business problem (dashboard or API --> consume a ML model)
--   ![:warnung:](https://a.slack-edge.com/production-standard-emoji-assets/14.0/google-medium/26a0-fe0f.png)  Write the report to sum-up all these points --> The form could be a notebook \ google document or word \ PDF
+- [UML Data Modelling](https://sparxsystems.com/resources/tutorials/uml/datamodel.html)
+Our example will be simpler I guess.
 
-## Data found on various locations
-### Adzuna
-#### API Documentation
-https://developer.adzuna.com/overview
-we can get historical salary data with the api
+### My thoughts
+A t first I thought we should get the data from different sources, transform them and only after the transformation store them in the database. 
+Maybe I was wrong here and we could benefit if we store the data from each source first in the database, transform and save again afterwards. I think we are mainly interested in the uniform data model (which includes all your different sources) but maybe in the future we change our minds about this uniform structure and in this case we would have
+no raw data from the sources and would be forced to get all the data again (in some caes this may be not possible at all, who knows).
 
-**web interface**:
-- location
-- company (no profiles)
-- estimated salary (for jobs in US, missing for example for jobs in Germany)
-- job category
-- date posted
-- salary
-- remote/flexibel
-- employment type
-- hours
+So we could make a seperate collection for all data sources.
 
-### Muse
-#### API Documentation
-https://www.themuse.com/developers/api/v2
+So far we have 3 data sources, I try to add new ones before our meeting on Wedenesday, I promis at least one new source ;)
 
-**web interface**:
-- job category
-- company ( link to company profile )
-- location
-- date posted
-- experience level 
-- remote/flexibel 
-- company type 
-- company size
-- perks and benefit 
-- diversity 
+### Data Sources
+#### Muse.com
+* **job_title**: name of the job, should not be NULL  
 
-### LinkedIn
-- job category
-- type of contract
-- location
-- date posted 
-- company ( link to company profile )
-- job experience
-- remote/flexibel
-- scope of activity
-- commitment
+* **min_salary**:  value can be :"NOT_FOUND" which equals NULL  
 
-### Welcomt to the jungle
-- job category
-- type of contract
-- location
-- salary
-- company ( link to company profile )
-- remote/flexibel
-- date posted
-- start date (optional)
-- job experience (optional)
-- education (optional)
+* **max_salary**: value can be :"NOT_FOUND" which equals NULL  
+
+* **currency**: value can be :"NOT_FOUND" which equals NULL  
+
+* **skills**: value can be [] => empty list which equals NULL  
+
+* **publication_date**: when the offer was published, should not be NULL  
+
+* **id**: every data I save contains an id, this id is distinct for the data source  
+
+* **location**: list that contains somethimes multiple entries, one of them should be city, country, field has to be checked, I have discovered so far something like this:  
+```json
+"location": [
+{
+"name": "Flexible / Remote"
+},
+{
+"name": "London, United Kingdom"
+}
+]
+```
+
+* **experience**: level of exp required, have not seen yet but I guess could be NULL  
+
+* **html_link** : link to full job offer description , could valuable if we get data from multiple sources to identify doubles (our sources are often services that query data sources, for example okjobs queries LinkIn), should not be NULL  
+
+* **type**: describes tpye as "external" (sample data has no other values), could be NULL imho  
+
+* **company_name**: should not be NULL  
+
+* **company_id**: muse company id => not useful for us !?  
+
+* **source**: redundant (see html_link above) !?  
+
+* **created** : I would say publication_date is enough !?  
+
