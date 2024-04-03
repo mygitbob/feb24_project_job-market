@@ -15,7 +15,7 @@
 `\c <name of db>`
 #### Create new database (do this before running the scripts)
 `CREATE DATABASE dummy_db;`
-You can now connect to it via `\c dummy`
+You can now connect to it via `\c dummy_db`
 #### List all tables of the database dummy
 ```
 SELECT table_name FROM information_schema.tables 
