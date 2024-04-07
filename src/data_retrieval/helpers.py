@@ -4,10 +4,10 @@ import csv
 import json
 from datetime import datetime
 
-# project diretory
-project_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+# project src diretory
+project_src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 # add to python path
-sys.path.append(project_path)
+sys.path.append(project_src_path)
 
 from config.constants import Constants
 from config.logger import logging, setup_logging
