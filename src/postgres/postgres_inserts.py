@@ -81,7 +81,7 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                             VALUES (%s)
                             ON CONFLICT DO NOTHING
                         """, (experience_level,))
-                    except psycopg2.errors.UniqueViolation:
+                    except psy.errors.UniqueViolation:
                         logging.warning(
                             f"{__file__}: insert_dim_tables: '{experience_level}' already exists in experience table.")
                     except Exception as e:
