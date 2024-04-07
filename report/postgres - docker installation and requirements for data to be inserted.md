@@ -8,6 +8,8 @@ docker run --name jobmarket_sql_container -e POSTGRES_PASSWORD=feb24 -d -p 5432:
 ```
 If you try this under Windows, strart `Docker Desktop` first.
 
+For more details look in the src/postgres/example folder
+
 ## Requirements for data to be inserted into postgres
 Data has to be in a DataFrame with the following columns:
 ```python

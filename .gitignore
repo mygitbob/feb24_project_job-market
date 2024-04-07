@@ -2,6 +2,9 @@
 .vscode/
 src/log.txt
 src/__pycache__/
+src/postgres/__pycache__/
+src/config/__pycache__/
+src/data_retrieval/__pycache__/
 src/config/my_secrets.py
 data/processed/muse.com/*
 data/processed/okjob.io/*
