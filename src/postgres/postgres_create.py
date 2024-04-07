@@ -103,7 +103,8 @@ def _create_job_title_table(cur):
         CREATE TABLE IF NOT EXISTS job_title (
             jt_id SERIAL PRIMARY KEY,
             name VARCHAR(50) NOT NULL
-        )
+        );
+        CREATE UNIQUE INDEX job_title_name_unique_idx ON job_title (name);
     """)
 
 
@@ -113,7 +114,8 @@ def _create_currency_table(cur):
             c_id SERIAL PRIMARY KEY,
             symbol VARCHAR(3) NOT NULL, -- when we have no symbol we can use a 3 char abbreviation
             name VARCHAR(50)
-        )
+        );
+        CREATE UNIQUE INDEX currency_symbol_unique_idx ON currency (symbol);
     """)
 
 
@@ -122,7 +124,8 @@ def _create_experience_table(cur):
         CREATE TABLE IF NOT EXISTS experience (
             e_id SERIAL PRIMARY KEY,
             level VARCHAR(20) NOT NULL
-        )
+        );
+        CREATE UNIQUE INDEX experience_unique_idx ON experience (level);
     """)
 
 
@@ -135,7 +138,8 @@ def _create_location_table(cur):
             city VARCHAR(50),
             city_district VARCHAR(50),
             area_code VARCHAR(50)
-        )
+        );
+        CREATE UNIQUE INDEX location_unique_idx ON location (country, region, city, city_district, area_code);
     """)
 
 
@@ -145,7 +149,8 @@ def _create_data_source_table(cur):
             ds_id SERIAL PRIMARY KEY,
             name VARCHAR(50) NOT NULL,
             url VARCHAR(50) NOT NULL
-        )
+        );
+        CREATE UNIQUE INDEX data_source_unique_idx ON data_source (name, url);
     """)
 
 
@@ -154,7 +159,8 @@ def _create_skill_list_table(cur):
         CREATE TABLE IF NOT EXISTS skill_list (
             sl_id SERIAL PRIMARY KEY,
             name VARCHAR(50) NOT NULL
-        )
+        );
+        CREATE UNIQUE INDEX skill_list_unique_idx ON skill_list (name);
     """)
 
 
@@ -163,8 +169,10 @@ def _create_job_category_table(cur):
         CREATE TABLE IF NOT EXISTS job_category (
             jc_id SERIAL PRIMARY KEY,
             name VARCHAR(50) NOT NULL
-        )
+        );
+        CREATE UNIQUE INDEX job_category_unique_idx ON job_category (name);
     """)
+
 
 # create fact table after dimensions
 

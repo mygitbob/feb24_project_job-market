@@ -40,17 +40,15 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                 # insert data into job_title table
                 job_title = row['job_title_name']
                 if job_title and isinstance(job_title, str):
-                    # insert only if not already present
-                    cur.execute(
-                        "SELECT 1 FROM job_title WHERE name = %s", (job_title,))
-                    existing_row = cur.fetchone()
-                    if not existing_row:
+                    try:
                         cur.execute("""
-                                    INSERT INTO job_title (name) VALUES (%s)
-                                    """, (job_title,))
+                            INSERT INTO job_title (name) VALUES (%s)
+                            ON CONFLICT (name) DO NOTHING
+                        """, (job_title,))
+                    except Exception as e:
+                        raise DataError(f"job_title_name: {e}")
                 else:
-                    raise DataError(
-                        f"job_title_name: wrong type or empty: {type(job_title)}")
+                    raise DataError(f"job_title_name: wrong type or empty: {type(job_title)}")
 
                 # Insert data into currency table
                 currency_symbol = row['currency_symbol']
@@ -60,36 +58,34 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                     raise DataError(
                         f"currency_symbol: wrong type: {type(currency_symbol)} or value: {currency_symbol}")
 
-                # Insert only if not already present
-                cur.execute(
-                    "SELECT 1 FROM currency WHERE symbol = %s", (currency_symbol,))
-                existing_row = cur.fetchone()
-                if not existing_row:
-                    if currency_name and isinstance(currency_name, str):
-                        cur.execute("""
-                            INSERT INTO currency (symbol, name) VALUES (%s, %s)
-                            """, (currency_symbol, currency_name))
-                    else:
-                        cur.execute("""
-                            INSERT INTO currency (symbol) VALUES (%s)
-                            """, (currency_symbol,))
-                        logging.warning(
-                            f"{__file__}: insert_dim_tables: optional key 'currency_name' present but value does not fit:{currency_name}")
-
+                try:
+                    cur.execute("""
+                        INSERT INTO currency (symbol, name)
+                        VALUES (%s, %s)
+                        ON CONFLICT (symbol) DO UPDATE SET name = EXCLUDED.name
+                    """, (currency_symbol, currency_name))
+                except Exception as e:
+                    raise DataError(f"currency: {e}")
+                
                 # Insert optional data into experience table
                 experience_level = row.get('experience_level', None)
+
                 if experience_level and isinstance(experience_level, str):
-                    # Insert only if not already present
-                    cur.execute(
-                        "SELECT 1 FROM experience WHERE level = %s", (experience_level,))
-                    existing_row = cur.fetchone()
-                    if not existing_row:
+                    try:
                         cur.execute("""
-                            INSERT INTO experience (level) VALUES (%s)
-                            """, (experience_level,))
+                            INSERT INTO experience (level)
+                            VALUES (%s)
+                            ON CONFLICT DO NOTHING
+                        """, (experience_level,))
+                    except psycopg2.errors.UniqueViolation:
+                        logging.warning(
+                            f"{__file__}: insert_dim_tables: '{experience_level}' already exists in experience table.")
+                    except Exception as e:
+                        raise DataError(f"experience_level: {e}")
                 else:
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'experience_level' present but value does not fit:{experience_level}")
+
 
                 # Insert data into location table
                 country = row['location_country']
@@ -121,50 +117,64 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                         f"{__file__}: insert_dim_tables: optional key 'location_area_code' present but value does not fit:{area_code}")
                     area_code = None
 
-                # Insert only if not already present
-                cur.execute("SELECT 1 FROM location WHERE country = %s AND region = %s AND city = %s AND city_district = %s AND area_code = %s",
-                            (country, region, city, city_district, area_code))
-                existing_row = cur.fetchone()
-                if not existing_row:
+                try:
                     cur.execute("""
-                        INSERT INTO location (country, region, city, city_district, area_code) 
+                        INSERT INTO location (country, region, city, city_district, area_code)
                         VALUES (%s, %s, %s, %s, %s)
+                        ON CONFLICT (country, region, city, city_district, area_code) DO NOTHING
                     """, (country, region, city, city_district, area_code))
+                except Exception as e:
+                    raise DataError(f"location: {e}")
+
 
                 # Insert data into data_source table
                 source_name = row['data_source_name']
                 source_url = row['data_source_url']
                 if source_name and source_url and isinstance(source_name, str) and isinstance(source_url, str):
-                    cur.execute("""
-                        INSERT INTO data_source (name, url) VALUES (%s, %s)
-                        """, (row['data_source_name'], row['data_source_url']))
+                    try:
+                        cur.execute("""
+                            INSERT INTO data_source (name, url) VALUES (%s, %s)
+                            ON CONFLICT (name, url) DO NOTHING
+                        """, (source_name, source_url))
+                    except Exception as e:
+                        raise DataError(f"data_source name,url: {e}")
                 else:
                     raise DataError(
-                        f"data_source name,url: wrong type: {type(source_name),type(source_url)} or value: {source_name,source_url}")
+                        f"data_source name,url: wrong type: {type(source_name), type(source_url)} or value: {source_name, source_url}")
 
                 # Insert data into skill_list table
-                skill_list = row.get('skills', None)
+                skill_list = row.get('skills', [])
                 if not isinstance(skill_list, list):
                     logging.warning(
-                        f"{__file__}: insert_dim_tables: optional key 'skills' but is no list:{type(skill_list)}")
+                        f"{__file__}: insert_dim_tables: optional key 'skills' but is not a list: {type(skill_list)}")
                 else:
                     for skill in skill_list:
-                        if skill:
-                            cur.execute("""
-                                INSERT INTO skill_list (name) VALUES (%s)
+                        if isinstance(skill, str) and skill.strip():
+                            try:
+                                cur.execute("""
+                                    INSERT INTO skill_list (name) VALUES (%s)
+                                    ON CONFLICT (name) DO NOTHING
                                 """, (skill,))
+                            except Exception as e:
+                                logging.warning(
+                                    f"Error inserting skill '{skill}': {e}")
 
                 # Insert data into job_category table
-                cat_list = row.get('categories', None)
+                cat_list = row.get('categories', [])
                 if not isinstance(cat_list, list):
                     logging.warning(
-                        f"{__file__}: insert_dim_tables: optional key 'categories' but is no list:{type(cat_list)}")
+                        f"{__file__}: insert_dim_tables: optional key 'categories' but is not a list: {type(cat_list)}")
                 else:
                     for cat in cat_list:
-                        if cat:
-                            cur.execute("""
-                                INSERT INTO job_category (name) VALUES (%s)
+                        if isinstance(cat, str) and cat.strip():
+                            try:
+                                cur.execute("""
+                                    INSERT INTO job_category (name) VALUES (%s)
+                                    ON CONFLICT (name) DO NOTHING
                                 """, (cat,))
+                            except Exception as e:
+                                logging.warning(
+                                    f"Error inserting category '{cat}': {e}")
 
             except psy.DataError as data_error:
                 logging.error(f"Data error occurred: {data_error}")
