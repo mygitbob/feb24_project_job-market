@@ -1,6 +1,7 @@
 import sys
 import os
 import pandas as pd
+from datetime import date
 import psycopg2 as psy
 import warnings
 warnings.filterwarnings('ignore')
@@ -116,6 +117,12 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'location_area_code' present but value does not fit:{area_code}")
                     area_code = None
+                
+                state = row.get('location_state', None)
+                if state is not None and not isinstance(state, str):
+                    logging.warning(
+                        f"{__file__}: insert_dim_tables: optional key 'location_state' present but value does not fit:{area_code}")
+                    state = None
 
                 try:
                     cur.execute("""
@@ -194,7 +201,127 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
         if conn is not None:
             conn.close()
 
+def check_type(to_check, type):
+    return isinstance(to_check, type)
 
+def insert_fact_table(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTGRES_USER,
+                      password=Constants.POSTGRES_PASSWORD, host=Constants.POSTGRES_HOST,
+                      port=Constants.POSTGRES_PORT):
+
+    try:
+        conn = psy.connect(
+            dbname=dbname,
+            user=user,
+            password=password,
+            host=host,
+            port=port
+        )
+        conn.set_isolation_level(psy.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
+        cur = conn.cursor()
+
+        for _, row in df.iterrows():
+            try:
+
+                # insert data into job_offer table
+                source_id = row['source_id']
+                published = row['published']
+                salary_min = row['salary_min']
+                salary_max = row['salary_max']
+                job_title = row['job_title']
+                experience = row['experience']
+                currency_symbol = row['currency_symbol']
+                country = row['country']
+                region = row['region']
+                city = row['city']
+                city_district = row['city_district']
+                area_code = row['area_code']
+                state = row['state']
+                data_source = row['data_source']
+                data_url = row['data_url']
+                # check for empty strings and right types
+                if all([source_id, job_title, currency_symbol, country, data_source, data_url]) and \
+                    all([check_type(source_id,str), check_type(job_title,str), check_type(currency_symbol,str), 
+                        check_type(country,str), check_type(data_source,str), check_type(data_url,str)]) and\
+                    all([check_type(salary_min,int), check_type(salary_max,int), check_type(published,date)]):
+                    try:
+                        cur.execute("""
+                            INSERT INTO job_offer (source_id, published, salary_min, salary_max, job_title_id, currency_id, location_id, data_source_id) 
+                            VALUES (%s, %s, (SELECT jt_id FROM job_title WHERE name = %s), 
+                                            (SELECT c_id FROM currency WHERE symbol = %s), 
+                                            (SELECT l_id FROM location WHERE country = %s AND region = %s AND city = %s AND city_district = %s AND area_code = %s AND state = %s), 
+                                            (SELECT ds_id FROM data_source WHERE name = %s AND url = %s))
+                            ON CONFLICT (source_id, published, job_title_id, currency_id, location_id, data_source_id) DO NOTHING
+                        """, (source_id, published, salary_min, salary_max, job_title, currency_symbol, country, region, city, 
+                              city_district, area_code, data_source, data_url))
+                    except Exception as e:
+                        raise DataError(f"data_source name,url: {e}")
+                else:
+                    raise DataError(
+                        f"data_source name,url: wrong type: {type(source_name), type(source_url)} or value: {source_name, source_url}")
+
+
+            except psy.DataError as data_error:
+                logging.error(f"Data error occurred: {data_error}")
+            except psy.IntegrityError as integrity_error:
+                logging.error(f"Integrity error occurred: {integrity_error}")
+            except psy.DatabaseError as db_error:
+                logging.error(f"Database error occurred: {db_error}")
+            except Exception as e:
+                logging.error(f"Unkown error: {e}")
+
+        conn.commit()
+        logging.debug("Dimension tables data inserted successfully")
+
+    except Exception as e:
+        logging.error(f"Error inserting data into dimension tables:\n{e}")
+    finally:
+        if conn is not None:
+            conn.close()
+            
+
+def insert_link_table(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTGRES_USER,
+                      password=Constants.POSTGRES_PASSWORD, host=Constants.POSTGRES_HOST,
+                      port=Constants.POSTGRES_PORT):
+
+    try:
+        conn = psy.connect(
+            dbname=dbname,
+            user=user,
+            password=password,
+            host=host,
+            port=port
+        )
+        conn.set_isolation_level(psy.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
+        cur = conn.cursor()
+
+        for _, row in df.iterrows():
+            try:
+
+                # insert
+                
+                # insert
+                
+                pass
+
+            except psy.DataError as data_error:
+                logging.error(f"Data error occurred: {data_error}")
+            except psy.IntegrityError as integrity_error:
+                logging.error(f"Integrity error occurred: {integrity_error}")
+            except psy.DatabaseError as db_error:
+                logging.error(f"Database error occurred: {db_error}")
+            except Exception as e:
+                logging.error(f"Unkown error: {e}")
+
+        conn.commit()
+        logging.debug("Dimension tables data inserted successfully")
+
+    except Exception as e:
+        logging.error(f"Error inserting data into dimension tables:\n{e}")
+    finally:
+        if conn is not None:
+            conn.close()
+
+            
 def insert_dataframe(df):
     """
     Inserts a dataframe in the postgres db.
@@ -218,6 +345,8 @@ def insert_dataframe(df):
         return errors
     df = trim_strings(df)
     insert_dim_tables(df)
+    insert_fact_table(df)
+    insert_link_tables(df)
     return []
 
 

@@ -204,7 +204,7 @@ def create_fact_table(dbname, user, password, host, port):
         cur.execute("""
             CREATE TABLE IF NOT EXISTS job_offer (
                 jo_id SERIAL PRIMARY KEY,
-                source_id BIGINT NOT NULL,
+                source_id VARCHAR NOT NULL,
                 published DATE NOT NULL,
                 salary_min INT NOT NULL,
                 salary_max INT NOT NULL,

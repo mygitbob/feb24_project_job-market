@@ -27,6 +27,7 @@ df.columns=[
     "location_city",            # optional string
     "location_city_district",   # optional string
     "location_area_code",       # optional string
+    "location_state",           # optional string
     "data_source_name",         # string, must not be empty
     "data_source_url",          # string, must not be empty
     "skills",                   # optional, when given is either an empty list or must contain non empty strings
