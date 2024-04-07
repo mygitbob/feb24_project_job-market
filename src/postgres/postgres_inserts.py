@@ -7,12 +7,14 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # project src diretory
-project_src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+project_src_path = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '..'))
 # add to python path
 sys.path.append(project_src_path)
-from config.logger import setup_logging, logging
-from check_dataframe import trim_strings, check_values, check_keys
+
 from config.constants import Constants
+from check_dataframe import trim_strings, check_values, check_keys
+from config.logger import setup_logging, logging
 
 
 class DataError(Exception):
@@ -49,7 +51,8 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                     except Exception as e:
                         raise DataError(f"job_title_name: {e}")
                 else:
-                    raise DataError(f"job_title_name: wrong type or empty: {type(job_title)}")
+                    raise DataError(
+                        f"job_title_name: wrong type or empty: {type(job_title)}")
 
                 # Insert data into currency table
                 currency_symbol = row['currency_symbol']
@@ -67,7 +70,7 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                     """, (currency_symbol, currency_name))
                 except Exception as e:
                     raise DataError(f"currency: {e}")
-                
+
                 # Insert optional data into experience table
                 experience_level = row.get('experience_level', None)
 
@@ -87,7 +90,6 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'experience_level' present but value does not fit:{experience_level}")
 
-
                 # Insert data into location table
                 country = row['location_country']
                 if not (country and isinstance(country, str)):
@@ -98,41 +100,40 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                 if region is not None and not isinstance(region, str):
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'location_region' present but value does not fit:{region}")
-                    region = None
+                    region = "NULL"
 
                 city = row.get('location_city', None)
                 if city is not None and not isinstance(city, str):
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'location_city' present but value does not fit:{city}")
-                    city = None
+                    city = "NULL"
 
                 city_district = row.get('location_city_district', None)
                 if city_district is not None and not isinstance(city_district, str):
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'location_city_district' present but value does not fit:{city_district}")
-                    city_district = None
+                    city_district = "NULL"
 
                 area_code = row.get('location_area_code', None)
                 if area_code is not None and not isinstance(area_code, str):
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'location_area_code' present but value does not fit:{area_code}")
-                    area_code = None
-                
-                state = row.get('location_state', None)
+                    area_code = "NULL"
+
+                state = row.get('location_state', "NULL")
                 if state is not None and not isinstance(state, str):
                     logging.warning(
-                        f"{__file__}: insert_dim_tables: optional key 'location_state' present but value does not fit:{area_code}")
-                    state = None
+                        f"{__file__}: insert_dim_tables: optional key 'location_state' present but value does not fit:{state}")
+                    state = "NULL"
 
                 try:
                     cur.execute("""
-                        INSERT INTO location (country, region, city, city_district, area_code)
-                        VALUES (%s, %s, %s, %s, %s)
-                        ON CONFLICT (country, region, city, city_district, area_code) DO NOTHING
-                    """, (country, region, city, city_district, area_code))
+                        INSERT INTO location (country, region, city, city_district, area_code, state)
+                        VALUES (%s, %s, %s, %s, %s, %s)
+                        ON CONFLICT (country, region, city, city_district, area_code, state) DO NOTHING
+                    """, (country, region, city, city_district, area_code, state))
                 except Exception as e:
                     raise DataError(f"location: {e}")
-
 
                 # Insert data into data_source table
                 source_name = row['data_source_name']
@@ -193,7 +194,7 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                 logging.error(f"Unkown error: {e}")
 
         conn.commit()
-        logging.debug("Dimension tables data inserted successfully")
+        logging.debug("Dimension tables data inserts finished")
 
     except Exception as e:
         logging.error(f"Error inserting data into dimension tables:\n{e}")
@@ -201,8 +202,10 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
         if conn is not None:
             conn.close()
 
+
 def check_type(to_check, type):
     return isinstance(to_check, type)
+
 
 def insert_fact_table(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTGRES_USER,
                       password=Constants.POSTGRES_PASSWORD, host=Constants.POSTGRES_HOST,
@@ -219,7 +222,7 @@ def insert_fact_table(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
         conn.set_isolation_level(psy.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
         cur = conn.cursor()
 
-        for _, row in df.iterrows():
+        for index, row in df.iterrows():
             try:
 
                 # insert data into job_offer table
@@ -227,38 +230,39 @@ def insert_fact_table(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                 published = row['published']
                 salary_min = row['salary_min']
                 salary_max = row['salary_max']
-                job_title = row['job_title']
-                experience = row['experience']
+                job_title = row['job_title_name']
+                experience = row.get('experience_level', None)
                 currency_symbol = row['currency_symbol']
-                country = row['country']
-                region = row['region']
-                city = row['city']
-                city_district = row['city_district']
-                area_code = row['area_code']
-                state = row['state']
-                data_source = row['data_source']
-                data_url = row['data_url']
+                country = row['location_country']
+                region = row.get('location_region', None)
+                city = row.get('location_city', None)
+                city_district = row.get('location_city_district', None)
+                area_code = row.get('location_area_code', None)
+                state = row.get('location_state', "NULL")
+                data_source = row['data_source_name']
+                data_url = row['data_source_url']
+                
                 # check for empty strings and right types
                 if all([source_id, job_title, currency_symbol, country, data_source, data_url]) and \
-                    all([check_type(source_id,str), check_type(job_title,str), check_type(currency_symbol,str), 
-                        check_type(country,str), check_type(data_source,str), check_type(data_url,str)]) and\
-                    all([check_type(salary_min,int), check_type(salary_max,int), check_type(published,date)]):
+                        all([check_type(source_id, str), check_type(job_title, str), check_type(currency_symbol, str),
+                            check_type(country, str), check_type(data_source, str), check_type(data_url, str)]) and\
+                        all([check_type(salary_min, int), check_type(salary_max, int), check_type(published, date)]):
                     try:
                         cur.execute("""
-                            INSERT INTO job_offer (source_id, published, salary_min, salary_max, job_title_id, currency_id, location_id, data_source_id) 
-                            VALUES (%s, %s, (SELECT jt_id FROM job_title WHERE name = %s), 
-                                            (SELECT c_id FROM currency WHERE symbol = %s), 
-                                            (SELECT l_id FROM location WHERE country = %s AND region = %s AND city = %s AND city_district = %s AND area_code = %s AND state = %s), 
+                            INSERT INTO job_offer (source_id, published, salary_min, salary_max, job_title_id, currency_id, experience_id, location_id, data_source_id) 
+                            VALUES (%s, %s, %s, %s, (SELECT jt_id FROM job_title WHERE name = %s), 
+                                            (SELECT c_id FROM currency WHERE symbol = %s),
+                                            (SELECT e_id FROM experience WHERE level = %s), 
+                                            (SELECT l_id FROM location WHERE country = %s AND region = %s AND city = %s AND city_district = %s AND area_code = %s AND  (state = %s OR state IS NULL)), 
                                             (SELECT ds_id FROM data_source WHERE name = %s AND url = %s))
                             ON CONFLICT (source_id, published, job_title_id, currency_id, location_id, data_source_id) DO NOTHING
-                        """, (source_id, published, salary_min, salary_max, job_title, currency_symbol, country, region, city, 
-                              city_district, area_code, data_source, data_url))
+                        """, (source_id, published, salary_min, salary_max, job_title, currency_symbol, experience, country,
+                              region, city, city_district, area_code, state, data_source, data_url))
                     except Exception as e:
-                        raise DataError(f"data_source name,url: {e}")
+                        raise DataError(f"fact table :cant exceute query: {e}")
                 else:
                     raise DataError(
-                        f"data_source name,url: wrong type: {type(source_name), type(source_url)} or value: {source_name, source_url}")
-
+                        f"insert fact table: data error, don´t pass the test: {index, row.values}")
 
             except psy.DataError as data_error:
                 logging.error(f"Data error occurred: {data_error}")
@@ -267,19 +271,19 @@ def insert_fact_table(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
             except psy.DatabaseError as db_error:
                 logging.error(f"Database error occurred: {db_error}")
             except Exception as e:
-                logging.error(f"Unkown error: {e}")
+                logging.error(f"Unknown error:{e}: for row:{index, row.values}")
 
         conn.commit()
-        logging.debug("Dimension tables data inserted successfully")
+        logging.debug("Fact table data inserts finished")
 
     except Exception as e:
         logging.error(f"Error inserting data into dimension tables:\n{e}")
     finally:
         if conn is not None:
             conn.close()
-            
 
-def insert_link_table(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTGRES_USER,
+
+def insert_link_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTGRES_USER,
                       password=Constants.POSTGRES_PASSWORD, host=Constants.POSTGRES_HOST,
                       port=Constants.POSTGRES_PORT):
 
@@ -298,9 +302,9 @@ def insert_link_table(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
             try:
 
                 # insert
-                
+
                 # insert
-                
+
                 pass
 
             except psy.DataError as data_error:
@@ -313,7 +317,7 @@ def insert_link_table(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                 logging.error(f"Unkown error: {e}")
 
         conn.commit()
-        logging.debug("Dimension tables data inserted successfully")
+        logging.debug("Link tables data inserts finished")
 
     except Exception as e:
         logging.error(f"Error inserting data into dimension tables:\n{e}")
@@ -321,7 +325,7 @@ def insert_link_table(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
         if conn is not None:
             conn.close()
 
-            
+
 def insert_dataframe(df):
     """
     Inserts a dataframe in the postgres db.
@@ -336,7 +340,7 @@ def insert_dataframe(df):
         errors : list       = empty when no errors occured, otherwise list of missing keys if any 
                               and index and error from rows that contain errors, 
                               check log for potenial conflicts during the sql inserts
-                              
+
     """
     missing_keys = check_keys(df)
     value_errors = check_values(df)
@@ -346,13 +350,13 @@ def insert_dataframe(df):
     df = trim_strings(df)
     insert_dim_tables(df)
     insert_fact_table(df)
-    insert_link_tables(df)
+    #insert_link_tables(df)
     return []
 
 
 if __name__ == "__main__":
     data = {
-        "source_id": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "source_id": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
         "job_title_name": ["Software Engineer", "Data Scientist", "Project Manager", "Marketing Specialist", "Financial Analyst", "HR Manager", "Sales Representative", "Product Manager", "UX/UI Designer", "Customer Support Specialist"],
         "experience_level": ["Senior", "Junior", "Mid", "Senior", "Mid", "Junior", "Senior", "Mid", "Junior", "Mid"],
         "published": pd.to_datetime(["2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01"]),
@@ -371,7 +375,7 @@ if __name__ == "__main__":
         "categories": [[21323], ["Data Science", "Analytics", "Machine Learning"], ["Project Management", "Business", "Management"], ["Marketing", "Digital Marketing", "Advertising"], ["Finance", "Accounting", "Financial Services"], ["HR", "Management", "Human Resources"], ["Sales", "Business Development", "Marketing"], ["Product Management", "Product Development", "Agile"], ["Design", "UI/UX", "Creative"], ["Customer Support", "Customer Service", "Technical Support"]]
     }
     setup_logging()
-    
+
     df = pd.DataFrame(data)
 
     errors = insert_dataframe(df.iloc[1:])

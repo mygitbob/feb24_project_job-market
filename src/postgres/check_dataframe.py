@@ -57,8 +57,10 @@ def check_values(df):
     errors = []
 
     # Check column "source_id"
-    if not pd.api.types.is_integer_dtype(df['source_id']):
-        errors.append("Column 'source_id' must contain integers.")
+    if 'source_id' in df.columns and not all(df['source_id'].apply(lambda x: isinstance(x, str) or pd.isna(x) or len(x) <= 20)):
+        for index, value in df.loc[~df['source_id'].apply(lambda x: isinstance(x, str) or pd.isna(x) or len(x) <= 20)].iterrows():
+            errors.append(
+                f"Invalid value '{value['source_id']}' in 'source_id' column at index {index}.")
 
     # Check column "job_title_name"
     if not all(df['job_title_name'].apply(lambda x: isinstance(x, str) and len(x.strip()) > 0 and len(x) <= 50)):

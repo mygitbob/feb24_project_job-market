@@ -138,7 +138,8 @@ def _create_location_table(cur):
             city VARCHAR(50),
             city_district VARCHAR(50),
             area_code VARCHAR(50),
-            CONSTRAINT location_unique_idx UNIQUE (country, region, city, city_district, area_code)
+            state VARCHAR(50),
+            CONSTRAINT location_unique_idx UNIQUE (country, region, city, city_district, area_code, state)
         );
     """)
 
