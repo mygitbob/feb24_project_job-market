@@ -20,6 +20,7 @@ df.columns=[
     "published",                      # date > 2000-01-01
     "salary_min",                     # int > 0
     "salary_max",                     # int > 0
+    "joboffer_url"                    # string, must not be empty
     "currency_symbol",                # string, 1 <= length <=3 
     "currency_name",                  # optional string
     "location_country",               # string, must not be empty
@@ -29,7 +30,6 @@ df.columns=[
     "location_area_code",       # optional string
     "location_state",           # optional string
     "data_source_name",         # string, must not be empty
-    "data_source_url",          # string, must not be empty
     "skills",                   # optional, when given is either an empty list or must contain non empty strings
     "categories"                # optional, when given is either an empty list or must contain non empty strings
 ]

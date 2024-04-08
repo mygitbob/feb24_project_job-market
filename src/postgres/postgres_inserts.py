@@ -253,7 +253,7 @@ def insert_fact_table(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                             VALUES (%s, %s, %s, %s, (SELECT jt_id FROM job_title WHERE name = %s), 
                                             (SELECT c_id FROM currency WHERE symbol = %s),
                                             (SELECT e_id FROM experience WHERE level = %s), 
-                                            (SELECT l_id FROM location WHERE country = %s AND region = %s AND city = %s AND city_district = %s AND area_code = %s AND  (state = %s OR state IS NULL)), 
+                                            (SELECT l_id FROM location WHERE country = %s AND region = %s AND city = %s AND city_district = %s AND area_code = %s AND  state = %s ), 
                                             (SELECT ds_id FROM data_source WHERE name = %s AND url = %s))
                             ON CONFLICT (source_id, published, job_title_id, currency_id, location_id, data_source_id) DO NOTHING
                         """, (source_id, published, salary_min, salary_max, job_title, currency_symbol, experience, country,
