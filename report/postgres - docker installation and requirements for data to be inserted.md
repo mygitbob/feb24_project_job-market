@@ -14,7 +14,7 @@ For more details look in the src/postgres/example folder
 Data has to be in a DataFrame with the following columns:
 ```python
 df.columns=[
-    "source_id",                      # int or greater
+    "source_id",                      # string
     "job_title_name",                 # string, must not be empty
     "experience_level",               # optional string
     "published",                      # date > 2000-01-01

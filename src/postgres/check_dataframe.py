@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-# DataFrame must include these keys
+# DataFrame must include these keys 
 mandatory_keys = [
     "source_id",                   
     "job_title_name",              
@@ -15,6 +15,27 @@ mandatory_keys = [
     "joboffer_url"
 ]
 
+# Columns have to be of this type
+column_types = {
+        "source_id": str,
+        "job_title_name": str,
+        "experience_level": (str, type(None)),
+        "published": pd.Timestamp,
+        "salary_min": int,
+        "salary_max": int,
+        "joboffer_url": str,
+        "currency_symbol": str,
+        "currency_name": (str, type(None)),
+        "location_country": str,
+        "location_region": (str, type(None)),
+        "location_city": (str, type(None)),
+        "location_city_district": (str, type(None)),
+        "location_area_code": (str, type(None)),
+        "location_state": (str, type(None)),
+        "data_source_name": str,
+        "skills": (list, type(None)),
+        "categories": (list, type(None))
+    }
 
 def trim_strings(df):
     """
@@ -45,6 +66,41 @@ def check_keys(df):
     return missing_keys
 
 
+import pandas as pd
+
+def check_column_types(df):
+    """
+    Checks if all columns in a DataFrame have the correct types.
+    Args:
+        DataFrame to check
+    Returns:
+        errors : list   = list of errors with the index a the row(s) 
+    """
+    errors = []
+
+
+    for col, col_type in column_types.items():
+        if col in df.columns:
+            if not all(df[col].apply(lambda x: isinstance(x, col_type) or pd.isna(x))):
+                errors.append(
+                    f"Column '{col}' contains invalid types.")
+
+    for col in ["skills", "categories"]:
+        if col in df.columns:
+            for index, value in df.iterrows():
+                if isinstance(value[col], list):
+                    # Filtern der NaN-Werte aus der Liste
+                    cleaned_list = [item for item in value[col] if not pd.isna(item)]
+                    if not all(isinstance(item, str) or item is None for item in cleaned_list):
+                        errors.append(
+                            f"Invalid values in '{col}' column at index {index}. Must contain only strings or None.")
+                elif not pd.isna(value[col]):  # Überprüfen, ob das Attribut vorhanden ist
+                    errors.append(
+                        f"Invalid type in '{col}' column at index {index}. Must be a list or None.")
+
+    return errors
+    
+    
 def check_values(df):
     """
     Checks if all values of a DatFrame fullfill the requirements.
@@ -121,3 +177,24 @@ def check_values(df):
                                 f"String value '{item}' in '{col}' column at index {index}, item index {item_index} is longer than 50 characters.")
 
     return errors
+
+def check_dataframe(df):
+    """
+    Check if DataFrame has all keys, columns have right types and values are ok
+    
+    Args:
+        DataFrame to check
+    Return:
+        list with errors | empty list -> DataFrame contains no errors
+    """
+    res = []
+    res = check_keys(df)
+    if res:     # error found
+        return res
+    res = check_column_types(df)
+    if res:     # error found
+        return res
+    res = check_values(df)
+    if res:     # error found
+        return res
+    return res  # empty list -> no errors

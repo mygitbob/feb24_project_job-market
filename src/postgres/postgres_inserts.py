@@ -13,7 +13,7 @@ project_src_path = os.path.abspath(
 sys.path.append(project_src_path)
 
 from config.constants import Constants
-from check_dataframe import trim_strings, check_values, check_keys
+from check_dataframe import trim_strings, check_dataframe
 from config.logger import setup_logging, logging
 
 
@@ -353,9 +353,8 @@ def insert_dataframe(df):
                               check log for potenial conflicts during the sql inserts
 
     """
-    missing_keys = check_keys(df)
-    value_errors = check_values(df)
-    errors = missing_keys + value_errors
+    
+    errors = check_dataframe(df)
     if errors:
         return errors
     df = trim_strings(df)
@@ -416,13 +415,33 @@ if __name__ == "__main__":
         "data_source_name": ["Company A", "Company B", "Company C", "Company A", "Company A", "Company A", "Company x", "Company x", "Company x", "Company x"],
         "joboffer_url": ["http://companya.com1", "http://companyb.com2", "http://companyc.com3", "http://companya.com4", "http://companya.com5", "http://companya.com6", "http://companyx.com7", "http://companyx.com8", "http://companyx.com9", "http://companyx.com0"],
     }
+    data_with_errors = {
+        "source_id": [1, "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+        "job_title_name": ["Software Engineer", "", "Project Manager", "Marketing Specialist", "Financial Analyst", "HR Manager", "Sales Representative", "Product Manager", "UX/UI Designer", "Customer Support Specialist"],
+        "experience_level": ["Senior", "Junior", "Mid", "Senior", "Mid", "Junior", "Senior", "Mid", "Junior", "Mid"],
+        "published": pd.to_datetime(["2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01"]),
+        "salary_min": [60000, 1500, 0, 55000, 65000, 60000, 55000, 70000, 55000, 60000],
+        "salary_max": [120000, 100000, 140000, 0, 130000, 120000, 110000, 140000, 110000, 120000],
+        "currency_symbol": ["USD", "EUR", "GBP", "USD", "", "GBP", "USD", "EUR", "GBP", "USD"],
+        "currency_name": ["US Dollar", "Euro", "British Pound", "US Dollar", "Euro", "British Pound", "US Dollar", "Euro", "British Pound", "US Dollar"],
+        "location_country": ["USA", "Germany", "UK", "USA", "Germany", "", "USA", "Germany", "UK", "USA"],
+        "location_region": ["West", "North", "South", "West", "North", "South", 666, "North", "South", "West"],
+        "location_city": ["New York", "Berlin", "London", "New York", "Berlin", "London", "New York", "Berlin", "London", "New York"],
+        "location_city_district": ["Manhattan", "Mitte", "Westminster", "Manhattan", "Mitte", "Westminster", "Manhattan", "Mitte", "Westminster", "Manhattan"],
+        "location_area_code": ["NY001", "BE001", "LON001", "NY002", "BE002", "LON002", "NY003", "BE003", "LON003", "NY004"],
+        "data_source_name": ["Company A", "Company B", "Company C", "Company A", "Company A", "Company A", "Company x", "", "Company x", "Company x"],
+        "joboffer_url": ["http://companya.com", "http://companyb.com", "http://companyc.com", "http://companya.com", "http://companya.com", "http://companya.com", "http://companyx.com", "http://companyx.com", "", "http://companyx.com"],
+        "skills": [["some skill"], ["R", "Python", "Machine Learning"], ["Project Management", "Leadership", "Communication"], ["Marketing", "SEO", "Social Media"], ["Finance", "Excel", "Financial Analysis"], ["HR Management", "Recruitment", "Employee Relations"], ["Sales", "Negotiation", "Customer Relationship Management"], ["Product Management", "Agile", "Product Development"], ["UI/UX Design", "Adobe Creative Suite", "Wireframing"], ["Customer Support", "Troubleshooting", "Ticketing System"]],
+        "categories": [["a category"], ["Data Science", "Analytics", "Machine Learning"], ["Project Management", "Business", "Management"], ["Marketing", "Digital Marketing", "Advertising"], ["Finance", "Accounting", "Financial Services"], ["HR", "Management", "Human Resources"], ["Sales", "Business Development", "Marketing"], ["Product Management", "Product Development", "Agile"], ["Design", "UI/UX", "Creative"], ["Customer Support", "Customer Service", "Technical Support"]]
+    }
     setup_logging()
 
     df = pd.DataFrame(data)
     df_wh = pd.DataFrame(data_with_holes)
     df_woc = pd.DataFrame(data_without_optional_cols)
-    
-    for frame in [df, df_wh, df_woc]:
+    df_we = pd.DataFrame(data_with_errors)
+       
+    for frame in [df, df_wh, df_woc, df_we]:
         errors = insert_dataframe(frame)
         if not errors:
             print("data passed checks, check log for potential errors during inserts")
