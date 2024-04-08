@@ -103,7 +103,7 @@ def _create_job_title_table(cur):
         CREATE TABLE IF NOT EXISTS job_title (
             jt_id SERIAL PRIMARY KEY,
             name VARCHAR(50) NOT NULL,
-            CONSTRAINT job_title_unique_idx UNIQUE (name)
+            CONSTRAINT unique_job_title UNIQUE (name)
         );
     """)
 
@@ -114,7 +114,7 @@ def _create_currency_table(cur):
             c_id SERIAL PRIMARY KEY,
             symbol VARCHAR(3) NOT NULL, -- when we have no symbol we can use a 3 char abbreviation
             name VARCHAR(50),
-            CONSTRAINT currency_symbol_unique_idx UNIQUE (symbol)
+            CONSTRAINT unique_currency UNIQUE (symbol)
         );
     """)
 
@@ -124,7 +124,7 @@ def _create_experience_table(cur):
         CREATE TABLE IF NOT EXISTS experience (
             e_id SERIAL PRIMARY KEY,
             level VARCHAR(20) NOT NULL,
-            CONSTRAINT experience_unique_idx UNIQUE (level)
+            CONSTRAINT unique_experience UNIQUE (level)
         );
     """)
 
@@ -139,7 +139,7 @@ def _create_location_table(cur):
             city_district VARCHAR(50),
             area_code VARCHAR(50),
             state VARCHAR(50),
-            CONSTRAINT location_unique_idx UNIQUE (country, region, city, city_district, area_code, state)
+            CONSTRAINT unique_location_tuple UNIQUE (country, region, city, city_district, area_code, state)
         );
     """)
 
@@ -149,8 +149,7 @@ def _create_data_source_table(cur):
         CREATE TABLE IF NOT EXISTS data_source (
             ds_id SERIAL PRIMARY KEY,
             name VARCHAR(50) NOT NULL,
-            url VARCHAR(50) NOT NULL,
-            CONSTRAINT data_source_unique_idx UNIQUE (name, url)
+            CONSTRAINT unique_data_source UNIQUE (name)
         );
     """)
 
@@ -160,7 +159,7 @@ def _create_skill_list_table(cur):
         CREATE TABLE IF NOT EXISTS skill_list (
             sl_id SERIAL PRIMARY KEY,
             name VARCHAR(50) NOT NULL,
-            CONSTRAINT skill_list_unique_idx UNIQUE (name)
+            CONSTRAINT unique_skill_name UNIQUE (name)
         );
     """)
 
@@ -170,7 +169,7 @@ def _create_job_category_table(cur):
         CREATE TABLE IF NOT EXISTS job_category (
             jc_id SERIAL PRIMARY KEY,
             name VARCHAR(50) NOT NULL,
-            CONSTRAINT job_category_unique_idx UNIQUE (name)
+            CONSTRAINT unique_job_category UNIQUE (name)
         );
     """)
 
@@ -209,12 +208,15 @@ def create_fact_table(dbname, user, password, host, port):
                 published DATE NOT NULL,
                 salary_min INT NOT NULL,
                 salary_max INT NOT NULL,
+                joboffer_url VARCHAR NOT NULL,
                 job_title_id INT NOT NULL REFERENCES job_title(jt_id),
                 currency_id INT NOT NULL REFERENCES currency(c_id),
                 location_id INT NOT NULL REFERENCES location(l_id),
                 data_source_id INT NOT NULL REFERENCES data_source(ds_id),
                 experience_id INT REFERENCES experience(e_id),
-                CONSTRAINT unique_job_offer UNIQUE (source_id, published, job_title_id, currency_id, location_id, data_source_id)
+                CONSTRAINT unique_source_id UNIQUE (source_id),
+                CONSTRAINT unique_joboffer_url UNIQUE (joboffer_url),
+                CONSTRAINT unique_job_details UNIQUE (published, job_title_id, location_id, data_source_id)
             )
         """)
 

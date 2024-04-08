@@ -12,7 +12,7 @@ mandatory_keys = [
     "currency_symbol",             
     "location_country",            
     "data_source_name",         
-    "data_source_url"
+    "joboffer_url"
 ]
 
 
@@ -90,8 +90,8 @@ def check_values(df):
             errors.append(
                 f"Invalid value '{value['currency_symbol']}' in 'currency_symbol' column at index {index}.")
 
-    # Check columns "currency_name", "location_country", "data_source_name", and "data_source_url"
-    for col in ['currency_name', 'location_country', 'data_source_name', 'data_source_url']:
+    # Check columns "location_country", "data_source_name", and "joboffer_url"
+    for col in ['location_country', 'data_source_name', 'joboffer_url']:
         if col in df.columns and not all(df[col].apply(lambda x: isinstance(x, str) and len(x.strip()) > 0 and len(x) <= 50)):
             for index, value in df.loc[~df[col].apply(lambda x: isinstance(x, str) and len(x.strip()) > 0 and len(x) <= 50)].iterrows():
                 errors.append(

@@ -55,9 +55,16 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                         f"job_title_name: wrong type or empty: {type(job_title)}")
 
                 # Insert data into currency table
+                # currency_smybol is mandatory
                 currency_symbol = row['currency_symbol']
-                currency_name = row.get('currency_name', None)
-
+                
+                # currency_name is optional
+                currency_name = row.get('currency_name', "NULL")
+                if not isinstance(currency_name, str):
+                    logging.warning(
+                        f"{__file__}: insert_dim_tables: optional key 'currency_name' present but value does not fit:{currency_name}")
+                    currency_name = "NULL"
+                    
                 if not (0 < len(currency_symbol) < 4 and isinstance(currency_symbol, str)):
                     raise DataError(
                         f"currency_symbol: wrong type: {type(currency_symbol)} or value: {currency_symbol}")
@@ -66,12 +73,13 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                     cur.execute("""
                         INSERT INTO currency (symbol, name)
                         VALUES (%s, %s)
-                        ON CONFLICT (symbol) DO UPDATE SET name = EXCLUDED.name
+                        ON CONFLICT (symbol) DO NOTHING
                     """, (currency_symbol, currency_name))
                 except Exception as e:
                     raise DataError(f"currency: {e}")
 
-                # Insert optional data into experience table
+                # Insert into experience table
+                # experience_level is optional
                 experience_level = row.get('experience_level', None)
 
                 if experience_level and isinstance(experience_level, str):
@@ -91,31 +99,32 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                         f"{__file__}: insert_dim_tables: optional key 'experience_level' present but value does not fit:{experience_level}")
 
                 # Insert data into location table
+                # country is mandatory
                 country = row['location_country']
-                if not (country and isinstance(country, str)):
+                if not (country and (country and isinstance(country, str))):
                     raise DataError(
                         f"location_country: wrong type: {type(country)} or value: {country}")
 
-                region = row.get('location_region', None)
-                if region is not None and not isinstance(region, str):
+                region = row.get('location_region', "NULL")
+                if not isinstance(region, str):
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'location_region' present but value does not fit:{region}")
                     region = "NULL"
 
-                city = row.get('location_city', None)
-                if city is not None and not isinstance(city, str):
+                city = row.get('location_city', "NULL")
+                if not isinstance(city, str):
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'location_city' present but value does not fit:{city}")
                     city = "NULL"
 
-                city_district = row.get('location_city_district', None)
-                if city_district is not None and not isinstance(city_district, str):
+                city_district = row.get('location_city_district', "NULL")
+                if not isinstance(city_district, str):
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'location_city_district' present but value does not fit:{city_district}")
                     city_district = "NULL"
 
-                area_code = row.get('location_area_code', None)
-                if area_code is not None and not isinstance(area_code, str):
+                area_code = row.get('location_area_code', "NULL")
+                if not isinstance(area_code, str):
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'location_area_code' present but value does not fit:{area_code}")
                     area_code = "NULL"
@@ -136,28 +145,29 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                     raise DataError(f"location: {e}")
 
                 # Insert data into data_source table
+                # data_source_name is mandatory
                 source_name = row['data_source_name']
-                source_url = row['data_source_url']
-                if source_name and source_url and isinstance(source_name, str) and isinstance(source_url, str):
+                if source_name and isinstance(source_name, str):
                     try:
                         cur.execute("""
-                            INSERT INTO data_source (name, url) VALUES (%s, %s)
-                            ON CONFLICT (name, url) DO NOTHING
-                        """, (source_name, source_url))
+                            INSERT INTO data_source (name) VALUES (%s)
+                            ON CONFLICT (name) DO NOTHING
+                        """, (source_name, ))
                     except Exception as e:
                         raise DataError(f"data_source name,url: {e}")
                 else:
                     raise DataError(
-                        f"data_source name,url: wrong type: {type(source_name), type(source_url)} or value: {source_name, source_url}")
+                        f"data_source name,url: wrong type: {type(source_name)} or value: {source_name}")
 
                 # Insert data into skill_list table
+                # skill_list is optional
                 skill_list = row.get('skills', [])
                 if not isinstance(skill_list, list):
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'skills' but is not a list: {type(skill_list)}")
                 else:
                     for skill in skill_list:
-                        if isinstance(skill, str) and skill.strip():
+                        if isinstance(skill, str) and skill:
                             try:
                                 cur.execute("""
                                     INSERT INTO skill_list (name) VALUES (%s)
@@ -168,13 +178,14 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                                     f"Error inserting skill '{skill}': {e}")
 
                 # Insert data into job_category table
+                # categories is optional
                 cat_list = row.get('categories', [])
                 if not isinstance(cat_list, list):
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'categories' but is not a list: {type(cat_list)}")
                 else:
                     for cat in cat_list:
-                        if isinstance(cat, str) and cat.strip():
+                        if isinstance(cat, str) and cat:
                             try:
                                 cur.execute("""
                                     INSERT INTO job_category (name) VALUES (%s)
@@ -185,13 +196,13 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                                     f"Error inserting category '{cat}': {e}")
 
             except psy.DataError as data_error:
-                logging.error(f"Data error occurred: {data_error}")
+                logging.error(f"Insert Dim: Data error occurred: {data_error}")
             except psy.IntegrityError as integrity_error:
-                logging.error(f"Integrity error occurred: {integrity_error}")
+                logging.error(f"Insert Dim: Integrity error occurred: {integrity_error}")
             except psy.DatabaseError as db_error:
-                logging.error(f"Database error occurred: {db_error}")
+                logging.error(f"Insert Dim: Database error occurred: {db_error}")
             except Exception as e:
-                logging.error(f"Unkown error: {e}")
+                logging.error(f"Insert Dim: Unkown error: {e}")
 
         conn.commit()
         logging.debug("Dimension tables data inserts finished")
@@ -265,19 +276,19 @@ def insert_fact_table(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                         f"insert fact table: data error, don´t pass the test: {index, row.values}")
 
             except psy.DataError as data_error:
-                logging.error(f"Data error occurred: {data_error}")
+                logging.error(f"Insert Fact: Data error occurred: {data_error}")
             except psy.IntegrityError as integrity_error:
-                logging.error(f"Integrity error occurred: {integrity_error}")
+                logging.error(f"Insert Fact: Integrity error occurred: {integrity_error}")
             except psy.DatabaseError as db_error:
-                logging.error(f"Database error occurred: {db_error}")
+                logging.error(f"Insert Fact: Database error occurred: {db_error}")
             except Exception as e:
-                logging.error(f"Unknown error:{e}: for row:{index, row.values}")
+                logging.error(f"Insert Fact: Unknown error:{e}: for row:{index, row.values}")
 
         conn.commit()
         logging.debug("Fact table data inserts finished")
 
     except Exception as e:
-        logging.error(f"Error inserting data into dimension tables:\n{e}")
+        logging.error(f"Error inserting data into fact table:\n{e}")
     finally:
         if conn is not None:
             conn.close()
@@ -320,7 +331,7 @@ def insert_link_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POST
         logging.debug("Link tables data inserts finished")
 
     except Exception as e:
-        logging.error(f"Error inserting data into dimension tables:\n{e}")
+        logging.error(f"Insert Link: Error inserting data into link tables:\n{e}")
     finally:
         if conn is not None:
             conn.close()
@@ -349,7 +360,7 @@ def insert_dataframe(df):
         return errors
     df = trim_strings(df)
     insert_dim_tables(df)
-    insert_fact_table(df)
+    #insert_fact_table(df)
     #insert_link_tables(df)
     return []
 
@@ -370,16 +381,50 @@ if __name__ == "__main__":
         "location_city_district": ["Manhattan", "Mitte", "Westminster", "Manhattan", "Mitte", "Westminster", "Manhattan", "Mitte", "Westminster", "Manhattan"],
         "location_area_code": ["NY001", "BE001", "LON001", "NY002", "BE002", "LON002", "NY003", "BE003", "LON003", "NY004"],
         "data_source_name": ["Company A", "Company B", "Company C", "Company A", "Company A", "Company A", "Company x", "Company x", "Company x", "Company x"],
-        "data_source_url": ["http://companya.com", "http://companyb.com", "http://companyc.com", "http://companya.com", "http://companya.com", "http://companya.com", "http://companyx.com", "http://companyx.com", "http://companyx.com", "http://companyx.com"],
-        "skills": [["sdsdsadsadasdsadassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"], ["R", "Python", "Machine Learning"], ["Project Management", "Leadership", "Communication"], ["Marketing", "SEO", "Social Media"], ["Finance", "Excel", "Financial Analysis"], ["HR Management", "Recruitment", "Employee Relations"], ["Sales", "Negotiation", "Customer Relationship Management"], ["Product Management", "Agile", "Product Development"], ["UI/UX Design", "Adobe Creative Suite", "Wireframing"], ["Customer Support", "Troubleshooting", "Ticketing System"]],
-        "categories": [[21323], ["Data Science", "Analytics", "Machine Learning"], ["Project Management", "Business", "Management"], ["Marketing", "Digital Marketing", "Advertising"], ["Finance", "Accounting", "Financial Services"], ["HR", "Management", "Human Resources"], ["Sales", "Business Development", "Marketing"], ["Product Management", "Product Development", "Agile"], ["Design", "UI/UX", "Creative"], ["Customer Support", "Customer Service", "Technical Support"]]
+        "joboffer_url": ["http://companya.com", "http://companyb.com", "http://companyc.com", "http://companya.com", "http://companya.com", "http://companya.com", "http://companyx.com", "http://companyx.com", "http://companyx.com", "http://companyx.com"],
+        "skills": [["some skill"], ["R", "Python", "Machine Learning"], ["Project Management", "Leadership", "Communication"], ["Marketing", "SEO", "Social Media"], ["Finance", "Excel", "Financial Analysis"], ["HR Management", "Recruitment", "Employee Relations"], ["Sales", "Negotiation", "Customer Relationship Management"], ["Product Management", "Agile", "Product Development"], ["UI/UX Design", "Adobe Creative Suite", "Wireframing"], ["Customer Support", "Troubleshooting", "Ticketing System"]],
+        "categories": [["a category"], ["Data Science", "Analytics", "Machine Learning"], ["Project Management", "Business", "Management"], ["Marketing", "Digital Marketing", "Advertising"], ["Finance", "Accounting", "Financial Services"], ["HR", "Management", "Human Resources"], ["Sales", "Business Development", "Marketing"], ["Product Management", "Product Development", "Agile"], ["Design", "UI/UX", "Creative"], ["Customer Support", "Customer Service", "Technical Support"]]
+    }
+    
+    data_with_holes = {
+        "source_id": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+        "job_title_name": ["Software Engineer", "Data Scientist", "Project Manager", "Marketing Specialist", "Financial Analyst", "HR Manager", "Sales Representative", "Product Manager", "UX/UI Designer", "Customer Support Specialist"],
+        "experience_level": [None, None, "Mid", "Senior", "Mid", "Junior", "Senior", "Mid", "Junior", "Mid"],
+        "published": pd.to_datetime(["2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01"]),
+        "salary_min": [60000, 50000, 70000, 55000, 65000, 60000, 55000, 70000, 55000, 60000],
+        "salary_max": [120000, 100000, 140000, 110000, 130000, 120000, 110000, 140000, 110000, 120000],
+        "currency_symbol": ["USD", "EUR", "GBP", "USD", "EUR", "GBP", "USD", "EUR", "GBP", "USD"],
+        "currency_name": [None, None, None, None, None, None, None, None, None, None],
+        "location_country": ["USA", "Germany", "UK", "USA", "Germany", "UK", "USA", "Germany", "UK", "USA"],
+        "location_region": ["NorthWest", None, None, "NorthWest", None, None, None, None, None, None],
+        "location_city": [None, "Berlin", None, None, "Berlin", None, None, None, None, None],
+        "location_city_district": [None, None, "LondonCity", None, None, "LondonCity", None, None, None, None],
+        "location_area_code": [None, None, None, None, None, None, "123", None, None, "123"],
+        "data_source_name": ["Company A", "Company B", "Company C", "Company A", "Company A", "Company A", "Company x", "Company x", "Company x", "Company x"],
+        "joboffer_url": ["http://companya.com1", "http://companyb.com2", "http://companyc.com3", "http://companya.com4", "http://companya.com5", "http://companya.com6", "http://companyx.com7", "http://companyx.com8", "http://companyx.com9", "http://companyx.com0"],
+        "skills": [[], ["R", "Python", "Machine Learning"], ["Project Management", "Leadership", "Communication"], ["Marketing", "SEO", "Social Media"], ["Finance", "Excel", "Financial Analysis"], ["HR Management", "Recruitment", "Employee Relations"], ["Sales", "Negotiation", "Customer Relationship Management"], ["Product Management", "Agile", "Product Development"], ["UI/UX Design", "Adobe Creative Suite", "Wireframing"], ["Customer Support", "Troubleshooting", "Ticketing System"]],
+        "categories": [None, ["Data Science", "Analytics", "Machine Learning"], ["Project Management", "Business", "Management"], ["Marketing", "Digital Marketing", "Advertising"], ["Finance", "Accounting", "Financial Services"], ["HR", "Management", "Human Resources"], ["Sales", "Business Development", "Marketing"], ["Product Management", "Product Development", "Agile"], ["Design", "UI/UX", "Creative"], ["Customer Support", "Customer Service", "Technical Support"]]
+    }
+    data_without_optional_cols = {
+        "source_id": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+        "job_title_name": ["Software Engineer", "Data Scientist", "Project Manager", "Marketing Specialist", "Financial Analyst", "HR Manager", "Sales Representative", "Product Manager", "UX/UI Designer", "Customer Support Specialist"],
+        "published": pd.to_datetime(["2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01"]),
+        "salary_min": [60000, 50000, 70000, 55000, 65000, 60000, 55000, 70000, 55000, 60000],
+        "salary_max": [120000, 100000, 140000, 110000, 130000, 120000, 110000, 140000, 110000, 120000],
+        "currency_symbol": ["USD", "EUR", "GBP", "USD", "EUR", "GBP", "USD", "EUR", "GBP", "USD"],
+        "location_country": ["USA", "Germany", "UK", "USA", "Germany", "UK", "USA", "Germany", "UK", "USA"],
+        "data_source_name": ["Company A", "Company B", "Company C", "Company A", "Company A", "Company A", "Company x", "Company x", "Company x", "Company x"],
+        "joboffer_url": ["http://companya.com1", "http://companyb.com2", "http://companyc.com3", "http://companya.com4", "http://companya.com5", "http://companya.com6", "http://companyx.com7", "http://companyx.com8", "http://companyx.com9", "http://companyx.com0"],
     }
     setup_logging()
 
     df = pd.DataFrame(data)
-
-    errors = insert_dataframe(df.iloc[1:])
-    if not errors:
-        print("data passed checks, check log for potential errors during inserts")
-    else:
-        print("data did´t pass checks:\n", errors)
+    df_wh = pd.DataFrame(data_with_holes)
+    df_woc = pd.DataFrame(data_without_optional_cols)
+    
+    for frame in [df, df_wh, df_woc]:
+        errors = insert_dataframe(frame)
+        if not errors:
+            print("data passed checks, check log for potential errors during inserts")
+        else:
+            print("data did´t pass checks:\n", errors)
