@@ -47,13 +47,24 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                         cur.execute("""
                             INSERT INTO job_title (name) VALUES (%s)
                             ON CONFLICT (name) DO NOTHING
+                            RETURNING jt_id
                         """, (job_title,))
+                        # get pk jt_id
+                        response = cur.fetchone()
+                        if response:
+                            jt_id = response[0]  # get jt_id if the job title was inserted
+                        else:
+                            cur.execute("""
+                                SELECT jt_id FROM job_title WHERE name = %s
+                            """, (job_title,))
+                            response = cur.fetchone()
+                            jt_id = response[0]  # get jt_id if the job title already exists
                     except Exception as e:
                         raise DataError(f"job_title_name: {e}")
                 else:
                     raise DataError(
                         f"job_title_name: wrong type or empty: {type(job_title)}")
-
+                
                 # Insert data into currency table
                 # currency_smybol is mandatory
                 currency_symbol = row['currency_symbol']
@@ -64,20 +75,30 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'currency_name' present but value does not fit:{currency_name}")
                     currency_name = "NULL"
-                    
+                
                 if not (0 < len(currency_symbol) < 4 and isinstance(currency_symbol, str)):
                     raise DataError(
                         f"currency_symbol: wrong type: {type(currency_symbol)} or value: {currency_symbol}")
-
                 try:
                     cur.execute("""
                         INSERT INTO currency (symbol, name)
                         VALUES (%s, %s)
                         ON CONFLICT (symbol) DO NOTHING
+                        RETURNING c_id
                     """, (currency_symbol, currency_name))
+                    # get pk c_id
+                    response = cur.fetchone()
+                    if response:
+                        c_id = response[0]  # get c_id if currency_symbol was inserted
+                    else:
+                        cur.execute("""
+                            SELECT c_id FROM currency WHERE symbol = %s
+                        """, (currency_symbol,))
+                        response = cur.fetchone()
+                        c_id = response[0]  # get c_id if currency_symbol already exists
                 except Exception as e:
                     raise DataError(f"currency: {e}")
-
+                
                 # Insert into experience table
                 # experience_level is optional
                 experience_level = row.get('experience_level', None)
@@ -88,13 +109,25 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                             INSERT INTO experience (level)
                             VALUES (%s)
                             ON CONFLICT DO NOTHING
+                            RETURNING e_id
                         """, (experience_level,))
+                        # get pk e_id
+                        response = cur.fetchone()
+                        if response:
+                            e_id = response[0]  # get e_id if  was inserted
+                        else:
+                            cur.execute("""
+                                SELECT e_id FROM experience WHERE level = %s
+                            """, (experience_level,))
+                            response = cur.fetchone()
+                            e_id = response[0]  # get e_id if  already exists
                     except psy.errors.UniqueViolation:
                         logging.warning(
                             f"{__file__}: insert_dim_tables: '{experience_level}' already exists in experience table.")
                     except Exception as e:
                         raise DataError(f"experience_level: {e}")
                 else:
+                    e_id = "NULL"
                     logging.warning(
                         f"{__file__}: insert_dim_tables: optional key 'experience_level' present but value does not fit:{experience_level}")
 
@@ -140,7 +173,18 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                         INSERT INTO location (country, region, city, city_district, area_code, state)
                         VALUES (%s, %s, %s, %s, %s, %s)
                         ON CONFLICT (country, region, city, city_district, area_code, state) DO NOTHING
+                        RETURNING l_id
                     """, (country, region, city, city_district, area_code, state))
+                    # get pk l_id
+                    response = cur.fetchone()
+                    if response:
+                        l_id = response[0]  # get l_id if  was inserted
+                    else:
+                        cur.execute("""
+                            SELECT l_id FROM location WHERE country = %s AND region = %s AND city = %s AND city_district = %s AND area_code = %s AND  state = %s
+                        """, (country, region, city, city_district, area_code, state))
+                        response = cur.fetchone()
+                        l_id = response[0]  # get e_id if  already exists
                 except Exception as e:
                     raise DataError(f"location: {e}")
 
@@ -152,7 +196,18 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                         cur.execute("""
                             INSERT INTO data_source (name) VALUES (%s)
                             ON CONFLICT (name) DO NOTHING
+                            RETURNING ds_id
                         """, (source_name, ))
+                        # get pk ds_id
+                        response = cur.fetchone()
+                        if response:
+                            ds_id = response[0]  # get ds_id if  was inserted
+                        else:
+                            cur.execute("""
+                                SELECT ds_id FROM data_source WHERE name = %s
+                            """, (source_name,))
+                            response = cur.fetchone()
+                            ds_id = response[0]  # get ds_id if  already exists
                     except Exception as e:
                         raise DataError(f"data_source name,url: {e}")
                 else:
@@ -176,7 +231,7 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                             except Exception as e:
                                 logging.warning(
                                     f"Error inserting skill '{skill}': {e}")
-
+                #TODO get sl_id´s
                 # Insert data into job_category table
                 # categories is optional
                 cat_list = row.get('categories', [])
@@ -194,7 +249,14 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                             except Exception as e:
                                 logging.warning(
                                     f"Error inserting category '{cat}': {e}")
+                #TODO get jc_id´s
+                
+                print(jt_id,c_id,e_id,l_id,ds_id)
 
+                #insert into fact table, need to return id
+                jo_id = _insert_fact_table(cur, row, jt_id,c_id,e_id,l_id,ds_id)        
+                print(jo_id)
+                #insert into link tables need ids as input
             except psy.DataError as data_error:
                 logging.error(f"Insert Dim: Data error occurred: {data_error}")
             except psy.IntegrityError as integrity_error:
@@ -212,7 +274,34 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
     finally:
         if conn is not None:
             conn.close()
-
+    
+def _insert_fact_table(cur, row, jt_id,c_id,e_id,l_id,ds_id):
+        
+        source_id = row['source_id']
+        joboffer_url = row['joboffer_url']
+        published = row['published']
+        salary_min = row['salary_min']
+        salary_max = row['salary_max']
+        
+        try:
+            cur.execute("""
+                INSERT INTO job_offer (source_id, published, salary_min, salary_max, joboffer_url, job_title_id, currency_id, location_id, data_source_id, experience_id) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                ON CONFLICT (source_id) DO NOTHING
+                RETURNING jo_id
+            """, (source_id, published, salary_min, salary_max, joboffer_url, jt_id, c_id, l_id, ds_id, e_id))
+            # get pk jo_id
+            response = cur.fetchone()
+            if response:
+                jo_id = response[0]  # get jo_id if  was inserted
+            else:
+                jo_id = None # did not insert fact !?
+        except Exception as e:
+            raise DataError(f"fact table :cant exceute query: {e}")
+        
+        if not jo_id:
+            raise DataError(f"fact table :cant get jo_id")
+        return jo_id
 
 def check_type(to_check, type):
     return isinstance(to_check, type)
@@ -238,42 +327,42 @@ def insert_fact_table(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
 
                 # insert data into job_offer table
                 source_id = row['source_id']
+                joboffer_url = row['joboffer_url']
                 published = row['published']
                 salary_min = row['salary_min']
                 salary_max = row['salary_max']
                 job_title = row['job_title_name']
-                experience = row.get('experience_level', None)
+                experience = row.get('experience_level', "NULL")
                 currency_symbol = row['currency_symbol']
                 country = row['location_country']
-                region = row.get('location_region', None)
-                city = row.get('location_city', None)
-                city_district = row.get('location_city_district', None)
-                area_code = row.get('location_area_code', None)
+                region = row.get('location_region', "NULL")
+                city = row.get('location_city', "NULL")
+                city_district = row.get('location_city_district', "NULL")
+                area_code = row.get('location_area_code', "NULL")
                 state = row.get('location_state', "NULL")
                 data_source = row['data_source_name']
-                data_url = row['data_source_url']
                 
-                # check for empty strings and right types
-                if all([source_id, job_title, currency_symbol, country, data_source, data_url]) and \
-                        all([check_type(source_id, str), check_type(job_title, str), check_type(currency_symbol, str),
-                            check_type(country, str), check_type(data_source, str), check_type(data_url, str)]) and\
-                        all([check_type(salary_min, int), check_type(salary_max, int), check_type(published, date)]):
-                    try:
-                        cur.execute("""
-                            INSERT INTO job_offer (source_id, published, salary_min, salary_max, job_title_id, currency_id, experience_id, location_id, data_source_id) 
-                            VALUES (%s, %s, %s, %s, (SELECT jt_id FROM job_title WHERE name = %s), 
-                                            (SELECT c_id FROM currency WHERE symbol = %s),
-                                            (SELECT e_id FROM experience WHERE level = %s), 
-                                            (SELECT l_id FROM location WHERE country = %s AND region = %s AND city = %s AND city_district = %s AND area_code = %s AND  state = %s ), 
-                                            (SELECT ds_id FROM data_source WHERE name = %s AND url = %s))
-                            ON CONFLICT (source_id, published, job_title_id, currency_id, location_id, data_source_id) DO NOTHING
-                        """, (source_id, published, salary_min, salary_max, job_title, currency_symbol, experience, country,
-                              region, city, city_district, area_code, state, data_source, data_url))
-                    except Exception as e:
-                        raise DataError(f"fact table :cant exceute query: {e}")
-                else:
-                    raise DataError(
-                        f"insert fact table: data error, don´t pass the test: {index, row.values}")
+                try:
+                    cur.execute("""
+                        INSERT INTO job_offer (source_id, published, salary_min, salary_max, joboffer_url, job_title_id, currency_id, location_id, data_source_id) 
+                        VALUES (%s, %s, %s, %s, %s, (SELECT jt_id FROM job_title WHERE name = %s), 
+                                        (SELECT c_id FROM currency WHERE symbol = %s),
+                                        (SELECT l_id FROM location WHERE country = %s AND region = %s AND city = %s AND city_district = %s AND area_code = %s AND  state = %s ), 
+                                        (SELECT ds_id FROM data_source WHERE name = %s),
+                                        (SELECT e_id FROM experience WHERE name = %s))
+                        ON CONFLICT (source_id) DO UPDATE SET 
+                        published = EXCLUDED.published, 
+                        salary_min = EXCLUDED.salary_min, 
+                        salary_max = EXCLUDED.salary_max, 
+                        job_title_id = EXCLUDED.job_title_id, 
+                        currency_id = EXCLUDED.currency_id, 
+                        location_id = EXCLUDED.location_id, 
+                        data_source_id = EXCLUDED.data_source_id
+                    """, (source_id, published, salary_min, salary_max, joboffer_url, job_title, currency_symbol, country,
+                            region, city, city_district, area_code, state, data_source, experience))
+                except Exception as e:
+                    raise DataError(f"fact table :cant exceute query: {e}")
+                
 
             except psy.DataError as data_error:
                 logging.error(f"Insert Fact: Data error occurred: {data_error}")
@@ -380,7 +469,7 @@ if __name__ == "__main__":
         "location_city_district": ["Manhattan", "Mitte", "Westminster", "Manhattan", "Mitte", "Westminster", "Manhattan", "Mitte", "Westminster", "Manhattan"],
         "location_area_code": ["NY001", "BE001", "LON001", "NY002", "BE002", "LON002", "NY003", "BE003", "LON003", "NY004"],
         "data_source_name": ["Company A", "Company B", "Company C", "Company A", "Company A", "Company A", "Company x", "Company x", "Company x", "Company x"],
-        "joboffer_url": ["http://companya.com", "http://companyb.com", "http://companyc.com", "http://companya.com", "http://companya.com", "http://companya.com", "http://companyx.com", "http://companyx.com", "http://companyx.com", "http://companyx.com"],
+        "joboffer_url": ["http://companya.com1", "http://companyb.com2", "http://companyc.com3", "http://companya.com4", "http://companya.com5", "http://companya.com6", "http://companyx.com7", "http://companyx.com8", "http://companyx.com9", "http://companyx.com0"],
         "skills": [["some skill"], ["R", "Python", "Machine Learning"], ["Project Management", "Leadership", "Communication"], ["Marketing", "SEO", "Social Media"], ["Finance", "Excel", "Financial Analysis"], ["HR Management", "Recruitment", "Employee Relations"], ["Sales", "Negotiation", "Customer Relationship Management"], ["Product Management", "Agile", "Product Development"], ["UI/UX Design", "Adobe Creative Suite", "Wireframing"], ["Customer Support", "Troubleshooting", "Ticketing System"]],
         "categories": [["a category"], ["Data Science", "Analytics", "Machine Learning"], ["Project Management", "Business", "Management"], ["Marketing", "Digital Marketing", "Advertising"], ["Finance", "Accounting", "Financial Services"], ["HR", "Management", "Human Resources"], ["Sales", "Business Development", "Marketing"], ["Product Management", "Product Development", "Agile"], ["Design", "UI/UX", "Creative"], ["Customer Support", "Customer Service", "Technical Support"]]
     }
@@ -441,7 +530,7 @@ if __name__ == "__main__":
     df_woc = pd.DataFrame(data_without_optional_cols)
     df_we = pd.DataFrame(data_with_errors)
        
-    for frame in [df, df_wh, df_woc, df_we]:
+    for frame in [df]:#, df_wh, df_woc, df_we]:
         errors = insert_dataframe(frame)
         if not errors:
             print("data passed checks, check log for potential errors during inserts")

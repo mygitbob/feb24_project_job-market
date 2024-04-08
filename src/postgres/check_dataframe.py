@@ -198,3 +198,30 @@ def check_dataframe(df):
     if res:     # error found
         return res
     return res  # empty list -> no errors
+
+data_with_errors = {
+        #"source_id": [1, "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+        "job_title_name": ["Software Engineer", "", "Project Manager", "Marketing Specialist", "Financial Analyst", "HR Manager", "Sales Representative", "Product Manager", "UX/UI Designer", "Customer Support Specialist"],
+        "experience_level": ["Senior", "Junior", "Mid", "Senior", "Mid", "Junior", "Senior", "Mid", "Junior", "Mid"],
+        "published": pd.to_datetime(["2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01"]),
+        "salary_min": [60000, 1500, 0, 55000, 65000, 60000, 55000, 70000, 55000, 60000],
+        "salary_max": [120000, 100000, 140000, 0, 130000, 120000, 110000, 140000, 110000, 120000],
+        "currency_symbol": ["USD", "EUR", "GBP", "USD", "", "GBP", "USD", "EUR", "GBP", "USD"],
+        "currency_name": ["US Dollar", "Euro", "British Pound", "US Dollar", "Euro", "British Pound", "US Dollar", "Euro", "British Pound", "US Dollar"],
+        "location_country": ["USA", "Germany", "UK", None, "Germany", "", "USA", "Germany", "UK", "USA"],
+        "location_region": ["West", "North", "South", "West", "North", "South", 666, "North", "South", "West"],
+        "location_city": ["New York", "Berlin", "London", "New York", "Berlin", "London", "New York", "Berlin", "London", "New York"],
+        "location_city_district": ["Manhattan", None, "Westminster", "Manhattan", "Mitte", "Westminster", "Manhattan", "Mitte", "Westminster", "Manhattan"],
+        "location_area_code": ["NY001", "BE001", "LON001", "NY002", "BE002", "LON002", "NY003", "BE003", "LON003", "NY004"],
+        "data_source_name": ["Company A", "Company B", "Company C", "Company A", "Company A", "Company A", "Company x", "", "Company x", "Company x"],
+        "joboffer_url": ["http://companya.com", "http://companyb.com", "http://companyc.com", "http://companya.com", "http://companya.com", "http://companya.com", "http://companyx.com", "http://companyx.com", "", "http://companyx.com"],
+        "skills": [["some skill"], ["R", "Python", "Machine Learning"], ["Project Management", "Leadership", "Communication"], ["Marketing", "SEO", "Social Media"], ["Finance", "Excel", "Financial Analysis"], ["HR Management", "Recruitment", "Employee Relations"], ["Sales", "Negotiation", "Customer Relationship Management"], ["Product Management", "Agile", "Product Development"], ["UI/UX Design", "Adobe Creative Suite", "Wireframing"], ["Customer Support", "Troubleshooting", "Ticketing System"]],
+        "categories": [["a category"], ["Data Science", "Analytics", "Machine Learning"], ["Project Management", "Business", "Management"], ["Marketing", "Digital Marketing", "Advertising"], ["Finance", "Accounting", "Financial Services"], ["HR", "Management", "Human Resources"], ["Sales", "Business Development", "Marketing"], ["Product Management", "Product Development", "Agile"], ["Design", "UI/UX", "Creative"], ["Customer Support", "Customer Service", "Technical Support"]]
+    }
+
+if __name__ == "__main__":
+        import pandas as pd
+        df = pd.DataFrame(data_with_errors)
+        print(check_keys(df))
+        print(check_column_types(df))
+        print(check_values(df[2:4]))
