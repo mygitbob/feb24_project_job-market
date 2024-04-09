@@ -139,7 +139,7 @@ def _create_location_table(cur):
             city_district VARCHAR(50),
             area_code VARCHAR(50),
             state VARCHAR(50),
-            CONSTRAINT unique_location_tuple UNIQUE (country, region, city, city_district, area_code, state)
+            CONSTRAINT unique_location_tuple UNIQUE (country, region, city, city_district, area_code, state)  -- change contraint to : ... UNIQUE NULLS NOT DISTINCT ...
         );
     """)
 
@@ -260,7 +260,7 @@ def create_link_table(dbname, user, password, host, port):
 
         # link job offers to skills
         cur.execute("""
-            CREATE TABLE IF NOT EXISTS job_2_skills (
+            CREATE TABLE IF NOT EXISTS job_to_skills (
                 job_id INT REFERENCES job_offer(jo_id),
                 skill_id INT REFERENCES skill_list(sl_id),
                 PRIMARY KEY (job_id, skill_id)
@@ -269,7 +269,7 @@ def create_link_table(dbname, user, password, host, port):
 
         # link job offers to job categories
         cur.execute("""
-            CREATE TABLE IF NOT EXISTS job_2_categories (
+            CREATE TABLE IF NOT EXISTS job_to_categories (
                 job_id INT REFERENCES job_offer(jo_id),
                 cat_id INT REFERENCES job_category(jc_id),
                 PRIMARY KEY (job_id, cat_id)
