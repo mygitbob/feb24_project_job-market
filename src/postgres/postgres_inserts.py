@@ -287,9 +287,9 @@ def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTG
                                 logging.warning(
                                     f"Error inserting job_category '{cat}': {e}")
                 
-                print(jt_id,c_id,e_id,l_id,ds_id)
-                print("skill list:", sl_id_list)
-                print("jobcat list:", jc_id_list)
+                #print(jt_id,c_id,e_id,l_id,ds_id)
+                #print("skill list:", sl_id_list)
+                #print("jobcat list:", jc_id_list)
                 #insert into fact table, need to return id
                 jo_id = _insert_fact_table(cur, row, jt_id,c_id,e_id,l_id,ds_id)        
                 
@@ -343,7 +343,7 @@ def _insert_fact_table(cur, row, jt_id,c_id,e_id,l_id,ds_id):
             raise MyDataError(f"fact table insert: cant exceute query: {e}")
         
         if not jo_id:
-            raise MyDataError(f"fact table insert: cant get jo_id")
+            raise MyDataError(f"fact table insert: cant get jo_id -> conflict -> already in db")
         return jo_id
 
 
@@ -473,14 +473,14 @@ if __name__ == "__main__":
         "skills": [["some skill"], ["R", "Python", "Machine Learning"], ["Project Management", "Leadership", "Communication"], ["Marketing", "SEO", "Social Media"], ["Finance", "Excel", "Financial Analysis"], ["HR Management", "Recruitment", "Employee Relations"], ["Sales", "Negotiation", "Customer Relationship Management"], ["Product Management", "Agile", "Product Development"], ["UI/UX Design", "Adobe Creative Suite", "Wireframing"], ["Customer Support", "Troubleshooting", "Ticketing System"]],
         "categories": [["a category"], ["Data Science", "Analytics", "Machine Learning"], ["Project Management", "Business", "Management"], ["Marketing", "Digital Marketing", "Advertising"], ["Finance", "Accounting", "Financial Services"], ["HR", "Management", "Human Resources"], ["Sales", "Business Development", "Marketing"], ["Product Management", "Product Development", "Agile"], ["Design", "UI/UX", "Creative"], ["Customer Support", "Customer Service", "Technical Support"]]
     }
-    setup_logging()
+    #setup_logging()
 
     df = pd.DataFrame(data)
     df_wh = pd.DataFrame(data_with_holes)
     df_woc = pd.DataFrame(data_without_optional_cols)
     df_we = pd.DataFrame(data_with_errors)
        
-    for frame in [df_wh]:#[df, df_wh, df_woc, df_we]:
+    for frame in [df, df_wh, df_woc, df_we]:
         errors = insert_dataframe(frame, check_df=True)
         if not errors:
             print("data passed checks, check log for potential errors during inserts")
