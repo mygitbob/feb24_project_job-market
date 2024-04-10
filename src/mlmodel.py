@@ -3,11 +3,8 @@ import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
-from sklearn.metrics import f1_score
 from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestClassifier
 
 # read csv
