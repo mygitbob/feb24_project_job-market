@@ -11,46 +11,53 @@ from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestClassifier
 
 # read csv
-df = pd.read_csv('reed_dataset_for_yue.csv')
-df.head()
+#df = pd.read_csv('reed_dataset_for_yue.csv')
+#df.head()
+
+## connect data from postgresDB to 'df' ##
 
 #keep only the columns needed for model
-df = df[['jobCategory', 'minimumsalary_yearly', 'maximumsalary_yearly', 'jobLevel', 'jobSkills', 'jobSite']]
+df = df[['categories', 'salary_min', 'salary_max', 'experience_level', 'skills']]
 df = df.drop_duplicates()
 
-## change headers ##
-# df.columns = []
+# split for min salary - model 1
+y1 = df['salary_min']
+X1 = df.drop(['salary_min','salary_max'], axis=1)
+X1_train, X1_test, y1_train, y1_test = train_test_split(X1, y1, test_size=0.2, random_state=48)
 
+# split for max salary - model 2
+y2 = df['salary_max']
+X2 = df.drop(['salary_min','salary_max'], axis=1)
+X2_train, X2_test, y2_train, y2_test = train_test_split(X2, y2, test_size=0.2, random_state=42)
 
-# split, model_1 for min salary 
-y = df['minimumsalary_yearly']
-X = df.drop(['minimumsalary_yearly','maximumsalary_yearly'], axis=1)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=48)
-
-# split for max salary
-y_max = df['maximumsalary_yearly']
-X_max = df.drop(['minimumsalary_yearly','maximumsalary_yearly'], axis=1)
 
 # Encoding
 le = LabelEncoder()
 
-X_train['jobCategory'] = le.fit_transform(X_train['jobCategory'])
-X_test['jobCategory'] = le.transform(X_test['jobCategory'])
+X1_train['categories'] = le.fit_transform(X1_train['categories'])
+X1_test['categories'] = le.transform(X1_test['categories'])
 
-X_train['jobLevel'] = le.fit_transform(X_train['jobLevel'])
-X_test['jobLevel'] = le.transform(X_test['jobLevel'])
+X1_train['experience_level'] = le.fit_transform(X1_train['experience_level'])
+X1_test['experience_level'] = le.transform(X1_test['experience_level'])
 
-X_train['jobSkills'] = le.fit_transform(X_train['jobSkills'])
-X_test['jobSkills'] = le.transform(X_test['jobSkills'])
+X1_train['skills'] = le.fit_transform(X1_train['skills'])
+X1_test['skills'] = le.transform(X1_test['skills'])
 
-X_train['jobSite'] = le.fit_transform(X_train['jobSite'])
-X_test['jobSite'] = le.transform(X_test['jobSite'])
+X2_train['categories'] = le.fit_transform(X2_train['categories'])
+X2_test['categories'] = le.transform(X2_test['categories'])
 
-# model
+X2_train['experience_level'] = le.fit_transform(X2_train['experience_level'])
+X2_test['experience_level'] = le.transform(X2_test['experience_level'])
+
+X2_train['skills'] = le.fit_transform(X2_train['skills'])
+X2_test['skills'] = le.transform(X2_test['skills'])
+
+
+# model training and get predicted value
 cl1 = RandomForestClassifier()
-cl1.fit(X_train, y_train)
-premin = cl1.predict(X_test)
+cl1.fit(X1_train, y1_train)
+pred_y1 = cl1.predict(X1_test)
 
 cl2 = RandomForestClassifier()
-cl2.fit(X_train, y_train)
-premax = cl2.predict(X_test)
+cl2.fit(X2_train, y2_train)
+pred_y2 = cl2.predict(X2_test)
