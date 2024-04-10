@@ -8,6 +8,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import f1_score
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestClassifier
 
 # read csv
 df = pd.read_csv('reed_dataset_for_yue.csv')
@@ -23,8 +24,12 @@ df = df.drop_duplicates()
 
 # split, model_1 for min salary 
 y = df['minimumsalary_yearly']
-X = df.drop('minimumsalary_yearly', axis=1)
+X = df.drop(['minimumsalary_yearly','maximumsalary_yearly'], axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=48)
+
+# split for max salary
+y_max = df['maximumsalary_yearly']
+X_max = df.drop(['minimumsalary_yearly','maximumsalary_yearly'], axis=1)
 
 # Encoding
 le = LabelEncoder()
@@ -40,3 +45,12 @@ X_test['jobSkills'] = le.transform(X_test['jobSkills'])
 
 X_train['jobSite'] = le.fit_transform(X_train['jobSite'])
 X_test['jobSite'] = le.transform(X_test['jobSite'])
+
+# model
+cl1 = RandomForestClassifier()
+cl1.fit(X_train, y_train)
+premin = cl1.predict(X_test)
+
+cl2 = RandomForestClassifier()
+cl2.fit(X_train, y_train)
+premax = cl2.predict(X_test)
