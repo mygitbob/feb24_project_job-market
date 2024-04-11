@@ -22,309 +22,459 @@ class MyDataError(Exception):
     pass
 
 
-def insert_dim_tables(df, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTGRES_USER,
-                      password=Constants.POSTGRES_PASSWORD, host=Constants.POSTGRES_HOST,
-                      port=Constants.POSTGRES_PORT):
+class MyDataWarning(Exception):
+    """Exception used to create a warning in log file, no real error"""
+    pass
+
+# TODO: enable custom databse configuration, better put this in a seperate modul and use it for all other modules
+def init_databse():
+    pass
+    
+    
+def insert_all_data(cur, df):
+    """
+    Function controls the table inserts and logs errors
+    Args:
+        cur :           = cursor database obejct
+        df : DataFrame  = DataFrame to be stored in db
+    Returns:
+        (count_suc, count_err, count_dup) : tupel(int, int, int) = numer of rows that were inserted  successful, not successful, 
+        not inserted because it´s already in the database (last number only for the fact table)
+    """
+    # number of successful inserted rows
+    count_suc = 0
+    # number of errors trying to insert rows
+    count_err = 0
+    # number of duplicate rows (therefor not inserted), this is only for the fact table
+    count_dup = 0
+    
+    for _, row in df.iterrows():
+        try:
+            # first insert into dimension tables and get pk (or list of pk´s) of current insert
+            jt_id = _insert_job_title(cur, row)        
+            e_id = _insert_experience(cur, row)        
+            c_id = _insert_currency(cur, row)
+            l_id = _insert_location(cur, row)
+            ds_id = _insert_data_source(cur, row)
+            sl_id_list = _insert_into_skill_list(cur, row)
+            jc_id_list = _insert_into_job_category(cur, row)
+                    
+            # afterwards insert into fact table
+            jo_id = _insert_job_offer(cur, row, jt_id,c_id,e_id,l_id,ds_id)
+            
+            # finally insert into link tables, but only if we inserted stuff (both are optional)
+            if len(sl_id_list) > 0:
+                _insert_job_to_skills(cur, jo_id, sl_id_list)    
+            if len(jc_id_list) > 0:
+                _insert_job_to_categories(cur, jo_id, jc_id_list)    
+            
+            count_suc += 1
+        except MyDataWarning as mdw:    # no error, only for logging
+            logging.warning(f"{__file__}: {mdw}")
+            count_dup += 1
+        except MyDataError as mde:
+            logging.error(f"{__file__}: MyDataError: {mde}")                
+            count_err += 1
+        except psy.DataError as de:
+            logging.error(f"{__file__}: psy.DataError: {de}")
+            count_err += 1
+        except psy.IntegrityError as ie:
+            logging.error(f"{__file__}: psy.IntegrityError: {ie}")
+            count_err += 1
+        except Exception as e:
+            logging.error(f"{__file__}: UnkownError: {e}")
+            count_err += 1
+            
+    return count_suc, count_err, count_dup
+
+
+def _insert_job_title(cur, row):
+    """
+    Insert into table job_title
+    
+    Args:
+        cur = database cursor
+        row = data row to store
+    Returns:
+        jt_id : int = primary key of inserted row
+    """
+    
+    try:
+        job_title = row['job_title_name']
+        if job_title and isinstance(job_title, str):
+            try:
+                cur.execute("""
+                    INSERT INTO job_title (name) VALUES (%s)
+                    ON CONFLICT (name) DO NOTHING
+                    RETURNING jt_id
+                """, (job_title,))
+                # get pk jt_id
+                response = cur.fetchone()
+                if response:
+                    jt_id = response[0]  # get jt_id if the job title was inserted
+                else:
+                    cur.execute("""
+                        SELECT jt_id FROM job_title WHERE name = %s
+                    """, (job_title,))
+                    response = cur.fetchone()
+                    jt_id = response[0]  # get jt_id if the job title already exists
+                if not jt_id:
+                    raise MyDataError("could not get jt_id")
+            except Exception as e:
+                raise MyDataError(f"Unkown database error: {e}")
+        else:
+            raise MyDataError(
+                f"'job_title' wrong type: '{type(job_title)}' or empty: '{job_title}'")        
+            
+    except MyDataError as mde:
+        raise MyDataError(f"_insert_job_title: {mde}")
+    except Exception as e:
+        raise MyDataError(f"_insert_job_title: row['job_title_name'] missing ?: {e}")
+    
+    return jt_id
+
+        
+def _insert_currency(cur, row):
+    """
+    Insert into table currency
+    
+    Args:
+        cur = database cursor
+        row = data row to store
+    Returns:
+        c_id : int = primary key of inserted row
+    """
+    
+    try:
+        # Insert data into currency table
+        # currency_smybol is mandatory
+        currency_symbol = row['currency_symbol']
+        
+        # currency_name is optional
+        currency_name = row.get('currency_name', "NULL")
+        if not isinstance(currency_name, str):
+            logging.warning(
+                f"{__file__}: insert_dim_tables: optional key 'currency_name' present but value does not fit:{currency_name}")
+            currency_name = None
+        
+        if not (0 < len(currency_symbol) < 4 and isinstance(currency_symbol, str)):
+            raise MyDataError(
+                f"currency_symbol: wrong type: {type(currency_symbol)} or value: {currency_symbol}")
+        try:
+            cur.execute("""
+                INSERT INTO currency (symbol, name)
+                VALUES (%s, %s)
+                ON CONFLICT (symbol) DO NOTHING
+                RETURNING c_id
+            """, (currency_symbol, currency_name))
+            # get pk c_id
+            response = cur.fetchone()
+            if response:
+                c_id = response[0]  # get c_id if currency_symbol was inserted
+            else:
+                cur.execute("""
+                    SELECT c_id FROM currency WHERE symbol = %s
+                """, (currency_symbol,))
+                response = cur.fetchone()
+                c_id = response[0]  # get c_id if currency_symbol already exists
+            if not c_id:
+                    raise MyDataError("could not get c_id")
+        except Exception as e:
+            raise MyDataError(f"Unkown database error: {e}")
+            
+    except MyDataError as mde:
+        raise MyDataError(f"_insert_currency: {mde}")
+    except Exception as e:
+        raise MyDataError(f"_insert_currency: row['currency_symbol'] missing ?: {e}")
+
+    return c_id
+
+
+def _insert_experience(cur, row):
+    """
+    Insert into table experience, this is optional
+    
+    Args:
+        cur = database cursor
+        row = data row to store
+    Returns:
+        e_id : int = primary key of inserted row
+    """
+    # Insert into experience table
+    # experience_level is optional
+    experience_level = row.get('experience_level', None)
+
+    if experience_level and isinstance(experience_level, str):
+        try:
+            cur.execute("""
+                INSERT INTO experience (level)
+                VALUES (%s)
+                ON CONFLICT DO NOTHING
+                RETURNING e_id
+            """, (experience_level,))
+            # get pk e_id
+            response = cur.fetchone()
+            if response:
+                e_id = response[0]  # get e_id if  was inserted
+            else:
+                cur.execute("""
+                    SELECT e_id FROM experience WHERE level = %s
+                """, (experience_level,))
+                response = cur.fetchone()
+                e_id = response[0]  # get e_id if  already exists
+            if not e_id:
+                raise MyDataError("could not get e_id")
+        except Exception as e:
+            raise MyDataError(f"Unkown database error: {e}")
+    else:
+        e_id = None
+        logging.warning(
+            f"{__file__}: _insert_experience: optional key 'experience_level' present but value does not fit:{experience_level}")
+    
+    return e_id
+    
+    
+def _insert_location(cur, row):
+    """
+    Insert into table location, only country is mandatory (see DataModel)
+    
+    Args:
+        cur = database cursor
+        row = data row to store
+    Returns:
+        l_id : int = primary key of inserted row
+    """
+
+    # Insert data into location table
+    # country is mandatory
+    try:
+        country = row['location_country']
+    except Exception as e:
+        raise MyDataError(f"_insert_currency: row['location_country'] missing ?: {e}")
+    
+    if not (country and (country and isinstance(country, str))):
+        raise MyDataError(
+            f"location_country: wrong type: {type(country)} or value: {country}")
+
+    region = row.get('location_region', "_UNKOWN_")
+    if not isinstance(region, str):
+        logging.warning(
+            f"{__file__}: _insert_location: optional key 'location_region' present but value does not fit:{region}")
+        region = "_UNKOWN_"
+
+    city = row.get('location_city', "_UNKOWN_")
+    if not isinstance(city, str):
+        logging.warning(
+            f"{__file__}: _insert_location: optional key 'location_city' present but value does not fit:{city}")
+        city = "_UNKOWN_"
+
+    city_district = row.get('location_city_district', "_UNKOWN_")
+    if not isinstance(city_district, str):
+        logging.warning(
+            f"{__file__}: _insert_location: optional key 'location_city_district' present but value does not fit:{city_district}")
+        city_district = "_UNKOWN_"
+
+    area_code = row.get('location_area_code', "_UNKOWN_")
+    if not isinstance(area_code, str):
+        logging.warning(
+            f"{__file__}: _insert_location: optional key 'location_area_code' present but value does not fit:{area_code}")
+        area_code = "_UNKOWN_"
+
+    state = row.get('location_state', "_UNKOWN_")
+    if state is not None and not isinstance(state, str):
+        logging.warning(
+            f"{__file__}: _insert_location: optional key 'location_state' present but value does not fit:{state}")
+        state = "_UNKOWN_"
 
     try:
-        conn = psy.connect(
-            dbname=dbname,
-            user=user,
-            password=password,
-            host=host,
-            port=port
-        )
-        conn.set_isolation_level(psy.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
-        cur = conn.cursor()
-
-        for _, row in df.iterrows():
-            try:
-
-                # insert data into job_title table
-                job_title = row['job_title_name']
-                if job_title and isinstance(job_title, str):
-                    try:
-                        cur.execute("""
-                            INSERT INTO job_title (name) VALUES (%s)
-                            ON CONFLICT (name) DO NOTHING
-                            RETURNING jt_id
-                        """, (job_title,))
-                        # get pk jt_id
-                        response = cur.fetchone()
-                        if response:
-                            jt_id = response[0]  # get jt_id if the job title was inserted
-                        else:
-                            cur.execute("""
-                                SELECT jt_id FROM job_title WHERE name = %s
-                            """, (job_title,))
-                            response = cur.fetchone()
-                            jt_id = response[0]  # get jt_id if the job title already exists
-                        if not jt_id:
-                            raise MyDataError(f"could not get jt_id")
-                    except Exception as e:
-                        raise MyDataError(f"job_title_name: {e}")
-                else:
-                    raise MyDataError(
-                        f"job_title_name: wrong type or empty: {type(job_title)}")
-                
-                # Insert data into currency table
-                # currency_smybol is mandatory
-                currency_symbol = row['currency_symbol']
-                
-                # currency_name is optional
-                currency_name = row.get('currency_name', "NULL")
-                if not isinstance(currency_name, str):
-                    logging.warning(
-                        f"{__file__}: insert_dim_tables: optional key 'currency_name' present but value does not fit:{currency_name}")
-                    currency_name = "NULL"
-                
-                if not (0 < len(currency_symbol) < 4 and isinstance(currency_symbol, str)):
-                    raise MyDataError(
-                        f"currency_symbol: wrong type: {type(currency_symbol)} or value: {currency_symbol}")
-                try:
-                    cur.execute("""
-                        INSERT INTO currency (symbol, name)
-                        VALUES (%s, %s)
-                        ON CONFLICT (symbol) DO NOTHING
-                        RETURNING c_id
-                    """, (currency_symbol, currency_name))
-                    # get pk c_id
-                    response = cur.fetchone()
-                    if response:
-                        c_id = response[0]  # get c_id if currency_symbol was inserted
-                    else:
-                        cur.execute("""
-                            SELECT c_id FROM currency WHERE symbol = %s
-                        """, (currency_symbol,))
-                        response = cur.fetchone()
-                        c_id = response[0]  # get c_id if currency_symbol already exists
-                    if not c_id:
-                            raise MyDataError(f"could not get c_id")
-                except Exception as e:
-                    raise MyDataError(f"currency: {e}")
-                
-                # Insert into experience table
-                # experience_level is optional
-                experience_level = row.get('experience_level', None)
-
-                if experience_level and isinstance(experience_level, str):
-                    try:
-                        cur.execute("""
-                            INSERT INTO experience (level)
-                            VALUES (%s)
-                            ON CONFLICT DO NOTHING
-                            RETURNING e_id
-                        """, (experience_level,))
-                        # get pk e_id
-                        response = cur.fetchone()
-                        if response:
-                            e_id = response[0]  # get e_id if  was inserted
-                        else:
-                            cur.execute("""
-                                SELECT e_id FROM experience WHERE level = %s
-                            """, (experience_level,))
-                            response = cur.fetchone()
-                            e_id = response[0]  # get e_id if  already exists
-                        if not e_id:
-                            raise MyDataError(f"could not get e_id")
-                    except Exception as e:
-                        raise MyDataError(f"experience_level: {e}")
-                else:
-                    e_id = None
-                    logging.warning(
-                        f"{__file__}: insert_dim_tables: optional key 'experience_level' present but value does not fit:{experience_level}")
-
-                # Insert data into location table
-                # country is mandatory
-                country = row['location_country']
-                if not (country and (country and isinstance(country, str))):
-                    raise MyDataError(
-                        f"location_country: wrong type: {type(country)} or value: {country}")
-
-                region = row.get('location_region', "NULL")
-                if not isinstance(region, str):
-                    logging.warning(
-                        f"{__file__}: insert_dim_tables: optional key 'location_region' present but value does not fit:{region}")
-                    region = "NULL"
-
-                city = row.get('location_city', "NULL")
-                if not isinstance(city, str):
-                    logging.warning(
-                        f"{__file__}: insert_dim_tables: optional key 'location_city' present but value does not fit:{city}")
-                    city = "NULL"
-
-                city_district = row.get('location_city_district', "NULL")
-                if not isinstance(city_district, str):
-                    logging.warning(
-                        f"{__file__}: insert_dim_tables: optional key 'location_city_district' present but value does not fit:{city_district}")
-                    city_district = "NULL"
-
-                area_code = row.get('location_area_code', "NULL")
-                if not isinstance(area_code, str):
-                    logging.warning(
-                        f"{__file__}: insert_dim_tables: optional key 'location_area_code' present but value does not fit:{area_code}")
-                    area_code = "NULL"
-
-                state = row.get('location_state', "NULL")
-                if state is not None and not isinstance(state, str):
-                    logging.warning(
-                        f"{__file__}: insert_dim_tables: optional key 'location_state' present but value does not fit:{state}")
-                    state = "NULL"
-
-                try:
-                    cur.execute("""
-                        INSERT INTO location (country, region, city, city_district, area_code, state)
-                        VALUES (%s, %s, %s, %s, %s, %s)
-                        ON CONFLICT (country, region, city, city_district, area_code, state) DO NOTHING
-                        RETURNING l_id
-                    """, (country, region, city, city_district, area_code, state))
-                    # get pk l_id
-                    response = cur.fetchone()
-                    if response:
-                        l_id = response[0]  # get l_id if  was inserted
-                    else:
-                        cur.execute("""
-                            SELECT l_id FROM location WHERE country = %s AND region = %s AND city = %s AND city_district = %s AND area_code = %s AND  state = %s
-                        """, (country, region, city, city_district, area_code, state))
-                        response = cur.fetchone()
-                        l_id = response[0]  # get e_id if  already exists
-                    if not l_id:
-                            raise MyDataError(f"could not get l_id")
-                except Exception as e:
-                    raise MyDataError(f"location: {e}")
-
-                # Insert data into data_source table
-                # data_source_name is mandatory
-                source_name = row['data_source_name']
-                if source_name and isinstance(source_name, str):
-                    try:
-                        cur.execute("""
-                            INSERT INTO data_source (name) VALUES (%s)
-                            ON CONFLICT (name) DO NOTHING
-                            RETURNING ds_id
-                        """, (source_name, ))
-                        # get pk ds_id
-                        response = cur.fetchone()
-                        if response:
-                            ds_id = response[0]  # get ds_id if  was inserted
-                        else:
-                            cur.execute("""
-                                SELECT ds_id FROM data_source WHERE name = %s
-                            """, (source_name,))
-                            response = cur.fetchone()
-                            ds_id = response[0]  # get ds_id if  already exists
-                        if not ds_id:
-                            raise MyDataError(f"could not get ds_id")
-                    except Exception as e:
-                        raise MyDataError(f"data_source name: {e}")
-                else:
-                    raise MyDataError(
-                        f"data_source name,url: wrong type: {type(source_name)} or value: {source_name}")
-
-                # Insert data into skill_list table
-                # skill_list is optional
-                sl_id_list = []
-                skill_list = row.get('skills', [])
-                if not isinstance(skill_list, list):
-                    logging.warning(
-                        f"{__file__}: insert_dim_tables: optional key 'skills' but is not a list: {type(skill_list)}")
-                else:
-                    for skill in skill_list:
-                        if isinstance(skill, str) and skill:
-                            try:
-                                cur.execute("""
-                                    INSERT INTO skill_list (name) VALUES (%s)
-                                    ON CONFLICT (name) DO NOTHING
-                                    RETURNING sl_id
-                                """, (skill,))
-                                 # get pk sl_id
-                                response = cur.fetchone()
-                                if response:
-                                    sl_id = response[0]  # get sl_id if  was inserted
-                                else:
-                                    cur.execute("""
-                                        SELECT sl_id FROM skill_list WHERE name = %s
-                                    """, (skill,))
-                                    response = cur.fetchone()
-                                    sl_id = response[0]  # get sl_id if  already exists
-                                if not sl_id:
-                                    raise MyDataError(f"could not get sl_id")
-                                sl_id_list.append(sl_id)
-                            except Exception as e:
-                                logging.warning(
-                                    f"Error inserting skill_list'{skill}': {e}")
-                                
-                # Insert data into job_category table
-                # categories is optional
-                jc_id_list = []
-                cat_list = row.get('categories', [])
-                if not isinstance(cat_list, list):
-                    logging.warning(
-                        f"{__file__}: insert_dim_tables: optional key 'categories' but is not a list: {type(cat_list)}")
-                else:
-                    for cat in cat_list:
-                        if isinstance(cat, str) and cat:
-                            try:
-                                cur.execute("""
-                                    INSERT INTO job_category (name) VALUES (%s)
-                                    ON CONFLICT (name) DO NOTHING
-                                    RETURNING jc_id
-                                """, (cat,))
-                                 # get pk jc_id
-                                response = cur.fetchone()
-                                if response:
-                                    jc_id = response[0]  # get jc_id if  was inserted
-                                else:
-                                    cur.execute("""
-                                        SELECT jc_id FROM job_category WHERE name = %s
-                                    """, (cat,))
-                                    response = cur.fetchone()
-                                    jc_id = response[0]  # get jc_id if  already exists
-                                if not jc_id:
-                                    raise MyDataError(f"could not get jc_id")
-                                jc_id_list.append(jc_id)                                
-                            except Exception as e:
-                                logging.warning(
-                                    f"Error inserting job_category '{cat}': {e}")
-                
-                #print(jt_id,c_id,e_id,l_id,ds_id)
-                #print("skill list:", sl_id_list)
-                #print("jobcat list:", jc_id_list)
-                #insert into fact table, need to return id
-                jo_id = _insert_fact_table(cur, row, jt_id,c_id,e_id,l_id,ds_id)        
-                
-                #insert into link tables need ids as input
-                _insert_job_to_skills(cur, jo_id, sl_id_list)
-                _insert_job_to_categories(cur, jo_id, jc_id_list)
+        
+        cur.execute("""
+            INSERT INTO location (country, region, city, city_district, area_code, state)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            ON CONFLICT (country, region, city, city_district, area_code, state) DO NOTHING
+            RETURNING l_id
+        """, (country, region, city, city_district, area_code, state))
+        # get pk l_id
+        response = cur.fetchone()
+        if response:
+            l_id = response[0]  # get l_id if  was inserted
+        else:
+            cur.execute("""
+                SELECT l_id FROM location WHERE country = %s AND region = %s AND city = %s AND city_district = %s AND area_code = %s AND  state = %s
+            """, (country, region, city, city_district, area_code, state))
+            response = cur.fetchone()
+            l_id = response[0]  # get e_id if  already exists
+        if not l_id:
+                raise MyDataError("could not get l_id")
             
-            except MyDataError as my_data_error:
-                logging.error(f"Insert Dim: My Data error occurred: {my_data_error}")                
-            except psy.DataError as data_error:
-                logging.error(f"Insert Dim: Data error occurred: {data_error}")
-            except psy.IntegrityError as integrity_error:
-                logging.error(f"Insert Dim: Integrity error occurred: {integrity_error}")
-            except psy.DatabaseError as db_error:
-                logging.error(f"Insert Dim: Database error occurred: {db_error}")
-            except Exception as e:
-                logging.error(f"Insert Dim: Unkown error: {e}")
-
-        conn.commit()
-        logging.debug("Dimension tables data inserts finished")
-
+    except MyDataError as mde:
+        raise MyDataError(f"_insert_location: {mde}")        
     except Exception as e:
-        logging.error(f"Database error:\n{e}")
-    finally:
-        if conn is not None:
-            conn.close()
+        raise MyDataError(f"_insert_location: Unkown databse error: {e}")
+    
+    return l_id
+
+
+def _insert_data_source(cur, row):
+    """
+    Insert into table data_source, only data_source_name is mandatory (see DataModel)
+    
+    Args:
+        cur = database cursor
+        row = data row to store
+    Returns:
+        ds_id : int = primary key of inserted row
+    """
+
+    # Insert data into data_source table
+    # data_source_name is mandatory
+    source_name = row['data_source_name']
+    if source_name and isinstance(source_name, str):
+        try:
+            cur.execute("""
+                INSERT INTO data_source (name) VALUES (%s)
+                ON CONFLICT (name) DO NOTHING
+                RETURNING ds_id
+            """, (source_name, ))
+            # get pk ds_id
+            response = cur.fetchone()
+            if response:
+                ds_id = response[0]  # get ds_id if  was inserted
+            else:
+                cur.execute("""
+                    SELECT ds_id FROM data_source WHERE name = %s
+                """, (source_name,))
+                response = cur.fetchone()
+                ds_id = response[0]  # get ds_id if  already exists
+            if not ds_id:
+                raise MyDataError("could not get ds_id")
+        except MyDataError as mde:
+            raise MyDataError(f"_insert_data_source: {mde}")
+        except Exception as e:
+            raise MyDataError(f"_insert_data_source: Unkown database error: {e}")
+    else:
+        raise MyDataError(
+            f"_insert_data_source: name: wrong type: {type(source_name)} or value: {source_name}")
         
+    return ds_id
+
+
+def _insert_into_skill_list(cur, row):    
+    """
+    Insert into table skill_list, this is optional
+    
+    Args:
+        cur = database cursor
+        row = data row to store
+    Returns:
+        sl_id_list : list[int] = list of primary key of inserted skills
+    """
+    # Insert data into skill_list table
+    # skill_list is optional
+    sl_id_list = []
+    skill_list = row.get('skills', [])
+    if not isinstance(skill_list, list):
+        logging.warning(
+            f"{__file__}: insert_dim_tables: optional key 'skills' is not a list: {type(skill_list)}")
+    else:
+        for skill in skill_list:
+            if isinstance(skill, str) and skill:
+                try:
+                    cur.execute("""
+                        INSERT INTO skill_list (name) VALUES (%s)
+                        ON CONFLICT (name) DO NOTHING
+                        RETURNING sl_id
+                    """, (skill,))
+                        # get pk sl_id
+                    response = cur.fetchone()
+                    if response:
+                        sl_id = response[0]  # get sl_id if  was inserted
+                    else:
+                        cur.execute("""
+                            SELECT sl_id FROM skill_list WHERE name = %s
+                        """, (skill,))
+                        response = cur.fetchone()
+                        sl_id = response[0]  # get sl_id if  already exists
+                    if not sl_id:
+                        raise MyDataError("could not get sl_id")
+                    sl_id_list.append(sl_id)
+                except Exception as e:
+                    logging.warning(
+                        f"{__file__}: _insert_into_skill_list: failed to insert skill:'{skill}': {e}")
+                
+    return sl_id_list
+
+
+def _insert_into_job_category(cur, row):    
+    """
+    Insert into table job_category, this is optional
+    
+    Args:
+        cur = database cursor
+        row = data row to store
+    Returns:
+        jc_id_list : list[int] = list of primary key of inserted skills
+    """
+
+    # Insert data into job_category table
+    # categories is optional
+    jc_id_list = []
+    cat_list = row.get('categories', [])
+    if not isinstance(cat_list, list):
+        logging.warning(
+            f"{__file__}: _insert_into_job_category: optional key 'categories' is not a list: {type(cat_list)}")
+    else:
+        for cat in cat_list:
+            if isinstance(cat, str) and cat:
+                try:
+                    cur.execute("""
+                        INSERT INTO job_category (name) VALUES (%s)
+                        ON CONFLICT (name) DO NOTHING
+                        RETURNING jc_id
+                    """, (cat,))
+                        # get pk jc_id
+                    response = cur.fetchone()
+                    if response:
+                        jc_id = response[0]  # get jc_id if  was inserted
+                    else:
+                        cur.execute("""
+                            SELECT jc_id FROM job_category WHERE name = %s
+                        """, (cat,))
+                        response = cur.fetchone()
+                        jc_id = response[0]  # get jc_id if  already exists
+                    if not jc_id:
+                        raise MyDataError("could not get jc_id")
+                    jc_id_list.append(jc_id)                                
+                except Exception as e:
+                    logging.warning(
+                        f"{__file__}: _insert_into_job_category: failed to insert skill:'{cat}': {e}")
+    return jc_id_list
+                    
+                    
+def _insert_job_offer(cur, row, jt_id,c_id,e_id,l_id,ds_id):
+        """
+        Insert into table job_category, this is optional
         
-def _insert_fact_table(cur, row, jt_id,c_id,e_id,l_id,ds_id):
+        Args:
+            cur = database cursor
+            row = data row to store, must contain keys: 'source_id', 'joboffer_url', 'published','salary_min', 'salary_max'
+            jt_id : int = primary key of insert into job_title
+            c_id : int = primary key of insert into currency
+            e_id : int = primary key of insert into experience
+            l_id : int = primary key of insert into location
+            ds_id : int = primary key of insert into data_source
+        Returns:
+            jo_id : int =  primary key of insert
+        """
         
-        source_id = row['source_id']
-        joboffer_url = row['joboffer_url']
-        published = row['published']
-        salary_min = row['salary_min']
-        salary_max = row['salary_max']
+        try:
+            source_id = row['source_id']
+            joboffer_url = row['joboffer_url']
+            published = row['published']
+            salary_min = row['salary_min']
+            salary_max = row['salary_max']
+        except Exception as e:
+            raise MyDataError(f"_insert_job_offer: soem of following keys missing: 'source_id', 'joboffer_url', 'published','salary_min', 'salary_max' : {e}")
         
         try:
             cur.execute("""
@@ -340,10 +490,11 @@ def _insert_fact_table(cur, row, jt_id,c_id,e_id,l_id,ds_id):
             else:
                 jo_id = None # did not insert fact !?
         except Exception as e:
-            raise MyDataError(f"fact table insert: cant exceute query: {e}")
+            raise MyDataError(f"_insert_job_offer: cant exceute query: {e}")
         
         if not jo_id:
-            raise MyDataError(f"fact table insert: cant get jo_id -> conflict -> already in db")
+            raise MyDataWarning(f"_insert_job_offer: cant get jo_id -> already in db !?")
+        
         return jo_id
 
 
@@ -374,7 +525,30 @@ def _insert_job_to_categories(cur, jo_id, jc_id_list):
         raise MyDataError(f"job_to_categories table insert :cant exceute query: {e}")
     
     
-def insert_dataframe(df, check_df=True):
+def connect_to_database(dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTGRES_USER,
+                      password=Constants.POSTGRES_PASSWORD, host=Constants.POSTGRES_HOST,
+                      port=Constants.POSTGRES_PORT):
+    """
+    Connetcts to postgres databse, connection has to be closed after using
+    Function does not handele Exceptions, these has to be handeled by the calling instance
+
+    Args:
+        TODO    
+    Returns:
+        conn : connection   = connection object to postgres        
+    """
+    conn = psy.connect(
+        dbname=dbname,
+        user=user,
+        password=password,
+        host=host,
+        port=port
+    )
+    
+    return conn    
+        
+        
+def store_dataframe(df, check_df=True):
     """
     Inserts a dataframe in the postgres db.
     First checks if all required keys are present and if the value sfullfill the requirements.
@@ -392,15 +566,36 @@ def insert_dataframe(df, check_df=True):
 
     """
     
+    errors = []
+    # check if DataFrame fullfills the requirements
     if check_df:
         errors = check_dataframe(df)
         if errors:
             return errors
+    
+    # trim all values, just in case
     df = trim_strings(df)
-    insert_dim_tables(df)
-    #insert_fact_table(df)
-    #insert_link_tables(df)
-    return []
+    
+    try: 
+        
+        # connect to databse TODO: chenage default values possible
+        conn = connect_to_database()
+        conn.set_isolation_level(psy.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
+        cur = conn.cursor()
+        
+        insert_all_data(cur, df)
+    
+        conn.commit() # complete transaction
+        
+        logging.debug(f"{__file__}: insert_dataframe: insertions complete")
+    except Exception as e:
+        logging.error(f"{__file__}: insert_dataframe: some database error:\n{e}")
+        
+    finally:
+        if conn:
+            conn.close()
+    
+    return errors # shall be empty at this stage ;)
 
 
 if __name__ == "__main__":
@@ -473,7 +668,7 @@ if __name__ == "__main__":
         "skills": [["some skill"], ["R", "Python", "Machine Learning"], ["Project Management", "Leadership", "Communication"], ["Marketing", "SEO", "Social Media"], ["Finance", "Excel", "Financial Analysis"], ["HR Management", "Recruitment", "Employee Relations"], ["Sales", "Negotiation", "Customer Relationship Management"], ["Product Management", "Agile", "Product Development"], ["UI/UX Design", "Adobe Creative Suite", "Wireframing"], ["Customer Support", "Troubleshooting", "Ticketing System"]],
         "categories": [["a category"], ["Data Science", "Analytics", "Machine Learning"], ["Project Management", "Business", "Management"], ["Marketing", "Digital Marketing", "Advertising"], ["Finance", "Accounting", "Financial Services"], ["HR", "Management", "Human Resources"], ["Sales", "Business Development", "Marketing"], ["Product Management", "Product Development", "Agile"], ["Design", "UI/UX", "Creative"], ["Customer Support", "Customer Service", "Technical Support"]]
     }
-    #setup_logging()
+    setup_logging()
 
     df = pd.DataFrame(data)
     df_wh = pd.DataFrame(data_with_holes)
@@ -481,7 +676,7 @@ if __name__ == "__main__":
     df_we = pd.DataFrame(data_with_errors)
        
     for frame in [df, df_wh, df_woc, df_we]:
-        errors = insert_dataframe(frame, check_df=True)
+        errors = store_dataframe(frame, check_df=True)
         if not errors:
             print("data passed checks, check log for potential errors during inserts")
         else:
