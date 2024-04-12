@@ -3,9 +3,9 @@ import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import OneHotEncoder
 
 # read csv
 #df = pd.read_csv('reed_dataset_for_yue.csv')
@@ -29,26 +29,26 @@ X2_train, X2_test, y2_train, y2_test = train_test_split(X2, y2, test_size=0.2, r
 
 
 # Encoding
-le = LabelEncoder()
+ohe = OneHotEncoder(drop = 'first', sparse=False)
 
-X1_train['categories'] = le.fit_transform(X1_train['categories'])
-X1_test['categories'] = le.transform(X1_test['categories'])
+# model 1 for min
+cat1 = ['categories', 'experience_level']
 
-X1_train['experience_level'] = le.fit_transform(X1_train['experience_level'])
-X1_test['experience_level'] = le.transform(X1_test['experience_level'])
+X1_train[cat1] = ohe.fit_transform(X1_train[cat1])
 
-X1_train['skills'] = le.fit_transform(X1_train['skills'])
-X1_test['skills'] = le.transform(X1_test['skills'])
+X1_test[cat1] = ohe.transform(X1_test[cat1])
 
-X2_train['categories'] = le.fit_transform(X2_train['categories'])
-X2_test['categories'] = le.transform(X2_test['categories'])
+#encode 'skills'
 
-X2_train['experience_level'] = le.fit_transform(X2_train['experience_level'])
-X2_test['experience_level'] = le.transform(X2_test['experience_level'])
 
-X2_train['skills'] = le.fit_transform(X2_train['skills'])
-X2_test['skills'] = le.transform(X2_test['skills'])
+# model 2 for max 
+cat2 = ['categories', 'experience_level']
 
+X2_train[cat2] = ohe.fit_transform(X2_train[cat2])
+
+X2_test[cat2] = ohe.transform(X2_test[cat2])
+
+# encode 'skills'
 
 # model training and get predicted value
 cl1 = RandomForestClassifier()
