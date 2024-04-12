@@ -15,7 +15,7 @@ sys.path.append(project_src_path)
 from config.constants import Constants
 from check_dataframe import trim_strings, check_dataframe
 from config.logger import setup_logging, logging
-
+from postgres_initdb import connect_to_database
 
 class MyDataError(Exception):
     """Exception raised when data fields are missing or values not in the right format or range"""
@@ -24,10 +24,6 @@ class MyDataError(Exception):
 
 class MyDataWarning(Exception):
     """Exception used to create a warning in log file, no real error"""
-    pass
-
-# TODO: enable custom databse configuration, better put this in a seperate modul and use it for all other modules
-def init_databse():
     pass
     
     
@@ -522,30 +518,7 @@ def _insert_job_to_categories(cur, jo_id, jc_id_list):
             """, (jo_id, jc_id))
         
     except Exception as e:
-        raise MyDataError(f"job_to_categories table insert :cant exceute query: {e}")
-    
-    
-def connect_to_database(dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTGRES_USER,
-                      password=Constants.POSTGRES_PASSWORD, host=Constants.POSTGRES_HOST,
-                      port=Constants.POSTGRES_PORT):
-    """
-    Connetcts to postgres databse, connection has to be closed after using
-    Function does not handele Exceptions, these has to be handeled by the calling instance
-
-    Args:
-        TODO    
-    Returns:
-        conn : connection   = connection object to postgres        
-    """
-    conn = psy.connect(
-        dbname=dbname,
-        user=user,
-        password=password,
-        host=host,
-        port=port
-    )
-    
-    return conn    
+        raise MyDataError(f"job_to_categories table insert :cant exceute query: {e}") 
         
         
 def store_dataframe(df, check_df=True):
@@ -578,7 +551,6 @@ def store_dataframe(df, check_df=True):
     
     try: 
         
-        # connect to databse TODO: chenage default values possible
         conn = connect_to_database()
         conn.set_isolation_level(psy.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
         cur = conn.cursor()

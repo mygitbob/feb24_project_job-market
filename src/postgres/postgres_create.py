@@ -9,93 +9,26 @@ sys.path.append(project_scr_path)
 
 from config.constants import Constants
 from config.logger import setup_logging, logging
+from postgres_initdb import connect_to_database, POSTGRES_DBNAME
 
 
-# we must first create a database
-
-
-def create_db(dbname, user, password, host, port):
-    """
-    Creates a databse in postgres
-
-    Args:
-        dbname : str        = name of db, default value see config/constants.py
-        user : str          = username, default value see config/constants.py
-        password : str      = password, default value see config/constants.py
-        host : str          = hostname or ip adress, default value see config/constants.py
-        port : int          = portnumber, default value see config/constants.py
-    Returns:
-        None
-    """
-    try:
-        conn = psy.connect(
-            dbname='postgres',  # 1st time we connect to the psotgres db and then create our own
-            user=user,
-            password=password,
-            host=host,
-            port=port
-        )
-        # we need this because of we need it
-        conn.set_isolation_level(psy.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
-        cur = conn.cursor()
-
-        create_db_sql = f'CREATE DATABASE {dbname}'
-        cur.execute(create_db_sql)
-        conn.commit()
-        logging.debug(f"{__file__}: create_db: new database created")
-
-    except psy.errors.DuplicateDatabase:
-        logging.debug(f"{__file__}: create_db: database already exists")
-    except Exception as e:
-        logging.error(f"{__file__}: create_db: Error creating database: {e}")
-    finally:
-        if conn is not None:
-            conn.close()
-
-
-# create dimension tables first
-def create_dim_tables(dbname, user, password, host, port):
+def create_dim_tables(cur):
     """
     Creates the dimesion tables of the database, see DataModel in report
 
     Args:
-        dbname : str        = name of db, default value see config/constants.py
-        user : str          = username, default value see config/constants.py
-        password : str      = password, default value see config/constants.py
-        host : str          = hostname or ip adress, default value see config/constants.py
-        port : int          = portnumber, default value see config/constants.py
+        cur     = database cursor object
     Returns:
         None
     """
-    try:
-        conn = psy.connect(
-            dbname=dbname,
-            user=user,
-            password=password,
-            host=host,
-            port=port
-        )
-        conn.set_isolation_level(psy.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
-        cur = conn.cursor()
 
-        _create_job_title_table(cur)
-        _create_currency_table(cur)
-        _create_experience_table(cur)
-        _create_location_table(cur)
-        _create_data_source_table(cur)
-        _create_skill_list_table(cur)
-        _create_job_category_table(cur)
-
-        conn.commit()
-        logging.debug(
-            f"{__file__}: create_dim_tables: dimension tables created successfully")
-
-    except Exception as e:
-        logging.error(
-            f"{__file__}: create_dim_tables: Error creating dimension tables: {e}")
-    finally:
-        if conn is not None:
-            conn.close()
+    _create_job_title_table(cur)
+    _create_currency_table(cur)
+    _create_experience_table(cur)
+    _create_location_table(cur)
+    _create_data_source_table(cur)
+    _create_skill_list_table(cur)
+    _create_job_category_table(cur)
 
 
 def _create_job_title_table(cur):
@@ -174,204 +107,167 @@ def _create_job_category_table(cur):
     """)
 
 
-# create fact table after dimensions
-
-
-def create_fact_table(dbname, user, password, host, port):
+def create_fact_table(cur):
     """
     Creates the fact table of the database, see DataModel in report
 
     Args:
-        dbname : str        = name of db, default value see config/constants.py
-        user : str          = username, default value see config/constants.py
-        password : str      = password, default value see config/constants.py
-        host : str          = hostname or ip adress, default value see config/constants.py
-        port : int          = portnumber, default value see config/constants.py
+        cur     = database cursor object
     Returns:
         None
     """
-    try:
-        conn = psy.connect(
-            dbname=dbname,
-            user=user,
-            password=password,
-            host=host,
-            port=port
+
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS job_offer (
+            jo_id SERIAL PRIMARY KEY,
+            source_id VARCHAR NOT NULL,
+            published DATE NOT NULL,
+            salary_min INT NOT NULL,
+            salary_max INT NOT NULL,
+            joboffer_url VARCHAR NOT NULL,
+            job_title_id INT NOT NULL REFERENCES job_title(jt_id),
+            currency_id INT NOT NULL REFERENCES currency(c_id),
+            location_id INT NOT NULL REFERENCES location(l_id),
+            data_source_id INT NOT NULL REFERENCES data_source(ds_id),
+            experience_id INT REFERENCES experience(e_id),
+            CONSTRAINT unique_source_id UNIQUE (source_id),
+            CONSTRAINT unique_joboffer_url UNIQUE (joboffer_url),
+            CONSTRAINT unique_job_details UNIQUE (published, job_title_id, location_id, data_source_id)
         )
-        conn.set_isolation_level(psy.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
-        cur = conn.cursor()
-
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS job_offer (
-                jo_id SERIAL PRIMARY KEY,
-                source_id VARCHAR NOT NULL,
-                published DATE NOT NULL,
-                salary_min INT NOT NULL,
-                salary_max INT NOT NULL,
-                joboffer_url VARCHAR NOT NULL,
-                job_title_id INT NOT NULL REFERENCES job_title(jt_id),
-                currency_id INT NOT NULL REFERENCES currency(c_id),
-                location_id INT NOT NULL REFERENCES location(l_id),
-                data_source_id INT NOT NULL REFERENCES data_source(ds_id),
-                experience_id INT REFERENCES experience(e_id),
-                CONSTRAINT unique_source_id UNIQUE (source_id),
-                CONSTRAINT unique_joboffer_url UNIQUE (joboffer_url),
-                CONSTRAINT unique_job_details UNIQUE (published, job_title_id, location_id, data_source_id)
-            )
-        """)
-
-        conn.commit()
-        logging.debug(
-            f"{__file__}: create_fact_table: fact table created successfully")
-
-    except Exception as e:
-        logging.error(
-            f"{__file__}: create_fact_table: Error creating fact table: {e}")
-    finally:
-        if conn is not None:
-            conn.close()
-
-# create link tables for n 2 m relations last
+    """)
 
 
-def create_link_table(dbname, user, password, host, port):
+def create_link_tables(cur):
     """
     Creates the link tables of the database, see DataModel in report
 
     Args:
-        dbname : str        = name of db, default value see config/constants.py
-        user : str          = username, default value see config/constants.py
-        password : str      = password, default value see config/constants.py
-        host : str          = hostname or ip adress, default value see config/constants.py
-        port : int          = portnumber, default value see config/constants.py
+        cur     = database cursor object
     Returns:
         None
     """
-    try:
-        conn = psy.connect(
-            dbname=dbname,
-            user=user,
-            password=password,
-            host=host,
-            port=port
+
+    # link job offers to skills
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS job_to_skills (
+            job_id INT REFERENCES job_offer(jo_id),
+            skill_id INT REFERENCES skill_list(sl_id),
+            PRIMARY KEY (job_id, skill_id)
         )
-        conn.set_isolation_level(psy.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
-        cur = conn.cursor()
+    """)
 
-        # link job offers to skills
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS job_to_skills (
-                job_id INT REFERENCES job_offer(jo_id),
-                skill_id INT REFERENCES skill_list(sl_id),
-                PRIMARY KEY (job_id, skill_id)
-            )
-        """)
-
-        # link job offers to job categories
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS job_to_categories (
-                job_id INT REFERENCES job_offer(jo_id),
-                cat_id INT REFERENCES job_category(jc_id),
-                PRIMARY KEY (job_id, cat_id)
-            )
-        """)
-        conn.commit()
-        logging.debug(
-            f"{__file__}: create_link_table: all link tables created successfully")
-
-    except Exception as e:
-        logging.error(
-            f"{__file__}: create_link_table: Error creating link tables: {e}")
-    finally:
-        if conn is not None:
-            conn.close()
-
-
-def drop_all_tables(dbname, user, password, host, port):
-    """
-    Deletes all tables of the database
-
-    Args:
-        dbname : str        = name of db, default value see config/constants.py
-        user : str          = username, default value see config/constants.py
-        password : str      = password, default value see config/constants.py
-        host : str          = hostname or ip adress, default value see config/constants.py
-        port : int          = portnumber, default value see config/constants.py
-    Returns:
-        None
-    """
-    try:
-        conn = psy.connect(
-            dbname=dbname,
-            user=user,
-            password=password,
-            host=host,
-            port=port
+    # link job offers to job categories
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS job_to_categories (
+            job_id INT REFERENCES job_offer(jo_id),
+            cat_id INT REFERENCES job_category(jc_id),
+            PRIMARY KEY (job_id, cat_id)
         )
-        conn.set_isolation_level(psy.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
-        cur = conn.cursor()
-
-        # get all table names
-        cur.execute("""
-            SELECT tablename
-            FROM pg_catalog.pg_tables
-            WHERE schemaname='public'
-        """)
-        tables = cur.fetchall()
-
-        # drop each table
-        for table in tables:
-            cur.execute(f"DROP TABLE IF EXISTS {table[0]} CASCADE")
-            logging.debug(f"{__file__}: Dropped table: {table[0]}")
-
-    except Exception as e:
-        logging.error(f"{__file__}: Error dropping all tables: {e}")
-    finally:
-        if conn is not None:
-            conn.close()
+    """)
 
 
-def create_tables(drop, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTGRES_USER,
-                  password=Constants.POSTGRES_PASSWORD, host=Constants.POSTGRES_HOST,
-                  port=Constants.POSTGRES_PORT):
+def create_tables(cur, drop):
     """
     Creates all tables of the database, see DataModel in report
-
+    The order of creation matters, first dimension then fact and finally link tables
+    
     Args:
+        cur                 = database cursor object
         drop : boolean      = drop tables ?
-        dbname : str        = name of db, default value see config/constants.py
-        user : str          = username, default value see config/constants.py
-        password : str      = password, default value see config/constants.py
-        host : str          = hostname or ip adress, default value see config/constants.py
-        port : int          = portnumber, default value see config/constants.py
     Returns:
         None
     """
     if drop:
-        drop_all_tables(dbname, user, password, host, port)
-    create_dim_tables(dbname, user, password, host, port)
-    create_fact_table(dbname, user, password, host, port)
-    create_link_table(dbname, user, password, host, port)
+        drop_all_tables(cur)
+    create_dim_tables(cur)
+    create_fact_table(cur)
+    create_link_tables(cur)
 
 
-def create_all(drop, dbname=Constants.POSTGRES_DBNAME, user=Constants.POSTGRES_USER,
-               password=Constants.POSTGRES_PASSWORD, host=Constants.POSTGRES_HOST,
-               port=Constants.POSTGRES_PORT):
+def drop_all_tables(cur):
+    """
+    Deletes all tables of the database
+
+    Args:
+        cur     = database cursor object
+    Returns:
+        None
+    """
+    
+
+    # get all table names
+    cur.execute("""
+        SELECT tablename
+        FROM pg_catalog.pg_tables
+        WHERE schemaname='public'
+    """)
+    tables = cur.fetchall()
+
+    # drop each table
+    for table in tables:
+        cur.execute(f"DROP TABLE IF EXISTS {table[0]} CASCADE")
+        logging.debug(f"{__file__}: Dropped table: {table[0]}")
+
+
+def create_db(dbname=POSTGRES_DBNAME):
+    """
+    Creates a databse in postgres
+    We have to first connect to db 'postgres' and then we can create our own
+    Args:
+        dbname : str    = name of our databse, comes from import POSTGRES_DBNAME
+    Returns:
+        None
+    """
+    try:
+        conn = connect_to_database("postgres") 
+        conn.set_isolation_level(psy.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
+        cur = conn.cursor()
+
+        cur.execute(f'CREATE DATABASE {dbname}')
+
+        conn.commit() # complete transaction
+        
+    except psy.errors.DuplicateDatabase:
+        logging.debug(f"{__file__}: create_db: database already exists")
+    except Exception as e:
+        logging.error(f"{__file__}: create_db: Error creating database: {e}")
+        raise Exception from e
+    finally:
+        if conn:
+            conn.close()
+            
+def create_all(drop):
     """
     Creates database and all tables of the database, see DataModel in report
 
     Args:
         drop : boolean      = drop tables ?
-        dbname : str        = name of db, default value see config/constants.py
-        user : str          = username, default value see config/constants.py
-        password : str      = password, default value see config/constants.py
-        host : str          = hostname or ip adress, default value see config/constants.py
-        port : int          = portnumber, default value see config/constants.py
     Returns:
         None
     """
-    create_db(dbname, user, password, host, port)
-    create_tables(drop, dbname, user, password, host, port)
+    
+    # create databse first
+    create_db()
+    logging.debug(f"{__file__}: create_all: database creation complete")
+    
+    try: 
+        
+        # create tables
+        conn = connect_to_database()
+        conn.set_isolation_level(psy.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
+        cur = conn.cursor()
+        
+        create_tables(cur, drop)
+    
+        conn.commit() # complete transaction
+        
+        logging.debug(f"{__file__}: create_all: table creation complete")
+    except Exception as e:
+        logging.error(f"{__file__}: create_all: some database error:\n{e}")
+        
+    finally:
+        if conn:
+            conn.close()
 
 
 if __name__ == "__main__":

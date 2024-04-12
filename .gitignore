@@ -4,6 +4,8 @@ docker_images
 src/log.txt
 src/__pycache__/
 src/postgres/__pycache__/
+src/postgres/set_env.bat
+src/postgres/set_env.ps1
 src/config/__pycache__/
 src/data_retrieval/__pycache__/
 src/config/my_secrets.py
