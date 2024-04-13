@@ -2,16 +2,11 @@ import requests
 from datetime import datetime
 import re
 import os
-import sys
 
-# project src diretory
-project_src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-# add to python path
-sys.path.append(project_src_path)
+from logger import logging
+from data_retrieval_init import DIR_NAME_MUSE, KNOWN_CURRENCY, PATH_DATA_RAW
 
-from config.constants import Constants
-from config.logger import setup_logging, logging
-from data_retrieval.helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files, remove_files
+from helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files, remove_files
 
 
 def save_raw_joblist(page=0, subdir='', headers={}):
@@ -34,7 +29,7 @@ def save_raw_joblist(page=0, subdir='', headers={}):
     if response_code == 200:
         if subdir == '':
             # create a folder for each source
-            subdir = Constants.DIR_NAME_MUSE
+            subdir = DIR_NAME_MUSE
         now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         # filename includes timestamp of request
         fname = f"muse_raw_joblist.page{str(page)}.{now}.json"
@@ -70,7 +65,7 @@ def get_raw_joblist(page, headers={}):
     return response.text, response.status_code
 
 
-def process_raw_data(source_subdir=Constants.DIR_NAME_MUSE, target_subdir=Constants.DIR_NAME_MUSE, delete_processed=False, write_json=True, write_csv=True):
+def process_raw_data(source_subdir=DIR_NAME_MUSE, target_subdir=DIR_NAME_MUSE, delete_processed=False, write_json=True, write_csv=True):
     """
     Extract information from all files or a specific file from data/raw/<subfolder> and save them in data/processed
     For exact data points see code below
@@ -140,15 +135,15 @@ def extract_salary(html_text):
 
     if matches:
         currency = matches.group(1).strip()[0]
-        if currency not in Constants.KOWN_CURRENCY:
-            currency = "UNKOWN"
+        if currency not in KNOWN_CURRENCY:
+            currency = "_UNKOWN_"
         try:
             min_nr = matches.group(1).split('-')[0].strip()[1:]
             max_nr = matches.group(1).split('-')[1].strip()[1:]
         except:
-            min_nr = max_nr = currency = "NOT_FOUND"
+            min_nr = max_nr = currency = "_NOT_FOUND_"
     else:
-        min_nr = max_nr = currency = "NOT_FOUND"
+        min_nr = max_nr = currency = "_NOT_FOUND_"
     return min_nr, max_nr, currency
 
 
@@ -176,7 +171,7 @@ def merge_processed_files(prefix='muse_proc', delete_source=False):
     Returns:
         None
     """
-    merge_files(Constants.DIR_NAME_MUSE, prefix, delete_source=delete_source)
+    merge_files(DIR_NAME_MUSE, prefix, delete_source=delete_source)
 
 
 def remove_raw_data():
@@ -190,7 +185,7 @@ def remove_raw_data():
         None
     """
     raw2delete = []
-    muse_dir = os.path.join(Constants.PATH_DATA_RAW, Constants.DIR_NAME_MUSE)
+    muse_dir = os.path.join(PATH_DATA_RAW, DIR_NAME_MUSE)
 
     if os.path.exists(muse_dir):
         for entry in os.listdir(muse_dir):
@@ -252,7 +247,6 @@ def update_all_source_data(end=0, start=0, headers={}):
 
 
 if __name__ == "__main__":
-    setup_logging()
     # job_list = get_raw_joblist(100, {})
     # print("Job list return length:", len(job_list[0]))
     # save_raw_joblist(0)

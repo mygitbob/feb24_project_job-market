@@ -1,4 +1,3 @@
-import sys
 import os
 import json
 import pandas as pd
@@ -6,16 +5,10 @@ import requests
 from datetime import datetime
 from time import sleep
 
-# project src diretory
-project_src_path = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '..'))
-# add to python path
-sys.path.append(project_src_path)
-
-from config.constants import Constants
-from config.logger import setup_logging, logging
-from data_retrieval.helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files, remove_files
-from data_retrieval.reed_locations import locations
+from logger import logging
+from helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files, remove_files
+from reed_locations import locations
+from data_retrieval_init import DIR_NAME_REED, API_VERSION_REED, REED_API_KEY, PATH_DATA_RAW
 
 
 # TODO: description
@@ -29,6 +22,7 @@ def check_results_empty(response_data):
             return False
     except json.JSONDecodeError:
         return False
+
 
 def save_raw_joblist(subdir = '', headers={}, parameters={}):
     """
@@ -50,7 +44,7 @@ def save_raw_joblist(subdir = '', headers={}, parameters={}):
             logging.debug(f"reed.py: save_raw_joblist: empty result")
             return False     
         if subdir == '':
-            subdir = Constants.DIR_NAME_REED                    # create a folder for each source 
+            subdir = DIR_NAME_REED                    # create a folder for each source 
         now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         if "resultsToSkip" in parameters:
             now = f"resToSkip-{parameters['resultsToSkip']}-" + now
@@ -75,7 +69,7 @@ def get_raw_joblist(headers={}, parameters={}):
     Returns:
         tupel : ( json data : str, response code : str) 
     """
-    url = f"https://www.reed.co.uk/api/{Constants.API_VERSION_REED}/search"
+    url = f"https://www.reed.co.uk/api/{API_VERSION_REED}/search"
     
     if parameters:
         query = "?"
@@ -84,7 +78,7 @@ def get_raw_joblist(headers={}, parameters={}):
         url += query[:-1]   # exclude final & 
 
     # we have to do basic authentication
-    auth_header = requests.auth.HTTPBasicAuth(Constants.REED_API_KEY, '')
+    auth_header = requests.auth.HTTPBasicAuth(REED_API_KEY, '')
     
     logging.debug(f"reed.py: GET REQUEST API FOR: {url}, AUTH: {auth_header} HEADERS: {headers}")
     response = requests.get(url, auth=auth_header, headers=headers)
@@ -97,7 +91,7 @@ def get_raw_joblist(headers={}, parameters={}):
 
 
 
-def proccess_raw_data(source_subdir=Constants.DIR_NAME_REED, target_subdir=Constants.DIR_NAME_REED, delete_processed = False, write_json=True, write_csv=True):
+def proccess_raw_data(source_subdir=DIR_NAME_REED, target_subdir=DIR_NAME_REED, delete_processed = False, write_json=True, write_csv=True):
     """
     Extract information of all files in data/raw/<subfolder> and save them in data/processed
     
@@ -145,7 +139,7 @@ def merge_processed_files(prefix='reed_proc', delete_source=False, name_add = ''
     Returns:
         None
     """
-    merge_files(Constants.DIR_NAME_REED, prefix, delete_source=delete_source, name_add=name_add)
+    merge_files(DIR_NAME_REED, prefix, delete_source=delete_source, name_add=name_add)
 
 
 def remove_raw_data():
@@ -159,7 +153,7 @@ def remove_raw_data():
         None
     """
     raw2delete = []
-    reed_dir = os.path.join(Constants.PATH_DATA_RAW, Constants.DIR_NAME_REED)
+    reed_dir = os.path.join(PATH_DATA_RAW, DIR_NAME_REED)
     if os.path.exists(reed_dir):
         for entry in os.listdir(reed_dir):
             if entry.endswith('.json') or entry.endswith('.csv'):
@@ -202,6 +196,7 @@ def distinct_locations(csv_file):
     distinct_values = df['locationName'].unique().tolist()
     
     return distinct_values
+
 
 def get_all_source_data(headers={}, parameters={}):
     """
@@ -258,7 +253,6 @@ def get_all_data_by_location(start, end, sleep_time=60, headers={}):
             sleep(sleep_time)  
 
 if __name__ == "__main__":
-    setup_logging()
     #job_list = get_raw_joblist(parameters={"resultsToSkip":"200"})
     #print("Job list return length:", len(job_list[0]))
     #print(job_list[0])

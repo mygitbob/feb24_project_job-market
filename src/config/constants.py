@@ -53,7 +53,7 @@ class Constants(metaclass=CMeta):
     # Misc, not used yet
     BAD_RESPONSE = "Error - No Data received"
     SALARY_ENTRY_MUSE = "contents"
-    KOWN_CURRENCY = ['$', '£', '€']
+    KNOWN_CURRENCY = ['$', '£', '€']
 
 if __name__ == "__main__":
 

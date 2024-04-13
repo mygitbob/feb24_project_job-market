@@ -1,15 +1,6 @@
-import sys
-import os
 import psycopg2 as psy
 
-# project src diretory
-project_scr_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-# add to python path
-sys.path.append(project_scr_path)
-
-from config.constants import Constants
-from config.logger import setup_logging, logging
-from postgres_initdb import connect_to_database, POSTGRES_DBNAME
+from postgres_initdb import connect_to_database, POSTGRES_DBNAME, logging
 
 
 def create_dim_tables(cur):
@@ -271,5 +262,4 @@ def create_all(drop):
 
 
 if __name__ == "__main__":
-    setup_logging()
     create_all(drop=True)

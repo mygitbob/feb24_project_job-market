@@ -1,21 +1,10 @@
-import sys
-import os
 import pandas as pd
-from datetime import date
 import psycopg2 as psy
 import warnings
 warnings.filterwarnings('ignore')
 
-# project src diretory
-project_src_path = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '..'))
-# add to python path
-sys.path.append(project_src_path)
-
-from config.constants import Constants
 from check_dataframe import trim_strings, check_dataframe
-from config.logger import setup_logging, logging
-from postgres_initdb import connect_to_database
+from postgres_initdb import connect_to_database, logging
 
 class MyDataError(Exception):
     """Exception raised when data fields are missing or values not in the right format or range"""
@@ -544,6 +533,7 @@ def store_dataframe(df, check_df=True):
     if check_df:
         errors = check_dataframe(df)
         if errors:
+            logging.error(f"{__file__}: insert_dataframe: DataFrame does not pass check :\n{errors}")
             return errors
     
     # trim all values, just in case
@@ -640,7 +630,6 @@ if __name__ == "__main__":
         "skills": [["some skill"], ["R", "Python", "Machine Learning"], ["Project Management", "Leadership", "Communication"], ["Marketing", "SEO", "Social Media"], ["Finance", "Excel", "Financial Analysis"], ["HR Management", "Recruitment", "Employee Relations"], ["Sales", "Negotiation", "Customer Relationship Management"], ["Product Management", "Agile", "Product Development"], ["UI/UX Design", "Adobe Creative Suite", "Wireframing"], ["Customer Support", "Troubleshooting", "Ticketing System"]],
         "categories": [["a category"], ["Data Science", "Analytics", "Machine Learning"], ["Project Management", "Business", "Management"], ["Marketing", "Digital Marketing", "Advertising"], ["Finance", "Accounting", "Financial Services"], ["HR", "Management", "Human Resources"], ["Sales", "Business Development", "Marketing"], ["Product Management", "Product Development", "Agile"], ["Design", "UI/UX", "Creative"], ["Customer Support", "Customer Service", "Technical Support"]]
     }
-    setup_logging()
 
     df = pd.DataFrame(data)
     df_wh = pd.DataFrame(data_with_holes)

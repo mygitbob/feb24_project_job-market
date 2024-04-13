@@ -1,17 +1,10 @@
 import os
-import sys
 import requests
 from datetime import datetime
 
-# project src diretory
-project_src_path = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '..'))
-# add to python path
-sys.path.append(project_src_path)
-
-from data_retrieval.helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files, remove_files
-from config.logger import setup_logging, logging
-from config.constants import Constants
+from data_retrieval_init import DIR_NAME_OKJOB, PATH_DATA_PROCESSED, PATH_DATA_RAW, OKJOB_API_KEY
+from helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files, remove_files
+from logger import logging
 
 
 def save_raw_joblist(start, end, subdir='', headers={}):
@@ -33,7 +26,7 @@ def save_raw_joblist(start, end, subdir='', headers={}):
     if response_code == 200:
         if subdir == '':
             # create a folder for each source
-            subdir = Constants.DIR_NAME_OKJOB
+            subdir = DIR_NAME_OKJOB
         now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         # filename includes timestamp of request
         fname = f"okjob_raw_joblist.entires{str(start)}-{str(end)}.{now}.json"
@@ -55,7 +48,7 @@ def get_raw_joblist(start, end, headers={}):
     Returns:
         tupel : ( json data : str, response code : str) 
     """
-    url = f"https://sheets.googleapis.com/v4/spreadsheets/1owGcfKZRHZq8wR7Iw6PVh6-ueR0weIVQMjxWW_0M6a8/values/Sheet1!A{start}:N{end}?key={Constants.OKJOB_API_KEY}"
+    url = f"https://sheets.googleapis.com/v4/spreadsheets/1owGcfKZRHZq8wR7Iw6PVh6-ueR0weIVQMjxWW_0M6a8/values/Sheet1!A{start}:N{end}?key={OKJOB_API_KEY}"
 
     logging.debug(f"okjob.py: GET REQUEST API FOR: {url}, HEADERS: {headers}")
     response = requests.get(url, headers=headers)
@@ -68,7 +61,7 @@ def get_raw_joblist(start, end, headers={}):
     return response.text, response.status_code
 
 
-def proccess_raw_data(source_subdir=Constants.DIR_NAME_OKJOB, target_subdir=Constants.DIR_NAME_OKJOB, delete_processed=False, write_json=True, write_csv=True):
+def proccess_raw_data(source_subdir=DIR_NAME_OKJOB, target_subdir=DIR_NAME_OKJOB, delete_processed=False, write_json=True, write_csv=True):
     """
     Extract information of all files in data/raw/<subfolder> and save them in data/processed
 
@@ -112,7 +105,7 @@ def proccess_raw_data(source_subdir=Constants.DIR_NAME_OKJOB, target_subdir=Cons
             # save full job description in subfolder
             # TODO: delete these files if no longer needed
             jobd_folder = os.path.join(
-                Constants.PATH_DATA_PROCESSED, Constants.DIR_NAME_OKJOB, "full_job_description")
+                PATH_DATA_PROCESSED, DIR_NAME_OKJOB, "full_job_description")
 
             if not os.path.exists(jobd_folder):
                 logging.debug(
@@ -138,7 +131,7 @@ def merge_processed_files(prefix='okjob_proc', delete_source=False):
     Returns:
         None
     """
-    merge_files(Constants.DIR_NAME_OKJOB, prefix, delete_source=delete_source)
+    merge_files(DIR_NAME_OKJOB, prefix, delete_source=delete_source)
 
 
 def remove_raw_data():
@@ -152,7 +145,7 @@ def remove_raw_data():
         None
     """
     raw2delete = []
-    okjob_dir = os.path.join(Constants.PATH_DATA_RAW, Constants.DIR_NAME_OKJOB)
+    okjob_dir = os.path.join(PATH_DATA_RAW, DIR_NAME_OKJOB)
 
     if os.path.exists(okjob_dir):
         for entry in os.listdir(okjob_dir):
@@ -215,7 +208,6 @@ def update_all_source_data(headers={}):
 
 
 if __name__ == "__main__":
-    setup_logging()
     # job_list = get_raw_joblist(start=3,end=3)
     # print("Job list return length:", len(job_list[0]))
     # print(job_list[0])

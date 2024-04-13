@@ -1,16 +1,10 @@
 import os
-import sys
 import csv
 import json
 from datetime import datetime
 
-# project src diretory
-project_src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-# add to python path
-sys.path.append(project_src_path)
-
-from config.constants import Constants
-from config.logger import logging, setup_logging
+from logger import logging
+from data_retrieval_init import PATH_DATA_RAW, PATH_DATA_PROCESSED
 
 def save_raw_api_data(fname, data, subdir = ''):
     """
@@ -24,7 +18,7 @@ def save_raw_api_data(fname, data, subdir = ''):
     Returns:
         None
     """
-    path2save = os.path.join(Constants.PATH_DATA_RAW, subdir)
+    path2save = os.path.join(PATH_DATA_RAW, subdir)
     fname = fname.replace(' ', '_')
     if not os.path.exists(path2save):
         os.mkdir(path2save)
@@ -57,7 +51,7 @@ def load_raw_api_data(subdir = '', fname=''):
     Returns:
          list of tuples: [ (filepath : str, json_data: dict) ]
     """
-    path2load = os.path.join(Constants.PATH_DATA_RAW, subdir)
+    path2load = os.path.join(PATH_DATA_RAW, subdir)
     result = []
     if fname != '':
         file = os.path.join(path2load, fname)
@@ -98,7 +92,7 @@ def save_processed_data(data_to_save, source_file, subdir='', delete_source=Fals
     Returns:
         None
     """
-    path2save = os.path.join(Constants.PATH_DATA_PROCESSED, subdir)
+    path2save = os.path.join(PATH_DATA_PROCESSED, subdir)
     if not os.path.exists(path2save):
         logging.debug(f"helpers: save_processed_data: mkdir: {path2save}")
         os.mkdir(path2save)
@@ -172,7 +166,7 @@ def merge_files(folder, prefix, delete_source=False, name_add = ''):
     """
     if prefix == '': 
         prefix = folder
-    source_path = os.path.join(Constants.PATH_DATA_PROCESSED, folder)
+    source_path = os.path.join(PATH_DATA_PROCESSED, folder)
     merged_json = []
     merged_csv = []
     files2delete = []
@@ -234,7 +228,6 @@ def merge_files(folder, prefix, delete_source=False, name_add = ''):
         remove_files(files2delete)
 
 if __name__ == "__main__":
-    setup_logging()
     #res = load_raw_data()
     #print(len(res))
     #print(load_raw_data(fname="adzuna_joblist_all_entries.json"))
@@ -242,4 +235,5 @@ if __name__ == "__main__":
     #print( [ ( i[0], type(i[1]) )  for i in res] )
     #dummy = [{'eins':1,'zwei':2,'drei':3},{'eins':11,'zwei':22,'drei':33}]
     #save_processed_data(dummy, "my.json.dummy.json", subdir='', delete_source=False, write_json=True, write_csv=True)
-    merge_files(Constants.DIR_NAME_MUSE, 'muse_proc', delete_source=True)
+    #merge_files(Constants.DIR_NAME_MUSE, 'muse_proc', delete_source=True)
+    pass

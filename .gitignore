@@ -9,6 +9,8 @@ src/postgres/set_env.ps1
 src/config/__pycache__/
 src/data_retrieval/__pycache__/
 src/config/my_secrets.py
+docker/postgres_data/*
+docker/logs/*
 data/processed/muse.com/*
 data/processed/okjob.io/*
 data/processed/reed.co.uk/*
