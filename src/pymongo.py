@@ -70,11 +70,3 @@ if __name__ == "__main__":
     main()
 
 
-# command to install postgre (mac os. ubuntu vm)
-# sudo apt install postgresql-client-common
-# sudo apt-get update
-# sudo apt-get install postgresql postgresql-contrib
-
-
-
-    
