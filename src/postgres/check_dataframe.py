@@ -33,8 +33,8 @@ column_types = {
         "location_area_code": (str, type(None)),
         "location_state": (str, type(None)),
         "data_source_name": str,
-        "skills": (list, type(None)),
-        "categories": (list, type(None))
+        "skills": (list[str], type(None)),
+        "categories": (list[str], type(None))
     }
 
 def trim_strings(df):

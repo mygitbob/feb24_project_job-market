@@ -1,6 +1,6 @@
 .venv/
 .vscode/
-docker_images
+docker/persitant_data
 src/log.txt
 src/__pycache__/
 src/postgres/__pycache__/
