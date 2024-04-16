@@ -121,8 +121,7 @@ def create_fact_table(cur):
             location_id INT NOT NULL REFERENCES location(l_id),
             data_source_id INT NOT NULL REFERENCES data_source(ds_id),
             experience_id INT REFERENCES experience(e_id),
-            CONSTRAINT unique_source_id UNIQUE (source_id),
-            CONSTRAINT unique_joboffer_url UNIQUE (joboffer_url),
+            CONSTRAINT unique_source UNIQUE (source_id, joboffer_url),
             CONSTRAINT unique_job_details UNIQUE (published, job_title_id, location_id, data_source_id)
         )
     """)
