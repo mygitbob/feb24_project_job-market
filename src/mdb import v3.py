@@ -170,19 +170,19 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+# MongoDB credentials and connection string
+mongo_user = os.getenv('MONGO_INITDB_ROOT_USERNAME')
+mongo_password = os.getenv('MONGO_INITDB_ROOT_PASSWORD')
+mongo_host = 'localhost'
+mongo_port = '27017'
+mongo_db = 'raw_data'
+connection_string = f'mongodb://{mongo_user}:{mongo_password}@{mongo_host}:{mongo_port}/'
+
+# Global MongoDB client
+client = MongoClient(connection_string)
+db = client[mongo_db]
 
 def insert_json_files_to_mongodb(folder_path, collection_name):
-    # MongoDB credentials and connection string
-    mongo_user = os.getenv('MONGO_INITDB_ROOT_USERNAME')
-    mongo_password = os.getenv('MONGO_INITDB_ROOT_PASSWORD')
-    mongo_host = 'localhost'
-    mongo_port = '27017'
-    mongo_db = 'raw_data'
-    connection_string = f'mongodb://{mongo_user}:{mongo_password}@{mongo_host}:{mongo_port}/'
-
-    # Connect to MongoDB with authentication
-    client = MongoClient(connection_string)
-    db = client[mongo_db]
     collection = db[collection_name]
 
     # Counter for inserted entries
@@ -210,10 +210,7 @@ def insert_json_files_to_mongodb(folder_path, collection_name):
 
     return inserted_count
 
-
-def remove_duplicates(mongo_db, collection_name, connection_string):
-    client = MongoClient(connection_string)
-    db = client[mongo_db]
+def remove_duplicates(collection_name):
     collection = db[collection_name]
 
     # Aggregation pipeline to identify duplicates by 'sourceId' (excluding the first occurrence)
@@ -234,8 +231,7 @@ def remove_duplicates(mongo_db, collection_name, connection_string):
 
     print(f"Removed {deleted_count} duplicate documents.")
 
-
-# Trigger the functions
+# Example usage
 folder_paths = ['raw_imports/muse', 'raw_imports/okjob', 'raw_imports/reed']
 collection_names = ['muse_test', 'okjob_test', 'reed_test']
 
@@ -244,4 +240,4 @@ for path, colltn in zip(folder_paths, collection_names):
     print(f"Inserted entries: {inserted}")
 
     # Remove duplicates after insertion
-    remove_duplicates(mongo_db, colltn, connection_string)
+    remove_duplicates(colltn)
