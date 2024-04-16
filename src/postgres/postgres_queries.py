@@ -341,7 +341,7 @@ def get_data(engine, limit=None, date=None, country=None):
         results[df_name] = df  
 
     # basis of merge is job_offer
-    final_df = results['job_offer_df'] = job_offer_df
+    final_df = results['job_offer_df']
     
     # merge dimension tables
     final_df = pd.merge(final_df, results['titles_df'], how="left", left_on="job_title_id", right_on="jt_id")
@@ -351,13 +351,22 @@ def get_data(engine, limit=None, date=None, country=None):
     final_df = pd.merge(final_df, results['loc_df'], how="left", left_on="location_id", right_on="l_id")
     
     # merge link tables
-    merged_skills_df = pd.merge(results['job2skill_df'], ['skills_df'], left_on='skill_id', right_on='sl_id', how='left')
-    merged_cats_df = pd.merge(['job2cats_df'], ['cats_df'], left_on='cat_id', right_on='jc_id', how='left')
+    merged_skills_df = pd.merge(results['job2skill_df'], results['skills_df'], left_on='skill_id', right_on='sl_id', how='left')
+    merged_cats_df = pd.merge(results['job2cats_df'], results['cats_df'], left_on='cat_id', right_on='jc_id', how='left')
     
-    # merge lists with basis
-
-    # drop redundant columns
-    # final_df = final_df.drop(columns=["id", "job_offer_id"])
+    
+    # make lists and merge
+    grouped_skills = merged_skills_df.groupby('job_id')['name'].apply(list).reset_index()
+    grouped_cats = merged_cats_df.groupby('job_id')['name'].apply(list).reset_index()
+    
+    final_df = pd.merge(final_df, grouped_skills, how='left', left_on='jo_id', right_on='job_id', suffixes=('_sleft', '_sright'))
+    final_df = pd.merge(final_df, grouped_cats, how='left', left_on='jo_id', right_on='job_id', suffixes=('_cleft', '_cright'))
+    
+    # drop redundant columns & rename
+    final_df = final_df.drop(columns=["job_title_id", "jo_id", "currency_id", "location_id", "job_id_cleft", "job_id_cright", 
+                                      "jt_id", "c_id", "l_id", "data_source_id", "experience_id", "e_id", "ds_id"])
+    final_df = final_df.rename(columns={'name_sright': 'skills', 'name': 'categories', 'name_sleft': 'data_source_name', 
+                                        'name_y': 'currency_name', 'name_y': 'currency_symbol', 'name_x': 'job_title'})
     
     return final_df
 
@@ -389,3 +398,4 @@ if __name__ == "__main__":
     #print(get_city_df(engine))
     #print(get_city_list(engine))
     print(get_city_list(engine, country='USA'))
+    print(get_data(engine))
