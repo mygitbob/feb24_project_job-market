@@ -366,7 +366,7 @@ def get_data(engine, limit=None, date=None, country=None):
     final_df = final_df.drop(columns=["job_title_id", "jo_id", "currency_id", "location_id", "job_id_cleft", "job_id_cright", 
                                       "jt_id", "c_id", "l_id", "data_source_id", "experience_id", "e_id", "ds_id"])
     final_df = final_df.rename(columns={'name_sright': 'skills', 'name': 'categories', 'name_sleft': 'data_source_name', 
-                                        'name_y': 'currency_name', 'name_y': 'currency_symbol', 'name_x': 'job_title'})
+                                        'name_y': 'currency_name', 'symbol': 'currency_symbol', 'name_x': 'job_title'})
     
     return final_df
 
