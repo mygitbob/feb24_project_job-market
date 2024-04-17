@@ -163,7 +163,6 @@ df_reed_salary_tr.loc[
 for column in ['minimumSalary', 'maximumSalary']:
     df_reed_salary_tr = transform_salary_to_yearly(df_reed, column, 'salaryPeriod')
 
-
 # Load the pre-trained model
 nlp = spacy.load('en_core_web_sm')  # Or 'en_core_web_lg' for more accuracy but larger size
 
@@ -225,7 +224,6 @@ df_reed_salary_tr['jobSkills'] = df_reed_salary_tr.apply(
     lambda row: categorize_by_keywords(row['jobTitle'] + " " + row['jobDescription'], keywords_skills), axis=1)
 df_reed_salary_tr['jobSite'] = df_reed_salary_tr.apply(
     lambda row: categorize_by_keywords(row['jobTitle'] + " " + row['jobDescription'], keywords_site), axis=1)
-
 
 keywords_title = {
     "data administrator": ["data", "administrator", "entry", "protection", "officer", "clerk", "admin", "migration",
@@ -313,7 +311,7 @@ column_mappings = {
     'jobUrl': 'joboffer_url',
     'currency': 'currency_symbol',
     'locationName': 'location_country',
-    'jobSite': 'job_site'
+    'jobSite': 'job_site',
     'jobSkills': 'skills',
     'jobCategory': 'categories'
 }
@@ -347,9 +345,11 @@ df_reed_postgres = df_reed_postgres[(df_reed_postgres['salary_min'] > 0) & (df_r
 
 # Set the types for other fields as strings
 df_reed_postgres['source_id'] = df_reed_postgres['source_id'].astype(str)
+df_reed_postgres['experience_level'] = df_reed_postgres['experience_level'].astype(str)
 df_reed_postgres['joboffer_url'] = df_reed_postgres['joboffer_url'].astype(str)
 df_reed_postgres['currency_symbol'] = df_reed_postgres['currency_symbol'].astype(str)
 df_reed_postgres['location_country'] = df_reed_postgres['location_country'].astype(str)
-df_reed_postgres['job_site'] = df_reed_postgres['job_site'].astype(str)
 df_reed_postgres['data_source_name'] = df_reed_postgres['data_source_name'].astype(str)
-
+df_reed_postgres['skills'] = df_reed_postgres['skills'].astype(list)
+df_reed_postgres['categories'] = df_reed_postgres['categories'].astype(list)
+df_reed_postgres['job_site'] = df_reed_postgres['job_site'].astype(str)
