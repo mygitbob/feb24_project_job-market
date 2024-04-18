@@ -2,6 +2,7 @@ from collections import defaultdict
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import pandas as pd
+import spacy
 import json
 import os
 import re
@@ -24,21 +25,25 @@ collection = db[collection_name]
 # Query to select documents where none of the specified fields are empty
 query = {
     "$and": [
+        {"sourceId": {"$ne": ""}},
         {"jobTitle": {"$regex": "data", "$options": "i"}},  # Case-insensitive search for "data" in jobTitle
-        {"locationName": {"$ne": ""}},
+        {"jobDescription": {"$ne": ""}},
         {"minimumSalary": {"$ne": ""}},
         {"maximumSalary": {"$ne": ""}},
-        {"currency": {"$ne": ""}}
+        {"jobUrl": {"$ne": ""}}
     ]
 }
 
 # Projection to specify fields to include, adding 'jobDescription' to the projection
 projection = {
+    "sourceId": 1,
     "jobTitle": 1,
-    "locationName": 1,
+    "date": 1,
     "minimumSalary": 1,
     "maximumSalary": 1,
+    "jobUrl": 1,
     "currency": 1,
+    "locationName": 1,
     "jobDescription": 1,
     "_id": 0
 }
@@ -158,7 +163,6 @@ df_reed_salary_tr.loc[
 for column in ['minimumSalary', 'maximumSalary']:
     df_reed_salary_tr = transform_salary_to_yearly(df_reed, column, 'salaryPeriod')
 
-import spacy
 
 # Load the pre-trained model
 nlp = spacy.load('en_core_web_sm')  # Or 'en_core_web_lg' for more accuracy but larger size
@@ -176,7 +180,7 @@ def categorize_seniority(job_title):
     elif any(token.lemma_.lower() in keywords_junior for token in doc):
         return 'Junior'
     else:
-        return 'Any'
+        return 'Medium'
 
 
 # Apply the function to create a new column
@@ -222,7 +226,6 @@ df_reed_salary_tr['jobSkills'] = df_reed_salary_tr.apply(
 df_reed_salary_tr['jobSite'] = df_reed_salary_tr.apply(
     lambda row: categorize_by_keywords(row['jobTitle'] + " " + row['jobDescription'], keywords_site), axis=1)
 
-md
 
 keywords_title = {
     "data administrator": ["data", "administrator", "entry", "protection", "officer", "clerk", "admin", "migration",
@@ -325,11 +328,13 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import classification_report, mean_absolute_error
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
+import joblib
+
 
 # Define categorical and numerical feature lists
 cat_other = ['jobCategory', 'jobSite']  # Other categorical features
 num = ['jobSkillsSumFrequency']
-job_level_order = [['any', 'junior', 'senior']]  # Nested list for job level ordering
+job_level_order = [['junior', 'medium', 'senior']]  # Nested list for job level ordering
 
 # Define a transformer for numerical attributes
 numeric_transformer = Pipeline(steps=[
@@ -388,3 +393,9 @@ max_salary_pred = pipeline_max_salary.predict(X_test)
 print(f"Mean Absolute Error (Max Salary): {mean_absolute_error(y_test_max, max_salary_pred)}")
 print(pipeline_max_salary.score(X_train, y_train_max))
 print(pipeline_max_salary.score(X_test, y_test_max))
+
+# Save the minimum salary prediction model
+joblib.dump(pipeline_min_salary, 'pipeline_min_salary.joblib')
+
+# Save the maximum salary prediction model
+joblib.dump(pipeline_max_salary, 'pipeline_max_salary.joblib')
