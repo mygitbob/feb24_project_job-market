@@ -68,3 +68,43 @@ positional arguments:<br>
 <br>
 optional arguments:<br>
   -h, --help         show this help message and exit<br>
+
+## How will our services interact/ be setup
+
+I have identified 2 ways how we have to start our services, each of the phases will have its own docker-compose file:
+
+1.) setup - this happens only once, it is the "installation phase"
+- run script that creates the needed folder structure for the persitant folders of our containers
+- create the database
+- start the databse
+- run the pipeline: initial data retrieval (here we get as much data as we can/like) 
+-> transform the initial data and storing in database
+-> train the model for the first time
+- start api service
+The databse and the api service will be running forever and will never stop
+
+2.) run the update pipeline, this can be initiated by a cronjob (no cronjob for windows, has to be linux or mac)
+- start data retrieval update -> transformation of new data-> model retraining
+
+This is an example of 3 containers that will be startetd one after another
+We need this for the update pipline
+data retrieval update -> new data transformation and storing in database -> model retraining
+
+can be done with a docker-compose like this:
+
+services:
+  first_container:
+    image: first_image
+    restart: "no"  
+
+  second_container:
+    image: second_image
+    restart: "no"
+    depends_on:
+      - first_container  
+    
+  third_container:
+    image: third_image
+    restart: "no"
+    depends_on:
+      - second_container  
