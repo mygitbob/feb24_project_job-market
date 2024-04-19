@@ -108,3 +108,6 @@ services:
     restart: "no"
     depends_on:
       - second_container  
+
+We will also need another docker-compose file to start the services that are running forever. They will be started in the setup phase but we won´t do this 
+in the presentation. We have done the setup before and at the start of the presentation we will have to start the databse and the api service
