@@ -2,9 +2,9 @@
 
 **TODO**
 fix bug when database connection cant be established:
-`UnboundLocalError: local variable 'conn' referenced before assignment`
-write project description
-write install / how to use description
+`UnboundLocalError: local variable 'conn' referenced before assignment`<br
+write project description<br>
+write install / how to use description<br>
 
 ## Building the docker images
 ### data_retrieval_app
@@ -22,7 +22,7 @@ if you want the log saved to a file use: <br>
 `docker run --rm -it -e PATH_DATA_RAW="/data_retrieval_app/data/raw_data" -e PATH_DATA_PROCESSED="/data_retrieval_app/data/processed_data" -e DIR_NAME_MUSE="muse.com" -e DIR_NAME_REED="reed.co.uk" -e KNOWN_CURRENCY="['$', '£', '?']" -e DIR_NAME_OKJOB="okjob.io" -e OKJOB_API_KEY="AIzaSyDErRezqW2klWRYKwQkzuOIMGJ5AeD5GSY" -e REED_API_KEY="52f1eba3-39f1-4ee8-bc36-26140b349e67" -e API_VERSION_REED="1.0" -e LOGFILE=data/logs/data_retrieval.log -v ${PWD}/../docker/persistant_data/:/data_retrieval_app/data/ data_retrieval_app bash`
 <br>
 <br>
-We can now use your data retrieval command:<br>
+We can now use our data retrieval command:<br>
 `python main.py -h`<br>
 usage: main.py [-h] [-s START_INDEX] [-e END_INDEX] [-l SLEEP_TIME] {init,update}<br>
 <br>
@@ -55,7 +55,7 @@ Create a container and test it:<br>
 first you have to start postgres:<br>
 `docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 postgres`
 
-We can now use your data retrieval command:<br>
+We can now use our transformation command:<br>
 `python main.py -h`<br>
 
 usage: main.py [-h] {setup,transform}<br>
