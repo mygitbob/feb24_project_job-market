@@ -2,7 +2,7 @@ import os
 import requests
 from datetime import datetime
 
-from data_retrieval_init import DIR_NAME_OKJOB, PATH_DATA_PROCESSED, PATH_DATA_RAW, OKJOB_API_KEY
+from init import DIR_NAME_OKJOB, PATH_DATA_PROCESSED, PATH_DATA_RAW, OKJOB_API_KEY
 from helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files, remove_files
 from logger import logging
 

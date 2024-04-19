@@ -8,7 +8,7 @@ from time import sleep
 from logger import logging
 from helpers import save_raw_api_data, load_raw_api_data, save_processed_data, merge_files, remove_files
 from reed_locations import locations
-from data_retrieval_init import DIR_NAME_REED, API_VERSION_REED, REED_API_KEY, PATH_DATA_RAW
+from init import DIR_NAME_REED, API_VERSION_REED, REED_API_KEY, PATH_DATA_RAW
 
 
 # TODO: description

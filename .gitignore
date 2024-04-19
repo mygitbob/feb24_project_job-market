@@ -1,6 +1,8 @@
 .venv/
 .vscode/
 docker/persitant_data
+src/data_retrieval/reed_locations.py.bak
+src/data_retrieval/logger.py
 src/log.txt
 src/__pycache__/
 src/postgres/__pycache__/

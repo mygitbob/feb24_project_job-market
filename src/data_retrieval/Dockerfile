@@ -12,12 +12,17 @@ RUN pip install numpy==1.26.4 pandas==2.2.1 python-dateutil==2.9.0.post0 beautif
 RUN pip install pytz==2024.1 requests==2.31.0 six==1.16.0 soupsieve==2.5 typing_extensions==4.11.0 \
                 tzdata==2024.1 urllib3==2.2.1
 
-ADD ./helpers.py /data_retrieval_app/
-ADD ./muse.py /data_retrieval_app/
-ADD ./okjob.py /data_retrieval_app/
-ADD ./reed_locations.py /data_retrieval_app/
-ADD ./reed.py /data_retrieval_app/
-ADD ./data_retrieval_init.py /data_retrieval_app/
-COPY ./logger.py /data_retrieval_app/   
-
 WORKDIR /data_retrieval_app/
+
+RUN mkdir -p /data_retrieval_app/data/
+
+COPY ./data_retrieval/helpers.py /data_retrieval_app/
+COPY ./data_retrieval/muse.py /data_retrieval_app/
+COPY ./data_retrieval/okjob.py /data_retrieval_app/
+COPY ./data_retrieval/reed_locations.py /data_retrieval_app/
+COPY ./data_retrieval/reed.py /data_retrieval_app/
+COPY ./data_retrieval/init.py /data_retrieval_app/
+COPY ./data_retrieval/main.py /data_retrieval_app/
+COPY ./logger/logger.py /data_retrieval_app/   
+
+

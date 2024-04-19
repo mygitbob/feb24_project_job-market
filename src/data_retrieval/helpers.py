@@ -4,7 +4,7 @@ import json
 from datetime import datetime
 
 from logger import logging
-from data_retrieval_init import PATH_DATA_RAW, PATH_DATA_PROCESSED
+from init import PATH_DATA_RAW, PATH_DATA_PROCESSED
 
 def save_raw_api_data(fname, data, subdir = ''):
     """
