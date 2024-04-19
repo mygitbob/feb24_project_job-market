@@ -19,6 +19,7 @@ Test for windows<br>
 if you want the log saved to a file use: <br>
 `docker run --rm -it -e PATH_DATA_RAW="/data_retrieval_app/data/raw_data" -e PATH_DATA_PROCESSED="/data_retrieval_app/data/processed_data" -e DIR_NAME_MUSE="muse.com" -e DIR_NAME_REED="reed.co.uk" -e KNOWN_CURRENCY="['$', '£', '?']" -e DIR_NAME_OKJOB="okjob.io" -e OKJOB_API_KEY="AIzaSyDErRezqW2klWRYKwQkzuOIMGJ5AeD5GSY" -e REED_API_KEY="52f1eba3-39f1-4ee8-bc36-26140b349e67" -e API_VERSION_REED="1.0" -e LOGFILE=data/logs/data_retrieval.log -v ${PWD}/../docker/persistant_data/:/data_retrieval_app/data/ data_retrieval_app bash`
 <br>
+<br>
 We can now use your data retrieval command:<br>
 `python main.py`<br>
 usage: main.py [-h] [-s START_INDEX] [-e END_INDEX] [-l SLEEP_TIME] {init,update}<br>
