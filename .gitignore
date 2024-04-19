@@ -25,3 +25,4 @@ log.txt
 log*.txt
 docker/data/*
 src/config.py
+src/set_env.ps1
