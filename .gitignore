@@ -26,3 +26,4 @@ log*.txt
 docker/data/*
 src/config.py
 src/set_env.ps1
+src/constants.py.bak
