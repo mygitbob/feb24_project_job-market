@@ -7,14 +7,14 @@ write install / how to use description
 ## Building the docker images
 ### data_retrieval_app
 **we first have to create the directory structure before starting the container**, this should work for now since it is already created but we have to think about it.<br>
-From the `src` use the command:<br>
+From the `src` folder use the command:<br>
 `docker build -t data_retrieval_app -f ./data_retrieval/Dockerfile .`<br>
 Create a container and test it:<br>
 `docker run --rm -it data_retrieval_app bash`<br>
 <br>
 Test for windows<br>
 **you have to be in the `src` folder !**<br>
-`docker run --rm -it -e PATH_DATA_RAW="/data_retrieval_app/data/raw_data" -e PATH_DATA_PROCESSED="/data_retrieval_app/data/processed_data" -e DIR_NAME_MUSE="muse.com" -e DIR_NAME_REED="reed.co.uk" -e KNOWN_CURRENCY="['$', '£', '?']" -e DIR_NAME_OKJOB="okjob.io" -e OKJOB_API_KEY="AIzaSyDErRezqW2klWRYKwQkzuOIMGJ5AeD5GSY" -e REED_API_KEY="52f1eba3-39f1-4ee8-bc36-26140b349e67" -e API_VERSION_REED="1.0" -v ${PWD}/../docker/persistant_data/data/data_retrieval:/data_retrieval_app/data/ data_retrieval_app bash`<br>
+`docker run --rm -it -e PATH_DATA_RAW="/data_retrieval_app/data/raw_data" -e PATH_DATA_PROCESSED="/data_retrieval_app/data/processed_data" -e DIR_NAME_MUSE="muse.com" -e DIR_NAME_REED="reed.co.uk" -e KNOWN_CURRENCY="['$', '£', '?']" -e DIR_NAME_OKJOB="okjob.io" -e OKJOB_API_KEY="AIzaSyDErRezqW2klWRYKwQkzuOIMGJ5AeD5GSY" -e REED_API_KEY="52f1eba3-39f1-4ee8-bc36-26140b349e67" -e API_VERSION_REED="1.0" -v ${PWD}/../docker/persistant_data/:/data_retrieval_app/data/ data_retrieval_app bash`<br>
 <br>
 <br>
 We can now use your data retrieval command:<br>
