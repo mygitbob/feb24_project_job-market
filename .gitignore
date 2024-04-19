@@ -24,3 +24,4 @@ data/raw/*
 log.txt
 log*.txt
 docker/data/*
+src/config.py
