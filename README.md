@@ -24,12 +24,13 @@ if you want the log saved to a file use: <br>
 <br>
 We can now use our data retrieval command:<br>
 `python main.py -h`<br>
+<br>
 usage: main.py [-h] [-s START_INDEX] [-e END_INDEX] [-l SLEEP_TIME] {init,update}<br>
 <br>
 Data retrieval tool that can perform initial data retrieval or an update ('init' or 'update')<br>
 <br>
 positional arguments:<br>
-  {init,update}         datat retrieval, can either do the initial data retrieval or and update ('init' or 'update')
+  {init,update}         datat retrieval, can either do the initial data retrieval or and update ('init' or 'update')<br>
 <br>
 optional arguments:<br>
   -h, --help            show this help message and exit<br>
