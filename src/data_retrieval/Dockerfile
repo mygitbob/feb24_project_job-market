@@ -14,7 +14,7 @@ RUN pip install pytz==2024.1 requests==2.31.0 six==1.16.0 soupsieve==2.5 typing_
 
 WORKDIR /data_retrieval_app/
 
-RUN mkdir -p /data_retrieval_app/data/
+RUN mkdir /data_retrieval_app/data/
 
 COPY ./data_retrieval/helpers.py /data_retrieval_app/
 COPY ./data_retrieval/muse.py /data_retrieval_app/

@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 
 
@@ -37,19 +36,19 @@ column_types = {
         "categories": (list[str], type(None))
     }
 
-def trim_strings(df):
+def strip_capitalize_strings(df):
     """
-    Strips all string values of a DataFrame, works if value is a simple list, 
-    strips all members of that list
+    Strips and capitalize all string values of a DataFrame, works if value is a simple list, 
+    strips all members of that list and capitalize them
     Args:
         DataFrame whose values have to be stripped
     Returns:
         DataFrame with stripped string values
     """
     if isinstance(df, pd.DataFrame):
-        df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+        df = df.applymap(lambda x: x.strip().capitalize() if isinstance(x, str) else x)
     elif isinstance(df, pd.Series):
-        df = df.apply(lambda x: x.strip() if isinstance(x, str) else x)
+        df = df.apply(lambda x: x.strip().capitalize() if isinstance(x, str) else x)
     return df
 
 
@@ -65,8 +64,6 @@ def check_keys(df):
     missing_keys = [key for key in mandatory_keys if key not in df.columns]
     return missing_keys
 
-
-import pandas as pd
 
 def check_column_types(df):
     """
@@ -219,9 +216,15 @@ data_with_errors = {
         "categories": [["a category"], ["Data Science", "Analytics", "Machine Learning"], ["Project Management", "Business", "Management"], ["Marketing", "Digital Marketing", "Advertising"], ["Finance", "Accounting", "Financial Services"], ["HR", "Management", "Human Resources"], ["Sales", "Business Development", "Marketing"], ["Product Management", "Product Development", "Agile"], ["Design", "UI/UX", "Creative"], ["Customer Support", "Customer Service", "Technical Support"]]
     }
 
+data_with_funny_strings = {
+    "column_names": [" dddTTTe", "Im ok", "dfdsfMMer "],
+    "should_be_ok": [" i AM a ", "second value", "123"]
+}
 if __name__ == "__main__":
         import pandas as pd
         df = pd.DataFrame(data_with_errors)
         print(check_keys(df))
-        print(check_column_types(df))
-        print(check_values(df[2:4]))
+        #print(check_column_types(df))
+        #print(check_values(df[2:4]))
+        df = pd.DataFrame(data_with_funny_strings)
+        print(strip_capitalize_strings(df))

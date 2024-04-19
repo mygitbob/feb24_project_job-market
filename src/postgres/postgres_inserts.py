@@ -3,7 +3,7 @@ import psycopg2 as psy
 import warnings
 warnings.filterwarnings('ignore')
 
-from check_dataframe import trim_strings, check_dataframe
+from check_dataframe import strip_capitalize_strings, check_dataframe
 from postgres_initdb import connect_to_database, logging
 
 class MyDataError(Exception):
@@ -537,7 +537,7 @@ def store_dataframe(df, check_df=True):
             return errors
     
     # trim all values, just in case
-    df = trim_strings(df)
+    df = strip_capitalize_strings(df)
     
     try: 
         

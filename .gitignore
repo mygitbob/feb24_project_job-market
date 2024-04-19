@@ -3,6 +3,10 @@
 docker/persitant_data
 src/data_retrieval/reed_locations.py.bak
 src/data_retrieval/logger.py
+src/transform/postgres*
+src/transform/check*
+src/transform/logger.py
+src/transform/__pycache__
 src/log.txt
 src/__pycache__/
 src/postgres/__pycache__/
