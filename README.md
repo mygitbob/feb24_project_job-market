@@ -2,7 +2,7 @@
 
 **TODO**
 fix bug when database connection cant be established:
-`UnboundLocalError: local variable 'conn' referenced before assignment`<br
+`UnboundLocalError: local variable 'conn' referenced before assignment`<br>
 write project description<br>
 write install / how to use description<br>
 
