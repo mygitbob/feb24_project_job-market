@@ -6,8 +6,8 @@ fix bug when database connection cant be established:
 write project description<br>
 write install / how to use description<br>
 
-## Building the docker images
-### data_retrieval_app
+# Building the docker images
+## data_retrieval_app
 **we first have to create the directory structure before starting the container**, this should work for now since it is already created but we have to think about it.<br>
 From the root folder use the command:<br>
 `docker build -t data_retrieval_app -f ./src/data_retrieval/Dockerfile .`<br>
@@ -52,7 +52,7 @@ data_retrieval_app bash`
 <br>
 <br>
 
-### transform_app
+## transform_app
 From the root folder use the command:<br>
 `docker build -t transform_app -f ./src/transform/Dockerfile .`<br>
 
@@ -62,13 +62,20 @@ Create a container and test it:<br>
 We can now use our transformation command:<br>
 `python main.py`<br>
 
-#### test the transform_app
+### test the transform_app
+#### setting up the database and network
 create a network (it´s briged by default)<br>
 `docker network create jobmarket_net`<br>
 <br>
-start postgres:<br>
+create the database, use `create_database.sql` from `src/postgres` folder<br>
+start postgres with default database:<br>
 `docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d postgres`<br>
+create databse jobmarket and tables<br>
+`psql -U postgres f ./src/postgres/create_database.sql`<br> 
+restart postgres with jobmarket database:<br>
+`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d jobmarket`<br>
 <br>
+#### start the transform app
 Start the transformation app with the required configuration.<br>
 **you have to be in the project root folder !**<br>
 <br>
@@ -87,7 +94,7 @@ Start the transformation app with the required configuration.<br>
 --network jobmarket_net
 transform_app bash`
 
-### model app
+## model app
 From the root folder use the command:<br>
 `docker build -t model_app -f ./src/model_creation/Dockerfile .`<br>
 
@@ -97,10 +104,11 @@ Create a container and test it:<br>
 We can now use our transformation command:<br>
 `python main.py`<br>
 
-#### test the transform_app
-create a network (it´s briged by default)<br>
-`docker network create jobmarket_net`<br>
+### test the model app
+#### setting up the database and network
+see transform app<br>
 <br>
+#### run model app
 start postgres:<br>
 `docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d postgres`<br>
 <br>
