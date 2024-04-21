@@ -14,7 +14,7 @@ REED_API_KEY = os.environ.get('REED_API_KEY', None)
 LOGFILE = os.environ.get('LOGFILE', None)
 
 
-class EnvironmentError(Exception):
+class InitError(Exception):
     """ Error is raised when the required environment variables are not set"""
     pass
 

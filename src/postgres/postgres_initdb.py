@@ -11,7 +11,6 @@ in the environment has following variables have to be set:
     POSTGRES_PASSWORD   password of the user (see above)
     POSTGRES_HOST       network address of postgres
     POSTGRES_PORT       port of postgres
-    POSTGRES_LOGFILE    filepath of logfile
 """
     
 POSTGRES_DBNAME = os.environ.get('POSTGRES_DBNAME', '_UNKOWN_')
@@ -24,6 +23,9 @@ except ValueError as ve:
     logging.error(f"{__file__}: init_db: port number must be an integer: {ve}")
     raise ValueError from ve 
 LOGFILE = os.environ.get('LOGFILE', None)
+
+
+# TODO check required env vars
 
 __all__ = ['POSTGRES_DBNAME']
 

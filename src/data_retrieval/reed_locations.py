@@ -39,4 +39,4 @@ locations = ['Aberdare', 'Aberdeen', 'Abertillery', 'Aberystwyth', 'Abingdon', '
              'Wymbush', 'Wymondham', 'Wyre', 'Yarmouth', 'Yate', 'Yeovil', 'York']
 
 if __name__ == "__main__":
-    print("locations has thsi many entries:", len(locations))
+    print("locations has this many entries:", len(locations))

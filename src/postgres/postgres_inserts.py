@@ -465,7 +465,7 @@ def _insert_job_offer(cur, row, jt_id,c_id,e_id,l_id,ds_id):
             cur.execute("""
                 INSERT INTO job_offer (source_id, published, salary_min, salary_max, joboffer_url, job_title_id, currency_id, location_id, data_source_id, experience_id) 
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                ON CONFLICT (source_id) DO NOTHING
+                ON CONFLICT (source_id, data_source_id) DO NOTHING
                 RETURNING jo_id
             """, (source_id, published, salary_min, salary_max, joboffer_url, jt_id, c_id, l_id, ds_id, e_id))
             # get pk jo_id

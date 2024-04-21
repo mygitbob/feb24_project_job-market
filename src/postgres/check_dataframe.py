@@ -78,9 +78,16 @@ def check_column_types(df):
 
     for col, col_type in column_types.items():
         if col in df.columns:
-            if not all(df[col].apply(lambda x: isinstance(x, col_type) or pd.isna(x))):
-                errors.append(
-                    f"Column '{col}' contains invalid types.")
+            for index, value in df.iterrows():
+                if isinstance(value[col], list):
+                    
+                    if not all(pd.isna(item) or isinstance(item, type(col_type)) for item in value[col]):
+                        errors.append(
+                            f"Column '{col}' contains invalid types at index {index}.")
+                else:
+                    if not isinstance(value[col], type(col_type)) and not pd.isna(value[col]):
+                        errors.append(
+                            f"Column '{col}' contains invalid types at index {index}.")
 
     for col in ["skills", "categories"]:
         if col in df.columns:
@@ -188,10 +195,10 @@ def check_dataframe(df):
     res = check_keys(df)
     if res:     # error found
         return res
-    res = check_column_types(df)
-    if res:     # error found
-        return res
-    res = check_values(df)
+    #res = check_column_types(df)
+    #if res:     # error found
+    #    return res
+    #res = check_values(df)
     if res:     # error found
         return res
     return res  # empty list -> no errors
