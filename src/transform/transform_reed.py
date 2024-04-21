@@ -1,8 +1,6 @@
 from helpers import *
 
 from collections import defaultdict
-#from pymongo import MongoClient
-#from dotenv import load_dotenv
 from job_categories_and_skills import *
 import pandas as pd
 import spacy
@@ -11,56 +9,10 @@ import os
 import re
 import postgres_initdb
 from postgres_inserts import store_dataframe
+from init import PATH_DATA_PROCESSED, DIR_NAME_REED
 
 
-def load_df():
-
-    load_dotenv()
-
-    mongo_user = os.getenv('MONGO_INITDB_ROOT_USERNAME')
-    mongo_password = os.getenv('MONGO_INITDB_ROOT_PASSWORD')
-    mongo_host = 'localhost'
-    mongo_port = '27017'
-    mongo_db = 'raw_data'
-    connection_string = f'mongodb://{mongo_user}:{mongo_password}@{mongo_host}:{mongo_port}/'
-
-    collection_name = 'reed_test'
-
-    client = MongoClient(connection_string)
-    db = client[mongo_db]
-    collection = db[collection_name]
-
-    # Query to select documents where none of the specified fields are empty
-    query = {
-        "$and": [
-            {"sourceId": {"$ne": ""}},
-            {"jobTitle": {"$regex": "data", "$options": "i"}},  # Case-insensitive search for "data" in jobTitle
-            {"jobDescription": {"$ne": ""}},
-            {"minimumSalary": {"$ne": ""}},
-            {"maximumSalary": {"$ne": ""}},
-            {"jobUrl": {"$ne": ""}}
-        ]
-    }
-
-    # Projection to specify fields to include, adding 'jobDescription' to the projection
-    projection = {
-        "sourceId": 1,
-        "jobTitle": 1,
-        "date": 1,
-        "minimumSalary": 1,
-        "maximumSalary": 1,
-        "jobUrl": 1,
-        "currency": 1,
-        "locationName": 1,
-        "jobDescription": 1,
-        "_id": 0
-    }
-
-    # Fetching the documents with projection
-    documents = collection.find(query, projection).limit(10)
-    #documents = collection.find(query, projection)
-
-    return documents
+SOURCE_DATA_PATH = os.path.join(PATH_DATA_PROCESSED, DIR_NAME_REED)
 
 
 def determine_salary_period(description, min_salary, max_salary):
@@ -219,7 +171,7 @@ def clean_sort_and_deduplicate(text):
     return ', '.join(cleaned_parts)
 
 
-def transform():
+def transform_old():
     nlp = spacy.load('en_core_web_sm')  # Or 'en_core_web_lg' for more accuracy but larger size
 
     documents = load_df()
@@ -323,9 +275,131 @@ def transform():
 
     errors = store_dataframe(df_reed_postgres, check_df=False)
     print(errors)
+
+def transform(df):
+    data_objects = []
+    for _, doc in df.iterrows():
+        # Determine the salary period
+        salary_period = determine_salary_period(doc['jobDescription'], doc['minimumSalary'], doc['maximumSalary'])
+        # Add the new field to the document
+        doc['salaryPeriod'] = salary_period
+        data_objects.append(doc)
+        
+    nlp = spacy.load('en_core_web_sm')
     
+    
+    df['minimumSalary'] = pd.to_numeric(df['minimumSalary'], errors='coerce')
+    df['maximumSalary'] = pd.to_numeric(df['maximumSalary'], errors='coerce')
+    
+    df.dropna(subset=['minimumSalary', 'maximumSalary'], inplace=True)
+
+    df = df[df['minimumSalary'] > 0]
+
+    df.loc[df['minimumSalary'] < 70, 'salaryPeriod'] = 'per hour'
+    df.loc[(df['minimumSalary'] >= 70) & (
+            df['minimumSalary'] < 999), 'salaryPeriod'] = 'per day'
+
+    for column in ['minimumSalary', 'maximumSalary']:
+        df_reed_salary_tr = transform_salary_to_yearly(df, column, 'salaryPeriod')
+    print(df_reed_salary_tr.columns)
+    
+    # Apply the function to create a new column
+    df_reed_salary_tr['jobLevel'] = df_reed_salary_tr['jobTitle'].apply(lambda x: categorize_seniority(x, nlp))
+    # Applying the function to each row for both jobSkills and jobSite columns
+    df_reed_salary_tr['jobSkills'] = df_reed_salary_tr.apply(
+        lambda row: categorize_by_keywords(row['jobTitle'] + " " + row['jobDescription'], keywords_skills, nlp), axis=1)
+    df_reed_salary_tr['jobSite'] = df_reed_salary_tr.apply(
+        lambda row: categorize_by_keywords(row['jobTitle'] + " " + row['jobDescription'], keywords_site, nlp), axis=1)
+    # Apply the function to the 'jobTitle' column and create a new 'jobCategory' column
+    df_reed_salary_tr['jobCategory'] = df_reed_salary_tr['jobTitle'].apply(
+        lambda x: categorize_job_titles(x, keywords_title))
+
+    # Apply the modified function to sort the terms within the 'jobSite' column using .loc
+    df_reed_salary_tr.loc[:, 'jobSite'] = df_reed_salary_tr['jobSite'].apply(clean_sort_and_deduplicate)
+    print(df_reed_salary_tr.columns)
+    
+    column_mappings = {
+        'id': 'source_id',
+        'jobTitle': 'job_title_name',
+        'jobLevel': 'experience_level',
+        'date': 'published',
+        'minimumSalary': 'salary_min',
+        'maximumSalary': 'salary_max',
+        'jobUrl': 'joboffer_url',
+        'currency': 'currency_symbol',
+        'locationName': 'location_country',
+        'jobSite': 'job_site',
+        'jobSkills': 'skills',
+        'jobCategory': 'categories'
+    }
+    
+    # Define additional columns and default values
+    additional_columns = {
+        'data_source_name': 'reed'
+    }
+
+    # Rename columns based on the mapping
+    df_reed_salary_tr.rename(columns=column_mappings, inplace=True)
+
+    # Define the new order of columns, add missing ones with default values
+    df_reed_postgres = df_reed_salary_tr[
+        [column_mappings.get(col, col) for col in column_mappings.keys()]
+    ]
+
+    # Add additional columns with default values
+    for col, default_value in additional_columns.items():
+        df_reed_postgres[col] = default_value
+
+    # Replace specific column values
+    df_reed_postgres['location_country'] = 'United Kingdom'
+
+    df_reed_postgres['published'] = pd.to_datetime(df_reed_postgres['published'], format='%d/%m/%Y')
+
+    # Ensure salaries are integers and greater than 0
+    df_reed_postgres['salary_min'] = pd.to_numeric(df_reed_postgres['salary_min'], errors='coerce').fillna(0).astype(int)
+    df_reed_postgres['salary_max'] = pd.to_numeric(df_reed_postgres['salary_max'], errors='coerce').fillna(0).astype(int)
+    df_reed_postgres = df_reed_postgres[(df_reed_postgres['salary_min'] > 0) & (df_reed_postgres['salary_max'] > 0)]
+
+    # Set the types for other fields as strings
+    df_reed_postgres['source_id'] = df_reed_postgres['source_id'].astype(str)
+    df_reed_postgres['experience_level'] = df_reed_postgres['experience_level'].astype(str)
+    df_reed_postgres['joboffer_url'] = df_reed_postgres['joboffer_url'].astype(str)
+    df_reed_postgres['currency_symbol'] = df_reed_postgres['currency_symbol'].astype(str)
+    df_reed_postgres['location_country'] = df_reed_postgres['location_country'].astype(str)
+    df_reed_postgres['data_source_name'] = df_reed_postgres['data_source_name'].astype(str)
+    df_reed_postgres['skills'] = df_reed_postgres['skills'].str.split(', ')
+    df_reed_postgres['categories'] = df_reed_postgres['categories'].str.split(', ')
+    df_reed_postgres['job_site'] = df_reed_postgres['job_site'].astype(str)
+    
+    return df_reed_postgres
+
+def load_and_transform():
+    """
+    Loads raw data from data retrieval folder , transforms it and stors it in postgres
+    source fifles will be deleted
+    path for the reed data retireval files is in SOURCE_DATA_PATH
+    Args:
+        None
+    Returns:
+        None
+    """
+    global SOURCE_DATA_PATH
+    logging(f"{__file__}: Transformation start")
+    zipper = get_raw_data(SOURCE_DATA_PATH)
+    for filepath, df in zipper:
+        logging(f"{__file__}: transforming {filepath}")
+        df_transformed = transform(df)
+        logging.debug(f"{__file__}: storing transformed data in databse")
+        store_dataframe(df_transformed)
+        rm_raw_data([filepath])
+    logging(f"{__file__}: Transformation end")
+
+SOURCE_DATA_PATH = "C:\\Users\\winbob\\datasientest\\feb24_project_job-market\\data\\processed\\reed.co.uk\\merged"
+
 if __name__ == "__main__":
-    df_list = get_raw_data(r"C:\Users\winbob\datasientest\feb24_project_job-market\data\processed\reed.co.uk\merged", delete=False)
+    load_and_transform()
+    """
+    df_list = get_raw_data(r"C:\\Users\\winbob\\datasientest\\feb24_project_job-market\\data\\processed\\reed.co.uk\\merged", delete=False)
     for df in df_list[:1]:
         data_objects = []
         for _, doc in df.iterrows():
@@ -422,6 +496,4 @@ if __name__ == "__main__":
         df_reed_postgres['categories'] = df_reed_postgres['categories'].str.split(', ')
         df_reed_postgres['job_site'] = df_reed_postgres['job_site'].astype(str)
 
-        store_dataframe(df_reed_postgres, check_df=False)
-        
-    
+        store_dataframe(df_reed_postgres, check_df=False)"""

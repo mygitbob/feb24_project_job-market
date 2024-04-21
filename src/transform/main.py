@@ -3,6 +3,7 @@ import init
 import postgres_create as pc
 import postgres_inserts as pi
 from check_dataframe import check_dataframe, strip_capitalize_strings
+from transform_reed import load_and_transform
 
 from logger import logging
 

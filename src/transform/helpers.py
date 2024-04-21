@@ -3,14 +3,14 @@ import glob
 import pandas as pd
 from logger import logging
 
-def get_raw_data(folder_path, delete=True):
+def get_raw_data(folder_path):
     """
     Reads csv files from folder_path and retturns them as a list of DataFrames
     Args:
         folder_path : str           = path of folder to look for csv files
         delete  : bool              = flag if source files should be deleted after transformed into DataFrame
     Returns:
-        dataframe_list : list       = list of DataFrames from folder_path
+        res : zip object       = zip object with list of filenames and list of DataFrames from folder_path
     """
     dataframe_list = []
     filename_list = []
@@ -23,11 +23,8 @@ def get_raw_data(folder_path, delete=True):
         dataframe_list.append(df)
         filename_list.append(file_path)
     
-    #remove files
-    if delete:
-        rm_raw_data(filename_list)    
-    
-    return dataframe_list
+    res = zip(filename_list, dataframe_list)
+    return res
                     
 def rm_raw_data(file_list):
     """
@@ -52,5 +49,6 @@ def rm_raw_data(file_list):
     
 
 if __name__ == "__main__":
-    l = get_raw_data("../../data/processed/muse.com/merged", delete=False)
-    print(l)
+    zipper = get_raw_data("../../data/processed/muse.com/merged")
+    for filepath, df in zipper:
+        print(df)
