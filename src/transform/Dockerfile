@@ -10,6 +10,8 @@ RUN pip install numpy==1.26.4 pandas==2.2.1 python-dateutil==2.9.0.post0 SQLAlch
 
 RUN pip install psycopg2
 
+RUN pip install spacy && python -m spacy download en_core_web_sm
+
 WORKDIR /transform_app/
 
 RUN mkdir /transform_app/data/

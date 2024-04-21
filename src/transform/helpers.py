@@ -22,7 +22,7 @@ def get_raw_data(folder_path):
             logging.error(f"{__file__}: cant create dataframe for {file_path}: {e}")
         dataframe_list.append(df)
         filename_list.append(file_path)
-    
+    logging.debug(f"{__file__}: filenmes: {filename_list}")
     res = zip(filename_list, dataframe_list)
     return res
                     

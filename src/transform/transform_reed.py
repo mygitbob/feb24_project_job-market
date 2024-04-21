@@ -384,17 +384,16 @@ def load_and_transform():
         None
     """
     global SOURCE_DATA_PATH
-    logging(f"{__file__}: Transformation start")
+    logging.debug(f"{__file__}: Reed transformation start")
     zipper = get_raw_data(SOURCE_DATA_PATH)
     for filepath, df in zipper:
-        logging(f"{__file__}: transforming {filepath}")
+        logging.debug(f"{__file__}: transforming {filepath}")
         df_transformed = transform(df)
-        logging.debug(f"{__file__}: storing transformed data in databse")
+        logging.debug(f"{__file__}: storing transformed data in database")
+        
         store_dataframe(df_transformed)
         rm_raw_data([filepath])
-    logging(f"{__file__}: Transformation end")
-
-SOURCE_DATA_PATH = "C:\\Users\\winbob\\datasientest\\feb24_project_job-market\\data\\processed\\reed.co.uk\\merged"
+    logging.debug(f"{__file__}: Reed transformation end")
 
 if __name__ == "__main__":
     load_and_transform()

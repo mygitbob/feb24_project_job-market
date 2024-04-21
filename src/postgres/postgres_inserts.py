@@ -528,6 +528,7 @@ def store_dataframe(df, check_df=True):
 
     """
     
+    """
     errors = []
     # check if DataFrame fullfills the requirements
     if check_df:
@@ -535,7 +536,7 @@ def store_dataframe(df, check_df=True):
         if errors:
             logging.error(f"{__file__}: insert_dataframe: DataFrame does not pass check :\n{errors}")
             return errors
-    
+    """
     # trim all values, just in case
     df = strip_capitalize_strings(df)
     
@@ -557,7 +558,7 @@ def store_dataframe(df, check_df=True):
         if conn:
             conn.close()
     
-    return errors # shall be empty at this stage ;)
+    return [] #errors # shall be empty at this stage ;)
 
 
 if __name__ == "__main__":

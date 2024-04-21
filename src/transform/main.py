@@ -14,13 +14,14 @@ def main(command):
         logging.debug(f"{__file__}: Database creation finished, for errors see log above")
         
     if command == "transform":
-        logging.debug(f"{__file__}: Starting transformation")
         # here we do the transformation
-        logging.debug(f"{__file__}: Transformation finished")
+        logging.debug(f"{__file__}: Starting reed data processing")
+        reed = load_and_transform()
+        logging.debug(f"{__file__}: Reed finished")
         
+        """
         logging.debug(f"{__file__}: Uploading to database")
-        import pandas as pd                     #TODO: replace with real code
-        df = pd.DataFrame(pi.data_with_holes)   #TODO: replace with real code
+        
         logging.debug(f"{__file__}: Check DataFrame")
         errors = check_dataframe(df)
         if errors:
@@ -33,6 +34,7 @@ def main(command):
         logging.debug(f"{__file__}: Storing DataFrame in postgres")
         pi.store_dataframe(df, check_df=False)  # checked already before
         logging.debug(f"{__file__}: Database uploading finished")
+        """
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Data transformation tool that can be used to set up the required database(s) and for the data transformation and storage in the database ('setup' or 'transform')")

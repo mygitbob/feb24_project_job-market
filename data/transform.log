@@ -1,0 +1,174 @@
+DEBUG:root:----------------------------------------
+DEBUG:root:2024-04-21 Starting ...
+DEBUG:root:----------------------------------------
+DEBUG:root:2024-04-21 Starting ...
+DEBUG:root:/transform_app/main.py: Starting reed data processing
+DEBUG:root:/transform_app/transform_reed.py: Reed transformation start
+DEBUG:root:/transform_app/helpers.py: filenmes: ['/transform_app/data/processed/reed.co.uk/merged/reed_proc.AL13EW_search.merged.2024-04-07_16-32.csv']
+DEBUG:root:/transform_app/transform_reed.py: transforming /transform_app/data/processed/reed.co.uk/merged/reed_proc.AL13EW_search.merged.2024-04-07_16-32.csv
+DEBUG:root:/transform_app/transform_reed.py: storing transformed data in databse
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+ERROR:root:/transform_app/postgres_inserts.py: MyDataError: _insert_job_title: Unkown database error: value too long for type character varying(50)
+
+DEBUG:root:/transform_app/postgres_inserts.py: insert_dataframe: insertions complete
+DEBUG:root:/transform_app/helpers.py: removed file: /transform_app/data/processed/reed.co.uk/merged/reed_proc.AL13EW_search.merged.2024-04-07_16-32.json
+DEBUG:root:/transform_app/helpers.py: removed file: /transform_app/data/processed/reed.co.uk/merged/reed_proc.AL13EW_search.merged.2024-04-07_16-32.csv
+DEBUG:root:/transform_app/transform_reed.py: Reed transformation end
+DEBUG:root:/transform_app/main.py: Reed finished

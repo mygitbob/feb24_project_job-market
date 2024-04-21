@@ -73,24 +73,28 @@ optional arguments:<br>
   -h, --help         show this help message and exit<br>
 
 #### test the transform_app
-first you have to start postgres:<br>
-`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 postgres`<br>
+create a network (it´s briged by default)<br>
+`docker network create jobmarket_net`<br>
+<br>
+start postgres:<br>
+`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d postgres`<br>
 <br>
 Start the transformation app with the required configuration.<br>
 **you have to be in the project root folder !**<br>
 <br>
 `docker run --rm -it 
--e PATH_DATA_PROCESSED="/data_retrieval_app/data/processed" 
+-e PATH_DATA_PROCESSED="/transform_app/data/processed" 
 -e DIR_NAME_MUSE="muse.com/merged" 
 -e DIR_NAME_REED="reed.co.uk/merged" 
 -e DIR_NAME_OKJOB="okjob.io/merged" 
 -e POSTGRES_DBNAME="jobmarket" 
 -e POSTGRES_USER="postgres" 
 -e POSTGRES_PASSWORD="feb24" 
--e POSTGRES_HOST="localhost" 
+-e POSTGRES_HOST="jobmarket_db" 
 -e POSTGRES_PORT=5432 
 -e LOGFILE=data/transform.log 
 -v ${PWD}/data/:/transform_app/data/ 
+--network jobmarket_net
 transform_app bash`
 
 
