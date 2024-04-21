@@ -87,7 +87,7 @@ Start the transformation app with the required configuration.<br>
 --network jobmarket_net
 transform_app bash`
 
-# model app
+### model app
 From the root folder use the command:<br>
 `docker build -t model_app -f ./src/model_creation/Dockerfile .`<br>
 
@@ -97,6 +97,27 @@ Create a container and test it:<br>
 We can now use our transformation command:<br>
 `python main.py`<br>
 
+#### test the transform_app
+create a network (it´s briged by default)<br>
+`docker network create jobmarket_net`<br>
+<br>
+start postgres:<br>
+`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d postgres`<br>
+<br>
+Start the model app with the required configuration.<br>
+**you have to be in the project root folder !**<br>
+<br>
+`docker run --rm -it 
+-e PATH_MODEL="/model_app/data/model" 
+-e POSTGRES_DBNAME="jobmarket" 
+-e POSTGRES_USER="postgres" 
+-e POSTGRES_PASSWORD="feb24" 
+-e POSTGRES_HOST="jobmarket_db" 
+-e POSTGRES_PORT=5432 
+-e LOGFILE=data/model_creation.log 
+-v ${PWD}/data/:/model_app/data/ 
+--network jobmarket_net
+model_app bash`
 ## How will our services interact/ be setup
 
 I have identified 2 ways how we have to start our services, each of the phases will have its own docker-compose file:

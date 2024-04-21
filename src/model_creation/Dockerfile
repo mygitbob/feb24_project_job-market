@@ -10,6 +10,7 @@ RUN pip install numpy==1.26.4 pandas==2.2.1 python-dateutil==2.9.0.post0 SQLAlch
 
 RUN pip install scikit-learn==1.4.2
 
+RUN pip install psycopg2
 
 WORKDIR /model_app/
 
