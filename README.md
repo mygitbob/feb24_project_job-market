@@ -7,7 +7,7 @@ write project description<br>
 write install / how to use description<br>
 
 # Building the docker images
-## data_retrieval_app
+## data_retrieval app
 **we first have to create the directory structure before starting the container**, this should work for now since it is already created but we have to think about it.<br>
 From the root folder use the command:<br>
 `docker build -t data_retrieval_app -f ./src/data_retrieval/Dockerfile .`<br>
@@ -33,7 +33,7 @@ optional arguments:<br>
   -l SLEEP_TIME, --sleep SLEEP_TIME<br>
                         Idle time for reed init<br>
 <br>
-#### test the data retireval app
+### test the data retireval app
 **you have to be in the project root folder !**<br>
 <br>
 `docker run --rm -it 
@@ -52,7 +52,7 @@ data_retrieval_app bash`
 <br>
 <br>
 
-## transform_app
+## transform app
 From the root folder use the command:<br>
 `docker build -t transform_app -f ./src/transform/Dockerfile .`<br>
 
@@ -62,7 +62,7 @@ Create a container and test it:<br>
 We can now use our transformation command:<br>
 `python main.py`<br>
 
-### test the transform_app
+### test the transform app
 #### setting up the database and network
 create a network (it´s briged by default)<br>
 `docker network create jobmarket_net`<br>
@@ -70,7 +70,7 @@ create a network (it´s briged by default)<br>
 create the database, use `create_database.sql` from `src/postgres` folder<br>
 start postgres with default database:<br>
 `docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d postgres`<br>
-create databse jobmarket and tables<br>
+create database jobmarket and tables<br>
 `psql -U postgres f ./src/postgres/create_database.sql`<br> 
 restart postgres with jobmarket database:<br>
 `docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d jobmarket`<br>
