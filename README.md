@@ -14,15 +14,6 @@ From the `src` folder use the command:<br>
 Create a container and test it:<br>
 `docker run --rm -it data_retrieval_app bash`<br>
 <br>
-#### test the data retireval app
-**you have to be in the project root folder !**<br>
-`docker run --rm -it -e PATH_DATA_RAW="/data_retrieval_app/data/raw" -e PATH_DATA_PROCESSED="/data_retrieval_app/data/processed" -e DIR_NAME_MUSE="muse.com" -e DIR_NAME_REED="reed.co.uk" 
--e KNOWN_CURRENCY="['$', '£', '?']" -e DIR_NAME_OKJOB="okjob.io" -e OKJOB_API_KEY="AIzaSyDErRezqW2klWRYKwQkzuOIMGJ5AeD5GSY" -e REED_API_KEY="52f1eba3-39f1-4ee8-bc36-26140b349e67" -e API_VERSION_REED="1.0" -v ${PWD}/data/:/data_retrieval_app/data/ data_retrieval_app bash`<br>
-<br>
-if you want the log saved to a file use: <br>
-`docker run --rm -it -e PATH_DATA_RAW="/data_retrieval_app/data/raw" -e PATH_DATA_PROCESSED="/data_retrieval_app/data/processed" -e DIR_NAME_MUSE="muse.com" -e DIR_NAME_REED="reed.co.uk" -e KNOWN_CURRENCY="['$', '£', '?']" -e DIR_NAME_OKJOB="okjob.io" -e OKJOB_API_KEY="AIzaSyDErRezqW2klWRYKwQkzuOIMGJ5AeD5GSY" -e REED_API_KEY="52f1eba3-39f1-4ee8-bc36-26140b349e67" -e API_VERSION_REED="1.0" -e LOGFILE=data/data_retrieval.log -v ${PWD}/data/:/data_retrieval_app/data/ data_retrieval_app bash`
-<br>
-<br>
 We can now use our data retrieval command:<br>
 `python main.py -h`<br>
 <br>
@@ -42,17 +33,31 @@ optional arguments:<br>
   -l SLEEP_TIME, --sleep SLEEP_TIME<br>
                         Idle time for reed init<br>
 <br>
+#### test the data retireval app
+**you have to be in the project root folder !**<br>
+<br>
+`docker run --rm -it 
+-e PATH_DATA_RAW="/data_retrieval_app/data/raw" 
+-e PATH_DATA_PROCESSED="/data_retrieval_app/data/processed" 
+-e DIR_NAME_MUSE="muse.com" 
+-e DIR_NAME_REED="reed.co.uk" 
+-e KNOWN_CURRENCY="['$', '£', '€']" 
+-e DIR_NAME_OKJOB="okjob.io" 
+-e OKJOB_API_KEY="AIzaSyDErRezqW2klWRYKwQkzuOIMGJ5AeD5GSY" 
+-e REED_API_KEY="52f1eba3-39f1-4ee8-bc36-26140b349e67" 
+-e API_VERSION_REED="1.0" 
+-e LOGFILE=data/data_retrieval.log 
+-v ${PWD}/data/:/data_retrieval_app/data/ 
+data_retrieval_app bash`
+<br>
+<br>
+
 ### transform_app
 From the `src` use the command:<br>
 `docker build -t transform_app -f ./transform/Dockerfile .`<br>
 
 Create a container and test it:<br>
 `docker run --rm -it transform_app bash`<br>
-
-#### test the transform_app
-
-first you have to start postgres:<br>
-`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 postgres`
 
 We can now use our transformation command:<br>
 `python main.py -h`<br>
@@ -66,6 +71,28 @@ positional arguments:<br>
 <br>
 optional arguments:<br>
   -h, --help         show this help message and exit<br>
+
+#### test the transform_app
+first you have to start postgres:<br>
+`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 postgres`<br>
+<br>
+Start the transformation app with the required configuration.<br>
+**you have to be in the project root folder !**<br>
+<br>
+`docker run --rm -it \
+-e PATH_DATA_PROCESSED="/data_retrieval_app/data/processed" \
+-e DIR_NAME_MUSE="muse.com/merged" \
+-e DIR_NAME_REED="reed.co.uk/merged" \ 
+-e DIR_NAME_OKJOB="okjob.io/merged" \
+-e POSTGRES_DBNAME="jobmarket" \
+-e POSTGRES_USER="postgres" \
+-e POSTGRES_PASSWORD="feb24" \
+-e POSTGRES_HOST="localhost" \
+-e POSTGRES_PORT=5432 \
+-e LOGFILE=data/transform.log \
+-v ${PWD}/data/:/transform_app/data/ \
+transform_app bash`
+
 
 ## How will our services interact/ be setup
 

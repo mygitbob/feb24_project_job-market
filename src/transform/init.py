@@ -1,6 +1,6 @@
 import postgres_initdb
 import os
-from logger import setup_logging
+from logger import setup_logging, logging
 
 PATH_DATA_PROCESSED = os.environ.get('PATH_DATA_PROCESSED', None)
 DIR_NAME_MUSE = os.environ.get('DIR_NAME_MUSE', None)

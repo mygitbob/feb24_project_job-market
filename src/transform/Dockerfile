@@ -21,5 +21,8 @@ COPY ./postgres/check_dataframe.py /transform_app/
 COPY ./logger/logger.py /transform_app/   
 COPY ./transform/main.py /transform_app/
 COPY ./transform/init.py /transform_app/
+COPY ./transform/job_categories_and_skills.py /transform_app/
+COPY ./transform/helpers.py /transform_app/
+COPY ./transform/transform_reed.py /transform_app/
 
 
