@@ -9,8 +9,8 @@ write install / how to use description<br>
 ## Building the docker images
 ### data_retrieval_app
 **we first have to create the directory structure before starting the container**, this should work for now since it is already created but we have to think about it.<br>
-From the `src` folder use the command:<br>
-`docker build -t data_retrieval_app -f ./data_retrieval/Dockerfile .`<br>
+From the root folder use the command:<br>
+`docker build -t data_retrieval_app -f ./src/data_retrieval/Dockerfile .`<br>
 Create a container and test it:<br>
 `docker run --rm -it data_retrieval_app bash`<br>
 <br>
@@ -53,24 +53,14 @@ data_retrieval_app bash`
 <br>
 
 ### transform_app
-From the `src` use the command:<br>
-`docker build -t transform_app -f ./transform/Dockerfile .`<br>
+From the root folder use the command:<br>
+`docker build -t transform_app -f ./src/transform/Dockerfile .`<br>
 
 Create a container and test it:<br>
 `docker run --rm -it transform_app bash`<br>
 
 We can now use our transformation command:<br>
-`python main.py -h`<br>
-
-usage: main.py [-h] {setup,transform}<br>
-<br>
-Data transformation tool that can be used to set up the required database(s) and for the data transformation and storage in the database ('setup' or 'transform')<br>
-<br>
-positional arguments:<br>
-  {setup,transform}  setup to create the database(s) or transform and save data ('setup' or 'transform')<br>
-<br>
-optional arguments:<br>
-  -h, --help         show this help message and exit<br>
+`python main.py`<br>
 
 #### test the transform_app
 create a network (it´s briged by default)<br>
@@ -97,6 +87,15 @@ Start the transformation app with the required configuration.<br>
 --network jobmarket_net
 transform_app bash`
 
+# model app
+From the root folder use the command:<br>
+`docker build -t model_app -f ./src/model_creation/Dockerfile .`<br>
+
+Create a container and test it:<br>
+`docker run --rm -it model_app bash`<br>
+
+We can now use our transformation command:<br>
+`python main.py`<br>
 
 ## How will our services interact/ be setup
 

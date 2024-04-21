@@ -18,13 +18,13 @@ WORKDIR /data_retrieval_app/
 RUN mkdir /data_retrieval_app/data/
 
 # copy our source code to image
-COPY ./data_retrieval/helpers.py /data_retrieval_app/
-COPY ./data_retrieval/muse.py /data_retrieval_app/
-COPY ./data_retrieval/okjob.py /data_retrieval_app/
-COPY ./data_retrieval/reed_locations.py /data_retrieval_app/
-COPY ./data_retrieval/reed.py /data_retrieval_app/
-COPY ./data_retrieval/init.py /data_retrieval_app/
-COPY ./data_retrieval/main.py /data_retrieval_app/
-COPY ./logger/logger.py /data_retrieval_app/   
+COPY ./src/data_retrieval/helpers.py /data_retrieval_app/
+COPY ./src/data_retrieval/muse.py /data_retrieval_app/
+COPY ./src/data_retrieval/okjob.py /data_retrieval_app/
+COPY ./src/data_retrieval/reed_locations.py /data_retrieval_app/
+COPY ./src/data_retrieval/reed.py /data_retrieval_app/
+COPY ./src/data_retrieval/init.py /data_retrieval_app/
+COPY ./src/data_retrieval/main.py /data_retrieval_app/
+COPY ./src/logger/logger.py /data_retrieval_app/   
 
 
