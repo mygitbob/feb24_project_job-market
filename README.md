@@ -16,7 +16,7 @@ Create a container and test it:<br>
 <br>
 We can now use our data retrieval command:<br>
 `python main.py -h`<br>
-```bash
+```
 usage: main.py [-h] [-s START_INDEX] [-e END_INDEX] [-l SLEEP_TIME] {init,update}
 
 Data retrieval tool that can perform initial data retrieval or an update ('init' or 'update')
