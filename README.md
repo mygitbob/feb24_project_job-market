@@ -16,23 +16,23 @@ Create a container and test it:<br>
 <br>
 We can now use our data retrieval command:<br>
 `python main.py -h`<br>
-<br>
-usage: main.py [-h] [-s START_INDEX] [-e END_INDEX] [-l SLEEP_TIME] {init,update}<br>
-<br>
-Data retrieval tool that can perform initial data retrieval or an update ('init' or 'update')<br>
-<br>
-positional arguments:<br>
-  {init,update}         datat retrieval, can either do the initial data retrieval or and update ('init' or 'update')<br>
-<br>
-optional arguments:<br>
-  -h, --help            show this help message and exit<br>
-  -s START_INDEX, --start START_INDEX<br>
-                        Start index for reed init<br>
-  -e END_INDEX, --end END_INDEX<br>
-                        End index for reed init<br>
-  -l SLEEP_TIME, --sleep SLEEP_TIME<br>
-                        Idle time for reed init<br>
-<br>
+```bash
+usage: main.py [-h] [-s START_INDEX] [-e END_INDEX] [-l SLEEP_TIME] {init,update}
+
+Data retrieval tool that can perform initial data retrieval or an update ('init' or 'update')
+
+positional arguments:
+  {init,update}         datat retrieval, can either do the initial data retrieval or and update ('init' or 'update')
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s START_INDEX, --start START_INDEX
+                        Start index for reed init
+  -e END_INDEX, --end END_INDEX
+                        End index for reed init
+  -l SLEEP_TIME, --sleep SLEEP_TIME
+                        Idle time for reed init
+```
 ### test the data retireval app
 **you have to be in the project root folder !**<br>
 <br>
