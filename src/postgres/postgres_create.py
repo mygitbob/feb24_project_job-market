@@ -243,7 +243,7 @@ def create_all(drop):
     try: 
         
         # create tables
-        conn = connect_to_database()
+        conn = connect_to_database("postgres")
         conn.set_isolation_level(psy.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
         cur = conn.cursor()
         

@@ -27,3 +27,7 @@ docker/data/*
 src/config.py
 src/set_env.ps1
 src/constants.py.bak
+src/model_creation/logger.py
+src/model_creation/postgres_initbd.py
+src/model_creation/postgres_queries.py
+src/postgres/logger.py

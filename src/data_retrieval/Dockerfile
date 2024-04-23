@@ -14,15 +14,17 @@ RUN pip install pytz==2024.1 requests==2.31.0 six==1.16.0 soupsieve==2.5 typing_
 
 WORKDIR /data_retrieval_app/
 
+# create folder to attach volume
 RUN mkdir /data_retrieval_app/data/
 
-COPY ./data_retrieval/helpers.py /data_retrieval_app/
-COPY ./data_retrieval/muse.py /data_retrieval_app/
-COPY ./data_retrieval/okjob.py /data_retrieval_app/
-COPY ./data_retrieval/reed_locations.py /data_retrieval_app/
-COPY ./data_retrieval/reed.py /data_retrieval_app/
-COPY ./data_retrieval/init.py /data_retrieval_app/
-COPY ./data_retrieval/main.py /data_retrieval_app/
-COPY ./logger/logger.py /data_retrieval_app/   
+# copy our source code to image
+COPY ./src/data_retrieval/helpers.py /data_retrieval_app/
+COPY ./src/data_retrieval/muse.py /data_retrieval_app/
+COPY ./src/data_retrieval/okjob.py /data_retrieval_app/
+COPY ./src/data_retrieval/reed_locations.py /data_retrieval_app/
+COPY ./src/data_retrieval/reed.py /data_retrieval_app/
+COPY ./src/data_retrieval/init.py /data_retrieval_app/
+COPY ./src/data_retrieval/main.py /data_retrieval_app/
+COPY ./src/logger/logger.py /data_retrieval_app/   
 
 

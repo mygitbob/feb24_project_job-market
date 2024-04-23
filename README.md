@@ -6,70 +6,128 @@ fix bug when database connection cant be established:
 write project description<br>
 write install / how to use description<br>
 
-## Building the docker images
-### data_retrieval_app
+# Building the docker images
+## data_retrieval app
 **we first have to create the directory structure before starting the container**, this should work for now since it is already created but we have to think about it.<br>
-From the `src` folder use the command:<br>
-`docker build -t data_retrieval_app -f ./data_retrieval/Dockerfile .`<br>
+From the root folder use the command:<br>
+`docker build -t data_retrieval_app -f ./src/data_retrieval/Dockerfile .`<br>
 Create a container and test it:<br>
 `docker run --rm -it data_retrieval_app bash`<br>
 <br>
-#### test the data retireval app
-**you have to be in the project root folder !**<br>
-`docker run --rm -it -e PATH_DATA_RAW="/data_retrieval_app/data/raw_data" -e PATH_DATA_PROCESSED="/data_retrieval_app/data/processed_data" -e DIR_NAME_MUSE="muse.com" -e DIR_NAME_REED="reed.co.uk" 
--e KNOWN_CURRENCY="['$', '£', '?']" -e DIR_NAME_OKJOB="okjob.io" -e OKJOB_API_KEY="AIzaSyDErRezqW2klWRYKwQkzuOIMGJ5AeD5GSY" -e REED_API_KEY="52f1eba3-39f1-4ee8-bc36-26140b349e67" -e API_VERSION_REED="1.0" -v ${PWD}/data/:/data_retrieval_app/data/ data_retrieval_app bash`<br>
-<br>
-if you want the log saved to a file use: <br>
-`docker run --rm -it -e PATH_DATA_RAW="/data_retrieval_app/data/raw_data" -e PATH_DATA_PROCESSED="/data_retrieval_app/data/processed_data" -e DIR_NAME_MUSE="muse.com" -e DIR_NAME_REED="reed.co.uk" -e KNOWN_CURRENCY="['$', '£', '?']" -e DIR_NAME_OKJOB="okjob.io" -e OKJOB_API_KEY="AIzaSyDErRezqW2klWRYKwQkzuOIMGJ5AeD5GSY" -e REED_API_KEY="52f1eba3-39f1-4ee8-bc36-26140b349e67" -e API_VERSION_REED="1.0" -e LOGFILE=data/logs/data_retrieval.log -v ${PWD}/data/:/data_retrieval_app/data/ data_retrieval_app bash`
-<br>
-<br>
 We can now use our data retrieval command:<br>
 `python main.py -h`<br>
-<br>
-usage: main.py [-h] [-s START_INDEX] [-e END_INDEX] [-l SLEEP_TIME] {init,update}<br>
-<br>
-Data retrieval tool that can perform initial data retrieval or an update ('init' or 'update')<br>
-<br>
-positional arguments:<br>
-  {init,update}         datat retrieval, can either do the initial data retrieval or and update ('init' or 'update')<br>
-<br>
-optional arguments:<br>
-  -h, --help            show this help message and exit<br>
-  -s START_INDEX, --start START_INDEX<br>
-                        Start index for reed init<br>
-  -e END_INDEX, --end END_INDEX<br>
-                        End index for reed init<br>
-  -l SLEEP_TIME, --sleep SLEEP_TIME<br>
-                        Idle time for reed init<br>
-<br>
-### transform_app
-first you have to start postgres:<br>
-`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 postgres`<br>
+```
+usage: main.py [-h] [-s START_INDEX] [-e END_INDEX] [-l SLEEP_TIME] {init,update}
 
-From the `src` use the command:<br>
-`docker build -t transform_app -f ./transform/Dockerfile .`<br>
+Data retrieval tool that can perform initial data retrieval or an update ('init' or 'update')
+
+positional arguments:
+  {init,update}         datat retrieval, can either do the initial data retrieval or and update ('init' or 'update')
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s START_INDEX, --start START_INDEX
+                        Start index for reed init
+  -e END_INDEX, --end END_INDEX
+                        End index for reed init
+  -l SLEEP_TIME, --sleep SLEEP_TIME
+                        Idle time for reed init
+```
+### test the data retireval app
+**you have to be in the project root folder !**<br>
+<br>
+`docker run --rm -it 
+-e PATH_DATA_RAW="/data_retrieval_app/data/raw" 
+-e PATH_DATA_PROCESSED="/data_retrieval_app/data/processed" 
+-e DIR_NAME_MUSE="muse.com" 
+-e DIR_NAME_REED="reed.co.uk" 
+-e KNOWN_CURRENCY="['$', '£', '€']" 
+-e DIR_NAME_OKJOB="okjob.io" 
+-e OKJOB_API_KEY="AIzaSyDErRezqW2klWRYKwQkzuOIMGJ5AeD5GSY" 
+-e REED_API_KEY="52f1eba3-39f1-4ee8-bc36-26140b349e67" 
+-e API_VERSION_REED="1.0" 
+-e LOGFILE=data/data_retrieval.log 
+-v ${PWD}/data/:/data_retrieval_app/data/ 
+data_retrieval_app bash`
+<br>
+<br>
+
+## transform app
+From the root folder use the command:<br>
+`docker build -t transform_app -f ./src/transform/Dockerfile .`<br>
 
 Create a container and test it:<br>
 `docker run --rm -it transform_app bash`<br>
 
-#### test the transform_app
+We can now use our transformation command:<br>
+`python main.py`<br>
 
-first you have to start postgres:<br>
-`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 postgres`
+### test the transform app
+#### setting up the database and network
+create a network (it´s briged by default)<br>
+`docker network create jobmarket_net`<br>
+<br>
+create the database, use `create_database.sql` from `src/postgres` folder<br>
+start postgres with default database:<br>
+`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d -v ${PWD}/data/postgres:/var/lib/postgresql/data postgres`<br>
+create database jobmarket and tables<br>
+`psql -U postgres -f ./src/postgres/create_database.sql`<br>
+for windows, enter ` psql -U postgres -f .\src\postgres\create_databse.sql`<br> 
+restart postgres with jobmarket database:<br>
+`docker stop jobmarket_db`<br>
+`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d -v ${PWD}/data/postgres:/var/lib/postgresql/data postgres`<br>
+<br>
+#### start the transform app
+Start the transformation app with the required configuration.<br>
+**you have to be in the project root folder !**<br>
+<br>
+`docker run --rm -it 
+-e PATH_DATA_PROCESSED="/transform_app/data/processed" 
+-e DIR_NAME_MUSE="muse.com/merged" 
+-e DIR_NAME_REED="reed.co.uk/merged" 
+-e DIR_NAME_OKJOB="okjob.io/merged" 
+-e POSTGRES_DBNAME="jobmarket" 
+-e POSTGRES_USER="postgres" 
+-e POSTGRES_PASSWORD="feb24" 
+-e POSTGRES_HOST="jobmarket_db" 
+-e POSTGRES_PORT=5432 
+-e LOGFILE=data/transform.log 
+-v ${PWD}/data/:/transform_app/data/ 
+--network jobmarket_net
+transform_app bash`
+
+## model app
+From the root folder use the command:<br>
+`docker build -t model_app -f ./src/model_creation/Dockerfile .`<br>
+
+Create a container and test it:<br>
+`docker run --rm -it model_app bash`<br>
 
 We can now use our transformation command:<br>
-`python main.py -h`<br>
+`python main.py`<br>
 
-usage: main.py [-h] {setup,transform}<br>
+### test the model app
+#### setting up the database and network
+see transform app<br>
 <br>
-Data transformation tool that can be used to set up the required database(s) and for the data transformation and storage in the database ('setup' or 'transform')<br>
+#### run model app
+start postgres:<br>
+`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d postgres`<br>
 <br>
-positional arguments:<br>
-  {setup,transform}  setup to create the database(s) or transform and save data ('setup' or 'transform')<br>
+Start the model app with the required configuration.<br>
+**you have to be in the project root folder !**<br>
 <br>
-optional arguments:<br>
-  -h, --help         show this help message and exit<br>
-
+`docker run --rm -it 
+-e PATH_MODEL="/model_app/data/model" 
+-e POSTGRES_DBNAME="jobmarket" 
+-e POSTGRES_USER="postgres" 
+-e POSTGRES_PASSWORD="feb24" 
+-e POSTGRES_HOST="jobmarket_db" 
+-e POSTGRES_PORT=5432 
+-e LOGFILE=data/model_creation.log 
+-v ${PWD}/data/:/model_app/data/ 
+--network jobmarket_net
+model_app bash`
 ## How will our services interact/ be setup
 
 I have identified 2 ways how we have to start our services, each of the phases will have its own docker-compose file:
