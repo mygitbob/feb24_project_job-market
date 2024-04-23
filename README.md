@@ -69,11 +69,13 @@ create a network (it´s briged by default)<br>
 <br>
 create the database, use `create_database.sql` from `src/postgres` folder<br>
 start postgres with default database:<br>
-`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d postgres`<br>
+`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d -v ${PWD}/data/postgres:/var/lib/postgresql/data postgres`<br>
 create database jobmarket and tables<br>
-`psql -U postgres -f ./src/postgres/create_database.sql`<br> 
+`psql -U postgres -f ./src/postgres/create_database.sql`<br>
+for windows, enter ` psql -U postgres -f .\src\postgres\create_databse.sql`<br> 
 restart postgres with jobmarket database:<br>
-`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d postgres`<br>
+`docker stop jobmarket_db`<br>
+`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d -v ${PWD}/data/postgres:/var/lib/postgresql/data postgres`<br>
 <br>
 #### start the transform app
 Start the transformation app with the required configuration.<br>
