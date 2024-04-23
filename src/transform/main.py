@@ -6,7 +6,7 @@ from transform_reed import load_and_transform
 
 from logger import logging
 
-def main(command):
+def main():
     
     # here we do the transformation
     logging.debug(f"{__file__}: Starting reed data processing")

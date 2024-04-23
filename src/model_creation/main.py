@@ -12,6 +12,7 @@ def main():
                         POSTGRES_DBNAME)
     df = get_data(engine)
     logging.debug(f"{__file__}: Start model training")
+    print(df.head())
     train_model(df)
 
 if __name__ == "__main__":

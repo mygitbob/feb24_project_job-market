@@ -12,26 +12,65 @@ from datetime import datetime
 from init import PATH_MODEL
 from init import logging
 
+"""
 def replace_skills_with_frequency_sum(skills_string, skills_frequency):
     skills_list = skills_string.split(',')
     frequency_sum = sum(skills_frequency[skill.strip()] for skill in skills_list)
     return frequency_sum
 
 def prepare_data(df):
-    all_skills = [skill.strip() for sublist in df['jobSkills'].str.split(',').tolist() for skill in sublist]
+    df = df.dropna(subset=['skills'])
+    print(df['skills'].dtype)
+    #df = df[~df['skills'].isin(['NaN', 'None'])]
+    unique_skills = df['skills'].explode().str.strip().unique()
+    print(unique_skills)
+    df['skills'] = df['skills'].apply(lambda x: x.strip() if isinstance(x, str) else x)
+    df = df[df['skills'] != '']
+    
+    all_skills = [skill.strip() for sublist in df['skills'].str.split(',').tolist() for skill in sublist]
     skills_frequency = Counter(all_skills)
 
-    df['jobSkillsSumFrequency'] = df['jobSkills'].apply(lambda x: replace_skills_with_frequency_sum(x, skills_frequency))
-    df.loc[df['jobSkills'] == 'none', 'jobSkillsSumFrequency'] = 0
+    df['jobSkillsSumFrequency'] = df['skills'].apply(lambda x: replace_skills_with_frequency_sum(x, skills_frequency))
+    df.loc[df['skills'] == 'none', 'jobSkillsSumFrequency'] = 0
+    return df
+"""
+
+def replace_skills_with_frequency_sum(skills_string, skills_frequency):
+    skills_list = skills_string.split(',')
+    frequency_sum = sum(skills_frequency.get(skill.strip(), 0) for skill in skills_list)
+    return frequency_sum
+
+def prepare_data(df):
+    # Drop rows with NaN values in the 'skills' column
+    df = df.dropna(subset=['skills']).copy()
+
+
+    # Convert non-string values in 'skills' column to strings
+    df['skills'] = df['skills'].astype(str)
+
+    # Strip leading and trailing whitespaces from string-type entries in the 'skills' column
+    df['skills'] = df['skills'].apply(lambda x: x.strip())
+
+    # Filter out rows where 'skills' is an empty string
+    df = df[df['skills'] != '']
+
+    # Count frequency of each skill and add it to a new column 'jobSkillsSumFrequency'
+    all_skills = [skill.strip() for sublist in df['skills'].str.split(',') for skill in sublist]
+    skills_frequency = Counter(all_skills)
+    df['jobSkillsSumFrequency'] = df['skills'].apply(lambda x: replace_skills_with_frequency_sum(x, skills_frequency))
+
+    # Set 'jobSkillsSumFrequency' to 0 where 'skills' is 'none'
+    df.loc[df['skills'] == 'none', 'jobSkillsSumFrequency'] = 0
+
     return df
 
 def train_model(postgres_df):
     preprocessed_df = prepare_data(postgres_df)
 
     # Define categorical and numerical feature lists
-    cat_other = ['jobCategory', 'jobSite']
+    cat_other = ['job_title'] #, 'jobSite']
     num = ['jobSkillsSumFrequency']
-    job_level_order = [['junior', 'medium', 'senior']]
+    job_level_order = [['Junior', 'Medium', 'Senior']]
 
     # Preprocessor Pipelines
     numeric_transformer = Pipeline(steps=[('scaler', StandardScaler())])
@@ -41,7 +80,7 @@ def train_model(postgres_df):
     preprocessor = ColumnTransformer(transformers=[
         ('num', numeric_transformer, num),
         ('cat', categorical_transformer, cat_other),
-        ('job_level', job_level_transformer, ['jobLevel'])
+        ('job_level', job_level_transformer, ['level'])
     ])
 
     # Model Pipelines
@@ -55,9 +94,9 @@ def train_model(postgres_df):
     ])
 
     # Splitting data
-    target_min = preprocessed_df['minimumSalary_yearly']
-    target_max = preprocessed_df['maximumSalary_yearly']
-    feats = preprocessed_df.drop(['minimumSalary_yearly', 'maximumSalary_yearly'], axis=1)
+    target_min = preprocessed_df['salary_min']
+    target_max = preprocessed_df['salary_max']
+    feats = preprocessed_df.drop(['salary_min', 'salary_max'], axis=1)
 
     X_train, X_test, y_train_min, y_test_min = train_test_split(feats, target_min, test_size=0.2, random_state=343)
     _, _, y_train_max, y_test_max = train_test_split(feats, target_max, test_size=0.2, random_state=343)
@@ -80,7 +119,7 @@ def train_model(postgres_df):
     path_max = os.path.join(PATH_MODEL, 'DecisionTreeRegressor_max_salary.latest.joblib')
 
     # check if old modles are present, if yes rename them
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     try:
         if os.path.exists(path_min):
             backup_min = os.path.join(PATH_MODEL, f'DecisionTreeRegressor_min_salary_{timestamp}.joblib')

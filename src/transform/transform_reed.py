@@ -126,7 +126,7 @@ def categorize_by_keywords(text, keywords, nlp):
         if token_text in [keyword.lower() for keyword in keywords]:
             keywords_found.add(token.text)
     # Return a comma-separated string of unique keywords found, or "None" if no keywords were identified
-    return ', '.join(keywords_found) if keywords_found else "_NOTFOUND_"
+    return ', '.join(keywords_found) if keywords_found else None #"_NOTFOUND_"
 
 
 def categorize_job_titles(job_title, keywords_title):
@@ -301,7 +301,6 @@ def transform(df):
 
     for column in ['minimumSalary', 'maximumSalary']:
         df_reed_salary_tr = transform_salary_to_yearly(df, column, 'salaryPeriod')
-    print(df_reed_salary_tr.columns)
     
     # Apply the function to create a new column
     df_reed_salary_tr['jobLevel'] = df_reed_salary_tr['jobTitle'].apply(lambda x: categorize_seniority(x, nlp))
@@ -317,6 +316,8 @@ def transform(df):
     # Apply the modified function to sort the terms within the 'jobSite' column using .loc
     df_reed_salary_tr.loc[:, 'jobSite'] = df_reed_salary_tr['jobSite'].apply(clean_sort_and_deduplicate)
     print(df_reed_salary_tr.columns)
+    df_reed_salary_tr['minimumSalary'] = df_reed_salary_tr['minimumSalary_yearly']
+    df_reed_salary_tr['maximumSalary'] = df_reed_salary_tr['maximumSalary_yearly']
     
     column_mappings = {
         'id': 'source_id',
@@ -368,9 +369,14 @@ def transform(df):
     df_reed_postgres['location_country'] = df_reed_postgres['location_country'].astype(str)
     df_reed_postgres['data_source_name'] = df_reed_postgres['data_source_name'].astype(str)
     df_reed_postgres['skills'] = df_reed_postgres['skills'].str.split(', ')
-    df_reed_postgres['categories'] = df_reed_postgres['categories'].str.split(', ')
+    #if df_reed_postgres['skills'].iloc[0] == ["_NOTFOUND_"]: # we don´t want a skill but a empty list here
+    #    df_reed_postgres.at[0, 'skills'] = [[]]
+    #df_reed_postgres['categories'] = df_reed_postgres['categories'].str.split(', ') Dont do this , we need the job title, see below
     df_reed_postgres['job_site'] = df_reed_postgres['job_site'].astype(str)
     
+    df_reed_postgres['job_title_name'] = df_reed_postgres['categories'] # we want the job titles in the right column
+    df_reed_postgres['categories'] = None   # this is optional
+
     return df_reed_postgres
 
 def load_and_transform():
