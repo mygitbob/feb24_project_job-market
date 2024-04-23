@@ -73,7 +73,7 @@ start postgres with default database:<br>
 create database jobmarket and tables<br>
 `psql -U postgres -f ./src/postgres/create_database.sql`<br> 
 restart postgres with jobmarket database:<br>
-`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d jobmarket`<br>
+`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d jobmarket postgres`<br>
 <br>
 #### start the transform app
 Start the transformation app with the required configuration.<br>
