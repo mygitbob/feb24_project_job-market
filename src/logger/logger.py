@@ -25,7 +25,7 @@ def setup_logging(log_file=None, level=logging.DEBUG, reset = False):
         
         with open(log_file, mode):
             logging.info("-"*40)
-            logging.info(f" Starting ...")
+            logging.info(" Starting ...")
             
     else:
         logging.basicConfig(stream=sys.stdout, level=level)
