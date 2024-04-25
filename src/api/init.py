@@ -1,6 +1,7 @@
 import postgres_initdb as pi
 import glob
 import os
+from joblib import load
 from postgres_queries import connect_db
 
 from logger import setup_logging, logging
@@ -23,8 +24,6 @@ if not all(env_vars.values()):
     logging.error(f"{__file__}: {msg}")
     raise EnvironmentError(msg)
 
-# setup logfile    
-setup_logging(LOGFILE)
 
 # connect to database
 database_connection = connect_db(

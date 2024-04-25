@@ -24,8 +24,8 @@ def setup_logging(log_file=None, level=logging.DEBUG, reset = False):
         logging.basicConfig(format='%(asctime)s - %(message)s', filename=log_file, level=level)
         
         with open(log_file, mode):
-            logging.debug("-"*40)
-            logging.debug(f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')} Starting ...")
+            logging.info("-"*40)
+            logging.info(f" Starting ...")
             
     else:
         logging.basicConfig(stream=sys.stdout, level=level)
