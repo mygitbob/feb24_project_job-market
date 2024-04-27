@@ -27,8 +27,8 @@ COPY ./src/api/main.py /api_app/
 COPY ./src/api/init.py /api_app/
 COPY ./src/api/routes.py /api_app/
 COPY ./src/api/api_types.py /api_app/
-COPY ./src/api/start_uvicorn.sh /api_app/
-RUN chmod +x /api_app/start_uvicorn.sh
+#COPY ./src/api/start_uvicorn.sh /api_app/
+#RUN chmod +x /api_app/start_uvicorn.sh
 
 EXPOSE $UVICORN_PORT
 
