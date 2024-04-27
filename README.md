@@ -48,6 +48,7 @@ optional arguments:
 -e API_VERSION_REED="1.0" 
 -e LOGFILE=data/data_retrieval.log 
 -v ${PWD}/data/:/data_retrieval_app/data/ 
+--name jobmarket_data_retrieval
 data_retrieval_app bash`
 <br>
 <br>
@@ -73,10 +74,7 @@ start postgres with default database:<br>
 create database jobmarket and tables<br>
 `psql -U postgres -f ./src/postgres/create_database.sql`<br>
 for windows, enter ` psql -U postgres -f .\src\postgres\create_databse.sql`<br> 
-restart postgres with jobmarket database:<br>
-`docker stop jobmarket_db`<br>
-`docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=feb24 --network jobmarket_net --name jobmarket_db -d -v ${PWD}/data/postgres:/var/lib/postgresql/data postgres`<br>
-<br>
+
 #### start the transform app
 Start the transformation app with the required configuration.<br>
 **you have to be in the project root folder !**<br>
@@ -94,6 +92,7 @@ Start the transformation app with the required configuration.<br>
 -e LOGFILE=data/transform.log 
 -v ${PWD}/data/:/transform_app/data/ 
 --network jobmarket_net
+--name jobmarket_transform
 transform_app bash`
 
 ## model app
@@ -127,15 +126,30 @@ Start the model app with the required configuration.<br>
 -e LOGFILE=data/model_creation.log 
 -v ${PWD}/data/:/model_app/data/ 
 --network jobmarket_net
+--name jobmarket_model
 model_app bash`
+## api app
+### build api app
+From the root folder use the command:<br>
+`build -t api_app -f ./src/api/Dockerfile .`
+
+### test api app
+Remeber, start the databse first ;)<br>
+Start the container (can be done with `-d` if you don´t want to see the output):<br>
+`docker run --rm -it  -p 8000:8000 -e PATH_MODEL="/api_app/data/model"  -e POSTGRES_DBNAME="jobmarket"  -e POSTGRES_USER="postgres"  
+-e POSTGRES_PASSWORD="feb24"  -e POSTGRES_HOST="jobmarket_db"  -e POSTGRES_PORT=5432  -e LOGFILE=data/api.log  
+-e UVICORN_PORT=8000 -v ${PWD}/data/:/api_app/data/  --network jobmarket_net --name jobmarket_api api_app`
+<br>
+You can now access the api via your browser and test the api:<br>
+`http://localhost:8000/docs`
+
 ## How will our services interact/ be setup
 
 I have identified 2 ways how we have to start our services, each of the phases will have its own docker-compose file:
 
 1.) setup - this happens only once, it is the "installation phase"
 - run script that creates the needed folder structure for the persitant folders of our containers
-- create the database
-- start the databse
+- start the databse container and create the jobmarket database
 - run the pipeline: initial data retrieval (here we get as much data as we can/like) 
 -> transform the initial data and storing in database
 -> train the model for the first time
@@ -168,5 +182,19 @@ services:
     depends_on:
       - second_container  
 
-We will also need another docker-compose file to start the services that are running forever. They will be started in the setup phase but we won´t do this 
-in the presentation. We have done the setup before and at the start of the presentation we will have to start the databse and the api service
+So we have to start our services in 3 modes:
+1. Initial setup and data collection:
+  - create folder structure
+  - start database service and create the jobmarket db, the database service has to be rujning all the time and never stops
+  - make initial data retrieval -> start data retrieval app , run init and stop it after its done
+  - transform initial data -> start transform app after data retrieval app has ended, transform data and then stop it
+  - create initial models -> start model app after transform app is finished, create models and stop it
+  - start api server, this also keeps running and never stops
+2. Update pipeline, run these apps as decribed above:
+  - start retrieval update, run update and stop
+  - start transform, make transformation and stop
+  - start model, create models and stop
+3. mechanism to restart the services that should keep running:
+  - (re-)start database service
+  - (re-)start api server, database server must be running !
+  

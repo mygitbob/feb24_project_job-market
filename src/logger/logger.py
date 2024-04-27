@@ -2,22 +2,30 @@ import logging
 import sys
 from datetime import datetime
 
-def setup_logging(log_file=None, level=logging.DEBUG, reset =True):
+def setup_logging(log_file=None, level=logging.DEBUG, reset = False):
     """
     Enables logging, when no log_file given prints on screen
-    Deletes old log file if same filename/path is given
 
     Args:
         log_file : str  = filepath, when empty use stdout
         level : str     = debug level
-
+        reset : bool    = if True than a new log file will be created and the old one deleted
     Returns:
         None
     """
+
     if log_file:
-        logging.basicConfig(filename=log_file, level=level)
-        with open(log_file, 'a'):
-            logging.debug("-"*40)
-            logging.debug(f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')} Starting ...")
+        
+        if reset:
+            mode = 'w'
+        else:
+            mode = 'a'
+            
+        logging.basicConfig(format='%(asctime)s - %(message)s', filename=log_file, level=level)
+        
+        with open(log_file, mode):
+            logging.info("-"*40)
+            logging.info(" Starting ...")
+            
     else:
         logging.basicConfig(stream=sys.stdout, level=level)
