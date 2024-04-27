@@ -55,7 +55,7 @@ async def make_prediction(req : Prediction_Request):
         else: 
             req.experience = "Medium"
             
-        # create DataFrame and make prediction
+        # create DataFrame for prediction
         df = create_dataframe(req)
         logging.debug(f"{__file__}: make_prediction: create DataFrame: {df.head()}")
     except HTTPException:
