@@ -21,6 +21,7 @@ data/processed/muse.com/*
 data/processed/okjob.io/*
 data/processed/reed.co.uk/*
 data/raw/*
+data/*
 log.txt
 log*.txt
 docker/data/*

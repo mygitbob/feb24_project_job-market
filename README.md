@@ -184,7 +184,7 @@ Finally the script adds a cronjob for the `run_update_pipeline.sh` which will be
 <br>
 
 `run_update_pipeline.sh` starts the data retrieval, tranform and create model services one after another.
-They will download the newest data from the sources, transform and save the data and then create new models with the updated data.<
+They will download the newest data from the sources, transform and save the data and then create new models with the updated data.
 <br>
 
 `restart_services.sh` script can be used to restart the postgres and api service. These two services should be running all the time.
