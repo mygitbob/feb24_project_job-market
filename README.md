@@ -55,6 +55,7 @@ docker run --rm -it
 <br>
 We can now use our data retrieval command:<br>
 `python main.py -h`<br>
+
 ```bash
 usage: main.py [-h] [-s START_INDEX] [-e END_INDEX] [-l SLEEP_TIME] {init,update}
 
@@ -72,6 +73,7 @@ optional arguments:
   -l SLEEP_TIME, --sleep SLEEP_TIME
                         Idle time for reed init
 ```
+
 ### Build the transform app
 `docker build -t transform_app -f ./src/transform/Dockerfile .`<br>
 <br>
@@ -80,6 +82,7 @@ Create a container and test it:<br>
 <br>
 ### Test the transform app
 Start the transformation app with the required configuration.<br>
+
 ```bash
 docker run --rm -it 
 -e PATH_DATA_PROCESSED="/transform_app/data/processed" 
@@ -106,6 +109,7 @@ Create a container and test it:<br>
 <br>
 ### Test the model app
 Start the model app with the required configuration.<br>
+
 ```bash
 docker run --rm -it 
 -e PATH_MODEL="/model_app/data/model" 
@@ -127,6 +131,7 @@ Create a container and test it:<br>
 <br>
 ### Test the api app
 Start the transformation app with the required configuration (use option `-d` if you don´t want to see the output):<br>
+
 ```bash
 docker run --rm -it  -p 8000:8000 
 -e PATH_MODEL="/api_app/data/model"  
@@ -147,6 +152,7 @@ http://localhost:8000/docs <br>
 <br>
 ## Install instructions
 First you have to give the install/update scripts the permission to execute:
+
 ```bash
 chmod +x  setup_jobmarket.sh
 ```
