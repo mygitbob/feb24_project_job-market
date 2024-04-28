@@ -8,7 +8,7 @@ fix bug when database connection cant be established:
 This section is for building and testing individual docker images/containers.<br>
 To build them all in one step use the `docker-compose` command, see install instructions.<br>
 For using the following commands you have to be in the project root folder.<br>
-Create the required folder structure:<br>
+Create the required folder structure with:<br>
 ```bash
 mkdir -p ./data/logs/
 mkdir -p ./data/raw/
@@ -27,7 +27,8 @@ docker run --rm -d -p 5432:5432
 --name jobmarket_db  
 -v ${PWD}/data/postgres:/var/lib/postgresql/data 
 -v ${PWD}/src/postgres:/docker-entrypoint-initdb.d
-postgres``` 
+postgres
+``` 
 This command uses the `create_databse.sql` script of the `./src/postgres` folder to create the database during its first start.
 <br>
 ### Build the data_retrieval app
@@ -94,7 +95,8 @@ docker run --rm -it
 -v ${PWD}/data/:/transform_app/data/ 
 --network jobmarket_net
 --name jobmarket_transform
-transform_app bash``` 
+transform_app bash
+``` 
 <br>
 ### Build the model app
 `docker build -t model_app -f ./src/model_creation/Dockerfile .`<br>
@@ -116,7 +118,8 @@ docker run --rm -it
 -v ${PWD}/data/:/model_app/data/ 
 --network jobmarket_net
 --name jobmarket_model
-model_app bash``` 
+model_app bash
+``` 
 ### build api app
 `build -t api_app -f ./src/api/Dockerfile .`
 Create a container and test it:<br>
@@ -136,7 +139,8 @@ docker run --rm -it  -p 8000:8000
 -e UVICORN_PORT=8000 
 -v ${PWD}/data/:/api_app/data/  
 --network jobmarket_net 
---name jobmarket_api api_app``` 
+--name jobmarket_api api_app
+``` 
 <br>
 You can now access the api via your browser and test the api:<br>
 http://localhost:8000/docs <br>
