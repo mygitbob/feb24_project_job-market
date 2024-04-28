@@ -44,15 +44,22 @@ def connect_to_database(dbname=POSTGRES_DBNAME):
         conn : connection   = connection object to postgres        
         dbname : str        = name of databse, when we create a new database we have to connect to the postgres db first
     """
-    conn = psy.connect(
-        dbname=dbname,
-        user=POSTGRES_USER,
-        password=POSTGRES_PASSWORD,
-        host=POSTGRES_HOST,
-        port=POSTGRES_PORT
-    )
-    
+    try:
+            conn = psy.connect(
+            dbname=dbname,
+            user=POSTGRES_USER,
+            password=POSTGRES_PASSWORD,
+            host=POSTGRES_HOST,
+            port=POSTGRES_PORT
+        )
+    except Exception as e:
+        logging.error(f"{__file__}: can not connect to database: {e}")
+        sys.exit(-1)
+    logging.info(f"{__file__}: database connection established")
     return conn   
+        
+# test db connection
+connect_to_database()
         
         
 if __name__ == "__main__":

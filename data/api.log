@@ -1,0 +1,10 @@
+2024-04-27 11:49:02,323 - ----------------------------------------
+2024-04-27 11:49:02,323 -  Starting ...
+2024-04-27 11:49:02,858 - /api_app/init.py: models loaded
+2024-04-27 11:49:34,265 - /api_app/routes.py: get_countries
+2024-04-27 11:50:29,578 - ----------------------------------------
+2024-04-27 11:50:29,578 -  Starting ...
+2024-04-27 11:50:30,081 - /api_app/init.py: models loaded
+2024-04-27 11:50:36,385 - /api_app/routes.py: get_countries
+2024-04-27 11:50:59,196 - /api_app/routes.py: get_job_titles
+2024-04-27 11:51:10,938 - /api_app/routes.py: get_countries

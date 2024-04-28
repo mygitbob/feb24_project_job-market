@@ -1,50 +1,111 @@
+version: '3'
+
 services:
-  
-  postgres:
+
+  jobmarket_db:
     image: postgres:latest
-    container_name: jobmarket_postgres
-    volumes:
-      - ./persistant_data/postgres_data:/var/lib/postgresql/data
-      - ./persistant_data/logs/postgres:/var/log/postgresql
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_PASSWORD=feb24
-
-  transform:
-    image: transform_app:0.0.1
-    container_name: jobmarket_transform
+      - "5432:5432"
+    networks:
+      - jobmarket_net
     volumes:
-      - ./persistant_data/data:/transform_app/data
-      - ./persistant_data/logs/transform:/var/log/transform
-    environment:
-      - POSTGRES_DBNAME=jobmarket
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=feb24
-      - POSTGRES_HOST=postgres
-      - POSTGRES_PORT=5432
-      - LOGFILE=/var/log/transform/log.txt 
-    command: ["bash"]
-    stdin_open: true
-    tty: true
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./src/postgres:/docker-entrypoint-initdb.d # create the database at the 1st start
 
-  data_retrieval:
-    image: data_retrieval_app:0.0.1
-    container_name: jobmarket_data_retrieval
-    volumes:
-      - ./persistant_data/data/data_retrieval:/data_retrieval_app/data/
-      - ./persistant_data/logs/data_retrieval:/var/log/data_retrieval
+  jobmarket_data_retrieval:
+    build:
+      context: ./src/data_retrieval
+      dockerfile: Dockerfile
+    image: jobmarket_data_retrieval_app:latest
     environment:
-      - PATH_DATA_RAW=/data_retrieval_app/data/raw_data
-      - PATH_DATA_PROCESSED=/data_retrieval_app/data/processed_data
-      - DIR_NAME_MUSE=muse.com
-      - DIR_NAME_REED=reed.co.uk
-      - KNOWN_CURRENCY=['$', '£', '€']
-      - DIR_NAME_OKJOB=okjob.io
-      - OKJOB_API_KEY=AIzaSyDErRezqW2klWRYKwQkzuOIMGJ5AeD5GSY
-      - REED_API_KEY=52f1eba3-39f1-4ee8-bc36-26140b349e67
-      - API_VERSION_REED=1.0
-      - LOGFILE=/var/log/data_retrieval/log.txt
-    command: ["bash"]
-    stdin_open: true
-    tty: true
+      PATH_DATA_RAW: ${PATH_DATA_RAW}
+      PATH_DATA_PROCESSED: ${PATH_DATA_PROCESSED}
+      DIR_NAME_MUSE: ${DIR_NAME_MUSE}
+      DIR_NAME_REED: ${DIR_NAME_REED}
+      KNOWN_CURRENCY: ${KNOWN_CURRENCY}
+      DIR_NAME_OKJOB: ${DIR_NAME_OKJOB}
+      OKJOB_API_KEY: ${OKJOB_API_KEY}
+      REED_API_KEY: ${REED_API_KEY}
+      API_VERSION_REED: ${API_VERSION_REED}
+      LOGFILE: ${LOGFILE}
+      PIPELINE_ACTION: ${PIPELINE_ACTION}
+      s: ${s:-}
+      e: ${s:-}
+      l: ${l:-}
+    volumes:
+      - ./data:/data_retrieval_app/data
+    entrypoint: ["sh", "-c", "python main.py $PIPELINE_ACTION"]
+
+  jobmarket_transform:
+    build:
+      context: ./src/transform
+      dockerfile: Dockerfile
+    image: jobmarket_transform_app:latest
+    environment:
+      - PATH_DATA_PROCESSED: ${PATH_DATA_PROCESSED}
+      - DIR_NAME_MUSE: ${DIR_NAME_MUSE}
+      - DIR_NAME_REED: ${DIR_NAME_REED}
+      - DIR_NAME_OKJOB: ${DIR_NAME_OKJOB}
+      - POSTGRES_DBNAME: ${POSTGRES_DBNAME}
+      - POSTGRES_USER: ${POSTGRES_USER}
+      - POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      - POSTGRES_HOST: ${POSTGRES_HOST}
+      - POSTGRES_PORT: ${POSTGRES_PORT}
+      - LOGFILE: ${LOGFILE}
+    networks:
+      - jobmarket_net
+    volumes:
+      - ./data:/transform_app/data
+    entrypoint: ["sh", "-c", "python main.py"]
+    depends_on:
+      - jobmarket_db
+
+  jobmarket_model:
+    build:
+      context: ./src/model_creation
+      dockerfile: Dockerfile
+    image: jobmarket_model_app:latest
+    environment:
+      - PATH_MODEL: ${PATH_MODEL}
+      - POSTGRES_DBNAME: ${POSTGRES_DBNAME}
+      - POSTGRES_USER: ${POSTGRES_USER}
+      - POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      - POSTGRES_HOST: ${POSTGRES_HOST}
+      - POSTGRES_PORT: ${POSTGRES_PORT}
+      - LOGFILE: ${LOGFILE}
+    networks:
+      - jobmarket_net
+    volumes:
+      - ./data:/model_app/data
+    entrypoint: ["sh", "-c", "python main.py"]
+    depends_on:
+      - jobmarket_db
+
+  jobmarket_api:
+    build:
+      context: ./src/api
+      dockerfile: Dockerfile
+    image: api_app:latest
+    environment:
+      - PATH_MODEL: ${PATH_MODEL}
+      - POSTGRES_DBNAME: ${POSTGRES_DBNAME}
+      - POSTGRES_USER: ${POSTGRES_USER}
+      - POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      - POSTGRES_HOST: ${POSTGRES_HOST}
+      - POSTGRES_PORT: ${POSTGRES_PORT}
+      - LOGFILE: ${LOGFILE}
+      - UVICORN_PORT: ${UVICORN_PORT}
+    ports:
+      - "8000:8000"
+    networks:
+      - jobmarket_net
+    volumes:
+      - ./data:/api_app/data
+    depends_on:
+      - jobmarket_db
+
+networks:
+  jobmarket_net:
+    driver: bridge

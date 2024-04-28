@@ -24,19 +24,6 @@ if not all(env_vars.values()):
     logging.error(f"{__file__}: {msg}")
     raise EnvironmentError(msg)
 
-
-# connect to database
-database_connection = connect_db(
-        db_user=pi.POSTGRES_USER,
-        db_password=pi.POSTGRES_PASSWORD,
-        db_host=pi.POSTGRES_HOST,
-        db_port=pi.POSTGRES_PORT,
-        db_name=pi.POSTGRES_DBNAME
-)
-if not database_connection:
-    logging.error(f"{__file__}: Can´t connect to database")
-    raise Exception("Can´t connect to database")
-
 # load models
 os.chdir(PATH_MODEL)
 

@@ -40,3 +40,8 @@ locations = ['Aberdare', 'Aberdeen', 'Abertillery', 'Aberystwyth', 'Abingdon', '
 
 if __name__ == "__main__":
     print("locations has this many entries:", len(locations))
+    print("Liverpool index:",locations.index("Liverpool"))
+    print("Manchester index:",locations.index("Manchester"))
+    tt = "_UNKOWN_"
+    sql_inserts = [ f"Insert INTO location (country, region, city, city_district, area_code, state) VALUES('United Kingdom', {tt}, {loc}, {tt}, {tt}, {tt})" for loc in locations[locations.index("Liverpool"): locations.index("Manchester")+1] ]
+    print(";\n".join(sql_inserts))
