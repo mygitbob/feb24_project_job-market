@@ -16,7 +16,7 @@ touch ./data/logs/api.log
 export PIPELINE_ACTION="init"
 
 # start database and initial data retrieval process
-docker-compose up -d jobmarket_db jobmarket_data_retrieval --env PIPLINE_INIT=init --env s=371 --env e=392 --env l=10
+docker-compose up -d jobmarket_db jobmarket_data_retrieval
 
 # when data retrieval is complete, start transform
 docker wait jobmarket_data_retrieval

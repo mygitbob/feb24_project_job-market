@@ -7,7 +7,7 @@
 export PIPELINE_ACTION="update"
 
 # start data retrieval update process
-docker-compose up -d jobmarket_db jobmarket_data_retrieval --env PIPELINE_ACTION=update
+docker-compose up -d jobmarket_db jobmarket_data_retrieval
 
 # warte auf Abschluss der Datenabrufaktualisierung und starte dann die Transformation
 docker wait jobmarket_data_retrieval
