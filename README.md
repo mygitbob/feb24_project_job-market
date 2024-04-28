@@ -1,8 +1,6 @@
 # Datasientest Project: feb24_project_job-market
 
-**TODO** Insert project description
-fix bug when database connection cant be established:
-`UnboundLocalError: local variable 'conn' referenced before assignment`<br>
+**TODO** Insert project description<br>
 
 ## Building the docker images
 This section is for building and testing individual docker images/containers.<br>
