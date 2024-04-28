@@ -12,23 +12,25 @@ touch ./data/logs/transform.log
 touch ./data/logs/model_creation.log
 touch ./data/logs/api.log
 
+# lead environment variables
+source .env
 # set PIPELINE_ACTION for setup phase
 export PIPELINE_ACTION="init"
 
 # start database and initial data retrieval process
-docker-compose jobmarket_db jobmarket_data_retrieval --env-file .env up
+docker-compose up -d jobmarket_data_retrieval
 
 # when data retrieval is complete, start transform
 docker wait jobmarket_data_retrieval
-docker-compose jobmarket_transform --env-file .env up
+docker-compose up -d jobmarket_transform 
 
 # when transform is complete, start model creation
 docker wait jobmarket_transform
-docker-compose jobmarket_model --env-file .env up
+docker-compose up -d jobmarket_model
 
 # when model creation is complete, start api
 docker wait jobmarket_model
-docker-compose jobmarket_api --env-file .env up
+docker-compose up -d jobmarket_api
 
 echo "setup phase finished"
 
