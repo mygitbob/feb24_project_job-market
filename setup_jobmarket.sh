@@ -12,6 +12,9 @@ touch ./data/logs/transform.log
 touch ./data/logs/model_creation.log
 touch ./data/logs/api.log
 
+# set PIPELINE_ACTION for setup phase
+export PIPELINE_ACTION="init"
+
 # start database and initial data retrieval process
 docker-compose up -d jobmarket_db jobmarket_data_retrieval --env PIPLINE_INIT=init --env s=371 --env e=392 --env l=10
 

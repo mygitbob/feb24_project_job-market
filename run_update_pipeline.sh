@@ -3,6 +3,9 @@
 # check if database and api are still running and restart them if not
 ./restart_services.sh
 
+# set PIPELINE_ACTION for update phase
+export PIPELINE_ACTION="update"
+
 # start data retrieval update process
 docker-compose up -d jobmarket_db jobmarket_data_retrieval --env PIPELINE_ACTION=update
 
