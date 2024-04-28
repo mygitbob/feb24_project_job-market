@@ -32,6 +32,7 @@ postgres
 This command uses the `create_databse.sql` script of the `./src/postgres` folder to create the database during its first start.
 <br>
 ### Build the data_retrieval app
+
 `docker build -t data_retrieval_app -f ./src/data_retrieval/Dockerfile .`<br>
 Create a container to check if it works:<br>
 `docker run --rm -it data_retrieval_app bash`<br>
@@ -57,7 +58,7 @@ We can now use our data retrieval command:<br>
 
 `python main.py -h`<br>
 
-```bash
+```
 usage: main.py [-h] [-s START_INDEX] [-e END_INDEX] [-l SLEEP_TIME] {init,update}
 
 Data retrieval tool that can perform initial data retrieval or an update ('init' or 'update')
@@ -82,6 +83,7 @@ Create a container and test it:<br>
 
 `docker run --rm -it transform_app bash`<br>
 <br>
+
 ### Test the transform app
 Start the transformation app with the required configuration.<br>
 
@@ -103,6 +105,7 @@ docker run --rm -it
 transform_app bash
 ``` 
 <br>
+
 ### Build the model app
 
 `docker build -t model_app -f ./src/model_creation/Dockerfile .`<br>
@@ -111,6 +114,7 @@ Create a container and test it:<br>
 
 `docker run --rm -it model_app bash`<br>
 <br>
+
 ### Test the model app
 Start the model app with the required configuration.<br>
 
@@ -128,13 +132,14 @@ docker run --rm -it
 --name jobmarket_model
 model_app bash
 ``` 
-### build api app
-`build -t api_app -f ./src/api/Dockerfile .`
+### Build the api app
+`build -t api_app -f ./src/api/Dockerfile .`<br>
 Create a container and test it:<br>
 `docker run --rm -it api_app bash`<br>
 <br>
+
 ### Test the api app
-Start the transformation app with the required configuration (use option `-d` if you don´t want to see the output):<br>
+Start the api app with the required configuration (use option `-d` if you don´t want to see the output):<br>
 
 ```bash
 docker run --rm -it  -p 8000:8000 
@@ -170,7 +175,7 @@ chmod +x  restart_services.sh
 Next you have to run the 
 
 `setup_jobmarket.sh`
-. This will create the required folder structure in the data folder,<br>
+This will create the required folder structure in the data folder,<br>
 create the jobmarket database and start the postgres container.<br> 
 Then the initial ETL pipline will be run. The containers will started one after another. <br>
 First the data retrieval, then the transform, which also stores the data in the jobmarket database.<br>
