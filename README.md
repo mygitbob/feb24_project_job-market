@@ -159,6 +159,7 @@ docker run --rm -it  -p 8000:8000
 You can now access the api via your browser and test the api:<br>
 http://localhost:8000/docs <br>
 <br>
+
 ## Install instructions
 First you have to give the install/update scripts the permission to execute:
 
