@@ -54,6 +54,7 @@ docker run --rm -it
 ```
 <br>
 We can now use our data retrieval command:<br>
+
 `python main.py -h`<br>
 
 ```bash
@@ -78,6 +79,7 @@ optional arguments:
 `docker build -t transform_app -f ./src/transform/Dockerfile .`<br>
 <br>
 Create a container and test it:<br>
+
 `docker run --rm -it transform_app bash`<br>
 <br>
 ### Test the transform app
@@ -102,9 +104,11 @@ transform_app bash
 ``` 
 <br>
 ### Build the model app
+
 `docker build -t model_app -f ./src/model_creation/Dockerfile .`<br>
 <br>
 Create a container and test it:<br>
+
 `docker run --rm -it model_app bash`<br>
 <br>
 ### Test the model app
@@ -163,7 +167,10 @@ chmod +x  run_update_pipeline.sh
 chmod +x  restart_services.sh
 ```
 <br>
-Next you have to run the `setup_jobmarket.sh`. This will create the required folder structure in the data folder,<br>
+Next you have to run the 
+
+`setup_jobmarket.sh`
+. This will create the required folder structure in the data folder,<br>
 create the jobmarket database and start the postgres container.<br> 
 Then the initial ETL pipline will be run. The containers will started one after another. <br>
 First the data retrieval, then the transform, which also stores the data in the jobmarket database.<br>
@@ -171,10 +178,12 @@ The pipeline also includes the model training, which is done by the model contai
 When the modles are created the api service is started.<br>
 Finally the script adds a cronjob for the `run_update_pipeline.sh` which will be stated every Sunday at 23.00.<br>
 <br>
-The `run_update_pipeline.sh` starts the data retrieval, tranform and create model services one after another.<br>
+
+`run_update_pipeline.sh` starts the data retrieval, tranform and create model services one after another.<br>
 They will download the newest data from the sources, transform and save the data and then create new models with the updated data.<br>
 <br>
-The `restart_services.sh` script can be used to restart the postgres and api service. These two services should be running all the time.<br>
+
+`restart_services.sh` script can be used to restart the postgres and api service. These two services should be running all the time.<br>
 If the system will be rebooted the script can be used to restart them again. The `run_update_pipeline.sh` also uses thsi script to check<br>
 if the databse is availible and if not restart it.<br>
 ## Architecture
