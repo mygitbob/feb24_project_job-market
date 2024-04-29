@@ -16,8 +16,9 @@ services:
 
   jobmarket_data_retrieval:
     build:
-      context: ./src/data_retrieval
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./src/data_retrieval/Dockerfile
+    container_name: jobmarket_data_retrieval_container
     image: jobmarket_data_retrieval_app:latest
     environment:
       PATH_DATA_RAW: ${PATH_DATA_RAW}
@@ -40,8 +41,9 @@ services:
 
   jobmarket_transform:
     build:
-      context: ./src/transform
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./src/transform/Dockerfile
+    container_name: jobmarket_transform_container
     image: jobmarket_transform_app:latest
     environment:
       PATH_DATA_PROCESSED: ${PATH_DATA_PROCESSED}
@@ -64,8 +66,9 @@ services:
 
   jobmarket_model:
     build:
-      context: ./src/model_creation
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./src/model_creation/Dockerfile
+    container_name: jobmarket_model_container
     image: jobmarket_model_app:latest
     environment:
       PATH_MODEL: ${PATH_MODEL}
@@ -85,8 +88,9 @@ services:
 
   jobmarket_api:
     build:
-      context: ./src/api
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./src/api/Dockerfile
+    container_name: jobmarket_api_container
     image: api_app:latest
     environment:
       PATH_MODEL: ${PATH_MODEL}
