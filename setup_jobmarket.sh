@@ -18,18 +18,18 @@ source .env
 export PIPELINE_ACTION="init"
 
 # start database and initial data retrieval process
-docker-compose up -d jobmarket_data_retrieval
+docker-compose up -d jobmarket_db jobmarket_data_retrieval
 
 # when data retrieval is complete, start transform
-docker wait jobmarket_data_retrieval
+docker wait jobmarket_data_retrieval_container
 docker-compose up -d jobmarket_transform 
 
 # when transform is complete, start model creation
-docker wait jobmarket_transform
+docker wait jobmarket_transform_container
 docker-compose up -d jobmarket_model
 
 # when model creation is complete, start api
-docker wait jobmarket_model
+docker wait jobmarket_model_container
 docker-compose up -d jobmarket_api
 
 echo "setup phase finished"
