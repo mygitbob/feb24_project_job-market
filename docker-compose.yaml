@@ -3,13 +3,12 @@ version: '3'
 services:
 
   jobmarket_db:
+    container_name: jobmarket_db_container
     image: postgres:latest
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
-    networks:
-      - jobmarket_net
     volumes:
       - ./data/postgres:/var/lib/postgresql/data
       - ./src/postgres:/docker-entrypoint-initdb.d # create the database at the 1st start
@@ -33,11 +32,11 @@ services:
       LOGFILE: ${LOGFILE_DATA_RETRIEVAL}
       PIPELINE_ACTION: ${PIPELINE_ACTION}
       s: ${s:-}
-      e: ${s:-}
+      e: ${e:-}
       l: ${l:-}
     volumes:
       - ./data:/data_retrieval_app/data
-    entrypoint: ["sh", "-c", "python main.py $PIPELINE_ACTION"]
+    entrypoint: ["sh", "-c", "python main.py $PIPELINE_ACTION -s=$s -e=$e -l=$l"]
 
   jobmarket_transform:
     build:
@@ -56,8 +55,6 @@ services:
       POSTGRES_HOST: ${POSTGRES_HOST}
       POSTGRES_PORT: ${POSTGRES_PORT}
       LOGFILE: ${LOGFILE_TRANSFORM}
-    networks:
-      - jobmarket_net
     volumes:
       - ./data:/transform_app/data
     entrypoint: ["sh", "-c", "python main.py"]
@@ -71,15 +68,13 @@ services:
     container_name: jobmarket_model_container
     image: jobmarket_model_app:latest
     environment:
-      PATH_MODEL: ${PATH_MODEL}
+      PATH_MODEL: /model_app/data/model
       POSTGRES_DBNAME: ${POSTGRES_DBNAME}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_HOST: ${POSTGRES_HOST}
       POSTGRES_PORT: ${POSTGRES_PORT}
       LOGFILE: ${LOGFILE_MODEL_CREATION}
-    networks:
-      - jobmarket_net
     volumes:
       - ./data:/model_app/data
     entrypoint: ["sh", "-c", "python main.py"]
@@ -93,7 +88,7 @@ services:
     container_name: jobmarket_api_container
     image: api_app:latest
     environment:
-      PATH_MODEL: ${PATH_MODEL}
+      PATH_MODEL: /api_app/data/model
       POSTGRES_DBNAME: ${POSTGRES_DBNAME}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -103,13 +98,7 @@ services:
       UVICORN_PORT: ${UVICORN_PORT}
     ports:
       - "8000:8000"
-    networks:
-      - jobmarket_net
     volumes:
       - ./data:/api_app/data
     depends_on:
       - jobmarket_db
-
-networks:
-  jobmarket_net:
-    driver: bridge
