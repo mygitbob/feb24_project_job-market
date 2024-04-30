@@ -196,6 +196,7 @@ TODO
 
 <br>
 Postgres Schema
+<br>
 ```mermaid
 JOB-TITLE }|--|| JOB-OFFER : has
     JOB-OFFER |o--|{ JOB-TO-SKILLS : maps
@@ -205,8 +206,7 @@ JOB-TITLE }|--|| JOB-OFFER : has
     JOB-OFFER ||--|{ DATA-SOURCE : sourced-from
     JOB-OFFER |o--|{ EXPERIENCE : requires
     JOB-TO-SKILLS }|--o| SKILL-LIST : includes
-    JOB-TO-CATEGORIES }|--o| JOB-CATEGORY : includes
-    
+    JOB-TO-CATEGORIES }|--o| JOB-CATEGORY : includes    
     
     JOB-TITLE {
         int jt_id PK
