@@ -14,11 +14,14 @@ touch ./data/logs/api.log
 
 # lead environment variables
 source .env
+
+# start database
+docker-compose up -d jobmarket_db
+
 # set PIPELINE_ACTION for setup phase
 export PIPELINE_ACTION="init"
-
-# start database and initial data retrieval process
-docker-compose up -d jobmarket_db jobmarket_data_retrieval
+# start initial data retrieval process
+jobmarket_data_retrieval
 
 # when data retrieval is complete, start transform
 docker wait jobmarket_data_retrieval_container

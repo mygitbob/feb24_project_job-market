@@ -58,8 +58,6 @@ services:
     volumes:
       - ./data:/transform_app/data
     entrypoint: ["sh", "-c", "python main.py"]
-    depends_on:
-      - jobmarket_db
 
   jobmarket_model:
     build:
@@ -78,8 +76,6 @@ services:
     volumes:
       - ./data:/model_app/data
     entrypoint: ["sh", "-c", "python main.py"]
-    depends_on:
-      - jobmarket_db
 
   jobmarket_api:
     build:
@@ -100,5 +96,3 @@ services:
       - "8000:8000"
     volumes:
       - ./data:/api_app/data
-    depends_on:
-      - jobmarket_db
