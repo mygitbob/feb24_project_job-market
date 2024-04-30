@@ -21,7 +21,7 @@ docker-compose up -d jobmarket_db
 # set PIPELINE_ACTION for setup phase
 export PIPELINE_ACTION="init"
 # start initial data retrieval process
-jobmarket_data_retrieval
+docker-compose up -d jobmarket_data_retrieval
 
 # when data retrieval is complete, start transform
 docker wait jobmarket_data_retrieval_container

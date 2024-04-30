@@ -1,4 +1,5 @@
 import os
+import sys
 import psycopg2 as psy
 
 from logger import setup_logging, logging
