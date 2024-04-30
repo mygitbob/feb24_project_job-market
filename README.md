@@ -282,7 +282,7 @@ JOB-TITLE }|--|| JOB-OFFER : has
     }
 ```
 
-Sample
+
 
 ```mermaid
   graph TD;
