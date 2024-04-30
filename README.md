@@ -281,3 +281,13 @@ JOB-TITLE }|--|| JOB-OFFER : has
         int cat_id FK
     }
 ```
+
+Sample
+
+```mermaid
+  graph TD;
+      A-->B;
+      A-->C;
+      B-->D;
+      C-->D;
+```
