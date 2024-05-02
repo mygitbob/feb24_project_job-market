@@ -124,7 +124,7 @@ def categorize_by_keywords(text, keywords, nlp):
         token_text = token.text.lower()
         # If the normalized token is in our list of keywords, add the original token text to the set
         if token_text in [keyword.lower() for keyword in keywords]:
-            keywords_found.add(token.text)
+            keywords_found.add(token.text.capitalize())
     # Return a comma-separated string of unique keywords found, or "None" if no keywords were identified
     return ', '.join(keywords_found) if keywords_found else None #"_NOTFOUND_"
 
@@ -170,111 +170,6 @@ def clean_sort_and_deduplicate(text):
     # Join the cleaned parts back into a single string
     return ', '.join(cleaned_parts)
 
-
-def transform_old():
-    nlp = spacy.load('en_core_web_sm')  # Or 'en_core_web_lg' for more accuracy but larger size
-
-    documents = load_df()
-    data_objects = []
-    for doc in documents:
-        # Determine the salary period
-        salary_period = determine_salary_period(doc['jobDescription'], doc['minimumSalary'], doc['maximumSalary'])
-        # Add the new field to the document
-        doc['salaryPeriod'] = salary_period
-        data_objects.append(doc)
-
-    # Creating the DataFrame
-    df_reed = pd.DataFrame(data_objects)
-
-    df_reed['minimumSalary'] = pd.to_numeric(df_reed['minimumSalary'], errors='coerce')
-    df_reed['maximumSalary'] = pd.to_numeric(df_reed['maximumSalary'], errors='coerce')
-
-    df_reed.dropna(subset=['minimumSalary', 'maximumSalary'], inplace=True)
-
-    df_reed = df_reed[df_reed['minimumSalary'] > 0]
-
-    df_reed.loc[df_reed['minimumSalary'] < 70, 'salaryPeriod'] = 'per hour'
-    df_reed.loc[
-        (df_reed['minimumSalary'] >= 70) & (
-                df_reed['minimumSalary'] < 999), 'salaryPeriod'] = 'per day'
-
-    for column in ['minimumSalary', 'maximumSalary']:
-        df_reed_salary_tr = transform_salary_to_yearly(df_reed, column, 'salaryPeriod')
-    # Apply the function to create a new column
-    df_reed_salary_tr['jobLevel'] = df_reed_salary_tr['jobTitle'].apply(lambda x: categorize_seniority(x, nlp))
-    # Applying the function to each row for both jobSkills and jobSite columns
-    df_reed_salary_tr['jobSkills'] = df_reed_salary_tr.apply(
-        lambda row: categorize_by_keywords(row['jobTitle'] + " " + row['jobDescription'], keywords_skills, nlp), axis=1)
-    df_reed_salary_tr['jobSite'] = df_reed_salary_tr.apply(
-        lambda row: categorize_by_keywords(row['jobTitle'] + " " + row['jobDescription'], keywords_site, nlp), axis=1)
-    # Apply the function to the 'jobTitle' column and create a new 'jobCategory' column
-    df_reed_salary_tr['jobCategory'] = df_reed_salary_tr['jobTitle'].apply(
-        lambda x: categorize_job_titles(x, keywords_title))
-
-    # Apply the modified function to sort the terms within the 'jobSite' column using .loc
-    df_reed_salary_tr.loc[:, 'jobSite'] = df_reed_salary_tr['jobSite'].apply(clean_sort_and_deduplicate)
-
-    # Mapping of source column names to postgres db column names
-    column_mappings = {
-        'sourceId': 'source_id',
-        'jobTitle': 'job_title_name',
-        'jobLevel': 'experience_level',
-        'date': 'published',
-        'minimumSalary': 'salary_min',
-        'maximumSalary': 'salary_max',
-        'jobUrl': 'joboffer_url',
-        'currency': 'currency_symbol',
-        'locationName': 'location_country',
-        'jobSite': 'job_site',
-        'jobSkills': 'skills',
-        'jobCategory': 'categories'
-    }
-
-    # Define additional columns and default values
-    additional_columns = {
-        'data_source_name': 'reed'
-    }
-
-    # Rename columns based on the mapping
-    df_reed_salary_tr.rename(columns=column_mappings, inplace=True)
-
-    # Define the new order of columns, add missing ones with default values
-    df_reed_postgres = df_reed_salary_tr[
-        [column_mappings.get(col, col) for col in column_mappings.keys()]
-    ]
-
-    # Add additional columns with default values
-    for col, default_value in additional_columns.items():
-        df_reed_postgres[col] = default_value
-
-    # Replace specific column values
-    df_reed_postgres['location_country'] = 'United Kingdom'
-
-    df_reed_postgres['published'] = pd.to_datetime(df_reed_postgres['published'], format='%d/%m/%Y')
-
-    # Ensure salaries are integers and greater than 0
-    df_reed_postgres['salary_min'] = pd.to_numeric(df_reed_postgres['salary_min'], errors='coerce').fillna(0).astype(
-        int)
-    df_reed_postgres['salary_max'] = pd.to_numeric(df_reed_postgres['salary_max'], errors='coerce').fillna(0).astype(
-        int)
-    df_reed_postgres = df_reed_postgres[(df_reed_postgres['salary_min'] > 0) & (df_reed_postgres['salary_max'] > 0)]
-
-    # Set the types for other fields as strings
-    df_reed_postgres['source_id'] = df_reed_postgres['source_id'].astype(str)
-    df_reed_postgres['experience_level'] = df_reed_postgres['experience_level'].astype(str)
-    df_reed_postgres['joboffer_url'] = df_reed_postgres['joboffer_url'].astype(str)
-    df_reed_postgres['currency_symbol'] = df_reed_postgres['currency_symbol'].astype(str)
-    df_reed_postgres['location_country'] = df_reed_postgres['location_country'].astype(str)
-    df_reed_postgres['data_source_name'] = df_reed_postgres['data_source_name'].astype(str)
-    df_reed_postgres['skills'] = df_reed_postgres['skills'].str.split(', ')
-    df_reed_postgres['categories'] = df_reed_postgres['categories'].str.split(', ')
-    df_reed_postgres['job_site'] = df_reed_postgres['job_site'].astype(str)
-
-
-    print(df_reed_postgres.head())
-
-    errors = store_dataframe(df_reed_postgres, check_df=False)
-    print(errors)
 
 def transform(df):
     data_objects = []
