@@ -4,6 +4,7 @@
 
 # lead environment variables
 source .env
+export PIPELINE_ACTION="not used here"
 
 if ! docker-compose ps | grep -q 'jobmarket_db'; then
     echo "Restarting postgres container..."
