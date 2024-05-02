@@ -108,7 +108,7 @@ def proccess_raw_data(source_subdir=DIR_NAME_OKJOB, target_subdir=DIR_NAME_OKJOB
                 PATH_DATA_PROCESSED, DIR_NAME_OKJOB, "full_job_description")
 
             if not os.path.exists(jobd_folder):
-                ssssing.debug(
+                logging.debug(
                     f"proccess_raw_data: create job description folder: {jobd_folder}")
                 os.makedirs(jobd_folder, exist_ok=True)
             jobd_fname = f"okjob_jobdesc_id={json_dict['id']}.html"
