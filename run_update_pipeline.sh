@@ -11,7 +11,7 @@ export PIPELINE_ACTION="update"
 # delete old data if anything is left
 rm -rf ./data/processed/muse.com/merged/* 2>/dev/null
 rm -rf ./data/processed/okjob.io/merged/* 2>/dev/null
-rm -rf ./data/processed/okjob.io/full_job_description\/* 2>/dev/null
+rm -rf ./data/processed/okjob.io/full_job_description/* 2>/dev/null
 rm -rf ./data/processed/reed.co.uk/merged/* 2>/dev/null
 
 docker-compose up -d jobmarket_db jobmarket_data_retrieval
