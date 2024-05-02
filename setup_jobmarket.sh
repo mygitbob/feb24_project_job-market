@@ -42,7 +42,7 @@ echo "setup phase finished"
 # get absolut path to update script
 SCRIPT_PATH=$(readlink -f ./run_update_pipeline.sh)
 # create job that runs our script every sunday at 23.00
-CRON_COMMAND="0 23 * * 0 $SCRIPT_PATH"
+CRON_COMMAND="0 23 * * 0 bash $SCRIPT_PATH"
 # create entry in crontab
 echo "$CRON_COMMAND" | crontab -
 
