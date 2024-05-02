@@ -21,7 +21,7 @@ def setup_logging(log_file=None, level=logging.DEBUG, reset = False):
         else:
             mode = 'a'
             
-        logging.basicConfig(format='%(asctime)s - %(message)s', filename=log_file, level=level)
+        logging.basicConfig(format='%(asctime)s - %(levelname)s - %(filename)s - %(message)s', filename=log_file, level=level)
         
         with open(log_file, mode):
             logging.info("-"*40)

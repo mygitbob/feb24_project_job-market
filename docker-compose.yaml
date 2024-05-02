@@ -21,7 +21,7 @@ services:
     image: jobmarket_data_retrieval_app:latest
     environment:
       PATH_DATA_RAW: ${PATH_DATA_RAW}
-      PATH_DATA_PROCESSED: ${PATH_DATA_PROCESSED}
+      PATH_DATA_PROCESSED: /data_retrieval_app/data/processed
       DIR_NAME_MUSE: ${DIR_NAME_MUSE}
       DIR_NAME_REED: ${DIR_NAME_REED}
       KNOWN_CURRENCY: ${KNOWN_CURRENCY}
@@ -45,10 +45,10 @@ services:
     container_name: jobmarket_transform_container
     image: jobmarket_transform_app:latest
     environment:
-      PATH_DATA_PROCESSED: ${PATH_DATA_PROCESSED}
-      DIR_NAME_MUSE: ${DIR_NAME_MUSE}
-      DIR_NAME_REED: ${DIR_NAME_REED}
-      DIR_NAME_OKJOB: ${DIR_NAME_OKJOB}
+      PATH_DATA_PROCESSED: /transform_app/data/processed
+      DIR_NAME_MUSE: ${DIR_NAME_MUSE_TRANSFORM}
+      DIR_NAME_REED: ${DIR_NAME_REED_TRANSFORM}
+      DIR_NAME_OKJOB: ${DIR_NAME_OKJOB_TRANSFORM}
       POSTGRES_DBNAME: ${POSTGRES_DBNAME}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -82,7 +82,7 @@ services:
       context: .
       dockerfile: ./src/api/Dockerfile
     container_name: jobmarket_api_container
-    image: api_app:latest
+    image: jobmarket_api_app:latest
     environment:
       PATH_MODEL: /api_app/data/model
       POSTGRES_DBNAME: ${POSTGRES_DBNAME}

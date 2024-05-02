@@ -24,11 +24,11 @@ def save_raw_api_data(fname, data, subdir = ''):
         os.mkdir(path2save)
     if isinstance(data, str):  
         with open(os.path.join(path2save, fname), 'w', encoding='utf-8') as file:
-            logging.debug(f"helpers: save_raw_data: write json file: {fname}")
+            logging.debug(f"save_raw_data: write json file: {fname}")
             file.write(data)
     elif isinstance(data, list):  
         with open(os.path.join(path2save, fname), 'w', encoding='utf-8') as file:
-            logging.debug(f"helpers: save_raw_data: write json file: {fname}")
+            logging.debug(f"save_raw_data: write json file: {fname}")
             file.write('[')            # multiple jsons have to be in an array
             for i, item in enumerate(data):
                 file.write(item)
@@ -59,9 +59,9 @@ def load_raw_api_data(subdir = '', fname=''):
             with open(file, encoding='utf-8') as f:
                 try:
                     result.append((file, json.load(f)))
-                    logging.debug(f"helpers: load_raw_data: load json file: {file}")
+                    logging.debug(f"load_raw_data: load json file: {file}")
                 except Exception as e:
-                    logging.error(f"helpers: load_raw_data: json load failed for file: {file}")
+                    logging.error(f"load_raw_data: json load failed for file: {file}")
         return result
     else: 
         for file in os.listdir(path2load):
@@ -70,9 +70,9 @@ def load_raw_api_data(subdir = '', fname=''):
                 with open(file, encoding='utf-8') as f:
                     try:
                         result.append((file, json.load(f)))
-                        logging.debug(f"helpers: load_raw_data: load json file: {file}")
+                        logging.debug(f"load_raw_data: load json file: {file}")
                     except Exception as e:
-                        logging.error(f"helpers: load_raw_data: json load failed for file: {file}")
+                        logging.error(f"load_raw_data: json load failed for file: {file}")
         return result
 
 
@@ -94,18 +94,18 @@ def save_processed_data(data_to_save, source_file, subdir='', delete_source=Fals
     """
     path2save = os.path.join(PATH_DATA_PROCESSED, subdir)
     if not os.path.exists(path2save):
-        logging.debug(f"helpers: save_processed_data: mkdir: {path2save}")
+        logging.debug(f"save_processed_data: mkdir: {path2save}")
         os.mkdir(path2save)
     fout = os.path.basename(source_file).replace('_raw_', '_processed_')
     if write_json:
         json_filepath = os.path.join(path2save, fout)
         with open(json_filepath, 'w', encoding='utf-8') as f:
-            logging.debug(f"helpers: save_processed_data: write json: {json_filepath}")
+            logging.debug(f"save_processed_data: write json: {json_filepath}")
             json.dump(data_to_save, f, indent=4)
     if write_csv:
         csv_filepath = os.path.join(path2save, fout).rsplit(".", maxsplit=1)[0] + ".csv"
         with open(csv_filepath, 'w', encoding='utf-8') as f:
-            logging.debug(f"helpers: save_processed_data: write csv: {csv_filepath}")
+            logging.debug(f"save_processed_data: write csv: {csv_filepath}")
             writer = csv.DictWriter(f, fieldnames = data_to_save[0].keys())
             writer.writeheader()
             writer.writerows(data_to_save)
@@ -119,7 +119,7 @@ def delete_all_files_in_directory_of_file(file_path):
     directory_path = os.path.dirname(file_path)
 
     if not os.path.isdir(directory_path):
-        logging.error(f"helpers: delete_all_files_in_directory_of_file: cant get dir name: {file_path}")
+        logging.error(f"delete_all_files_in_directory_of_file: cant get dir name: {file_path}")
         return
     
     file_list = os.listdir(directory_path)
@@ -128,9 +128,9 @@ def delete_all_files_in_directory_of_file(file_path):
         file_path = os.path.join(directory_path, file_name)
         if os.path.isfile(file_path):
             os.remove(file_path)
-            logging.debug(f"helpers: delete_all_files_in_directory_of_file: deleting file: {file_path}")
+            logging.debug(f"delete_all_files_in_directory_of_file: deleting file: {file_path}")
         else:
-            logging.error(f"helpers: delete_all_files_in_directory_of_file: error deleting file: {file_path}")
+            logging.error(f"delete_all_files_in_directory_of_file: error deleting file: {file_path}")
     
 
 
@@ -145,10 +145,10 @@ def remove_files(files2delete):
     """
     for to_delete in files2delete:
         try:
-            logging.debug(f"helpers: remove_raw_api_data: deleting file: {to_delete}")
+            logging.debug(f"remove_raw_api_data: deleting file: {to_delete}")
             os.remove(to_delete)
         except OSError as e:
-            logging.error(f"helpers: remove_raw_api_data: error deleting file: {to_delete}")
+            logging.error(f"remove_raw_api_data: error deleting file: {to_delete}")
 
 
 def merge_files(folder, prefix, delete_source=False, name_add = ''):
@@ -172,14 +172,14 @@ def merge_files(folder, prefix, delete_source=False, name_add = ''):
     files2delete = []
 
     if not os.path.exists(source_path):
-        logging.debug(f"helpers: merge_files: make dir: {source_path}")
+        logging.debug(f"merge_files: make dir: {source_path}")
         os.mkdir(source_path)
 
     for file in os.listdir(source_path):
         if file.startswith(prefix):
             if file.endswith('.json'):
                 with open(os.path.join(source_path, file), encoding='utf-8') as f:
-                    logging.debug(f"helpers: merge_files: open json: {file}")
+                    logging.debug(f"merge_files: open json: {file}")
                     merged_json.extend(json.load(f))
                     if delete_source:
                         files2delete.append(os.path.join(source_path, file))
@@ -199,13 +199,13 @@ def merge_files(folder, prefix, delete_source=False, name_add = ''):
     if merged_json:
         jout_file = out_file + ".json"
         with open(os.path.join(source_path, jout_file), 'w', encoding='utf-8') as f:
-            logging.debug(f"helpers: merge_files: write json: {jout_file}")
+            logging.debug(f"merge_files: write json: {jout_file}")
             json.dump(merged_json, f)
 
     if merged_csv:    
         cout_file = out_file + ".csv"
         with open(os.path.join(source_path, cout_file), 'w', newline='', encoding='utf-8') as outf:
-            logging.debug(f"helpers: merge_files: write csv: {cout_file}")
+            logging.debug(f"merge_files: write csv: {cout_file}")
             writer = csv.writer(outf)
 
             # write header only once

@@ -12,28 +12,6 @@ from datetime import datetime
 from init import PATH_MODEL
 from init import logging
 
-"""
-def replace_skills_with_frequency_sum(skills_string, skills_frequency):
-    skills_list = skills_string.split(',')
-    frequency_sum = sum(skills_frequency[skill.strip()] for skill in skills_list)
-    return frequency_sum
-
-def prepare_data(df):
-    df = df.dropna(subset=['skills'])
-    print(df['skills'].dtype)
-    #df = df[~df['skills'].isin(['NaN', 'None'])]
-    unique_skills = df['skills'].explode().str.strip().unique()
-    print(unique_skills)
-    df['skills'] = df['skills'].apply(lambda x: x.strip() if isinstance(x, str) else x)
-    df = df[df['skills'] != '']
-    
-    all_skills = [skill.strip() for sublist in df['skills'].str.split(',').tolist() for skill in sublist]
-    skills_frequency = Counter(all_skills)
-
-    df['jobSkillsSumFrequency'] = df['skills'].apply(lambda x: replace_skills_with_frequency_sum(x, skills_frequency))
-    df.loc[df['skills'] == 'none', 'jobSkillsSumFrequency'] = 0
-    return df
-"""
 
 def replace_skills_with_frequency_sum(skills_string, skills_frequency):
     skills_list = skills_string.split(',')
@@ -129,13 +107,13 @@ def train_model(postgres_df):
             backup_max = os.path.join(PATH_MODEL, f'DecisionTreeRegressor_max_salary_{timestamp}.joblib')
             os.rename(path_max, backup_max)
     except Exception as e:
-        logging.error(f"{__file__}: error renaming old models: {e}")
+        logging.error(f"error renaming old models: {e}")
     
     # save new models
     try:
         joblib.dump(pipeline_min_salary, path_min)
         joblib.dump(pipeline_max_salary, path_max)
     except Exception as e:
-        logging.error(f"{__file__}: error saving new models: {e}")
+        logging.error(f"error saving new models: {e}")
     else:
-        logging.debug(f"{__file__}: new models trained and saved")
+        logging.debug(f"new models trained and saved")

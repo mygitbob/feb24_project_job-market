@@ -23,7 +23,7 @@ def save_raw_joblist(page=0, subdir='', headers={}):
     """
     if page > 99:
         logging.debug(
-            f"muse.py: save_raw_joblist: page number too high: {page}")
+            f"save_raw_joblist: page number too high: {page}")
         return
     response_data, response_code = get_raw_joblist(page, headers)
     if response_code == 200:
@@ -37,7 +37,7 @@ def save_raw_joblist(page=0, subdir='', headers={}):
         fname.replace(' ', '_')
         save_raw_api_data(fname, response_data, subdir)
     else:
-        logging.debug(f"muse.py: save_raw_joblist: no data to save")
+        logging.debug(f"save_raw_joblist: no data to save")
 
 
 def get_raw_joblist(page, headers={}):
@@ -54,14 +54,14 @@ def get_raw_joblist(page, headers={}):
     # url = f"https://www.themuse.com/api/public/jobs?api_key={Constants.MUSE_API_KEY}&page={page}"
     url = f"https://www.themuse.com/api/public/jobs?page={page}"
 
-    logging.debug(f"muse.py: GET REQUEST API FOR: {url}, HEADERS: {headers}")
+    logging.debug(f"GET REQUEST API FOR: {url}, HEADERS: {headers}")
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         logging.debug(
-            f"muse.py: {url}: CONNECTION SUCCESSFUL, RESPONSE CODE: {response.status_code}")
+            f"{url}: CONNECTION SUCCESSFUL, RESPONSE CODE: {response.status_code}")
     else:
         logging.error(
-            f"muse.py: {url}: CONNECTION NOT SUCCESSFUL, RESPONSE CODE: {response.status_code}")
+            f"{url}: CONNECTION NOT SUCCESSFUL, RESPONSE CODE: {response.status_code}")
     return response.text, response.status_code
 
 
@@ -83,11 +83,11 @@ def process_raw_data(source_subdir=DIR_NAME_MUSE, target_subdir=DIR_NAME_MUSE, d
     data2process = load_raw_api_data(subdir=source_subdir)
     for d2p in data2process:
         fname, data = d2p
-        logging.debug(f"muse.py: process_raw_data: process raw file {fname}")
+        logging.debug(f"process_raw_data: process raw file {fname}")
         all_entries = []
         if 'results' not in data:
             logging.error(
-                f"muse.py: process_raw_data: no entry results for {fname}")
+                f"process_raw_data: no entry results for {fname}")
             break
         job_results = data['results']
         for job_result in job_results:

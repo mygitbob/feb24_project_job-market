@@ -41,7 +41,7 @@ def save_raw_joblist(subdir = '', headers={}, parameters={}):
     if response_code == 200:
         
         if check_results_empty(response_data):   # do we still get results or just an empty reply ?
-            logging.debug(f"reed.py: save_raw_joblist: empty result")
+            logging.debug("save_raw_joblist: empty result")
             return False     
         if subdir == '':
             subdir = DIR_NAME_REED                    # create a folder for each source 
@@ -53,7 +53,7 @@ def save_raw_joblist(subdir = '', headers={}, parameters={}):
         save_raw_api_data(fname, response_data, subdir)
         return True
     else:
-        logging.debug(f"reed.py: save_raw_joblist: response code: {response_code}")
+        logging.debug(f"save_raw_joblist: response code: {response_code}")
         return False
 
 
@@ -80,13 +80,13 @@ def get_raw_joblist(headers={}, parameters={}):
     # we have to do basic authentication
     auth_header = requests.auth.HTTPBasicAuth(REED_API_KEY, '')
     
-    logging.debug(f"reed.py: GET REQUEST API FOR: {url}, AUTH: {auth_header} HEADERS: {headers}")
+    logging.debug(f"GET REQUEST API FOR: {url}, AUTH: {auth_header} HEADERS: {headers}")
     response = requests.get(url, auth=auth_header, headers=headers)
 
     if response.status_code == 200:
-        logging.debug(f"reed.py: {url}: CONNECTION SUCCESSFUL, RESPONSE CODE: {response.status_code}")
+        logging.debug(f"{url}: CONNECTION SUCCESSFUL, RESPONSE CODE: {response.status_code}")
     else:
-        logging.error(f"reed.py: {url}: CONNECTION NOT SUCCESSFUL, RESPONSE CODE: {response.status_code}")
+        logging.error(f"{url}: CONNECTION NOT SUCCESSFUL, RESPONSE CODE: {response.status_code}")
     return response.text, response.status_code
 
 
@@ -110,7 +110,7 @@ def proccess_raw_data(source_subdir=DIR_NAME_REED, target_subdir=DIR_NAME_REED, 
     
     for tupel_entry in raw_api_data:
         fname, json_data = tupel_entry
-        logging.debug(f"reed.py: proccess_raw_data: process raw file {fname}")
+        logging.debug(f"proccess_raw_data: process raw file {fname}")
 
         job_entries = json_data['results']
 
@@ -121,13 +121,13 @@ def proccess_raw_data(source_subdir=DIR_NAME_REED, target_subdir=DIR_NAME_REED, 
                     entry['id'] = entry['jobId']            # rename jobId to id as for the other sources
                     del entry['jobId']
                 except:
-                    logging.error(f"reed.py: proccess_raw_data: no id found for {entry}")   
+                    logging.error(f"proccess_raw_data: no id found for {entry}")   
                 entry_stripped = {key: str(value).strip() for key, value in entry.items()}
                 result_list.append(entry_stripped)
 
             save_processed_data(result_list, fname, target_subdir, delete_source=delete_processed, write_json=write_json, write_csv=write_csv)   
         else:
-            logging.error(f"reed.py: proccess_raw_data: result list empty for file: {fname}")
+            logging.error(f"proccess_raw_data: result list empty for file: {fname}")
 
 
 def merge_processed_files(prefix='reed_proc', delete_source=False, name_add = ''):

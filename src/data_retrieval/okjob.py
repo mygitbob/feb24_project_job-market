@@ -34,7 +34,7 @@ def save_raw_joblist(start, end, subdir='', headers={}):
         fname.replace(' ', '_')
         save_raw_api_data(fname, response_data, subdir)
     else:
-        logging.debug(f"okjob.py: save_raw_joblist: no data to save")
+        logging.debug("save_raw_joblist: no data to save")
 
 
 def get_raw_joblist(start, end, headers={}):
@@ -50,14 +50,14 @@ def get_raw_joblist(start, end, headers={}):
     """
     url = f"https://sheets.googleapis.com/v4/spreadsheets/1owGcfKZRHZq8wR7Iw6PVh6-ueR0weIVQMjxWW_0M6a8/values/Sheet1!A{start}:N{end}?key={OKJOB_API_KEY}"
 
-    logging.debug(f"okjob.py: GET REQUEST API FOR: {url}, HEADERS: {headers}")
+    logging.debug(f"GET REQUEST API FOR: {url}, HEADERS: {headers}")
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         logging.debug(
-            f"okjob.py: {url}: CONNECTION SUCCESSFUL, RESPONSE CODE: {response.status_code}")
+            f"{url}: CONNECTION SUCCESSFUL, RESPONSE CODE: {response.status_code}")
     else:
         logging.error(
-            f"okjob.py: {url}: CONNECTION NOT SUCCESSFUL, RESPONSE CODE: {response.status_code}")
+            f"{url}: CONNECTION NOT SUCCESSFUL, RESPONSE CODE: {response.status_code}")
     return response.text, response.status_code
 
 
@@ -80,7 +80,7 @@ def proccess_raw_data(source_subdir=DIR_NAME_OKJOB, target_subdir=DIR_NAME_OKJOB
 
     for tupel_entry in raw_api_data:
         fname, json_data = tupel_entry
-        logging.debug(f"okjob.py: proccess_raw_data: process raw file {fname}")
+        logging.debug(f"proccess_raw_data: process raw file {fname}")
 
         keys = json_data['values'][0]       # keys are in the first entry
         # all other entries contain values
@@ -99,7 +99,7 @@ def proccess_raw_data(source_subdir=DIR_NAME_OKJOB, target_subdir=DIR_NAME_OKJOB
                 json_dict["id"] = str(int(id_entry))
             except:
                 logging.error(
-                    f"okjob.py: proccess_raw_data: cant cast id: {id_entry}")
+                    f"proccess_raw_data: cant cast id: {id_entry}")
                 break
 
             # save full job description in subfolder
@@ -108,8 +108,8 @@ def proccess_raw_data(source_subdir=DIR_NAME_OKJOB, target_subdir=DIR_NAME_OKJOB
                 PATH_DATA_PROCESSED, DIR_NAME_OKJOB, "full_job_description")
 
             if not os.path.exists(jobd_folder):
-                logging.debug(
-                    f"okjob.py: proccess_raw_data: create job description folder: {jobd_folder}")
+                ssssing.debug(
+                    f"proccess_raw_data: create job description folder: {jobd_folder}")
                 os.makedirs(jobd_folder, exist_ok=True)
             jobd_fname = f"okjob_jobdesc_id={json_dict['id']}.html"
             job_full_path = os.path.join(jobd_folder, jobd_fname)

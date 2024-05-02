@@ -1,10 +1,11 @@
-import postgres_initdb as pi
+from postgres_initdb import POSTGRES_DBNAME, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER
 import glob
 import os
 from joblib import load
 from postgres_queries import connect_db
 
 from logger import setup_logging, logging
+
 
 PATH_MODEL = os.environ.get('PATH_MODEL', None)
 
@@ -21,8 +22,17 @@ env_vars = {
 # check env_vars
 if not all(env_vars.values()):
     msg = f"All required environment variables must be set: {', '.join([f'{var_name}={var_value}' for var_name, var_value in env_vars.items()])}"
-    logging.error(f"{__file__}: {msg}")
+    logging.error(msg)
     raise EnvironmentError(msg)
+
+# connect to database
+database_connection = connect_db(
+            db_user=POSTGRES_USER,
+            db_password=POSTGRES_PASSWORD,
+            db_host=POSTGRES_HOST,
+            db_port=POSTGRES_PORT,
+            db_name=POSTGRES_DBNAME
+)
 
 # load models
 os.chdir(PATH_MODEL)
@@ -41,8 +51,9 @@ if match_min and match_max:
     model_max = load(path_max)
     logging.info(f"{__file__}: models loaded")
 else:
-    logging.error(f"{__file__}:Can´t load models: {PATH_MODEL}")
-    raise Exception("Can´t load models:", PATH_MODEL)
+    msg = f"Can´t load models: {PATH_MODEL}"
+    logging.error(msg)
+    raise Exception(msg)
 
 
 if __name__ == "__main__":

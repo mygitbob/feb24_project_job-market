@@ -17,7 +17,7 @@ env_vars = {
 # check env_vars
 if not all(env_vars.values()):
     msg = f"All required environment variables must be set: {', '.join([f'{var_name}={var_value}' for var_name, var_value in env_vars.items()])}"
-    logging.error(f"{__file__}: {msg}")
+    logging.error(msg)
     raise EnvironmentError(msg)
 
 # setup logfile    

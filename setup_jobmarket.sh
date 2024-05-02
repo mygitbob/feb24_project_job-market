@@ -5,6 +5,7 @@ mkdir -p ./data/logs/
 mkdir -p ./data/raw/
 mkdir -p ./data/processed/
 mkdir -p ./data/model/
+mkdir -p ./data/postgres/
 
 # for the presentation, create empty log files
 touch ./data/logs/data_retrieval.log

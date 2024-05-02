@@ -1,10 +1,9 @@
 import postgres_queries as pq
-from init import database_connection, model_min, model_max
+from init import model_min, model_max, database_connection
 from fastapi import APIRouter, HTTPException
 import pandas as pd
 from api_types import Prediction_Request
 from logger import logging
-
 
 def create_dataframe(request: Prediction_Request) -> pd.DataFrame:
     data = {
@@ -22,7 +21,7 @@ router = APIRouter()
 
 @router.post("/make_prediciton", tags=["user", "prediction"])
 async def make_prediction(req : Prediction_Request):
-    logging.info(f"{__file__}: make_prediction: request: {req}")
+    logging.info(f"make_prediction: request: {req}")
     
     # check request
     try:
@@ -57,12 +56,12 @@ async def make_prediction(req : Prediction_Request):
             
         # create DataFrame for prediction
         df = create_dataframe(req)
-        logging.debug(f"{__file__}: make_prediction: create DataFrame: {df.head()}")
+        logging.debug(f"make_prediction: create DataFrame: {df.head()}")
     except HTTPException:
-        logging.warning(f"{__file__}: make_prediction: values not in database, see response")
+        logging.warning(f"make_prediction: values not in database, see response")
         raise 
     except Exception as a:
-        logging.error(f"{__file__}: make_prediction: unkown error while handling request values: {e}")
+        logging.error(f"make_prediction: unkown error while handling request values: {e}")
         raise   
     
     #make prediction
@@ -70,30 +69,30 @@ async def make_prediction(req : Prediction_Request):
         min_salary = int(model_min.predict(df).tolist()[0])
         max_salary = int(model_max.predict(df).tolist()[0])
     except Exception as e:
-        logging.error(f"{__file__}: make_prediction: prediction error: {e}")
+        logging.error(f"make_prediction: prediction error: {e}")
         raise
     
-    logging.debug(f"{__file__}: make_prediction: predict min/max: {min_salary, max_salary}")
+    logging.debug(f"make_prediction: predict min/max: {min_salary, max_salary}")
     return {"predictions": [{"minimum yearly salary": str(min_salary) + " €"}, {"maximum yearly salary": str(max_salary) + " €"}]}
 
 @router.get("/job_titles", tags=["user", "info"])
 async def get_job_titles():
-    logging.info(f"{__file__}: get_job_titles")
+    logging.info(f"get_job_titles")
     return {"job titles": pq.get_job_title_list(database_connection)}
 
 @router.get("/countries", tags=["user", "info"])
 async def get_countries():
-    logging.info(f"{__file__}: get_countries")
+    logging.info(f"get_countries")
     return {"countries": pq.get_country_list(database_connection)}
 
 @router.get("/skills", tags=["user", "info"])
 async def get_skills():
-    logging.info(f"{__file__}: get_skills")
+    logging.info(f"get_skills")
     return {"skills": pq.get_skill_list(database_connection)}
 
 @router.get("/experience", tags=["user", "info"])
 async def get_experience():
-    logging.info(f"{__file__}: get_experiences")
+    logging.info(f"get_experiences")
     return {"experience levels": pq.get_experience_list(database_connection)}
 
 
