@@ -36,7 +36,17 @@ docker-compose up -d jobmarket_model
 docker wait jobmarket_model_container
 docker-compose up -d jobmarket_api
 
-echo "setup phase finished"
+echo "Setup phase finished"
+
+echo "Starting tests..."
+ERROR_FILE="data/pytest_results.txt"
+
+if pytest -v tests/ > $ERROR_FILE 2>&1; then
+    echo "All tests ran successfully, adding cronjob"
+else
+    echo "Error: one or more tests did not succeed. Details can be found in the file $ERROR_FILE"
+    exit 1
+fi
 
 # add cronjob
 # get absolut path to update script
@@ -46,4 +56,4 @@ CRON_COMMAND="0 23 * * 0 bash $SCRIPT_PATH"
 # create entry in crontab
 echo "$CRON_COMMAND" | crontab -
 
-echo "cron job for update pipline created"
+echo "Cron job for update pipline created"

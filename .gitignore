@@ -35,3 +35,4 @@ src/postgres/logger.py
 src/api/postgres_initdb.py
 src/api/postgres_queries.py
 src/api/logger.py
+tests/__pycache__/

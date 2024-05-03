@@ -40,19 +40,19 @@ async def make_prediction(req : Prediction_Request):
             if req.city not in city_list:
                 raise HTTPException(status_code=404, detail={"error": "City not found", f"cities for {req.country} in databse": city_list})
         
-        if req.skills:
-            skill_list = pq.get_skill_list(database_connection)
-            if not all(skill in skill_list for skill in req.skills):
-                raise HTTPException(status_code=404, detail={"error": "Some skill(s) not found", "skills in database": skill_list})
-        else:
-            req.skills = []
-            
         if req.experience:
             exp_list = pq.get_experience_list(database_connection)
             if not req.experience in exp_list:
                 raise HTTPException(status_code=404, detail={"error": "Experience class not found", "experience classes in database": exp_list})
         else: 
             req.experience = "Medium"
+        
+        if req.skills:
+            skill_list = pq.get_skill_list(database_connection)
+            if not all(skill in skill_list for skill in req.skills):
+                raise HTTPException(status_code=404, detail={"error": "Some skill(s) not found", "skills in database": skill_list})
+        else:
+            req.skills = []
             
         # create DataFrame for prediction
         df = create_dataframe(req)

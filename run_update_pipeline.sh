@@ -9,6 +9,10 @@ source .env
 export PIPELINE_ACTION="update"
 
 # delete old data if anything is left
+rm -rf ./data/raw/muse.com/* 2>/dev/null
+rm -rf ./data/raw/okjob.io/* 2>/dev/null
+rm -rf ./data/raw/okjob.io/* 2>/dev/null
+
 rm -rf ./data/processed/muse.com/merged/* 2>/dev/null
 rm -rf ./data/processed/okjob.io/merged/* 2>/dev/null
 rm -rf ./data/processed/okjob.io/full_job_description/* 2>/dev/null
