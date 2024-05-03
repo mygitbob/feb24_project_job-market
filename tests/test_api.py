@@ -104,7 +104,7 @@ def test_correct_optional_prediction():
         "job_title": "Data architect",
         "country": "United kingdom",
         "city": None,
-        "experience": "Junior",
+        "experience": "Medium",
         "skills": None
     }
     response = requests.post(f"{test_url}/make_prediciton", json=data)
