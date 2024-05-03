@@ -23,8 +23,9 @@ keywords_title = {
                      "insight", "consultant"],
     "database administrator": ["database", "administrator", "assistant", "manager"],
     "data scientist": ["data", "scientist", "science", "engineer"],
-    "data center technician": ["data", "center", "cabling", "installer", "installation", "engineer"],
     "data q&a": ["data", "test", "tester", "automation", "processing"],
     "data architect": ["data", "architect"],
     "data project manager": ["head", "manager", "director", "procurement", "management"]
 }
+
+#  "data center technician": ["data", "center", "cabling", "installer", "installation", "engineer"],
