@@ -6,7 +6,6 @@ import time
 
 test_url = "http://localhost:8000"
 
-
 # test if container is running
 def is_container_running(container_name):
     result = subprocess.run(["docker", "ps", "--format", "{{.Names}}"], capture_output=True, text=True)
@@ -16,15 +15,17 @@ def is_container_running(container_name):
 # start database and api service
 def setup_module(module):
     if not is_container_running("jobmarket_db_container"):
-        subprocess.run(["docker-compose", "up", "-d", "jobmarket_db"], cwd="../")
+        subprocess.run(["docker-compose", "up", "-d", "jobmarket_db"])
         time.sleep(5)
         if not is_container_running("jobmarket_db_container"):
+            subprocess.run(["docker-compose", "up", "-d", "jobmarket_db"])
             time.sleep(5)
             pytest.fail("Database container failed to start")
     if not is_container_running("jobmarket_api_container"):
-        subprocess.run(["docker-compose", "up", "-d", "jobmarket_api"], cwd="../")
+        subprocess.run(["docker-compose", "up", "-d", "jobmarket_api"])
         time.sleep(5)
         if not is_container_running("jobmarket_api_container"):
+            subprocess.run(["docker-compose", "up", "-d", "jobmarket_api"])
             time.sleep(5)
             pytest.fail("API container failed to start")
 
