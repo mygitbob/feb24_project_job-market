@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# lead environment variables
+source .env
+# set PIPELINE_ACTION for setup phase
+export PIPELINE_ACTION="init"
+
 # create need folder structure just in case
 mkdir -p ./data/logs/
 mkdir -p ./data/raw/
@@ -13,14 +18,9 @@ touch ./data/logs/transform.log
 touch ./data/logs/model_creation.log
 touch ./data/logs/api.log
 
-# lead environment variables
-source .env
-
 # start database
 docker-compose up -d jobmarket_db
 
-# set PIPELINE_ACTION for setup phase
-export PIPELINE_ACTION="init"
 # start initial data retrieval process
 docker-compose up -d jobmarket_data_retrieval
 
