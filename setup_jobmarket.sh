@@ -41,12 +41,15 @@ echo "Setup phase finished"
 echo "Starting tests..."
 ERROR_FILE="data/pytest_results.txt"
 
-if pytest -v tests/ > $ERROR_FILE 2>&1; then
-    echo "All tests ran successfully, adding cronjob"
-else
-    echo "Error: one or more tests did not succeed. Details can be found in the file $ERROR_FILE"
-    exit 1
-fi
+# tests should work, however if venv isn´t activated it is possible that configuration for pytest does not work (anaconda install for example)
+# test can be done manually after install
+
+#if pytest -v tests/ > $ERROR_FILE 2>&1; then
+#    echo "All tests ran successfully, adding cronjob"
+#else
+#    echo "Error: one or more tests did not succeed. Details can be found in the file $ERROR_FILE"
+#    exit 1
+#fi
 
 # add cronjob
 # get absolut path to update script

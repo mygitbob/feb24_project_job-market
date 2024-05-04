@@ -124,7 +124,7 @@ def categorize_by_keywords(text, keywords, nlp):
         token_text = token.text.lower()
         # If the normalized token is in our list of keywords, add the original token text to the set
         if token_text in [keyword.lower() for keyword in keywords]:
-            keywords_found.add(token.text.capitalize())
+            keywords_found.add(token.text)
     # Return a comma-separated string of unique keywords found, or "None" if no keywords were identified
     return ', '.join(keywords_found) if keywords_found else None #"_NOTFOUND_"
 
@@ -247,7 +247,7 @@ def transform(df):
         df_reed_postgres[col] = default_value
 
     # Replace specific column values
-    df_reed_postgres['location_country'] = 'United Kingdom'
+    df_reed_postgres['location_country'] = 'United kingdom'
 
     df_reed_postgres['published'] = pd.to_datetime(df_reed_postgres['published'], format='%d/%m/%Y')
 
