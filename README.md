@@ -20,7 +20,7 @@ Incorporating Machine Learning techniques, our application delivers estimated sa
 At the moment the application uses the following data sources:
 - muse.com
 - okjob.io
-- reed.co.uk
+- reed.co.uk <br>
 More data sources can be added in the future.
 ## Installtion Instructions
 ### Linux and MacOs
@@ -66,8 +66,7 @@ The project is structured into five microservices, each encapsulated within a Do
 This architecture ensures modularity and scalability, allowing for efficient management and deployment of each component. The microservices architecture also facilitates independent development and scaling of individual services as needed.
 ![System Architecture](report/images/SystemArchitecture.png)
 ## Data Flow
-The data retrieval service extracts the raw data form various data sources and saves them in a local folder. The transform server then loads the data from the local folder and 
-saves the transformed data in a PostgreSQL database.
+The data retrieval service first extracts raw data from various sources and stores it in a local folder. Subsequently, the transformation server accesses this local folder, processes the raw data, standardizes it, and then saves the transformed data into a PostgreSQL database. Following this, the model creation service retrieves the transformed data from the database, utilizes it to generate predictive models, and then stores these models in a designated local folder. Finally, the API server leverages both the stored models from the local folder and the data from the database to provide salary predictions to end-users based on their input parameters.
 ![Data Flow](report/images/DataFlow1.png)
 ![Data Flow](report/images/DataFlow2.png)
 ## Data Model
