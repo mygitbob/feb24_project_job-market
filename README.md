@@ -1,8 +1,41 @@
 # Datasientest Project: feb24_project_job-market
 
-**TODO** Insert project description<br>
+## Project description
+TODO
+## Install Instructions
+### Linux and MacOs
+Run the setup script from the project´s root folder:
+```bash
+bash setup_jobmarket.sh
+``` 
+Alternatively:
+```bash
+chmod +x  setup_jobmarket.sh
+./setup_jobmarket.sh
+```
+The script may require superuser rights to add a cronjob. If prompted, run the script with sudo:
+```bash
+sudo bash setup_jobmarket.sh
+``` 
+After running the script, you can verify the installation with pytest. Ensure you're using the correct pytest version by creating a virtual environment and installing dependencies from the `requirements.txt` file:
+```bash
+python -m venv .venv
+source .venv/bin/activate 
+pip install -r requirements.txt
+``` 
+### Windows
+You can use the PowerShell script to install from the project's root folder. Note that no cronjob will be installed, and automatic updates of collected job information won't occur. Windows support is primarily for testing and development:
+```powershell
+.\setup_jobmarket.ps1
+```
+## Architecture
+TODO
+## Data Flow
+TODO
+## Data Model
+TODO
 
-## Building the docker images
+## Manual building the docker images
 This section is for building and testing individual docker images/containers.<br>
 To build them all in one step use the `docker-compose` command, see install instructions.<br>
 For using the following commands you have to be in the project root folder.<br>
@@ -158,39 +191,6 @@ You can now access the api via your browser and test the api:<br>
 http://localhost:8000/docs <br>
 <br>
 
-## Install instructions
-First you have to give the install/update scripts the permission to execute:
 
-```bash
-chmod +x  setup_jobmarket.sh
-```
-```bash
-chmod +x  run_update_pipeline.sh
-```
-```bash
-chmod +x  restart_services.sh
-```
-<br>
-Next you have to run the  
 
-`setup_jobmarket.sh`
-This will create the required folder structure in the data folder,
-create the jobmarket database and start the postgres container.
-Then the initial ETL pipline will be run. The containers will started one after another. 
-First the data retrieval, then the transform, which also stores the data in the jobmarket database.
-The pipeline also includes the model training, which is done by the model container after transform has ended.
-When the modles are created the api service is started.
-Finally the script adds a cronjob for the `run_update_pipeline.sh` which will be stated every Sunday at 23.00.
-<br>
-
-`run_update_pipeline.sh` starts the data retrieval, tranform and create model services one after another.
-They will download the newest data from the sources, transform and save the data and then create new models with the updated data.
-<br>
-
-`restart_services.sh` script can be used to restart the postgres and api service. These two services should be running all the time.
-If the system will be rebooted the script can be used to restart them again. The `run_update_pipeline.sh` also uses thsi script to check
-if the databse is availible and if not restart it.<br>
-
-## Architecture
-TODO
 
