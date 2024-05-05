@@ -67,6 +67,20 @@ The project is structured into five microservices, each encapsulated within a Do
 
 This architecture ensures modularity and scalability, allowing for efficient management and deployment of each component. The microservices architecture also facilitates independent development and scaling of individual services as needed.
 ![System Architecture](report/images/SystemArchitecture.png)
+
+### Microservices Interaction
+Throughout the system's lifecycle, the microservices interact as follows:
+
+- Initialization and Installation:
+  - The database is set up and remains permanently active to continuously store data.
+  - During installation, the entire ETL and model creation pipeline is initiated, comprising the data retrieval, transformation, and model creation services. These services terminate upon completion of their tasks.
+  - After installation, the API service is launched and remains continuously active to provide users access to the system's functionality.
+- Automatic Updates:
+  - A cronjob is added to periodically (every Sunday at 23:00) initiate the update pipeline to ensure the data and models remain up to date.
+  - During automatic updates, the data retrieval, transformation, and model creation services are restarted to refresh the data and models. These services terminate upon completion of their tasks.
+- Ensuring Availability:
+  - A special script named "restart_services.sh" is utilized to ensure that the database and API service are automatically restarted upon system reboot or failure to ensure continuous availability.
+
 ## Data Flow
 The data retrieval service first extracts raw data from various sources and stores it in a local folder. Subsequently, the transformation server accesses this local folder, processes the raw data, standardizes it, and then saves the transformed data into a PostgreSQL database. Following this, the model creation service retrieves the transformed data from the database, utilizes it to generate predictive models, and then stores these models in a designated local folder. Finally, the API server leverages both the stored models from the local folder and the data from the database to provide salary predictions to end-users based on their input parameters.
 ![Data Flow](report/images/DataFlow1.png)
