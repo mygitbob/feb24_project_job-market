@@ -28,12 +28,13 @@ You can use the PowerShell script to install from the project's root folder. Not
 ```powershell
 .\setup_jobmarket.ps1
 ```
-## Architecture
-TODO
+## System Architecture
+![System Architecture](report/images/SystemArchitecture.png)
 ## Data Flow
-TODO
+![Data Flow](report/images/DataFlow1.png)
+![Data Flow](report/images/DataFlow2.png)
 ## Data Model
-TODO
+![Data Model](report/images/PostgresSchema.png)
 
 ## Manual building the docker images
 This section is for building and testing individual docker images/containers.<br>
