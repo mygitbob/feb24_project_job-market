@@ -1,10 +1,21 @@
-# Datasientest Project: feb24_project_job-market
+# Datasientest Project: Data Job Salary Predictor
 
 ## Project description
-The application was developed for job posters and job seekers to rectify a common problem encountered during job posting: an improved way of making estimates on salaries with a better degree of accuracy. 
-It establishes the lower and upper bounds for salary prediction for a given job in a specific country. The prediction can be further improved by providing information about the specific location within the country, the level of job experience, and the relevant job skills.<br>
-The development of the application was mainly focused on the ETL process, which is relevant for Data Engineering experience. It collects job offers from various data sources and then transforms this data in a uniform manner. Special emphasis is placed on standardizing various salary data to a common basis, in this case, as a yearly salary figure. Additionally, it attempts to extract required/desired job skills and job experience from the job descriptions. The data model is built in a way that enables the addition of new data sources, as it includes space for future job data that is currently unused but was found in data sources that are not currently utilized, such as detailed location information and a section to save job categories.
-The application also leverages a Machine Learning model to give end-users an estimate of their probable salaries, leading towards better, more informative career choices. It creates two models, one for the minimum and one the the maximum We provided a simple yet effficient API interface to access the trained model and we zoomed specifically on Data-related job postings.
+Our project, "Data Job Salary Predictor," addresses a common challenge encountered by both job posters and seekers: the need for more accurate salary estimates during job postings. By establishing lower and upper bounds for salary predictions specific to each job within a given country, our application aims to provide more precise salary estimates. To enhance prediction accuracy, we incorporate additional factors such as specific geographical location within the country, level of job experience, and relevant job skills.
+<br>
+<br>
+**Data Related Job Focus**:
+At the core of our application lies a specialized focus on data-related job postings. Recognizing the need for precise classification of job titles, we employ advanced techniques to categorize and generalize job titles within the data industry. This classification is crucial for generating accurate prediction models tailored to the unique demands of data-related roles.
+<br>
+The development of our application is centered around the Extract, Transform, Load (ETL) process, a fundamental aspect of Data Engineering. Through this process, we collect job offers from diverse data sources and standardize the data into a uniform format. Notably, we emphasize the standardization of salary data into yearly figures, enabling easier comparison across different job postings. Additionally, we extract essential job skills and experience requirements from job descriptions to enrich our dataset.
+<br>
+<br>
+**Model Creation and Data Classification**:
+During model creation, our focus on data-related job postings becomes even more pronounced. The necessity to accurately predict salaries within the data industry requires precise classification of job titles. By leveraging advanced machine learning techniques, we classify job titles into relevant data-related categories, ensuring that our prediction models are tailored to the specific requirements of the data job market.
+<br>
+Our data model is designed with scalability in mind, allowing for the seamless integration of new data sources. It accommodates future job data that may not be currently utilized but could enhance prediction accuracy, such as detailed location information and job categories.
+<br>
+Incorporating Machine Learning techniques, our application delivers estimated salary ranges to end-users, empowering them to make informed career decisions. We deploy two models—one for predicting minimum salaries and another for maximum salaries. Our user-friendly API interface grants easy access to these trained models, specifically focusing on data-related job postings. Through these efforts, we strive to provide a valuable tool for both job seekers and employers in the dynamic data job market.
 ### Data Sources
 At the moment the application uses the following data sources:
 - muse.com
@@ -38,13 +49,20 @@ You can use the PowerShell script to install from the project's root folder. Not
 .\setup_jobmarket.ps1
 ```
 ## System Architecture
-The project is divided in five mircoservices, each built as a Docker container.:
-- PostgreSQL database server (prebuild image from dockerhub)
-- pipeline for ETL and model creation:
-  - data retrieaval service for collecting the raw data
-  - transforamtion service which transforms the raw data and saves them in a PostgreSQL database
-  - model creation service that uses the transformed data to create models for the salaray prediction
-- api server that uses the created models and the transformed data to deliver a salaray prediction
+The project is structured into five microservices, each encapsulated within a Docker container:
+1. PostgreSQL Database Server:
+  Utilizes a prebuilt image from DockerHub to host the project's database.
+2. ETL and Model Creation Pipeline:
+  - Data Retrieval Service:
+    Responsible for gathering raw data from various sources.
+  - Transformation Service:
+    Transforms the raw data into a standardized format and stores it in a PostgreSQL database.
+  - Model Creation Service:
+    Utilizes the transformed data to develop predictive models for salary estimation.
+3. API Server:
+  Utilizes the created models and transformed data to provide salary predictions to end-users.
+  
+This architecture ensures modularity and scalability, allowing for efficient management and deployment of each component. The microservices architecture also facilitates independent development and scaling of individual services as needed.
 ![System Architecture](report/images/SystemArchitecture.png)
 ## Data Flow
 The data retrieval service extracts the raw data form various data sources and saves them in a local folder. The transform server then loads the data from the local folder and 
