@@ -3,7 +3,14 @@
 ## Project description
 The application was developed for job posters and job seekers to rectify a common problem encountered during job posting: an improved way of making estimates on salaries with a better degree of accuracy. 
 It establishes the lower and upper bounds for salary prediction for a given job in a specific country. The prediction can be further improved by providing information about the specific location within the country, the level of job experience, and the relevant job skills.<br>
-The development of the application was foccused mainly on the ETL process that is relevant for Data Engineering experience. The application also leverages a Machine Learning (ML) model to give end-users an estimate of their probable salaries, leading towards better, more informative career choices. We provided a simple yet effficient API interface to access the trained model and we zoomed specifically on Data-related job postings.
+The development of the application was mainly focused on the ETL process, which is relevant for Data Engineering experience. It collects job offers from various data sources and then transforms this data in a uniform manner. Special emphasis is placed on standardizing various salary data to a common basis, in this case, as a yearly salary figure. Additionally, it attempts to extract required/desired job skills and job experience from the job descriptions. The data model is built in a way that enables the addition of new data sources, as it includes space for future job data that is currently unused but was found in data sources that are not currently utilized, such as detailed location information and a section to save job categories.
+The application also leverages a Machine Learning model to give end-users an estimate of their probable salaries, leading towards better, more informative career choices. It creates two models, one for the minimum and one the the maximum We provided a simple yet effficient API interface to access the trained model and we zoomed specifically on Data-related job postings.
+### Data Sources
+At the moment the application uses the following data sources:
+- muse.com
+- okjob.io
+- reed.co.uk
+More data sources can be added in the future.
 ## Installtion Instructions
 ### Linux and MacOs
 Run the setup script from the project´s root folder:
@@ -31,18 +38,21 @@ You can use the PowerShell script to install from the project's root folder. Not
 .\setup_jobmarket.ps1
 ```
 ## System Architecture
-The project is divied in five mircoservices:
-- postgres database server (prebuild image from dockerhub)
+The project is divided in five mircoservices, each built as a Docker container.:
+- PostgreSQL database server (prebuild image from dockerhub)
 - pipeline for ETL and model creation:
   - data retrieaval service for collecting the raw data
-  - transforamtion service which transforms the raw data and saves them in a postgres database
+  - transforamtion service which transforms the raw data and saves them in a PostgreSQL database
   - model creation service that uses the transformed data to create models for the salaray prediction
 - api server that uses the created models and the transformed data to deliver a salaray prediction
 ![System Architecture](report/images/SystemArchitecture.png)
 ## Data Flow
+The data retrieval service extracts the raw data form various data sources and saves them in a local folder. The transform server then loads the data from the local folder and 
+saves the transformed data in a PostgreSQL database.
 ![Data Flow](report/images/DataFlow1.png)
 ![Data Flow](report/images/DataFlow2.png)
 ## Data Model
+The transformed data will be saved in a PostgreSQL database according to this schema:
 ![Data Model](report/images/PostgresSchema.png)
 
 ## Manual building the docker images
