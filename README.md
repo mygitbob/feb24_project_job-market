@@ -50,6 +50,7 @@ You can use the PowerShell script to install from the project's root folder. Not
 ```
 ## System Architecture
 The project is structured into five microservices, each encapsulated within a Docker container:
+
 1. PostgreSQL Database Server:
   Utilizes a prebuilt image from DockerHub to host the project's database.
 2. ETL and Model Creation Pipeline:
@@ -61,7 +62,7 @@ The project is structured into five microservices, each encapsulated within a Do
     Utilizes the transformed data to develop predictive models for salary estimation.
 3. API Server:
   Utilizes the created models and transformed data to provide salary predictions to end-users.
-  
+
 This architecture ensures modularity and scalability, allowing for efficient management and deployment of each component. The microservices architecture also facilitates independent development and scaling of individual services as needed.
 ![System Architecture](report/images/SystemArchitecture.png)
 ## Data Flow
