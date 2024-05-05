@@ -20,7 +20,8 @@ Incorporating Machine Learning techniques, our application delivers estimated sa
 At the moment the application uses the following data sources:
 - muse.com
 - okjob.io
-- reed.co.uk <br>
+- reed.co.uk 
+<br>
 More data sources can be added in the future.
 ## Installtion Instructions
 ### Linux and MacOs
