@@ -176,7 +176,7 @@ def get_skill_list(engine):
     skill_list = df.loc[:, 'name'].to_list()
     skill_list = [entry.capitalize() for entry in skill_list]
     
-    return set(skill_list)
+    return list(set(skill_list))
 
 
 def get_job_category_df(engine):
@@ -259,7 +259,7 @@ def get_country_list(engine):
     country_list = df.loc[:, 'country'].to_list()
     country_list = [entry.title() for entry in country_list]
     
-    return set(country_list)
+    return list(set(country_list))
 
 
 def get_city_df(engine, country=None):
