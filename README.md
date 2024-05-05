@@ -23,6 +23,7 @@ At the moment the application uses the following data sources:
 - reed.co.uk 
 <br>
 More data sources can be added in the future.
+
 ## Installtion Instructions
 ### Linux and MacOs
 Run the setup script from the project´s root folder:
