@@ -1,8 +1,10 @@
 # Datasientest Project: feb24_project_job-market
 
 ## Project description
-The application was developed for job posters and job seekers to rectify a common problem encountered during job posting: an improved way of making estimates on salaries with a better degree of accuracy. The development of the application was foccused mainly on the ETL process that is relevant for Data Engineering experience. The application also leverages a Machine Learning (ML) model to give end-users an estimate of their probable salaries, leading towards better, more informative career choices. We provided a simple yet effficient API interface to access the trained model and we zoomed specifically on Data-related job postings.
-## Install Instructions
+The application was developed for job posters and job seekers to rectify a common problem encountered during job posting: an improved way of making estimates on salaries with a better degree of accuracy. 
+It establishes the lower and upper bounds for salary prediction for a given job in a specific country. The prediction can be further improved by providing information about the specific location within the country, the level of job experience, and the relevant job skills.<br>
+The development of the application was foccused mainly on the ETL process that is relevant for Data Engineering experience. The application also leverages a Machine Learning (ML) model to give end-users an estimate of their probable salaries, leading towards better, more informative career choices. We provided a simple yet effficient API interface to access the trained model and we zoomed specifically on Data-related job postings.
+## Installtion Instructions
 ### Linux and MacOs
 Run the setup script from the project´s root folder:
 ```bash
@@ -30,12 +32,12 @@ You can use the PowerShell script to install from the project's root folder. Not
 ```
 ## System Architecture
 The project is divied in five mircoservices:
-- postgres databse server (prebuild image from dockerhub)
+- postgres database server (prebuild image from dockerhub)
 - pipeline for ETL and model creation:
   - data retrieaval service for collecting the raw data
   - transforamtion service which transforms the raw data and saves them in a postgres database
   - model creation service that uses the transformed data to create models for the salaray prediction
-- api server that uses the crreated models and the transformed data to deliver a salaray prediction
+- api server that uses the created models and the transformed data to deliver a salaray prediction
 ![System Architecture](report/images/SystemArchitecture.png)
 ## Data Flow
 ![Data Flow](report/images/DataFlow1.png)
