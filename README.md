@@ -26,7 +26,7 @@ More data sources can be added in the future.
 
 ## Installation Instructions
 You need a valid api key for `okjob.io` and `reed.co.uk` to use the application.<br>
-You have to edit the `.env` file in the project root folder and add these values in the data retrieval section for the variables `OKJOB_API_KEY` and `REED_API_KEY`. (only after the presentation on the 6.5.)
+You have to edit the `.env` file in the project root folder and add these to the variables `OKJOB_API_KEY` and `REED_API_KEY` in the data retrieval section. (only after the presentation on the 6.5.)
 ### Linux and MacOs
 Run the setup script from the project´s root folder:
 ```bash
