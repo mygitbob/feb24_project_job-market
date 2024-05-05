@@ -53,7 +53,7 @@ def test_countries():
     response = requests.get(f"{test_url}/countries")
     assert response.status_code == 200
     country_list = response.json()["countries"]
-    assert "United kingdom" in country_list
+    assert "United Kingdom" in country_list
 
     
 # test if endpoint /database contains job titles, at least "Other" should be included
@@ -85,7 +85,7 @@ def test_skills():
 def test_correct_minimal_prediction():
     data = {
         "job_title": "Other",
-        "country": "United kingdom",
+        "country": "United Kingdom",
         "city": None,
         "experience": None,
         "skills": None
@@ -102,7 +102,7 @@ def test_correct_minimal_prediction():
 def test_correct_optional_prediction():
     data = {
         "job_title": "Data architect",
-        "country": "United kingdom",
+        "country": "United Kingdom",
         "city": None,
         "experience": "Medium",
         "skills": None
@@ -149,7 +149,7 @@ def test_wrong_country_prediction():
 def test_wrong_city_prediction():
     data = {
         "job_title": "Other",
-        "country": "United kingdom",
+        "country": "United Kingdom",
         "city": "wrong value",
         "experience": "wrong value",
         "skills": ["wrong value"]
@@ -164,7 +164,7 @@ def test_wrong_city_prediction():
 def test_wrong_experience_prediction():
     data = {
         "job_title": "Other",
-        "country": "United kingdom",
+        "country": "United Kingdom",
         "city": None,
         "experience": "wrong value",
         "skills": ["wrong value"]
@@ -179,7 +179,7 @@ def test_wrong_experience_prediction():
 def test_wrong_skill_type_prediction():
     data = {
         "job_title": "Other",
-        "country": "United kingdom",
+        "country": "United Kingdom",
         "city": None,
         "experience": None,
         "skills": "wrong type"
@@ -194,7 +194,7 @@ def test_wrong_skill_type_prediction():
 def test_wrong_skill_value_prediction():
     data = {
         "job_title": "Other",
-        "country": "United kingdom",
+        "country": "United Kingdom",
         "city": None,
         "experience": None,
         "skills": ["wrong value"]
@@ -209,7 +209,7 @@ def test_wrong_skill_value_prediction():
 def test_wrong_skill_type_prediction():
     data = {
         "job_title": "Other",
-        "country": "United kingdom",
+        "country": "United Kingdom",
         "city": "wrong value",
         "experience": None,
         "skills": "wrong type"
