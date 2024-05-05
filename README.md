@@ -1,7 +1,7 @@
-# Datasientest Project: Data Job Salary Predictor
+# Datasientest Project: Salary Predictor
 
 ## Project description
-Our project, "Data Job Salary Predictor," addresses a common challenge encountered by both job posters and seekers: the need for more accurate salary estimates during job postings. By establishing lower and upper bounds for salary predictions specific to each job within a given country, our application aims to provide more precise salary estimates. To enhance prediction accuracy, we incorporate additional factors such as specific geographical location within the country, level of job experience, and relevant job skills.
+Our project addresses a common challenge encountered by both job posters and seekers: the need for more accurate salary estimates during job postings. By establishing lower and upper bounds for salary predictions specific to each job within a given country, our application aims to provide more precise salary estimates. To enhance prediction accuracy, we incorporate additional factors such as specific geographical location within the country, level of job experience, and relevant job skills.
 <br>
 <br>
 **Data Related Job Focus**:
@@ -24,7 +24,7 @@ At the moment the application uses the following data sources:
 <br>
 More data sources can be added in the future.
 
-## Installtion Instructions
+## Installation Instructions
 ### Linux and MacOs
 Run the setup script from the project´s root folder:
 ```bash
