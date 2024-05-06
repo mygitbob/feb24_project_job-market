@@ -1,10 +1,32 @@
-# Datasientest Project: feb24_project_job-market
+# Datasientest Project: Salary Predictor
 
 ## Project description
-The application was developed for job posters and job seekers to rectify a common problem encountered during job posting: an improved way of making estimates on salaries with a better degree of accuracy. 
-It establishes the lower and upper bounds for salary prediction for a given job in a specific country. The prediction can be further improved by providing information about the specific location within the country, the level of job experience, and the relevant job skills.<br>
-The development of the application was foccused mainly on the ETL process that is relevant for Data Engineering experience. The application also leverages a Machine Learning (ML) model to give end-users an estimate of their probable salaries, leading towards better, more informative career choices. We provided a simple yet effficient API interface to access the trained model and we zoomed specifically on Data-related job postings.
-## Installtion Instructions
+Our project addresses a common challenge encountered by both job posters and seekers: the need for more accurate salary estimates during job postings. By establishing lower and upper bounds for salary predictions specific to each job within a given country, our application aims to provide more precise salary estimates. To enhance prediction accuracy, we incorporate additional factors such as specific geographical location within the country, level of job experience, and relevant job skills.
+<br>
+<br>
+**Data Related Job Focus**:
+At the core of our application lies a specialized focus on data-related job postings. Recognizing the need for precise classification of job titles, we employ advanced techniques to categorize and generalize job titles within the data industry. This classification is crucial for generating accurate prediction models tailored to the unique demands of data-related roles.
+<br>
+The development of our application is centered around the Extract, Transform, Load (ETL) process, a fundamental aspect of Data Engineering. Through this process, we collect job offers from diverse data sources and standardize the data into a uniform format. Notably, we emphasize the standardization of salary data into yearly figures, enabling easier comparison across different job postings. Additionally, we extract essential job skills and experience requirements from job descriptions to enrich our dataset.
+<br>
+<br>
+**Model Creation and Data Classification**:
+During model creation, our focus on data-related job postings becomes even more pronounced. The necessity to accurately predict salaries within the data industry requires precise classification of job titles. By leveraging advanced machine learning techniques, we classify job titles into relevant data-related categories, ensuring that our prediction models are tailored to the specific requirements of the data job market.
+<br>
+Our data model is designed with scalability in mind, allowing for the seamless integration of new data sources. It accommodates future job data that may not be currently utilized but could enhance prediction accuracy, such as detailed location information and job categories.
+<br>
+Incorporating Machine Learning techniques, our application delivers estimated salary ranges to end-users, empowering them to make informed career decisions. We deploy two models—one for predicting minimum salaries and another for maximum salaries. Our user-friendly API interface grants easy access to these trained models, specifically focusing on data-related job postings. Through these efforts, we strive to provide a valuable tool for both job seekers and employers in the dynamic data job market.
+### Data Sources
+At the moment the application uses the following data sources:
+- muse.com
+- okjob.io
+- reed.co.uk 
+<br>
+More data sources can be added in the future.
+
+## Installation Instructions
+You need a valid api key for `okjob.io` and `reed.co.uk` to use the application.<br>
+You have to edit the `.env` file in the project root folder and add these to the variables `OKJOB_API_KEY` and `REED_API_KEY` in the data retrieval section. (only after the presentation on the 6.5.)
 ### Linux and MacOs
 Run the setup script from the project´s root folder:
 ```bash
@@ -31,18 +53,42 @@ You can use the PowerShell script to install from the project's root folder. Not
 .\setup_jobmarket.ps1
 ```
 ## System Architecture
-The project is divied in five mircoservices:
-- postgres database server (prebuild image from dockerhub)
-- pipeline for ETL and model creation:
-  - data retrieaval service for collecting the raw data
-  - transforamtion service which transforms the raw data and saves them in a postgres database
-  - model creation service that uses the transformed data to create models for the salaray prediction
-- api server that uses the created models and the transformed data to deliver a salaray prediction
+The project is structured into five microservices, each encapsulated within a Docker container:
+
+- PostgreSQL Database Server:
+  Utilizes a prebuilt image from DockerHub to host the project's database.
+- ETL and Model Creation Pipeline:
+  - Data Retrieval Service:
+    Responsible for gathering raw data from various sources.
+  - Transformation Service:
+    Transforms the raw data into a standardized format and stores it in a PostgreSQL database.
+  - Model Creation Service:
+    Utilizes the transformed data to develop predictive models for salary estimation.
+- API Server:
+  Utilizes the created models and transformed data to provide salary predictions to end-users.
+
+This architecture ensures modularity and scalability, allowing for efficient management and deployment of each component. The microservices architecture also facilitates independent development and scaling of individual services as needed.
 ![System Architecture](report/images/SystemArchitecture.png)
+
+### Microservices Interaction
+Throughout the system's lifecycle, the microservices interact as follows:
+
+- Initialization and Installation:
+  - The database is set up and remains permanently active to continuously store data.
+  - During installation, the entire ETL and model creation pipeline is initiated, comprising the data retrieval, transformation, and model creation services. These services terminate upon completion of their tasks.
+  - After installation, the API service is launched and remains continuously active to provide users access to the system's functionality.
+- Automatic Updates:
+  - A cronjob is added to periodically (every Sunday at 23:00) initiate the update pipeline to ensure the data and models remain up to date.
+  - During automatic updates, the data retrieval, transformation, and model creation services are restarted to refresh the data and models. These services terminate upon completion of their tasks.
+- Ensuring Availability:
+  - A special script named "restart_services.sh" is utilized to ensure that the database and API service are automatically restarted upon system reboot or failure to ensure continuous availability.
+
 ## Data Flow
+The data retrieval service first extracts raw data from various sources and stores it in a local folder. Subsequently, the transformation server accesses this local folder, processes the raw data, standardizes it, and then saves the transformed data into a PostgreSQL database. Following this, the model creation service retrieves the transformed data from the database, utilizes it to generate predictive models, and then stores these models in a designated local folder. Finally, the API server leverages both the stored models from the local folder and the data from the database to provide salary predictions to end-users based on their input parameters.
 ![Data Flow](report/images/DataFlow1.png)
 ![Data Flow](report/images/DataFlow2.png)
 ## Data Model
+The transformed data will be saved in a PostgreSQL database according to this schema:
 ![Data Model](report/images/PostgresSchema.png)
 
 ## Manual building the docker images
